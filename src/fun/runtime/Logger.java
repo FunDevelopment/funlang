@@ -525,7 +525,7 @@ public class Logger implements FunParserVisitor {
         logIfVerbose("ArgumentList:");
         return handleNode(node, data);
     }
-    public Object visit(ParsedCollectionIndex node, Object data) {
+    public Object visit(ParsedIndex node, Object data) {
         logIfVerbose("CollectionIndex:");
         return handleNode(node, data);
     }

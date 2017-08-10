@@ -1,6 +1,6 @@
 /* Fun
  *
- * $Id: ParsedCollectionIndex.java,v 1.4 2007/10/08 15:36:59 sthippo Exp $
+ * $Id: ParsedIndex.java,v 1.4 2007/10/08 15:36:59 sthippo Exp $
  *
  * Copyright (c) 2002-2007 by fundev.org
  *
@@ -18,8 +18,8 @@ import fun.lang.*;
  * @author Michael St. Hippolyte
  * @version $Revision: 1.4 $
  */
-public class ParsedCollectionIndex extends CollectionIndex {
-    public ParsedCollectionIndex(int id) {
+public class ParsedIndex extends Index {
+    public ParsedIndex(int id) {
         super();
     }
 

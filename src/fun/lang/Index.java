@@ -13,13 +13,12 @@ package fun.lang;
 import fun.runtime.Context;
 
 /**
- * Base class for CollectionIndex and TableIndex classes; refers to a
- * location (offset or key) in a collection.
+ * A reference to a location (offset or key) in a collection.
  *
  * @author Michael St. Hippolyte
  * @version $Revision: 1.10 $
  */
-abstract public class Index extends AbstractNode {
+public class Index extends AbstractNode {
 
     private boolean dynamic = false;
 
@@ -116,8 +115,20 @@ abstract public class Index extends AbstractNode {
         
         return str;
     }
-    
-    abstract protected Index createIndex(); 
-    
-    abstract public String toString();
+    public int getIndex(Context context) {
+        return getIndexValue(context).getInt();
+    }
+
+    public String getKey(Context context) {
+        return getIndexValue(context).getString();
+    }
+
+    public String toString() {
+        return "[" + getChild(0).toString() + "]";
+    }
+
+    protected Index createIndex() {
+        return new Index();
+    }
+
 }

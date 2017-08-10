@@ -60,7 +60,7 @@ public interface FunParserTreeConstants
   public int JJTSPECIALNAME = 54;
   public int JJTNAMEWITHARGUMENTS = 55;
   public int JJTNAMEWITHINDEXES = 56;
-  public int JJTCOLLECTIONINDEX = 57;
+  public int JJTINDEX = 57;
   public int JJTLOGICALOROPERATOR = 58;
   public int JJTLOGICALANDOPERATOR = 59;
   public int JJTEQUALSOPERATOR = 60;
@@ -152,7 +152,7 @@ public interface FunParserTreeConstants
     "SpecialName",
     "NameWithArguments",
     "NameWithIndexes",
-    "CollectionIndex",
+    "Index",
     "LogicalOrOperator",
     "LogicalAndOperator",
     "EqualsOperator",
@@ -186,4 +186,4 @@ public interface FunParserTreeConstants
     "NullLiteral",
   };
 }
-/* JavaCC - OriginalChecksum=a658fcb2ffc1ba36317e8e24ed6cdd94 (do not edit this line) */
+/* JavaCC - OriginalChecksum=f5bc0e09a17a10d8f26823699ce53d1e (do not edit this line) */

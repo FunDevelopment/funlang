@@ -303,7 +303,7 @@ abstract public class FunVisitor implements FunParserVisitor {
     public Object visit(ParsedArguments node, Object data) {
         return handleNode(node, data);
     }
-    public Object visit(ParsedCollectionIndex node, Object data) {
+    public Object visit(ParsedIndex node, Object data) {
         return handleNode(node, data);
     }
     public Object visit(ParsedTableElement node, Object data) {

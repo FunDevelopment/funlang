@@ -254,7 +254,7 @@ class ResolvedArray extends ResolvedCollection {
         }
 
         public Index next() {
-            return new CollectionIndex(new PrimitiveValue(ix++));
+            return new Index(new PrimitiveValue(ix++));
         }
 
         public void remove() {
@@ -373,14 +373,10 @@ class ResolvedArray extends ResolvedCollection {
             context = getResolutionContext();
         }
         
-        if (index instanceof CollectionIndex) {
-            int ix = index.getIndexValue(context).getInt();
-            Object element = (ix >= 0 && ix < array.getSize() ? array.get(ix) : null);
-            if (element instanceof ResolvedInstance) {
-                return (ResolvedInstance) element;
-            }
-        } else {
-            throw new IllegalArgumentException("Unspported index type: " + index.getClass().getName());
+        int ix = index.getIndexValue(context).getInt();
+        Object element = (ix >= 0 && ix < array.getSize() ? array.get(ix) : null);
+        if (element instanceof ResolvedInstance) {
+            return (ResolvedInstance) element;
         }
         
         return null;

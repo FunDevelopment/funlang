@@ -6659,7 +6659,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       }
       label_46:
       while (true) {
-        CollectionIndex();
+        Index();
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case LBRACKET:
           ;
@@ -6707,9 +6707,9 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     }
   }
 
-  final public void CollectionIndex() throws ParseException {
- /*@bgen(jjtree) CollectionIndex */
-  ParsedCollectionIndex jjtn000 = new ParsedCollectionIndex(JJTCOLLECTIONINDEX);
+  final public void Index() throws ParseException {
+ /*@bgen(jjtree) Index */
+  ParsedIndex jjtn000 = new ParsedIndex(JJTINDEX);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {

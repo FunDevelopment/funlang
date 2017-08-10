@@ -2224,7 +2224,7 @@ void NameWithArguments() :
 void NameWithIndexes() :
 { Token t; }
 {
-    t = <IDENTIFIER> { jjtThis.setName(t.image); } [ Arguments() ] ( CollectionIndex() )+
+    t = <IDENTIFIER> { jjtThis.setName(t.image); } [ Arguments() ] ( Index() )+
 }
 
 void Name() :
@@ -2233,7 +2233,7 @@ void Name() :
     t = <IDENTIFIER> { jjtThis.setName(t.image); }
 }
 
-void CollectionIndex() :
+void Index() :
 {}
 {
     (

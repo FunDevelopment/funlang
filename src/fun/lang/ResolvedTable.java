@@ -308,7 +308,7 @@ class ResolvedTable extends ResolvedCollection {
 
         public Index next() {
             String key = (String) keys.next();
-            return new CollectionIndex(new PrimitiveValue(key));
+            return new Index(new PrimitiveValue(key));
         }
 
         public void remove() {

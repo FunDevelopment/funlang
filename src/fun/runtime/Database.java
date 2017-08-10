@@ -311,13 +311,13 @@ public class Database {
             if (context == null) {
                 context = getResolutionContext();
             }
-            if (index instanceof CollectionIndex) {
-                int i = index.getIndexValue(context).getInt();
+            if (index.isNumericIndex(context)) {
+                int i = index.getIndex(context);
                 Object[] keys = recs.keySet().toArray();
                 Arrays.sort(keys);
                 element = recs.get(keys[i]);
             } else {
-                String key = index.getIndexValue(context).getString();
+                String key = index.getKey(context);
                 element = recs.get(key);
             }
             return getElementDefinition(element);
@@ -331,13 +331,13 @@ public class Database {
                 context = getResolutionContext();
             }
             
-            if (index instanceof CollectionIndex) {
-                int i = index.getIndexValue(context).getInt();
+            if (index.isNumericIndex(context)) {
+                int i = index.getIndex(context);
                 Object[] keys = recs.keySet().toArray();
                 Arrays.sort(keys);
                 element = recs.get(keys[i]);
             } else {
-                String key = index.getIndexValue(context).getString();
+                String key = index.getKey(context);
                 element = recs.get(key);
             }
             
@@ -400,7 +400,7 @@ public class Database {
 
             public Index next() {
                 String key = (String) keys.next();
-                return new CollectionIndex(new PrimitiveValue(key));
+                return new Index(new PrimitiveValue(key));
             }
 
             public void remove() {

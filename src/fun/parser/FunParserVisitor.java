@@ -60,7 +60,7 @@ public interface FunParserVisitor
   public Object visit(ParsedSpecialName node, Object data);
   public Object visit(ParsedNameWithArguments node, Object data);
   public Object visit(ParsedNameWithIndexes node, Object data);
-  public Object visit(ParsedCollectionIndex node, Object data);
+  public Object visit(ParsedIndex node, Object data);
   public Object visit(ParsedLogicalOrOperator node, Object data);
   public Object visit(ParsedLogicalAndOperator node, Object data);
   public Object visit(ParsedEqualsOperator node, Object data);
@@ -93,4 +93,4 @@ public interface FunParserVisitor
   public Object visit(ParsedBooleanLiteral node, Object data);
   public Object visit(ParsedNullLiteral node, Object data);
 }
-/* JavaCC - OriginalChecksum=7de437f7bcf408dc780aa8b69afc4498 (do not edit this line) */
+/* JavaCC - OriginalChecksum=125a89a92e8e4beae245e1e41dce4dd9 (do not edit this line) */

@@ -4735,7 +4735,7 @@ void NameWithIndexes() :
 {/*@bgen(jjtree) NameWithIndexes */
     try {
 /*@egen*/
-    t = <IDENTIFIER> { jjtn000.setName(t.image); } [ Arguments() ] ( CollectionIndex() )+/*@bgen(jjtree)*/
+    t = <IDENTIFIER> { jjtn000.setName(t.image); } [ Arguments() ] ( Index() )+/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -4781,13 +4781,13 @@ void Name() :
 /*@egen*/
 }
 
-void CollectionIndex() :
-{/*@bgen(jjtree) CollectionIndex */
-  ParsedCollectionIndex jjtn000 = new ParsedCollectionIndex(JJTCOLLECTIONINDEX);
+void Index() :
+{/*@bgen(jjtree) Index */
+  ParsedIndex jjtn000 = new ParsedIndex(JJTINDEX);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/}
-{/*@bgen(jjtree) CollectionIndex */
+{/*@bgen(jjtree) Index */
     try {
 /*@egen*/
     (

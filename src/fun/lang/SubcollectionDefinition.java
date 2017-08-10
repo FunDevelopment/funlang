@@ -294,12 +294,10 @@ public class SubcollectionDefinition extends CollectionDefinition {
             Object key = indexVal.getValue();
             Definition element = (Definition) overrides.get(key);
             if (element == null) {
-                if (index instanceof CollectionIndex) {
-                    int ix = indexVal.getInt();
-                    int superlen = superInstance.getSize();
-                    if (ix >= superlen) {
-                        return (Definition) additions.get(ix - superlen);
-                    }
+                int ix = indexVal.getInt();
+                int superlen = superInstance.getSize();
+                if (ix >= superlen) {
+                    return (Definition) additions.get(ix - superlen);
                 }
             } else {
                 return element;
