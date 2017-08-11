@@ -189,15 +189,8 @@ class ResolvedTable extends ResolvedCollection {
         if (context == null) {
         	context = getResolutionContext();
         }
-        if (index.isNumericIndex(context)) {
-            int i = index.getIndexValue(context).getInt();
-            Object[] keys = table.keySet().toArray();
-            Arrays.sort(keys);
-            element = getElement(keys[i]);
-        } else {
-            String key = index.getIndexValue(context).getString();
-            element = getElement(key);
-        }
+        String key = index.getIndexValue(context).getString();
+        element = getElement(key);
         return getElementDefinition(element);
     }
     
@@ -218,15 +211,8 @@ class ResolvedTable extends ResolvedCollection {
             context = getResolutionContext();
         }
         
-        if (index.isNumericIndex(context)) {
-            int i = index.getIndexValue(context).getInt();
-            Object[] keys = table.keySet().toArray();
-            Arrays.sort(keys);
-            element = getElement(keys[i]);
-        } else {
-            String key = index.getIndexValue(context).getString();
-            element = getElement(key);
-        }
+        String key = index.getIndexValue(context).getString();
+        element = getElement(key);
         
         if (element instanceof ResolvedInstance) {
             return (ResolvedInstance) element;

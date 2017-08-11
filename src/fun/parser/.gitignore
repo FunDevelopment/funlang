@@ -10,3 +10,10 @@
 /Token.java
 /TokenMgrError.java
 /bento.jj
+/FunParser.java
+/FunParserConstants.java
+/FunParserTokenManager.java
+/fun.jj
+/JJTFunParserState.java
+/FunParserVisitor.java
+/FunParserTreeConstants.java
