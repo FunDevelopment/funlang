@@ -240,7 +240,7 @@ core [=
     
     dynamic string[] dir(path) = fun.runtime.Utils.dir(path)
 
-    file_interface file_impl(file_interface fbase, path),(base, path),(base) = fun.runtime.Utils.getBentoFile(fbase, base, path)
+    file_interface file_impl(file_interface fbase, path),(base, path),(base) = fun.runtime.Utils.getFunFile(fbase, base, path)
     
     dynamic file_impl(*) file(file_interface fbase, path),(base, path),(base) [/]
 
@@ -266,7 +266,7 @@ core [=
         dynamic boolean mkdirs [&]
     =]
 
-    persistent_cache = fun.runtime.BentoFileCache(cache_path)
+    persistent_cache = fun.runtime.FunFileCache(cache_path)
 
     dynamic string[] safe_lines_from_file(filename, basedir) = fun.runtime.Utils.safeLinesFromFile(filename, basedir)  
 
@@ -298,7 +298,7 @@ core [=
     /** sends a string to log file/console **/
     dynamic log(str) = fun.runtime.SiteBuilder.log(str)
 
-    /** sends a string to log file/console if Bento is running in
+    /** sends a string to log file/console if Fun is running in
      *  verbose mode.
      **/
     dynamic vlog(str) = fun.runtime.SiteBuilder.vlog(str)

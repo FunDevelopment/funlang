@@ -1,7 +1,7 @@
 /-----------------------------------------------------------------------------
  --  core_js.fun                                                          --
  --                                                                         --
- --  Core JavaScript definitions for Bento.                                 --
+ --  Core JavaScript definitions for Fun.                                 --
  --                                                                         --
  --  Copyright (c) 2006-2017 by fundev.org.  All rights reserved.         --
  --                                                                         --

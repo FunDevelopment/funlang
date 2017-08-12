@@ -1,7 +1,7 @@
 /-----------------------------------------------------------------------------
  --  core_sandbox.fun                                                     --
  --                                                                         --
- --  Sandbox for writing and running Bento code interactively.              --
+ --  Sandbox for writing and running Fun code interactively.              --
  --                                                                         --
  --  Copyright (c) 2014 by fundev.org.  All rights reserved.              --
  --                                                                         --

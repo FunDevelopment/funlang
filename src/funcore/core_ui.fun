@@ -1,7 +1,7 @@
 /-----------------------------------------------------------------------------
  --  core_ui.fun                                                          --
  --                                                                         --
- --  Core user interface definitions for Bento.                             --
+ --  Core user interface definitions for Fun.                             --
  --                                                                         --
  --  Copyright (c) 2006-2012 by fundev.org.  All rights reserved.         --
  --                                                                         --

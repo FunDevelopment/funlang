@@ -1,12 +1,12 @@
 /-----------------------------------------------------------------------------
- --  Bento Core
+ --  Fun Core
  --  
  --  $Id: core.fun,v 1.24 2015/04/23 16:52:16 sthippo Exp $                                                             --
  --                                                                         --
  --  This file contains core definitions -- ones that are broadly useful,   --
  --  needed by many applications and therefore worth making accessible to   --
  --  all by default.  In many languages this takes the form of standard     --
- --  libraries.  The equivalent of a library in Bento is a site that        --
+ --  libraries.  The equivalent of a library in Fun is a site that        --
  --  you adopt.                                                             --
  --                                                                         --
  --  core is also a fun keyword, denoting the root of a site's            --
@@ -74,7 +74,7 @@ core [=
     
     /--- runtime system reflection and identification ---/
     
-    /** Abstract Bento processor.  A Bento processor is capable of parsing Bento source
+    /** Abstract Fun processor.  A Fun processor is capable of parsing Fun source
      *  code and creating fun_site objects.
      */
     fun_processor [=
@@ -82,7 +82,7 @@ core [=
         version [?]
         props{} = {}
         
-        /** Compile Bento source code and return a fun_domain object. **/
+        /** Compile Fun source code and return a fun_domain object. **/
         fun_domain compile(funpath, boolean recursive, boolean autoload_core),
                             (fun_source_text, boolean autoload_core) [&]
 
@@ -94,7 +94,7 @@ core [=
     fun_processor fun_server [=
 
         /** The URL prefix that this server uses to filter requests.  This allows an
-         *  HTTP server to dispatch requests among multiple Bento servers, using the
+         *  HTTP server to dispatch requests among multiple Fun servers, using the
          *  first part of the URL to differentiate among them.
          *
          *  If null, this server accepts all requests.
@@ -186,7 +186,7 @@ core [=
     =]
 
 
-    /** A Bento statement; base class for the various types of statements. **/
+    /** A Fun statement; base class for the various types of statements. **/
     fun_node [=
         fun_node[] children = []
     =]
@@ -473,7 +473,7 @@ core [=
     /--------- platform-independent superclasses of platform-dependent types ---------/
 
     /** request describes an HTTP request. This is an optional parameter passed to
-     *  pages when they are instantiated by the Bento server.
+     *  pages when they are instantiated by the Fun server.
      */
     request [=
 
@@ -542,7 +542,7 @@ core [=
 
 
     dynamic reinit [=
-        log("Initializing core, Bento version " + version);
+        log("Initializing core, Fun version " + version);
     =]
 
 
@@ -563,7 +563,7 @@ core [=
         boolean init [?]
         boolean enabled [?]
         
-        /------- Bento/database table mapping --------/
+        /------- Fun/database table mapping --------/
         string{} table(record, key) = {}        
 
         /------- direct sql functions -------/
