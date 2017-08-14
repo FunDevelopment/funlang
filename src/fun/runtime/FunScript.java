@@ -83,7 +83,7 @@ public class FunScript implements fun_processor {
             if (runner.initedOk) {
                 try {
                     runner.loadSite();
-                    runner.run(writer);
+                    runner.run(writer, scriptArgs);
                 } catch (Throwable t) {
                     noProblems = false;
                     System.err.println("Problem running FunRunner: " + t.getMessage());
@@ -330,7 +330,7 @@ public class FunScript implements fun_processor {
     // Run a program
     //
     
-    private void run(Writer out) throws Redirection, IOException {
+    private void run(Writer out, String[] args) throws Redirection, IOException {
         String req = request;
         FunSite site = mainSite; 
         
