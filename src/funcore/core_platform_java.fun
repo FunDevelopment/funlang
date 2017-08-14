@@ -8,7 +8,7 @@
  --                                                                         --
  -----------------------------------------------------------------------------/
 
-core [=
+core {
 
     extern java java.**
     extern java javax.**
@@ -56,7 +56,7 @@ core [=
     table = fun.runtime.Table;
     
     dynamic string[] sorted_array(string[] ary) = fun.runtime.Utils.sortedArray(ary)
-    dynamic string{} sorted_table(string{} tbl) = fun.runtime.Utils.sortedTable(tbl) 
+    dynamic string[] sorted_table(string[] tbl) = fun.runtime.Utils.sortedTable(tbl) 
 
     /------ Database objects ------/
 
@@ -64,7 +64,7 @@ core [=
 
     java.sql.ResultSet result_set [/]
 
-    string{} db_row(result_set results, int row) = fun.runtime.DatabaseRow(results, row)
+    string[] db_row(result_set results, int row) = fun.runtime.DatabaseRow(results, row)
 
     /------ Math ------/
     
@@ -77,17 +77,17 @@ core [=
     dynamic date_format simple_time_format = java.text.SimpleDateFormat("HH:mm")
     java.util.Date date [/]
 
-    dynamic date today [=
+    dynamic date today {
         simple_date_format.format(super);
-    =]
+    }
 
-    dynamic date now [=
+    dynamic date now {
         simple_time_format.format(super);
-    =]
+    }
 
-    dynamic date numeric_today [=
+    dynamic date numeric_today {
         numeric_date_format.format(super);
-    =]
+    }
 
     long time [/]
     dynamic time current_time = java.lang.System.currentTimeMillis
@@ -121,36 +121,36 @@ core [=
     /** Returns index of substr in str, or -1 if not found.  If the ix parameter is supplied,
       * the search begins at that offset in the string.
       **/
-    dynamic int index_of(str, substr), (str, substr, int ix) [= 
-        with (ix) [=
+    dynamic int index_of(str, substr), (str, substr, int ix) { 
+        with (ix) {
             fun.runtime.Utils.indexOf(str, substr, ix);
-        =] else [=
+        } else {
             fun.runtime.Utils.indexOf(str, substr);
-        =]
-    =]
+        }
+    }
 
     /** Returns index of substr in str, searching from the end of the string
      *  back, or -1 if not found.  If the ix parameter is supplied, the 
      *  search begins at that offset in the string.
      **/
-    dynamic int last_index_of(str, substr), (str, substr, int ix) [= 
-        with (ix) [=
+    dynamic int last_index_of(str, substr), (str, substr, int ix) { 
+        with (ix) {
             fun.runtime.Utils.lastIndexOf(str, substr, ix);
-        =] else [=
+        } else {
             fun.runtime.Utils.lastIndexOf(str, substr);
-        =]
-    =]
+        }
+    }
 
     /** Returns a portion of the passed string, starting at position start_ix and ending
      *  just before position end_ix, or, if end_ix is not provided, to the end of string.
      **/
-    dynamic substring(str, int start_ix), (str, int start_ix, int end_ix) [=
-        with (end_ix) [=
+    dynamic substring(str, int start_ix), (str, int start_ix, int end_ix) {
+        with (end_ix) {
             fun.runtime.Utils.substring(str, start_ix, end_ix);
-        =] else [=
+        } else {
             fun.runtime.Utils.substring(str, start_ix);
-        =]
-    =]
+        }
+    }
     
     /** Removes leading and trailing spaces, or characters of a specified value **/
     dynamic trim(str),(str, char c) = c ? fun.runtime.Utils.trim(str, c) : fun.runtime.Utils.trim(str)
@@ -206,7 +206,7 @@ core [=
 	 */ 
     dynamic replace(str, oldstr, newstr) = fun.runtime.Utils.replaceOccurrences(str, oldstr, newstr)
 
-    dynamic replace_all(str, strmap{}) = fun.runtime.Utils.replaceAllOccurrences(str, strmap)
+    dynamic replace_all(str, strmap[]) = fun.runtime.Utils.replaceAllOccurrences(str, strmap)
 
     dynamic concat(str1, str2),(strs[]) = (strs ? fun.runtime.Utils.concat(strs) : fun.runtime.Utils.concat(str1, str2)) 
 
@@ -244,7 +244,7 @@ core [=
     
     dynamic file_impl(*) file(file_interface fbase, path),(base, path),(base) [/]
 
-    file_interface [=
+    file_interface {
         name [&]
         absolute_path [&]
         canonical_path [&]
@@ -264,7 +264,7 @@ core [=
         dynamic boolean delete [&]
         dynamic boolean mkdir [&]
         dynamic boolean mkdirs [&]
-    =]
+    }
 
     persistent_cache = fun.runtime.FunFileCache(cache_path)
 
@@ -273,7 +273,7 @@ core [=
 
     /----- Run a System Command -----/ 
 
-    exec_interface [=
+    exec_interface {
         dynamic boolean is_running [?]
         dynamic int exit_val [?]
         dynamic exception [?]
@@ -282,9 +282,9 @@ core [=
         dynamic boolean has_err [?]
         dynamic err [?]
         dynamic read_in(str) [?]
-    =]
+    }
     
-    exec_interface exec(cmd), (cmd, string{} env), (cmd, string{} env, file run_dir) = fun.runtime.Exec.execFactory(cmd, env, run_dir);
+    exec_interface exec(cmd), (cmd, string[] env), (cmd, string[] env, file run_dir) = fun.runtime.Exec.execFactory(cmd, env, run_dir);
     
 
 	/----- System Information -----/
@@ -309,4 +309,4 @@ core [=
     /** sends an error message to log file/console **/
     dynamic err(str) = fun.runtime.SiteBuilder.err(str)
     
-=]
+}

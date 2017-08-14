@@ -927,7 +927,7 @@ public class FunSite extends FunDomain {
 
                     case FunParserConstants.DOT:
                     case FunParserConstants.LPAREN:
-                    case FunParserConstants.LCURLY:
+                    case FunParserConstants.LCODE:
                     case FunParserConstants.LBRACKET:
                         out.print(t.image);
                         break;
@@ -952,8 +952,8 @@ public class FunSite extends FunDomain {
                                 case FunParserConstants.RPAREN:
                                 case FunParserConstants.LBRACKET:
                                 case FunParserConstants.RBRACKET:
-                                case FunParserConstants.LCURLY:
-                                case FunParserConstants.RCURLY:
+                                case FunParserConstants.LCODE:
+                                case FunParserConstants.RCODE:
                                     break;
                                 case FunParserConstants.EXTERN:
                                 case FunParserConstants.KEEP:

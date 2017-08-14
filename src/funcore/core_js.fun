@@ -7,79 +7,79 @@
  --                                                                         --
  -----------------------------------------------------------------------------/
 
-core [=
+core {
 
     /** base class for definitions that instantiate javascript. **/
     javascript [/]
 
-    dynamic core_scripts(boolean{} options, find_element_function, page_name) [=
+    dynamic core_scripts(boolean{} options, find_element_function, page_name) {
 
         boolean use_wait_cursor = options["use_wait_cursor"]
-        if (options["graphics"]) [=
+        if (options["graphics"]) {
             vlog("**graphics enabled**");
             graphics_script;
-        =] else [=
+        } else {
             vlog("**graphics disabled**");            
-        =]
+        }
         
-        if (options["drag"]) [=
+        if (options["drag"]) {
             vlog("**dragging enabled**");
             drag_script;
-        =] else [=
+        } else {
             vlog("**dragging disabled**");
-        =]
+        }
        
-        if (options["ajax"]) [=
+        if (options["ajax"]) {
             log("**ajax enabled**");
             ajax_script(page_name, find_element_function, use_wait_cursor);
-        =] else [=
+        } else {
             log("**ajax disabled**");
-        =]
+        }
 
-        if (options["animation"]) [=
+        if (options["animation"]) {
             vlog("**animation enabled**");
             animation_script(page_name, use_wait_cursor);
-        =] else [=
+        } else {
             vlog("**animation disabled**");
-        =]
+        }
 
-        if (options["debug"]) [=
+        if (options["debug"]) {
             vlog("**debugging enabled**");
             debug_script;
-        =] else [=
+        } else {
             vlog("**debugging disabled**");
-        =]
+        }
 
-    =]
+    }
 
     /** Base class for cross-browser functions to handle events. **/
-    javascript event_handler [|
-        function [= type; =](e) {
+    javascript event_handler [/
+        function {/ type; /}(e) {
             if (!e) {
                e = window.event;
             }
             var targetElement = (e.target ? e.target : e.srcElement);
-            [= sub; =]
+            {/ sub; /}
             return false;
         }
-    |]
+    /]
     
     /** Inspired by Scott Andrew's code at http://www.scottandrew.com/weblog/articles/cbs-events **/
-    javascript add_handler(event_type, event_handler eh) [|
-        [=/** W3C support **/=]
+    javascript add_handler(event_type, event_handler eh) [/
+        {//** W3C support **//}
         if (document.addEventListener) {
-            document.addEventListener([= event_type; =], [= eh.type; =], false);
+            document.addEventListener({/ event_type; /}, {/ eh.type; /}, false);
             return true;
-        [=/** IE support **/=]
+        {//** IE support **//}
         } else if (document.attachEvent) {
-            var r = document.attachEvent("on" + [= event_type; =], [= eh.type; =]);
+            var r = document.attachEvent("on" + {/ event_type; /}, {/ eh.type; /});
             return r;
         } else {
             alert("Sorry, this web site won't work correctly in your browser.  Either JavaScript has been disabled, or your browser is too old, new or weird.");  
         }
-    |]        
+    /]        
     
-    event_handler select_handler [|
+    event_handler select_handler [/
         selectedElement = targetElement;
         while (selectedElement != null && (selectedElement.id == null || !selectable[selectedElement.id])) {
             selectedElement = selectedElement.parentNode;
@@ -88,32 +88,32 @@ core [=
             showSelected(selectedElement);
             dragStart(selectedElement, e);
         }
-    |]                    
+    /]                    
 
-    javascript init_draggable [=
-        for d in site.descendants_of_type("draggable") [=
-            if (d.id) [|
-                draggable["[= d.id; =]"] = true;
-            |]
-        =]
-    =]
+    javascript init_draggable {
+        for d in site.descendants_of_type("draggable") {
+            if (d.id) [/
+                draggable["{/ d.id; /}"] = true;
+            /]
+        }
+    }
 
-    javascript init_selectable [= 
-        [| var selectableElement; |]
-        for s in site.descendants_of_type("selectable") [=
-            if (s.id) [|
-                selectableElement = document.getElementById("[= s.id; =]");
+    javascript init_selectable { 
+        [/ var selectableElement; /]
+        for s in site.descendants_of_type("selectable") {
+            if (s.id) [/
+                selectableElement = document.getElementById("{/ s.id; /}");
                 if (selectableElement != null) {
                     topz++;
-                    selectable["[= s.id; =]"] = true;
+                    selectable["{/ s.id; /}"] = true;
                     selectableElement.style.zIndex = topz;
                 }
-            |]
-        =]
-        [| selectable.length = topz; |]
-    =]
+            /]
+        }
+        [/ selectable.length = topz; /]
+    }
     
-    javascript drag_script [|
+    javascript drag_script [/
         var eventModel;
         var selectedElement;
         var dragElement;
@@ -142,7 +142,7 @@ core [=
         var S = "s"
         var SE = "se"
 
-        [= select_handler; =]
+        {/ select_handler; /}
        
         function showSelected(element) {
             moveToTop(element);
@@ -305,10 +305,10 @@ core [=
 
         function pageLoad(e) {
             eventModel = (e ? "W3C" : (window.event ? "IE" : "unknown"));
-            [=
+            {/
                 init_selectable;
                 init_draggable;
-            =]
+            /}
 
             if (eventModel == "IE") {
                 document.onmousedown = select_handler;
@@ -325,11 +325,11 @@ core [=
             return true;
         }
         window.onload = pageLoad;
-    |]
+    /]
 
-    javascript ajax_script(page_name, find_element_function, boolean use_wait_cursor) [|
+    javascript ajax_script(page_name, find_element_function, boolean use_wait_cursor) [/
     
-        [= find_element_function; =]
+        {/ find_element_function; /}
         
         function createXMLHttpRequest() {
             var xmlHttp = undefined;
@@ -360,7 +360,7 @@ core [=
                     id = id.substring(1);
                     req_id = "$" + id;
                 } else {
-                    req_id = "$[= page_name; =]." + id;
+                    req_id = "${/ page_name; /}." + id;
                 }
 
                 req = createXMLHttpRequest();
@@ -384,7 +384,7 @@ core [=
                     id = id.substring(1);
                     req_id = "$" + id;
                 } else {
-                    req_id = "$[= page_name; =]." + id;
+                    req_id = "${/ page_name; /}." + id;
                 }
 
                 req = createXMLHttpRequest();
@@ -417,7 +417,7 @@ core [=
                     id = id.substring(1);
                     req_id = "$" + id;
                 } else {
-                    req_id = "$[= page_name; =]." + id;
+                    req_id = "${/ page_name; /}." + id;
                 }
 
                 req = createXMLHttpRequest();
@@ -445,7 +445,7 @@ core [=
                     compName = compName.substring(1);
                     req_id = "$" + compName;
                 } else {
-                    req_id = "$[= page_name; =]." + compName;
+                    req_id = "${/ page_name; /}." + compName;
                 }
 
                 req = createXMLHttpRequest();
@@ -474,7 +474,7 @@ core [=
                     id = id.substring(1);
                     req_id = "$" + id;
                 } else {
-                    req_id = "$[= page_name; =]." + id;
+                    req_id = "${/ page_name; /}." + id;
                 }
                 req = createXMLHttpRequest();
                 if (req != undefined) {
@@ -508,7 +508,7 @@ core [=
                     compName = compName.substring(1);
                     req_id = "$" + compName;
                 } else {
-                    req_id = "$[= page_name; =]." + compName;
+                    req_id = "${/ page_name; /}." + compName;
                 }
 
                 req = createXMLHttpRequest();
@@ -533,7 +533,7 @@ core [=
         }
 
         function getComponentResponder(req, id, successFunction, successParam) {
-            [= if (use_wait_cursor) [| document.body.style.cursor = 'wait'; |] =]
+            {/ if (use_wait_cursor) [/ document.body.style.cursor = 'wait'; /] /}
             return function() {
                 var element;
                 if (req.readyState == 4) {
@@ -555,7 +555,7 @@ core [=
                     } else {
                         console.log("Error " + req.status + ": " + req.statusText);
                     }
-                    [= if (use_wait_cursor) [| document.body.style.cursor = 'default'; |] =]
+                    {/ if (use_wait_cursor) [/ document.body.style.cursor = 'default'; /] /}
                 }
             }
         }
@@ -569,7 +569,7 @@ core [=
                     id = id.substring(1);
                     req_id = "$" + id;
                 } else {
-                    req_id = "$[= page_name; =]." + id;
+                    req_id = "${/ page_name; /}." + id;
                 }
                 req.onreadystatechange = getCallbackResponder(req, callbackFunction, callbackParam);
                 if (serverParam != undefined && serverValue != undefined) {
@@ -594,7 +594,7 @@ core [=
                     id = id.substring(1);
                     req_id = "$" + id;
                 } else {
-                    req_id = "$[= page_name; =]." + id;
+                    req_id = "${/ page_name; /}." + id;
                 }
                 req.onreadystatechange = getCallbackResponder(req, callbackFunction, callbackParam);
                 req.open("POST", req_id, true);
@@ -633,9 +633,9 @@ core [=
 	             parent.replaceChild(newElement, element);
 	         }
          }
-    |]
+    /]
 
-    javascript graphics_script [|
+    javascript graphics_script [/
         function getWindowHeight() {
             var windowHeight = 0;
             if (typeof(window.innerHeight) == 'number') {
@@ -649,9 +649,9 @@ core [=
             }
             return windowHeight;
         } 
-    |]
+    /]
 
-    debug_script [|
+    debug_script [/
 
-    |]
-=]
+    /]
+}

@@ -146,7 +146,7 @@ public class Dim extends AbstractNode {
     }
     
     public String toString() {
-        String str = (is_table ? "{" : "[") + (type == TYPE.APPEND ? "+" : (type == TYPE.DEFINITE ? String.valueOf(size) : "")) + (is_table ? "}" : "]");
+        String str = "[" + (type == TYPE.APPEND ? "+" : (type == TYPE.DEFINITE ? String.valueOf(size) : "")) + "]";
         return str;
     }
 }

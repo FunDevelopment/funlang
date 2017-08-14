@@ -314,7 +314,7 @@ abstract public class AbstractNode extends FunCompilerVisitDestination implement
 
                 case FunParserConstants.DOT:
                 case FunParserConstants.LPAREN:
-                case FunParserConstants.LCURLY:
+                case FunParserConstants.LCODE:
                 case FunParserConstants.LBRACKET:
                     sb.append(t.image);
                     break;
@@ -340,8 +340,8 @@ abstract public class AbstractNode extends FunCompilerVisitDestination implement
                             case FunParserConstants.RPAREN:
                             case FunParserConstants.LBRACKET:
                             case FunParserConstants.RBRACKET:
-                            case FunParserConstants.LCURLY:
-                            case FunParserConstants.RCURLY:
+                            case FunParserConstants.LCODE:
+                            case FunParserConstants.RCODE:
                                 break;
                             case FunParserConstants.ADOPT:
                             case FunParserConstants.KEEP:

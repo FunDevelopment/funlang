@@ -3,7 +3,7 @@
  --/
 
 
-[=
+{
 
 
     /** The primary site. **/
@@ -22,7 +22,7 @@
      **/ 
     site_config[] all_sites = []
     
-    site_config{} site_config_table = { for site_config sc in all_sites [= sc.name: sc =] }
+    site_config[] site_config_table = { for site_config sc in all_sites {/ sc.name: sc /} }
     
     /** If true, the sites in all_sites share the main_site core instead of
      *  loading their own.
@@ -59,7 +59,7 @@
     file_separator = "/"
 
     /** A generic website configuration. **/
-    site_config [=
+    site_config {
         name [?]
 
         funpath [?]
@@ -73,44 +73,44 @@
          *  the listen_to array.  If empty, respond to any address.
          **/
         respond_only_to[] = []  
-    =]
+    }
 
 
     /--- config objects for available sites ---/
 
     /--- fun language test site ---/
-    site_config test_config [=
+    site_config test_config {
         name = "test"
         funpath = "./sites/test"
         filepath = "."
-    =]    
+    }    
 
     /--- site organization test ---/
-    site_config site_org_test_config [=
+    site_config site_org_test_config {
         name = "site_org_test"
 
         funpath = "./sites/test/site_org_test"
-    =]
+    }
 
     /--- multisite test site 1 ---/ 
-    site_config site1_config [=
+    site_config site1_config {
         name = "site_1"
 
         funpath = "./sites/test/site1/site_1.fun"
-    =]
+    }
     
     /--- multisite test site 2 ---/ 
-    site_config site2_config [=
+    site_config site2_config {
         name = "site_2"
 
         funpath = "./sites/test/site2/site_2.fun"
-    =]
+    }
     
     /--- multisite test site 3 ---/ 
-    site_config site3_config [=
+    site_config site3_config {
         name = "site_3"
 
         funpath = "./sites/test/site3/site_3.fun"
-    =]
+    }
     
-=]
+}

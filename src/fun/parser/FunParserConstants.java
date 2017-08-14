@@ -177,29 +177,29 @@ public interface FunParserConstants {
   /** RegularExpression Id. */
   int RCODE = 98;
   /** RegularExpression Id. */
-  int LCONCURRENT = 99;
+  int LEMBEDCODE = 99;
   /** RegularExpression Id. */
-  int RCONCURRENT = 100;
+  int REMBEDCODE = 100;
   /** RegularExpression Id. */
-  int LPAREN = 101;
+  int LCONCURRENT = 101;
   /** RegularExpression Id. */
-  int RPAREN = 102;
+  int RCONCURRENT = 102;
   /** RegularExpression Id. */
-  int LDYNAMICPAREN = 103;
+  int LPAREN = 103;
   /** RegularExpression Id. */
-  int RDYNAMICPAREN = 104;
+  int RPAREN = 104;
   /** RegularExpression Id. */
-  int LCONCURRENTPAREN = 105;
+  int LDYNAMICPAREN = 105;
   /** RegularExpression Id. */
-  int RCONCURRENTPAREN = 106;
+  int RDYNAMICPAREN = 106;
   /** RegularExpression Id. */
-  int LBRACKET = 107;
+  int LCONCURRENTPAREN = 107;
   /** RegularExpression Id. */
-  int RBRACKET = 108;
+  int RCONCURRENTPAREN = 108;
   /** RegularExpression Id. */
-  int LCURLY = 109;
+  int LBRACKET = 109;
   /** RegularExpression Id. */
-  int RCURLY = 110;
+  int RBRACKET = 110;
   /** RegularExpression Id. */
   int SEMICOLON = 111;
   /** RegularExpression Id. */
@@ -401,16 +401,18 @@ public interface FunParserConstants {
     "<BQ_STRING_LITERAL>",
     "<LETTER>",
     "<DIGIT>",
-    "\"[|\"",
-    "\"|]\"",
     "\"[/\"",
     "\"/]\"",
+    "\"[|\"",
+    "\"|]\"",
     "\"[``\"",
     "\"``]\"",
-    "\"[=\"",
-    "\"=]\"",
-    "\"[++\"",
-    "\"++]\"",
+    "\"{\"",
+    "\"}\"",
+    "\"{/\"",
+    "\"/}\"",
+    "\"{+\"",
+    "\"+}\"",
     "\"(\"",
     "\")\"",
     "\"(:\"",
@@ -419,8 +421,6 @@ public interface FunParserConstants {
     "\"+)\"",
     "\"[\"",
     "\"]\"",
-    "\"{\"",
-    "\"}\"",
     "\";\"",
     "\",\"",
     "\".\"",
@@ -464,13 +464,14 @@ public interface FunParserConstants {
     "\"@\"",
     "<token of kind 152>",
     "\"[``\"",
-    "\"[|\"",
-    "\"[=\"",
-    "\"|]\"",
     "\"[/\"",
+    "\"{/\"",
     "\"/]\"",
+    "\"[|\"",
+    "\"|]\"",
     "<token of kind 159>",
     "\"``]\"",
+    "\"[=\"",
     "\"++\"",
     "\"|>\"",
   };

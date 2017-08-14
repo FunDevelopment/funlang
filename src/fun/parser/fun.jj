@@ -355,8 +355,8 @@ TOKEN :
 
 TOKEN :
 {
-      < LSTATIC: "[|" > {   stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
-    | < RSTATIC: "|]" > {   if (stateStack.size() > 0) {
+      < LSTATIC: "[/" > {   stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
+    | < RSTATIC: "/]" > {   if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -364,8 +364,8 @@ TOKEN :
                                 SwitchTo(DEFAULT);
                             }
                         }
-    | < LSTATICW: "[/" > {  stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
-    | < RSTATICW: "/]" > {   if (stateStack.size() > 0) {
+    | < LSTATICW: "[|" > {  stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
+    | < RSTATICW: "|]" > {   if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -384,8 +384,8 @@ TOKEN :
                               }
                           }
 
-    | < LCODE: "[=" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
-    | < RCODE: "=]" >  { if (stateStack.size() > 0) {
+    | < LCODE: "{" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
+    | < RCODE: "}" >  { if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -394,10 +394,20 @@ TOKEN :
                             }
                           }
 
+    | < LEMBEDCODE: "{/" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
+    | < REMBEDCODE: "/}" >  { if (stateStack.size() > 0) {
+                                currentState = (Integer) stateStack.pop();
+                                SwitchTo(currentState.intValue());
+                             } else {
+                                // this is a mismatched delimiter error
+                                SwitchTo(DEFAULT);
+                             }
+                           }
+
     // concurrency brackets don't change the lexical state, so they don't
     // need the logic that the code and static brackets have
-    | < LCONCURRENT: "[++" >
-    | < RCONCURRENT: "++]" >
+    | < LCONCURRENT: "{+" >
+    | < RCONCURRENT: "+}" >
 
     | < LPAREN: "(" >
     | < RPAREN: ")" >
@@ -407,8 +417,6 @@ TOKEN :
     | < RCONCURRENTPAREN: "+)" >
     | < LBRACKET: "[" >
     | < RBRACKET: "]" >
-    | < LCURLY: "{" >
-    | < RCURLY: "}" >
     | < SEMICOLON: ";" >
     | < COMMA: "," >
     | < DOT: "." >
@@ -482,15 +490,15 @@ TOKEN :
 {
       <STATIC_0: "[``" > { input_stream.backup(3); } : DEFAULT
     |
-      <STATIC_1: "[|" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_1: "[/" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_2: "[=" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_2: "{/" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_3: "|]" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_3: "/]" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_4: "[/" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_4: "[|" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_5: "/]" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_5: "|]" > { input_stream.backup(2); } : DEFAULT
 }
 
 //<IN_STATIC_TEXT>
@@ -584,7 +592,7 @@ Node StaticText() :
       }
     |
       t = <STATIC_5> {
-            // we have a /], which means preserve trailing whitespace 
+            // we have a |], which means preserve trailing whitespace 
             str = t.image.substring(0, t.image.length() - 2);
             jjtn000.setText(str);
             jjtn000.setPreserveTrailing(true);
@@ -644,7 +652,7 @@ void LeadingStaticText()            :
                        jjtc000 = false;
                      }
 /*@egen*/ {
-            // we have a /], which means preserve trailing whitespace 
+            // we have a |], which means preserve trailing whitespace 
             str = t.image.substring(0, t.image.length() - 2);
             jjtn000.setText(str);
             jjtn000.setPreserveLeading(true);
@@ -1050,9 +1058,9 @@ Block StaticBlock() :
       LOOKAHEAD(2)
       ("[|" | "[/") ("|]" | "/]")
     |
-      "[|" ( StaticText() | Block() )+ ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
+      "[/" ( StaticText() | Block() )+ ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
     |
-      "[/" LeadingStaticText() ( StaticText() | Block() )*  ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
+      "[|" LeadingStaticText() ( StaticText() | Block() )*  ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
     |
       "[``" LiteralText() "``]" [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
     )/*@bgen(jjtree)*/
@@ -1097,7 +1105,54 @@ Block FunBlock() :
 {/*@bgen(jjtree) FunBlock */
     try {
 /*@egen*/
-    ("[=" ( DeepStatement() )* "=]")[ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
+    (      ("{" ( DeepStatement() )* "}")
+    | 
+      ("{/" ( DeepStatement() )* "/}")
+    )
+    [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    {
+        return jjtn000;
+    }/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+Block EmbeddedFunBlock()          : 
+{/*@bgen(jjtree) FunBlock */
+    ParsedFunBlock jjtn000 = new ParsedFunBlock(JJTFUNBLOCK);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Block catchBlock;
+}
+{/*@bgen(jjtree) FunBlock */
+    try {
+/*@egen*/
+    ("{/" ( DeepStatement() )* "/}")
+    [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
@@ -1196,7 +1251,7 @@ Block ConcurrentFunBlock() :
 {/*@bgen(jjtree) ConcurrentFunBlock */
     try {
 /*@egen*/
-    ("[++" ( DeepStatement() )* "++]")[ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
+    ("{+" ( DeepStatement() )* "+}")[ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
@@ -1238,7 +1293,10 @@ void SiteBlock()          :
 {/*@bgen(jjtree) FunBlock */
     try {
 /*@egen*/
-    ("[=" ( Directive() )* ( SiteLevelStatement() )* "=]")/*@bgen(jjtree)*/
+    (      ("{" ( Directive() )* ( SiteLevelStatement() )* "}")
+    | 
+      ("{/" ( Directive() )* ( SiteLevelStatement() )* "/}")
+    )/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -1258,7 +1316,7 @@ void SiteBlock()          :
         jjtree.closeNodeScope(jjtn000, true);
       }
     }
-/*@egen*/
+/*@egen*/    
 }
 
 
@@ -2238,7 +2296,7 @@ void ElementExpression()      :
     (
       StaticBlock()
     |
-      FunBlock()
+      EmbeddedFunBlock()
     |
       NullBlock()
     |
@@ -2255,7 +2313,7 @@ AbstractNode generateElementExpression()      :
 {    (
       node = StaticBlock()
     |
-      node = FunBlock()
+      node = EmbeddedFunBlock()
     |
       node = NullBlock()
     |
@@ -2648,26 +2706,7 @@ void IndefiniteCollectionType()      :
 }
 
 
-void Dim()      :
-{}
-{
-    ArrayDim() | TableDim()
-}
-
-void DefiniteDim()      :
-{}
-{
-    DefiniteArrayDim() | DefiniteTableDim()
-}
-
-void AppendDim()      :
-{}
-{
-    AppendArrayDim() | AppendTableDim()
-}
-
-
-void ArrayDim()     :
+void Dim()     :
 {/*@bgen(jjtree) Dim */
   ParsedDim jjtn000 = new ParsedDim(JJTDIM);
   boolean jjtc000 = true;
@@ -2730,8 +2769,7 @@ void ArrayDim()     :
 /*@egen*/
 }
 
-
-void DefiniteArrayDim()     :
+void DefiniteDim()     :
 {/*@bgen(jjtree) Dim */
   ParsedDim jjtn000 = new ParsedDim(JJTDIM);
   boolean jjtc000 = true;
@@ -2764,7 +2802,7 @@ void DefiniteArrayDim()     :
 /*@egen*/
 }
 
-void AppendArrayDim()     :
+void AppendDim()     :
 {/*@bgen(jjtree) Dim */
   ParsedDim jjtn000 = new ParsedDim(JJTDIM);
   boolean jjtc000 = true;
@@ -2783,7 +2821,7 @@ void AppendArrayDim()     :
 /*@egen*/
 }
 
-void StreamArrayDim()     :
+void StreamDim()     :
 {/*@bgen(jjtree) Dim */
   ParsedDim jjtn000 = new ParsedDim(JJTDIM);
   boolean jjtc000 = true;
@@ -2794,121 +2832,6 @@ void StreamArrayDim()     :
 /*@egen*/
     { jjtn000.setDimType(Dim.TYPE.STREAM); }
     "[" "^" "]"/*@bgen(jjtree)*/
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
-
-void TableDim()     :
-{/*@bgen(jjtree) Dim */
-  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Dim */
-    try {
-/*@egen*/
-    { jjtn000.setTable(true); }
-
-    "{" (
-
-          "}"/*@bgen(jjtree)*/
-                                 {
-                                   jjtree.closeNodeScope(jjtn000, true);
-                                   jjtc000 = false;
-                                 }
-/*@egen*/                    { jjtn000.setDimType(Dim.TYPE.INDEFINITE); }
-        |
-          LOOKAHEAD("+" "}")
-          "+" "}"/*@bgen(jjtree)*/
-                                 {
-                                   jjtree.closeNodeScope(jjtn000, true);
-                                   jjtc000 = false;
-                                 }
-/*@egen*/                { jjtn000.setDimType(Dim.TYPE.APPEND); }
-        |
-          ValueExpression() "}"/*@bgen(jjtree)*/
-                                 {
-                                   jjtree.closeNodeScope(jjtn000, true);
-                                   jjtc000 = false;
-                                 }
-/*@egen*/  { jjtn000.setDimType(Dim.TYPE.DEFINITE); }
-        )/*@bgen(jjtree)*/
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        throw (RuntimeException)jjte000;
-      }
-      if (jjte000 instanceof ParseException) {
-        throw (ParseException)jjte000;
-      }
-      throw (Error)jjte000;
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
-
-void DefiniteTableDim()     :
-{/*@bgen(jjtree) Dim */
-  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Dim */
-    try {
-/*@egen*/
-    {
-        jjtn000.setDimType(Dim.TYPE.DEFINITE);
-        jjtn000.setTable(true);
-    }
-    "{" ValueExpression() "}"/*@bgen(jjtree)*/
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        throw (RuntimeException)jjte000;
-      }
-      if (jjte000 instanceof ParseException) {
-        throw (ParseException)jjte000;
-      }
-      throw (Error)jjte000;
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
-
-void AppendTableDim()     :
-{/*@bgen(jjtree) Dim */
-  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Dim */
-    try {
-/*@egen*/
-    {
-        jjtn000.setDimType(Dim.TYPE.APPEND);
-        jjtn000.setTable(true);
-    }
-    "{" "+" "}"/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -2928,56 +2851,7 @@ void IndefiniteDim()     :
 /*@egen*/
     { jjtn000.setDimType(Dim.TYPE.INDEFINITE); }
     (
-      "{" "}"/*@bgen(jjtree)*/
-              {
-                jjtree.closeNodeScope(jjtn000, true);
-                jjtc000 = false;
-              }
-/*@egen*/ { jjtn000.setTable(true); }
-    |
       "[" "]"
-    )/*@bgen(jjtree)*/
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
-
-void IndefiniteArrayDim()     :
-{/*@bgen(jjtree) Dim */
-  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Dim */
-    try {
-/*@egen*/
-    { jjtn000.setDimType(Dim.TYPE.INDEFINITE); }
-    (
-      "[" "]"
-    )/*@bgen(jjtree)*/
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
-
-void IndefiniteTableDim()     :
-{/*@bgen(jjtree) Dim */
-  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Dim */
-    try {
-/*@egen*/
-    { jjtn000.setDimType(Dim.TYPE.INDEFINITE);  jjtn000.setTable(true); }
-    (
-      "{" "}"
     )/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
@@ -3106,19 +2980,13 @@ void DefElementName() :
     t = <IDENTIFIER> { jjtn000.setName(t.image); }
     (
       LOOKAHEAD("[" "+")
-      AppendArrayDim()
+      AppendDim()
     |
-      LOOKAHEAD("{" "+")
-      AppendTableDim()
-    | 
       LOOKAHEAD("[" "^")
-      StreamArrayDim()
+      StreamDim()
     |
       LOOKAHEAD("[")
-      DefiniteArrayDim()
-    |
-      LOOKAHEAD("{")
-      DefiniteTableDim()
+      DefiniteDim()
     )+/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
@@ -3751,7 +3619,7 @@ Block ArrayInitBlock()                     :
     try {
 /*@egen*/
     (
-      "[=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=]"
+      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
     )
     [ catchBlock = ArrayInitCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -3918,7 +3786,7 @@ Block TableInitBlock()                     :
     try {
 /*@egen*/
     (
-      "[=" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "=]"
+      "{/" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "/}"
     )
     [ catchBlock = TableInitCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -5966,7 +5834,7 @@ Block ComprehensionBlock()          :
     try {
 /*@egen*/
     (
-      "[=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=]"
+      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
     )
     [ catchBlock = ComprehensionCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {

@@ -1,77 +1,77 @@
 /-- little test --/
 
-site small_test [=
-    response index [| <h6>small test</h6> |]
+site small_test {
+    response index [/ <h6>small test</h6> /]
 
-    concurrent_test [=
+    concurrent_test {
     
-        launch [=
+        launch {
             [++
                 new_thread;
             ++]
-        =]
+        }
         
-        if (running) [=
+        if (running) {
           
             "counter is running.<br>tick: ";
           
             tick;
        
-        =] else [= 
+        } else { 
             "launching concurrent instantiation.<br>";
               
             launch;
             
-            if (launch) [=
+            if (launch) {
                 "error: ";
                 launch;
-            =]           
+            }           
        
-        =]
-    =]
+        }
+    }
 
-    concurrent_test_2 [=
+    concurrent_test_2 {
     
-        launch [=
+        launch {
             new_thread;++
-        =]
+        }
         
-        if (running) [=
+        if (running) {
           
             "counter is running.<br>tick: ";
           
             tick;
        
-        =] else [= 
+        } else { 
             "launching concurrent instantiation.<br>";
               
             launch;
             
-            if (launch) [=
+            if (launch) {
                 "error: ";
                 launch;
-            =]           
+            }           
        
-        =]
-    =]
+        }
+    }
 
     boolean running(boolean flag) = flag
     int tick(int n) = n
     
-    dynamic new_thread [=
+    dynamic new_thread {
         eval(running(: true :));
-        for int i from 0 to 10 [=
+        for int i from 0 to 10 {
             log("^ tick " + i);
             eval(tick(: i :));
             
             sleep(1000);
         
-        =]
+        }
     
         eval(running(: false :));
-    =]
+    }
     
-    cache_test [=
+    cache_test {
     
         a(x) = x
         
@@ -82,9 +82,9 @@ site small_test [=
         a(: "C" :);
         a;        
     
-    =]
+    }
     
-    keep_by_test [=
+    keep_by_test {
         test_array[] = [ "x", "x", "x" ]
         
         keep by ix0 in test_array: val1(x) = x
@@ -97,9 +97,9 @@ site small_test [=
         val1(: "E" :);
 
         test_array[0];
-    =]
+    }
         
-    keep_by_2 [=
+    keep_by_2 {
         cache_array[] = [ "X", "X", "X" ]
         keep by ix0 in cache_array: val1(x) = x
         keep by ix1 in cache_array: val2(x) = x
@@ -111,16 +111,16 @@ site small_test [=
         
         cache_array[0];
         cache_array[1];
-    =]
+    }
 
 
-    nested_keep_test [=
-        keep: a_container [=
+    nested_keep_test {
+        keep: a_container {
             keep in container: a(x) = x
             a("A");
-        =]
+        }
 
         a_container;    
         a_container.a;
-    =]
-=]
+    }
+}

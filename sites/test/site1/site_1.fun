@@ -25,7 +25,7 @@ site site_1 [=
 
 
     /------ configuration properties ------/
-    urlprefix(page p) [| /[= if (p.site.type != sitename) [= p.site.type; "/"; =] =] |]  
+    urlprefix(page p) [| /{/ if (p.site.type != sitename) { p.site.type; "/"; } /} |]  
 	
 	/------ display properties ------/
 
@@ -59,7 +59,7 @@ site site_1 [=
                               ]
 
         menuitem(page p) [|
-            <div class="menu_item"><a href="[= urlprefix(p); p.type; =]">[= p.label; =]</a></div>
+            <div class="menu_item"><a href="[= urlprefix(p); p.type; =]">{/ p.label; /}</a></div>
         |]
 
         content [?]
@@ -67,7 +67,7 @@ site site_1 [=
         menu [=
             [| <table border="0" cellspacing="0" cellpadding="4" align="left" valign="top" height="100%"> |]
             for page p in destinations [|
-                <tr><td>[= menuitem(p); =]</td></tr>
+                <tr><td>{/ menuitem(p); /}</td></tr>
             |]
             [| </table> |]
         =]
@@ -94,7 +94,7 @@ site site_1 [=
 
     basepage(r, s) local_page(request r, session s) [=
         title [| Site 1 Local Page|]
-        label [| Site 1 local_page = [= owner.type; =] |]
+        label [| Site 1 local_page = {/ owner.type; /} |]
 
         content [|
             <p>This is a Site 1 local page.</p>
@@ -114,7 +114,7 @@ site site_1 [=
 
     basepage(r, s) s1_page(request r, session s) [=
         title [| Site 1 Special Page|]
-        label [| Site 1 s1_page = [= owner.type; =] |]
+        label [| Site 1 s1_page = {/ owner.type; /} |]
 
         content [|
             <p>This is the Site 1 special page.</p>

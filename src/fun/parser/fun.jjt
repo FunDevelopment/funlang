@@ -351,8 +351,8 @@ TOKEN :
 
 TOKEN :
 {
-      < LSTATIC: "[|" > {   stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
-    | < RSTATIC: "|]" > {   if (stateStack.size() > 0) {
+      < LSTATIC: "[/" > {   stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
+    | < RSTATIC: "/]" > {   if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -360,8 +360,8 @@ TOKEN :
                                 SwitchTo(DEFAULT);
                             }
                         }
-    | < LSTATICW: "[/" > {  stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
-    | < RSTATICW: "/]" > {   if (stateStack.size() > 0) {
+    | < LSTATICW: "[|" > {  stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
+    | < RSTATICW: "|]" > {   if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -380,8 +380,8 @@ TOKEN :
                               }
                           }
 
-    | < LCODE: "[=" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
-    | < RCODE: "=]" >  { if (stateStack.size() > 0) {
+    | < LCODE: "{" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
+    | < RCODE: "}" >  { if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -390,10 +390,20 @@ TOKEN :
                             }
                           }
 
+    | < LEMBEDCODE: "{/" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
+    | < REMBEDCODE: "/}" >  { if (stateStack.size() > 0) {
+                                currentState = (Integer) stateStack.pop();
+                                SwitchTo(currentState.intValue());
+                             } else {
+                                // this is a mismatched delimiter error
+                                SwitchTo(DEFAULT);
+                             }
+                           }
+
     // concurrency brackets don't change the lexical state, so they don't
     // need the logic that the code and static brackets have
-    | < LCONCURRENT: "[++" >
-    | < RCONCURRENT: "++]" >
+    | < LCONCURRENT: "{+" >
+    | < RCONCURRENT: "+}" >
 
     | < LPAREN: "(" >
     | < RPAREN: ")" >
@@ -403,8 +413,6 @@ TOKEN :
     | < RCONCURRENTPAREN: "+)" >
     | < LBRACKET: "[" >
     | < RBRACKET: "]" >
-    | < LCURLY: "{" >
-    | < RCURLY: "}" >
     | < SEMICOLON: ";" >
     | < COMMA: "," >
     | < DOT: "." >
@@ -478,15 +486,15 @@ TOKEN :
 {
       <STATIC_0: "[``" > { input_stream.backup(3); } : DEFAULT
     |
-      <STATIC_1: "[|" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_1: "[/" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_2: "[=" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_2: "{/" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_3: "|]" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_3: "/]" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_4: "[/" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_4: "[|" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_5: "/]" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_5: "|]" > { input_stream.backup(2); } : DEFAULT
 }
 
 //<IN_STATIC_TEXT>
@@ -543,7 +551,7 @@ Node StaticText() :
       }
     |
       t = <STATIC_5> {
-            // we have a /], which means preserve trailing whitespace 
+            // we have a |], which means preserve trailing whitespace 
             str = t.image.substring(0, t.image.length() - 2);
             jjtThis.setText(str);
             jjtThis.setPreserveTrailing(true);
@@ -576,7 +584,7 @@ void LeadingStaticText() #StaticText:
         }
     |
       t = <STATIC_5> {
-            // we have a /], which means preserve trailing whitespace 
+            // we have a |], which means preserve trailing whitespace 
             str = t.image.substring(0, t.image.length() - 2);
             jjtThis.setText(str);
             jjtThis.setPreserveLeading(true);
@@ -709,9 +717,9 @@ Block StaticBlock() :
       LOOKAHEAD(2)
       ("[|" | "[/") ("|]" | "/]")
     |
-      "[|" ( StaticText() | Block() )+ ("|]" | "/]") [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
+      "[/" ( StaticText() | Block() )+ ("|]" | "/]") [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
     |
-      "[/" LeadingStaticText() ( StaticText() | Block() )*  ("|]" | "/]") [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
+      "[|" LeadingStaticText() ( StaticText() | Block() )*  ("|]" | "/]") [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
     |
       "[``" LiteralText() "``]" [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
     )
@@ -725,7 +733,23 @@ Block FunBlock() :
     Block catchBlock;
 }
 {
-    ("[=" ( DeepStatement() )* "=]")[ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
+    (      ("{" ( DeepStatement() )* "}")
+    | 
+      ("{/" ( DeepStatement() )* "/}")
+    )
+    [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
+    {
+        return jjtThis;
+    }
+}
+
+Block EmbeddedFunBlock() #FunBlock: 
+{
+    Block catchBlock;
+}
+{
+    ("{/" ( DeepStatement() )* "/}")
+    [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
         return jjtThis;
     }
@@ -762,7 +786,7 @@ Block ConcurrentFunBlock() :
     Block catchBlock;
 }
 {
-    ("[++" ( DeepStatement() )* "++]")[ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
+    ("{+" ( DeepStatement() )* "+}")[ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
         return jjtThis;
     }
@@ -773,7 +797,10 @@ Block ConcurrentFunBlock() :
 void SiteBlock() #FunBlock:
 {}
 {
-    ("[=" ( Directive() )* ( SiteLevelStatement() )* "=]")
+    (      ("{" ( Directive() )* ( SiteLevelStatement() )* "}")
+    | 
+      ("{/" ( Directive() )* ( SiteLevelStatement() )* "/}")
+    )    
 }
 
 
@@ -1281,7 +1308,7 @@ void ElementExpression() #void:
     (
       StaticBlock()
     |
-      FunBlock()
+      EmbeddedFunBlock()
     |
       NullBlock()
     |
@@ -1298,7 +1325,7 @@ AbstractNode generateElementExpression() #void:
 {    (
       node = StaticBlock()
     |
-      node = FunBlock()
+      node = EmbeddedFunBlock()
     |
       node = NullBlock()
     |
@@ -1466,26 +1493,7 @@ void IndefiniteCollectionType() #Type:
 }
 
 
-void Dim() #void:
-{}
-{
-    ArrayDim() | TableDim()
-}
-
-void DefiniteDim() #void:
-{}
-{
-    DefiniteArrayDim() | DefiniteTableDim()
-}
-
-void AppendDim() #void:
-{}
-{
-    AppendArrayDim() | AppendTableDim()
-}
-
-
-void ArrayDim() #Dim:
+void Dim() #Dim:
 {}
 {
     "[" (
@@ -1502,62 +1510,25 @@ void ArrayDim() #Dim:
         )
 }
 
-
-void DefiniteArrayDim() #Dim:
+void DefiniteDim() #Dim:
 {}
 {
     { jjtThis.setDimType(Dim.TYPE.DEFINITE); }
     "[" ValueExpression() "]"
 }
 
-void AppendArrayDim() #Dim:
+void AppendDim() #Dim:
 {}
 {
     { jjtThis.setDimType(Dim.TYPE.APPEND); }
     "[" "+" "]"
 }
 
-void StreamArrayDim() #Dim:
+void StreamDim() #Dim:
 {}
 {
     { jjtThis.setDimType(Dim.TYPE.STREAM); }
     "[" "^" "]"
-}
-
-void TableDim() #Dim:
-{}
-{
-    { jjtThis.setTable(true); }
-
-    "{" (
-
-          "}"                    { jjtThis.setDimType(Dim.TYPE.INDEFINITE); }
-        |
-          LOOKAHEAD("+" "}")
-          "+" "}"                { jjtThis.setDimType(Dim.TYPE.APPEND); }
-        |
-          ValueExpression() "}"  { jjtThis.setDimType(Dim.TYPE.DEFINITE); }
-        )
-}
-
-void DefiniteTableDim() #Dim:
-{}
-{
-    {
-        jjtThis.setDimType(Dim.TYPE.DEFINITE);
-        jjtThis.setTable(true);
-    }
-    "{" ValueExpression() "}"
-}
-
-void AppendTableDim() #Dim:
-{}
-{
-    {
-        jjtThis.setDimType(Dim.TYPE.APPEND);
-        jjtThis.setTable(true);
-    }
-    "{" "+" "}"
 }
 
 void IndefiniteDim() #Dim:
@@ -1565,27 +1536,7 @@ void IndefiniteDim() #Dim:
 {
     { jjtThis.setDimType(Dim.TYPE.INDEFINITE); }
     (
-      "{" "}" { jjtThis.setTable(true); }
-    |
       "[" "]"
-    )
-}
-
-void IndefiniteArrayDim() #Dim:
-{}
-{
-    { jjtThis.setDimType(Dim.TYPE.INDEFINITE); }
-    (
-      "[" "]"
-    )
-}
-
-void IndefiniteTableDim() #Dim:
-{}
-{
-    { jjtThis.setDimType(Dim.TYPE.INDEFINITE);  jjtThis.setTable(true); }
-    (
-      "{" "}"
     )
 }
 
@@ -1624,19 +1575,13 @@ void DefElementName() :
     t = <IDENTIFIER> { jjtThis.setName(t.image); }
     (
       LOOKAHEAD("[" "+")
-      AppendArrayDim()
+      AppendDim()
     |
-      LOOKAHEAD("{" "+")
-      AppendTableDim()
-    | 
       LOOKAHEAD("[" "^")
-      StreamArrayDim()
+      StreamDim()
     |
       LOOKAHEAD("[")
-      DefiniteArrayDim()
-    |
-      LOOKAHEAD("{")
-      DefiniteTableDim()
+      DefiniteDim()
     )+
 }
 
@@ -1903,7 +1848,7 @@ Block ArrayInitBlock() #DynamicElementBlock:
 }
 {
     (
-      "[=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=]"
+      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
     )
     [ catchBlock = ArrayInitCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -1987,7 +1932,7 @@ Block TableInitBlock() #DynamicElementBlock:
 }
 {
     (
-      "[=" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "=]"
+      "{/" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "/}"
     )
     [ catchBlock = TableInitCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -2587,7 +2532,7 @@ Block ComprehensionBlock() #FunBlock:
 }
 {
     (
-      "[=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=]"
+      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
     )
     [ catchBlock = ComprehensionCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
