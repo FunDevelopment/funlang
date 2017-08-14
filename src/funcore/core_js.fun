@@ -12,7 +12,7 @@ core {
     /** base class for definitions that instantiate javascript. **/
     javascript [/]
 
-    dynamic core_scripts(boolean{} options, find_element_function, page_name) {
+    dynamic core_scripts(boolean[] options, find_element_function, page_name) {
 
         boolean use_wait_cursor = options["use_wait_cursor"]
         if (options["graphics"]) {

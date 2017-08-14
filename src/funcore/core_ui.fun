@@ -117,10 +117,10 @@ core {
 
     component, draggable, resizable seldeco(),(component target) {
         id = "selection_decoration"
-        int x { with (target) { (target.x - 4); /} else { 0; /} /}
-        int y { with (target) { (target.y - 4); /} else { 0; /} /}
-        int width { with (target) { (target.width + 8); /} else { 7; /} /}
-        int height { with (target) { (target.height + 8); /} else { 7; /} /}
+        int x { with (target) { (target.x - 4); } else { 0; } }
+        int y { with (target) { (target.y - 4); } else { 0; } }
+        int width { with (target) { (target.width + 8); } else { 7; } }
+        int height { with (target) { (target.height + 8); } else { 7; } }
            
         style {
             [/
@@ -335,9 +335,9 @@ core {
     dynamic layout border_layout(c), (n, c, s), (n, w, c, e, s), (x[]), (comp_table[]) {
 
         dynamic center_if_not_aligned(p), (component c) {
-            with (c) { if (!c.align) [| align="center" /] /}
+            with (c) { if (!c.align) [| align="center" /] }
             else [| align="center" /]         
-		/}            
+		}            
 
         dynamic north(panel) [/
             <table{/ table_props; /}>{/
@@ -352,7 +352,7 @@ core {
         dynamic center(panel) [/
             <td{/ cell_props(panel); /}>{/ panel; /}</td>
         /]
-        dynamic east(panel) {/
+        dynamic east(panel) {
             if (panel) [/
                 <td{/ cell_props(panel); /}>{/ panel; /}</td>
             /]
@@ -364,6 +364,7 @@ core {
             /]
             [/ </table> /]
         }
+
         with (x) {
             if (x.count < 2) {
                 north;
@@ -567,7 +568,7 @@ core {
             with (size) [/ size="{/ size; /}" /] with (maxlength) [| maxlength="{/ maxlength; /}" /]
             with (req_id) [| onchange='requestComponent("{/ req_id; /}", this.name, this.value)' /]
             if (disabled) [| disabled /]
-        }>
+        /}>
     /]
 
 
@@ -576,7 +577,7 @@ core {
                                                 (form_name, name, value) [/
         <input type="text" id="{/ (id ? id : name); /}" class="{/ owner.type; /}" name="{/ name; /}" value="{/ value; /}" {/
             with (size) [/ size="{/ size; /}" /] with (maxlength) [| maxlength="{/ maxlength; /}" /]
-        } onchange="document.forms['{/ form_name; /}'].submit()" />
+        /} onchange="document.forms['{/ form_name; /}'].submit()" />
     /]
 
 
@@ -586,7 +587,7 @@ core {
                                               (name, value, onchange_script) [/
         <input type="text" id="{/ (id ? id : name); /}" class="{/ owner.type; /}" name="{/ name; /}" value="{/ value; /}" {/
             with (size) [/ size="{/ size; /}" /] with (maxlength) [| maxlength="{/ maxlength; /}" /]
-        } onchange='{/ onchange_script; /}' oninput='{/ onchange_script; /}'>
+        /} onchange='{/ onchange_script; /}' oninput='{/ onchange_script; /}'>
     /]
 
 
@@ -607,7 +608,7 @@ core {
                                          (name, value, int size) [/
         <input type="password" id="{/ (id ? id : name); /}" class="{/ owner.type; /}" name="{/ name; /}" value="{/ value; /}" {/
             with (size) [/ size="{/ size; /}" /] with (maxlength) [/ maxlength="{/ maxlength; /}" /]
-        }>
+        /}>
     /]
 
 
@@ -616,7 +617,7 @@ core {
                                                     (form_name, name, value) [/
         <input type="password" id="{/ (id ? id : name); /}" class="{/ owner.type; /}" name="{/ name; /}" value="{/ value; /}" {/
             with (size) [/ size="{/ size; /}" /] with (maxlength) [| maxlength="{/ maxlength; /}" /]
-        } onchange="document.forms['{/ form_name; /}'].submit()" />
+        /} onchange="document.forms['{/ form_name; /}'].submit()" />
     /]
 
 
@@ -676,12 +677,12 @@ core {
             /] else with (field_ids) [/
                 var params = {};
                 {/
-                    with (params) {/ 
+                    with (params) { 
                         for k in query_params.keys [/
                             params["{/ k; /}"] = "{/ query_params[k]; /}";
                         /]
                     }
-                }
+                /}
                 {/ for f in field_ids [/
                 params["{/ f; /}"] = encodeURIComponent(document.getElementById("{/ f; /}").value);
                 /] /}  
@@ -697,7 +698,7 @@ core {
         [/ <input type="submit" name="{/ name;/}" value="{/ value; /}" class="{/ owner.type; /}" id="{/ name; /}_button" {/
         with (req_id)             [/ onclick='{/ submit_script(req_id); /}' {/ log("req_id " + req_id); /} /]
         else with (req_component) [/ onclick='{/ submit_script(req_component.id); /}' {/ log("req_component.id " + req_component.id); /} /]
-        }/> /]
+        /}/> /]
     }
 
 
@@ -713,7 +714,7 @@ core {
             with (value) [/ value="{/ value; /}" /]
             if (checked) [| checked /]
             with (onclick_script) [| onclick='{/ onclick_script; /}' /]
-        } >{/ label; /}</input>
+        /} >{/ label; /}</input>
     /]
 
 
@@ -723,7 +724,7 @@ core {
             if (value) [| id="{/ groupname; /}_{/ value; /}_radiobutton" class="{/ groupname; /}_radiobutton" /]
             if (checked) [| checked /]
             with (onclick_script) [| onclick='{/ onclick_script; /}' /]
-        } >{/ label; /}</input>
+        /} >{/ label; /}</input>
     /]
 
 
@@ -735,10 +736,10 @@ core {
             with (onchange_script) [| onchange='{/ onchange_script; /}' /] 
             if (disabled) [| disabled /] 
             [/ > /]
-            for option o in options {/
+            for option o in options {
                 o;
             }
-        }</select>
+        /}</select>
     /]
 
 
@@ -755,8 +756,8 @@ core {
         onreset [/]
 
         [/ <form name="/] type; [/" action=" /]
-        with (action) { action; /}
-        else { action_page.type; /}
+        with (action) { action; }
+        else { action_page.type; }
         [/ " method="POST /]
         if (onsubmit) [/ " onsubmit="{/ onsubmit; /} /]
         if (onreset) [/ " onreset="{/ onreset; /} /]

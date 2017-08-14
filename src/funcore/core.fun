@@ -862,7 +862,7 @@ core {
         html_header [/
             <head>
             <title>{/ title; /}</title>
-            {
+            {/
                 for m in meta [/
                     <meta {/ m; /} >
                 /]
@@ -876,7 +876,7 @@ core {
                     {/ style; /}
                     </style>
                 /]
-            }
+            /}
             </head>
         /]
 
@@ -919,7 +919,7 @@ core {
                     {/ script; /}
                     </script>
                 /]
-            }
+            /}
             </body>
             </html>
         /]
@@ -979,7 +979,6 @@ core {
             eval(logged_messages(: logged_messages + err_msg :));
             log("error_log: " + msg);
         }
-
 
         sub;    
     } 
