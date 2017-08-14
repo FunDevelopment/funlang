@@ -2,13 +2,13 @@
  *    site_2 test site.
  **/
 
-site site_2 [=
+site site_2 {
 
     /------------------ per-session initialization -----------------/
 
-    session_init [=
+    session_init {
         s2_x(: "site_2 session_init called" :);
-    =]
+    }
 
     s2_x(x) = x
 
@@ -16,14 +16,14 @@ site site_2 [=
     check_name = "body_attribs"
     verbosity = 2
     
-    debug_info(info) [=
+    debug_info(info) {
         /-- comment this out to turn off display of debugging information --/
         info;
-    =]
+    }
 
 
     /------ configuration properties ------/
-    urlprefix(page p) [| /[= if (p.site.type != sitename) [= p.site.type; "/"; =] =] |]  
+    urlprefix(page p) [/ /{/ if (p.site.type != sitename) { p.site.type; "/"; } /} /]  
 	
 	/------ display properties ------/
 
@@ -34,10 +34,10 @@ site site_2 [=
             
     /------------------ base page --------------------/
 
-    page(r, s) basepage(request r, session s) [=
+    page(r, s) basepage(request r, session s) {
         /-- metadata --/
-        title [| Site 2 |]
-        label [| Site 2 test site |]
+        title [/ Site 2 /]
+        label [/ Site 2 test site /]
 
         /-- appearance variables --/
         color bgcolor = site2_bgcolor
@@ -56,57 +56,57 @@ site site_2 [=
                               , site_3.s3_page
                               ]
         
-        menuitem(page p) [|
-            <div class="menu_item"><a href="[= urlprefix(p); p.type; =]">[= p.label; =]</a></div>
-        |]
+        menuitem(page p) [/
+            <div class="menu_item"><a href="{/ urlprefix(p); p.type; /}">{/ p.label; /}</a></div>
+        /]
 
         content [?]
 
-        menu [=
-            [| <table border="0" cellspacing="0" cellpadding="4" align="left" valign="top" height="100%"> |]
-            for page p in destinations [|
-                <tr><td>[= menuitem(p); =]</td></tr>
-            |]
-            [| </table> |]
-        =]
+        menu {
+            [/ <table border="0" cellspacing="0" cellpadding="4" align="left" valign="top" height="100%"> /]
+            for page p in destinations [/
+                <tr><td>{ menuitem(p); }</td></tr>
+            /]
+            [/ </table> /]
+        }
         
-        [| <table><tr><td> |]
+        [/ <table><tr><td> /]
         menu;
-        [| </td><td> |]
-        [| <p>s2_x = [= s2_x; =]</p> |]
+        [/ </td><td> /]
+        [/ <p>s2_x = {/ s2_x; /}</p> /]
         content;
-        [| </td></tr></table> |]
+        [/ </td></tr></table> /]
         
-    =]
+    }
 
     /-------------- Site Pages ---------------/
 
     /** The front end of the application. **/    
-    basepage(r, s) index(request r, session s) [=
-        title [| Site 2 |]
-        label [| Site 2 Home |]
+    basepage(r, s) index(request r, session s) {
+        title [/ Site 2 /]
+        label [/ Site 2 Home /]
 
-        content [|
+        content [/
             <p>This is the Site 2 home page.</p>
-        |]
-    =]
+        /]
+    }
 
-    basepage(r, s) local_page(request r, session s) [=
-        title [| Site 2 Local Page|]
-        label [| Site 2 local_page = [= owner.type; =] |]
+    basepage(r, s) local_page(request r, session s) {
+        title [/ Site 2 Local Page/]
+        label [/ Site 2 local_page = {/ owner.type; /} /]
 
-        content [|
+        content [/
             <p>This is a Site 2 local page.</p>
-        |]
-    =]
+        /]
+    }
 
-    basepage(r, s) s2_page(request r, session s) [=
-        title [| Site 2 Special Page|]
-        label [| Site 2 s2_page = [= owner.type; =] |]
+    basepage(r, s) s2_page(request r, session s) {
+        title [/ Site 2 Special Page/]
+        label [/ Site 2 s2_page = {/ owner.type; /} /]
 
-        content [|
+        content [/
             <p>This is the Site 2 special page.</p>
-        |]
-    =]
+        /]
+    }
 
-=]
+}

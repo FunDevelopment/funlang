@@ -6,9 +6,9 @@ site small_test {
     concurrent_test {
     
         launch {
-            [++
+            {+
                 new_thread;
-            ++]
+            +}
         }
         
         if (running) {
