@@ -2316,6 +2316,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_la1[69] = jj_gen;
           ;
         }
+                                                              jjtn000.setIsTable(false);
       } else if (jj_2_31(2147483647)) {
         DefCollectionName();
         jj_consume_token(ASSIGN);
@@ -2328,6 +2329,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_la1[70] = jj_gen;
           ;
         }
+                                                              jjtn000.setIsTable(true);
       } else if (jj_2_32(2147483647)) {
         DefTypeName();
         jj_consume_token(ASSIGN);
@@ -2340,6 +2342,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_la1[71] = jj_gen;
           ;
         }
+                                                        jjtn000.setIsTable(false);
       } else if (jj_2_33(2147483647)) {
         DefTypeName();
         jj_consume_token(ASSIGN);
@@ -2352,6 +2355,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_la1[72] = jj_gen;
           ;
         }
+                                                        jjtn000.setIsTable(true);
       } else if (jj_2_34(2147483647)) {
         DefTypeName();
         label_14:
@@ -2535,11 +2539,13 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         DefCollectionName();
         jj_consume_token(ASSIGN);
         ArrayInitExpression();
+                                                                       jjtn000.setIsTable(false);
       } else if (jj_2_38(2147483647)) {
         CollectionType();
         DefCollectionName();
         jj_consume_token(ASSIGN);
         TableInitExpression();
+                                                                       jjtn000.setIsTable(true);
       } else if (jj_2_39(2147483647)) {
         IndefiniteCollectionType();
         DefTypeName();
@@ -2562,31 +2568,37 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         DefTypeName();
         jj_consume_token(ASSIGN);
         ArrayInitExpression();
+                                                                 jjtn000.setIsTable(false);
       } else if (jj_2_42(2147483647)) {
         CollectionType();
         DefTypeName();
         jj_consume_token(ASSIGN);
         TableInitExpression();
+                                                                 jjtn000.setIsTable(true);
       } else if (jj_2_43(2147483647)) {
         SuperType();
         DefCollectionName();
         jj_consume_token(ASSIGN);
         ArrayInitExpression();
+                                                                  jjtn000.setIsTable(false);
       } else if (jj_2_44(2147483647)) {
         SuperType();
         DefCollectionName();
         jj_consume_token(ASSIGN);
         TableInitExpression();
+                                                                  jjtn000.setIsTable(true);
       } else if (jj_2_45(2147483647)) {
         SuperType();
         DefTypeName();
         jj_consume_token(ASSIGN);
         ArrayInitExpression();
+                                                            jjtn000.setIsTable(false);
       } else if (jj_2_46(2147483647)) {
         SuperType();
         DefTypeName();
         jj_consume_token(ASSIGN);
         TableInitExpression();
+                                                            jjtn000.setIsTable(true);
       } else if (jj_2_47(2147483647)) {
         SuperType();
         DefTypeName();

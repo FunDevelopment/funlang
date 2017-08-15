@@ -29,7 +29,7 @@ public class CollectionDefinition extends ComplexDefinition /* implements Dynami
     }
     
     private List<Dim> dims;
-    private Dim.TYPE majorDimType;
+    private Dim.TYPE majorDimType = null;
     private boolean majorIsTable = false;
     private element_decorator decorator = null;
     private CollectionBuilder builder = null;
@@ -203,7 +203,13 @@ public class CollectionDefinition extends ComplexDefinition /* implements Dynami
         int numDims = dims.size();
         Dim majorDim = (Dim) dims.get(numDims - 1);
         majorDimType = majorDim.getType();
-        majorIsTable = majorDim.isTable();
+        if (builder == null) {
+            setTable(majorDim.isTable());        	
+        }
+    }
+        
+    protected void setTable(boolean isTable) {
+        majorIsTable = isTable;
         if (majorIsTable) {
             setTableBuilder();
         } else {

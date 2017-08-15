@@ -107,6 +107,10 @@ public class ParsedCollectionDefinition extends CollectionDefinition implements 
         setDurability(dur);
     }
 
+    public void setIsTable(boolean flag) {
+    	setTable(flag);
+    }
+    
     public NameNode getDefName() {
     	return getNameNode();
     }
