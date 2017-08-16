@@ -1762,16 +1762,16 @@ Scoped CollectionDefinition() :
 /*@egen*/
     (
       LOOKAHEAD(DefCollectionName() "=" "[")
-      DefCollectionName() "=" ArrayInitExpression() [ ";" ]
+      DefCollectionName() "=" ArrayInitExpression() [ ";" ] { jjtn000.setIsTable(false); }
     |
       LOOKAHEAD(DefCollectionName() "=" "{")
-      DefCollectionName() "=" TableInitExpression() [ ";" ]
+      DefCollectionName() "=" TableInitExpression() [ ";" ] { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(DefTypeName() "=" "[")
-      DefTypeName() "=" ArrayInitExpression() [ ";" ]
+      DefTypeName() "=" ArrayInitExpression() [ ";" ] { jjtn000.setIsTable(false); }
     |
       LOOKAHEAD(DefTypeName() "=" "{")
-      DefTypeName() "=" TableInitExpression() [ ";" ]
+      DefTypeName() "=" TableInitExpression() [ ";" ] { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(DefTypeName() (IndefiniteDim())+ "=")
       DefTypeName() (IndefiniteDim())+ "=" ValueInstanceExpression() [ ";" ]
@@ -1906,10 +1906,10 @@ Scoped TypedCollectionDefinition()                      :
 /*@egen*/
     (
       LOOKAHEAD(CollectionType() DefCollectionName() "=" "[")
-      CollectionType() DefCollectionName() "=" ArrayInitExpression()
+      CollectionType() DefCollectionName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     |
       LOOKAHEAD(CollectionType() DefCollectionName() "=" "{")
-      CollectionType() DefCollectionName() "=" TableInitExpression()
+      CollectionType() DefCollectionName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(IndefiniteCollectionType() DefTypeName() "=" ValueInstanceExpression())
       IndefiniteCollectionType() DefTypeName() "=" ValueInstanceExpression() [ ";" ]
@@ -1918,22 +1918,22 @@ Scoped TypedCollectionDefinition()                      :
       IndefiniteCollectionType() DefTypeName() Block()
     |
       LOOKAHEAD(CollectionType() DefTypeName() "=" "[")
-      CollectionType() DefTypeName() "=" ArrayInitExpression()
+      CollectionType() DefTypeName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     |
       LOOKAHEAD(CollectionType() DefTypeName() "=" "{")
-      CollectionType() DefTypeName() "=" TableInitExpression()
+      CollectionType() DefTypeName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(SuperType() DefCollectionName() "=" "[")
-      SuperType() DefCollectionName() "=" ArrayInitExpression()
+      SuperType() DefCollectionName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     | 
       LOOKAHEAD(SuperType() DefCollectionName() "=" "{")
-      SuperType() DefCollectionName() "=" TableInitExpression()
+      SuperType() DefCollectionName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(SuperType() DefTypeName() "=" "[")
-      SuperType() DefTypeName() "=" ArrayInitExpression()
+      SuperType() DefTypeName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     | 
       LOOKAHEAD(SuperType() DefTypeName() "=" "{")
-      SuperType() DefTypeName() "=" TableInitExpression()
+      SuperType() DefTypeName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(SuperType() DefTypeName() (IndefiniteDim())+ "=")
       SuperType() DefTypeName() (IndefiniteDim())+ "=" ValueInstanceExpression() [ ";" ]

@@ -203,9 +203,9 @@ public class CollectionDefinition extends ComplexDefinition /* implements Dynami
         int numDims = dims.size();
         Dim majorDim = (Dim) dims.get(numDims - 1);
         majorDimType = majorDim.getType();
-        if (builder == null) {
-            setTable(majorDim.isTable());        	
-        }
+        //if (builder == null) {
+        //    setTable(majorDim.isTable());        	
+        //}
     }
         
     protected void setTable(boolean isTable) {
@@ -292,7 +292,16 @@ public class CollectionDefinition extends ComplexDefinition /* implements Dynami
      *  arguments.
      */
     public CollectionInstance createCollectionInstance(Context context, ArgumentList args, List<Index> indexes) throws Redirection {
-        return builder.createCollectionInstance(context, args, indexes);
+        if (builder == null) {
+        	Type type = getType();
+            Class<?> c = type.getTypeClass(context);
+            if (c != null && (Map.class.isAssignableFrom(c))) {
+                setTable(true);
+            } else {
+            	setTable(false);
+            }
+        }
+    	return builder.createCollectionInstance(context, args, indexes);
     }
 
     /** Wraps the passed data in a collection instance in the specified context with the specified

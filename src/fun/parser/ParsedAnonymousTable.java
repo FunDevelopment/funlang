@@ -42,6 +42,7 @@ public class ParsedAnonymousTable extends CollectionDefinition implements Initia
         dim.setTable(true);
         List<Dim> dims = new SingleItemList<Dim>(dim);
         setDims(dims);
+        setTable(true);
         init(null, name, contents);
     }
 }

@@ -90,7 +90,7 @@ public class Table {
         }        
     }
 
-    public static Object parse(Context context, String str) throws ParseException, Redirection {
+    public static Map<String, Object> parse(Context context, String str) throws ParseException, Redirection {
         try {
             FunParser parser = new FunParser(new StringReader("parse{}=" + str));
             Definition owner = context.getDefiningDef();

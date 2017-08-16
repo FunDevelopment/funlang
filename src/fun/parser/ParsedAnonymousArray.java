@@ -43,6 +43,7 @@ public class ParsedAnonymousArray extends CollectionDefinition implements Initia
         Dim dim = new Dim(Dim.TYPE.DEFINITE, len);
         List<Dim> dims = new SingleItemList<Dim>(dim);
         setDims(dims);
+        setTable(false);
         init(null, name, contents);
     }
 }
