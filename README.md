@@ -1,13 +1,15 @@
-# The Bento Programming Language
+# The Fun Programming Language
 
-Bento is a programming language for creating web applications.
+## Functional programming without the non-fun parts
 
-A number of things make Bento special:
+Fun is a functional-ish programming language designed to be enjoyable, fulfilling and expressive.  Fun wishes to banish the evil that is I-know-what-I-want-to-do-but-the-damn-language-won't-let-me.    
 
-* Bento is declarative but supports procedural styles as well
-* Bento is object-oriented with a rich inheritance model
-* Bento has built in automated state management
+A number of things make Fun special:
+
+* Fun is declarative but supports a natural programming style 
+* Fun is object-oriented with a rich inheritance model
+* Fun has built in automated state management
 
 
-A concise guide to Bento: [Bento in a Nutshell](/docs/bento in a nutshell.md)
+See [A Concise Guide to Fun](/docs/concise_guide_to_fun.md)
 
