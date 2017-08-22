@@ -5,7 +5,6 @@ site test {
     extern java org.**
     extern java java.**
 
-
     copyright [/
         Copyright &copy; 2004-2016 by <a href="http://www.fundev.org">fundev.org</a><br>
     /]
@@ -102,11 +101,11 @@ site test {
 
         [/
            <table bgcolor="#F7F1DD" cellpadding="2" cellspacing="4" width="400">
-           <tr><th bgcolor="#CCBB77" colspan="2">{/ name; /}</th></tr>
+           <tr><th bgcolor="#CCBB77" colspan="2">{= name; =}</th></tr>
         /]
 
         if (expected) [/
-           <tr><td><b>Expected:</b></td><td>{/ expected; /} </td></tr>
+           <tr><td><b>Expected:</b></td><td>{= expected; =} </td></tr>
         /]
 
         [/ <tr><td><b>Result:</b></td> /]
@@ -244,13 +243,13 @@ site test {
         else [/ x /]
     }
 
-bat {/
+bat {=
 
 byte[2] bb = [ 257, 256 ]
 
 bb[0];
 
-/}
+=}
 
 
     test_case name_resolution_test {
@@ -414,10 +413,10 @@ bb[0];
         
     }
     
-ss1 {/
+ss1 {=
         stat_sub_1.hi;
     stat_sub_1.b;
-/}    
+=}    
 
 
     global glob_super {
@@ -818,7 +817,7 @@ ss1 {/
     
     }
 
-ott {/
+ott {=
         owner_base {
         
             id = owner.type;
@@ -857,7 +856,7 @@ ott {/
         for owner_base ob in owner_array_2 {
            ob;
         }
-/}
+=}
 
     test_case simple_instantiation_test {
         int category = instantiations
@@ -871,10 +870,10 @@ ott {/
         cprime = "C"
         c = cprime
         dprime = "D"
-        d {/ dprime; /}
+        d {= dprime; =}
         char e = 'E'
-        f {/ [/ F /] /}
-        g [/ {/ [/ G /] /} /]
+        f {= [/ F /] =}
+        g [/ {= [/ G /] =} /]
         h [``H``]
 
         a;
@@ -1188,7 +1187,7 @@ ott {/
         
     }
 
-at {/
+at {=
     test_super {
         test_child [?]
     
@@ -1206,7 +1205,7 @@ at {/
         } catch [/ C /]
     }
     test_sub_2;
-/}
+=}
 
 
     test_case return_type_test {
@@ -1428,7 +1427,7 @@ at {/
         k3[2];
     }
 
-iat {/
+iat {=
         ia_target {
             child [/ B /]
             [/ A /]  
@@ -1454,7 +1453,7 @@ iat {/
         k2[1];
         k3[] = ia_3_to_table_2.keys
         k3[2];
-/}    
+=}    
 
     
     test_case aliased_array_test {
@@ -1582,7 +1581,7 @@ iat {/
         parent_with_param("Q").child;
     }
 
-pt {/
+pt {=
         l_param = "L"
         p_2(p1, p2) {
             param_1 = p1
@@ -1594,7 +1593,7 @@ pt {/
 
         any_param_in_super(l_param, "x").param_1;
         any_param_in_super("x", "M").param_2;
-/}
+=}
 
 
     test_case loop_parameter_test {
@@ -1631,7 +1630,7 @@ pt {/
 
         tp {
             int nr = 0
-            char ap[] = [ for int n from 0 to nr {/ 'L' /} ]
+            char ap[] = [ for int n from 0 to nr {= 'L' =} ]
         }
 
         tp[] tps = [ tp1 ]
@@ -1660,7 +1659,7 @@ pt {/
         }
     }
 
-lpt {/
+lpt {=
         dynamic foo(a) {
             x = a
         }
@@ -1672,7 +1671,7 @@ lpt {/
         for foo f: de {
             bar(f);
         }
-/}
+=}
 
     test_case nested_parameter_test {
         int category = parameters
@@ -1752,7 +1751,7 @@ lpt {/
         tp(ap(p));        
     }
 
-npt {/
+npt {=
         parent_param {
             child [/ F /]
         }
@@ -1771,9 +1770,9 @@ npt {/
            show(p_p);
         }
         show_param_child(parent_param_container(parent_param));
-/}
+=}
 
-tpt {/
+tpt {=
 
         apc {
             g [/ x /]
@@ -1805,7 +1804,7 @@ tpt {/
         }
 
         tp(ap(p));        
-/}
+=}
 
     test_case parameter_child_array_test {
         int category = parameters
@@ -1877,11 +1876,11 @@ tpt {/
 
         fixed_array[3] = [ "A", "B", "C" ]
 
-        dynamic_array[] = [ for int i from 0 to 3 {/
-                                if (i == 0) {/ "D" /}
-                                else if (i == 1) {/ "E" /}
-                                else {/ "F" /}
-                            /}
+        dynamic_array[] = [ for int i from 0 to 3 {=
+                                if (i == 0) {= "D" =}
+                                else if (i == 1) {= "E" =}
+                                else {= "F" =}
+                            =}
                           ]
 
         growable_array[] = [ "G" ]
@@ -1978,7 +1977,7 @@ tpt {/
 
         dynamic show_j("K") show_k [/]
 
-        dynamic show_l(x) {/ x; /}
+        dynamic show_l(x) {= x; =}
 
         show(x);
         show(y);
@@ -2010,8 +2009,8 @@ tpt {/
 
         xy[] xy_array_builder_1 = [ xy(init_vals_1[0][0], init_vals_1[0][1]),  xy(init_vals_1[1][0], init_vals_1[1][1]) ]
         xy[] xy_array_builder_2(val_matrix[][]) = [ xy(val_matrix[0][0], val_matrix[0][1]),  xy(val_matrix[1][0], val_matrix[1][1]) ]
-        xy[] xy_array_builder_3(val_matrix[][]) = [ for v in val_matrix {/ xy(v[0], v[1]) /} ]
-        xy[] xy_array_builder_4(val_matrix[][]) = [ for v in val_matrix {/ xy_from(v) /} ]
+        xy[] xy_array_builder_3(val_matrix[][]) = [ for v in val_matrix {= xy(v[0], v[1]) =} ]
+        xy[] xy_array_builder_4(val_matrix[][]) = [ for v in val_matrix {= xy_from(v) =} ]
 
 
         for xy aa in xy_array_builder_1 {
@@ -2032,18 +2031,18 @@ tpt {/
         }
     }
 
-abt {/
- dynamic xy(xx, yy) {/
+abt {=
+ dynamic xy(xx, yy) {=
     x = xx
     y = yy
- /}
+ =}
  init_vals_2[][] = [ ["E", "F"], ["G", "H"] ]
  xy[] xy_array_builder_2(val_matrix[][]) = [ xy(val_matrix[0][0], val_matrix[0][1]),  xy(val_matrix[1][0], val_matrix[1][1]) ]
- for xy bb in xy_array_builder_2(init_vals_2) {/
+ for xy bb in xy_array_builder_2(init_vals_2) {=
     bb.x;
     bb.y;
- /}
-/}
+ =}
+=}
 
     test_case array_element_builder_test {
         int category = collections
@@ -2229,12 +2228,12 @@ abt {/
         show_fum(fum_array_2[2]);
     }
 
-aet {/
-fum(xx) {/
+aet {=
+fum(xx) {=
     x = xx
 
     x;
-/}
+=}
 
 
 fum("G") fum_gg [/]
@@ -2242,7 +2241,7 @@ fum(fum_gg.x) fum_g [/]
 
 fum_g;
 
-/}
+=}
 
     test_case array_element_child_array_test {
         int category = collections
@@ -2304,7 +2303,7 @@ fum_g;
         sho_fum(fo4.fofum[0]);
 	}		
 
-aecat {/
+aecat {=
         fum [/]
 
         fo {
@@ -2326,7 +2325,7 @@ aecat {/
                 ff.fofum[ii];
             }
         }
-/}
+=}
 
 	
 	test_case dynamic_array_test {
@@ -2352,47 +2351,47 @@ aecat {/
             else             [/ x /]
         }
 	    
-	    nested_dynamic_array[] = [ for c in jk {/ c /} ] 
-        nested_array_with_loop_param[] = [ for i from 1 to 3 {/ lm(i) /} ]
+	    nested_dynamic_array[] = [ for c in jk {= c =} ] 
+        nested_array_with_loop_param[] = [ for i from 1 to 3 {= lm(i) =} ]
         
         no[] = [ "x", "N", "O" ]
-        nested_array_with_loop_index[] = [ for i from 1 to 3 {/ no[i] /} ]
+        nested_array_with_loop_index[] = [ for i from 1 to 3 {= no[i] =} ]
         
         pq[] = [ "x", "P", "x", "Q" ]
-        nested_array_with_expression_index[] = [ for i from 0 to 2 {/ pq[(2 * i + 1)] /} ]
+        nested_array_with_expression_index[] = [ for i from 0 to 2 {= pq[(2 * i + 1)] =} ]
 
-        rs[] = [ for i from 0 to 2 {/ if (i == 0) {/ "R" /} else {/ "S" /} /} ]
+        rs[] = [ for i from 0 to 2 {= if (i == 0) {= "R" =} else {= "S" =} =} ]
         
-        nested_array_with_dynamic_array_reference[] = [ for i from 0 to 2 {/ rs[i] /} ]
+        nested_array_with_dynamic_array_reference[] = [ for i from 0 to 2 {= rs[i] =} ]
 
         tt[] = [ "T" ]
         super_array[] = []
         
-        super_array dimless_dynamic_array = [ for t in tt {/ t /} ]
+        super_array dimless_dynamic_array = [ for t in tt {= t =} ]
 	    
 	    dynamic_array[] = [ 
-	                        if (true_flag)  {/ [/ A /] /},
+	                        if (true_flag)  {= [/ A /] =},
 
-	                        if (false_flag) {/ [/ x /] /},
+	                        if (false_flag) {= [/ x /] =},
 
-	                        if (true_flag)  {/ [/ B /] /}
-	                                  else  {/ [/ x /] /},
+	                        if (true_flag)  {= [/ B /] =}
+	                                  else  {= [/ x /] =},
 
-                            if (false_flag) {/ [/ x /] /}
-                                       else {/ [/ C /] /},
+                            if (false_flag) {= [/ x /] =}
+                                       else {= [/ C /] =},
                                        
-                            if (true_flag)  {/ if (true_flag) {/ d /} /},
+                            if (true_flag)  {= if (true_flag) {= d =} =},
 
-                            if (true_flag)  {/ if (false_flag) {/ x /} /},
+                            if (true_flag)  {= if (false_flag) {= x =} =},
 
-                            if (true_flag)  {/ {/ e; [/ F /] g; /} /},
+                            if (true_flag)  {= {= e; [/ F /] g; =} =},
                            
-                            for hh in hi {/ hh /},
-                            for jj in nested_dynamic_array {/ jj /},
-                            for ll in nested_array_with_loop_param {/ ll /},
-                            for nn in nested_array_with_loop_index {/ nn /},
-                            for pp in nested_array_with_expression_index {/ pp /},
-                            for rr in nested_array_with_dynamic_array_reference {/ rr /}
+                            for hh in hi {= hh =},
+                            for jj in nested_dynamic_array {= jj =},
+                            for ll in nested_array_with_loop_param {= ll =},
+                            for nn in nested_array_with_loop_index {= nn =},
+                            for pp in nested_array_with_expression_index {= pp =},
+                            for rr in nested_array_with_dynamic_array_reference {= rr =}
                           ]
 
         for el in dynamic_array {
@@ -2479,9 +2478,9 @@ aecat {/
                        sub_obj_with_local_sub
                      ]
     
-        items[] = [ for int i from 0 to 6 {/
+        items[] = [ for int i from 0 to 6 {=
                            item_for_index(objs, i),
-                       /}
+                       =}
                   ]
                   
         for item in items {
@@ -2500,12 +2499,12 @@ aecat {/
             base_obj[] child_objs = []
             
             dynamic base_obj[] all_desc_objs = [
-                    for base_obj bo in child_objs {/
+                    for base_obj bo in child_objs {=
                         bo,
-                        for base_obj bbo in bo.all_desc_objs {/
+                        for base_obj bbo in bo.all_desc_objs {=
                            bbo
-                        /}
-                    /}
+                        =}
+                    =}
                 ]
 
             type;
@@ -2558,31 +2557,31 @@ aecat {/
     
         dynamic_table{} = {
             
-            for int i from 0 to 2 {/
+            for int i from 0 to 2 {=
                 key_array[i]: value_array[i]
-            /},
+            =},
             
-            for k in nested_table.keys {/
+            for k in nested_table.keys {=
                 k: nested_table[k]
-            /},
+            =},
             
-            if (tru) {/
+            if (tru) {=
                 "e": "E"
-            /},
+            =},
             
-            if (fals) {/
+            if (fals) {=
                "f": "x"
-            /} else {/
+            =} else {=
                "f": "F"
-            /},
+            =},
             
-            {/ "g": ghval(tru) /},
+            {= "g": ghval(tru) =},
             
-            {/ hkey: ghval(fals) /},
+            {= hkey: ghval(fals) =},
 
-            for ii iii in ii_array {/
+            for ii iii in ii_array {=
                 "i": iii
-            /}
+            =}
         }
         
         dynamic_table["a"];
@@ -2640,15 +2639,15 @@ aecat {/
         gum("K") gum_k [/]
         gum("M") gum_m [/]
 
-        gum gum_table_1{} = { "3": gum_c, "4": gum_d,
+        gum{} gum_table_1 = { "3": gum_c, "4": gum_d,
                               "1": gum_a, "2": gum_b,
                               five: gum_e, six: gum_f,
                               seven: gum_g, gum_h_index.x: gum_h,
                               "9": gum_gum("I"),
                               (ten): gum_m  }
-        gum gum_table_2{} = { "j": gum_j, "k": gum_k }
+        gum{} gum_table_2 = { "j": gum_j, "k": gum_k }
         
-        gum gum_table_3{} = { "x": gum("L") } 
+        gum{} gum_table_3 = { "x": gum("L") } 
 
         fv = "five"
         six [/]
@@ -2676,13 +2675,13 @@ aecat {/
         gum_table_1["10"];
     }
 
-te {/
+te {=
    gum{} = { yo: "ho" }
    
    yo [/]
    
    gum[yo.type];
-/}
+=}
 
     test_case table_test {
         int category = collections
@@ -2698,11 +2697,11 @@ te {/
         item_f = "F"
 
         fixed_table{} = { "": "D", "item_a": "A", "item_b": item_b, "item_c": "C" }
-        dynamic_table{} = { for int i from 0 to 3 {/
-                                if (i == 0)      {/ "item_e": "E"    /}
-                                else if (i == 1) {/ "item_f": item_f /}
-                                else             {/    key_g: "G"    /}
-                             /}
+        dynamic_table{} = { for int i from 0 to 3 {=
+                                if (i == 0)      {= "item_e": "E"    =}
+                                else if (i == 1) {= "item_f": item_f =}
+                                else             {=    key_g: "G"    =}
+                             =}
                            }
                           
         /--- children of elements in a typed table ---/
@@ -2755,10 +2754,10 @@ te {/
         table_sub["o"];
     }
 
-tt {/
+tt {=
   table_with_arg(n){} = { "n": n }
   table_with_arg("N")["n"];
-/}    
+=}    
 
 
     test_case table_parameter_test {
@@ -2804,7 +2803,7 @@ tt {/
         show_foo_ij(foos);
     }
 
-tblpt {/
+tblpt {=
         z{}{} = { "t1":{ "e":"E", "f":"F"}, "t2":{ "g":"G", "h":"H" } }
         dynamic show(aa) {
             for k in aa.keys {
@@ -2813,7 +2812,7 @@ tblpt {/
         }
 
         show(z);
-/}
+=}
 
     
     test_case multidimensional_table_test {
@@ -2929,7 +2928,7 @@ tblpt {/
         if (table_2 != table_1) [/ S /] else [/ x /]
         
     }
-cop {/
+cop {=
   array_1[] = [ "a" ]
   array_2[] = [ "b", "c" ]
   array_3[] = array_1 + array_2
@@ -2941,7 +2940,7 @@ cop {/
   array_1.count;
   array_2.count;
   array_3.count;
-/}
+=}
 
     test_case count_test {
         int category = collections
@@ -2953,7 +2952,7 @@ cop {/
         a = "a"
         b[] = [ "b1", "b2" ]
         c{} = { c1: "1", c2: "2", c3: "3" } 
-        d[] = [ for int n from 0 to 4 {/ ("d" + n) /} ]
+        d[] = [ for int n from 0 to 4 {= ("d" + n) =} ]
         e[] = [ "e1", "e2", "e3", "e4", "e5" ]
         ealias = e
         f[] = [ "f1", "f2", "f3", "f4", "f5", "f6" ]
@@ -3024,14 +3023,14 @@ cop {/
         test_array[2];
     }
 
-cu {/
+cu {=
     test_array[] = [ "A", "X" ]
     array.get(test_array, 0);
     array.set(test_array, 1, "B");
     test_array[1];
     if (array.size(test_array) == 2) [/ C /]
     else [/ X /]
-/}
+=}
 
     test_case object_child_test {
         int category = instantiations
@@ -3163,7 +3162,7 @@ cu {/
         }        
     }
 
-oct {/
+oct {=
     sub_8 {
         keep: k(x) = x
         dynamic set_k {
@@ -3182,9 +3181,9 @@ oct {/
     }
     eval(sub_8_obj);
     show_xk(sub_8_obj);
-/}
+=}
 
-oct9 {/
+oct9 {=
     sub_9(z) {
         keep: l(x) = x
         dynamic set_l {
@@ -3198,12 +3197,12 @@ oct9 {/
   eval(lobj);
   test_cons(lobj);
          
-  dynamic test_cons(sub_9 gm) {/
+  dynamic test_cons(sub_9 gm) {=
     gm.set_l;
     gm.l;
-  /}
+  =}
 
-/}
+=}
     cocotest {
     
         cobj(g) {
@@ -3278,7 +3277,7 @@ oct9 {/
         obj3.h;
     }
 
-st {/
+st {=
         keep: serializable obj1 {
             keep: a = "A"
             keep: bc[] = [ "B", "C" ]
@@ -3311,10 +3310,10 @@ st {/
     obj3(obj3_nms, obj3_vals);
     
     obj3.h;
-/}  
+=}  
   
 
-st2 {/
+st2 {=
         serializable oa {
             keep:
             a = "A"
@@ -3360,7 +3359,7 @@ st2 {/
         o2("{ fg.keep: { f: \"F\" } }");
 
         o2.fg.f;
-/}
+=}
 
     test_case sort_test {
         int category = utilities
@@ -3389,13 +3388,13 @@ st2 {/
         }
         
     }
-srt {/
+srt {=
         unsorted_table{} = { "c": "F", "b": "E", "a": "D" }
         sorted_unsorted_table{} = sorted_table(unsorted_table)
             for x in sorted_unsorted_table {
                 x;
             }
-/}
+=}
 
     test_case external_test {
         int category = external_objects
@@ -3463,20 +3462,20 @@ srt {/
         external_sub.rr;
     }
 
-qtst {/
+qtst {=
     q = "Q"
     fun_context my_context = this_domain.context
     my_context.construct("q");
-/}
+=}
 
-itst {/
+itst {=
     external_interface {
         i [?]
         show(x) [?]
     }
     external_interface parameterized_builder(x) = org.fundev.test.ExternalTest(x)
     parameterized_builder("I").i;
-/}
+=}
 
 rtst {
     external_interface {
@@ -3538,7 +3537,7 @@ rtst {
         aliased_obj.other.methodZ;
     }        
         
-ceot {/
+ceot {=
         external_obj {
             other [&]
         }
@@ -3551,7 +3550,7 @@ ceot {/
         aliased_obj(: :).other(: "J" :);
         " - ";
         aliased_obj(: :).other.methodZ;
-/}        
+=}        
         
         
     test_case external_argument_test {
@@ -3581,18 +3580,18 @@ ceot {/
         show_child(org.fundev.test.ExternalTest("E"));
     }
 
-extparent {/
+extparent {=
     string[] extList = []
     string{} extMap = {}
-/}
+=}
 
 extparent ep = org.fundev.test.ExternalTest
  
-etst {/
+etst {=
     ep.extList[0];
     ep.extMap["1"];
     ep.extMap[1];
-/}      
+=}      
         
     string{} string_map = {}
     string_map[] map_array = [] 
@@ -4132,7 +4131,7 @@ blt {
         cached_array_parent.child_array[2];
     }
 
-cat {/
+cat {=
         eval(array_parent);
         array_parent.child_array[0];
         
@@ -4141,7 +4140,7 @@ cat {/
         
         eval(cached_array_parent(: array_parent_sub :));
         cached_array_parent.child_array[2];
-/}
+=}
 
 
     
@@ -4211,8 +4210,8 @@ cat {/
         /-- it's necessary to keep parent_cache, otherwise it will get
          -- thrown away when we leave scope and undo caching of child_cache
          --/
-        keep: parent_cache[] = {}
-        keep in parent_cache: child_cache[] = {}
+        keep: parent_cache{} = {}
+        keep in parent_cache: child_cache{} = {}
 
         keep_H {
             keep in child_cache:
@@ -4305,7 +4304,7 @@ cat {/
         test_cache["n"];
     }
 
-kt {/
+kt {=
         keep: parent_cache{} = {}
         keep in parent_cache: child_cache{} = {}
         child_cache get_child_cache = parent_cache["child_cache"]
@@ -4320,7 +4319,7 @@ kt {/
         keep_H;
 
         get_child_cache["h"];
-/}
+=}
 
     keep_not_test {
         obj_no {
@@ -4447,7 +4446,7 @@ kt {/
         test_cache["d"];
     }
 
-dkt {/
+dkt {=
     test_cache{} = {}
 
         bkey = "b"
@@ -4460,7 +4459,7 @@ dkt {/
     keep_B;         
     "-";
     test_cache["b"];
-/}
+=}
 
     test_case nested_keep_test {
         int category = caching
@@ -4526,7 +4525,7 @@ dkt {/
         ijk_container.k;
     }
 
-nkt {/
+nkt {=
     abcd_container {
         b(x) = x
         b("B");
@@ -4536,7 +4535,7 @@ nkt {/
     abcd_container(: :);
     "-";
     abcd_container.b; 
-/}
+=}
 
     test_case cached_identity_test {
         int category = caching
@@ -4594,7 +4593,7 @@ nkt {/
         identity_sub.p2; 
     }
 
-cit {/
+cit {=
         sup {
             b [/ X /]
             c [?]
@@ -4643,7 +4642,7 @@ cit {/
         eval(identity_sub(: parameterized_sub("F", "G") :));
         identity_sub.p1;
         identity_sub.p2;  ---/ 
-/}
+=}
 
     test_case nested_cached_identity_test {
         int category = caching
@@ -4716,13 +4715,13 @@ cit {/
         mwp.cv.f;
     }
 
-hinit {/
+hinit {=
     cnit;
     ss1;
     cnit;
-/}
+=}
 
-cnit {/
+cnit {=
         wo {
             keep: a [/]
             keep: pl b [/]
@@ -4785,7 +4784,7 @@ cnit {/
         mwp.ct.d;
         mwp.cz;
         mwp.cv.f;
-/}
+=}
 
     test_case cached_child_of_alias_test {
         int category = caching
@@ -4915,7 +4914,7 @@ cnit {/
         so_ho("I");
     }
 
-ccat {/
+ccat {=
       
         obj {
             keep: child(z) = z
@@ -4933,7 +4932,7 @@ ccat {/
         eval(cached_obj(subobj_a));
         
         aliased_cached_obj.child; 
-/}
+=}
     
     
     test_case cached_aliased_parameter_test {
@@ -5053,7 +5052,7 @@ capt {
         populate.c;
     }
 
-pct {/
+pct {=
       test_cache{} = {}
       pop(passed_cache{}) {
          table.set(passed_cache, "a", "A");
@@ -5063,7 +5062,7 @@ pct {/
       test_cache["x"];
       pop(test_cache);
       test_cache["a"];
-/}
+=}
 
     test_case keep_scope_test {
         int category = caching
@@ -5117,7 +5116,7 @@ pct {/
         
     }
 
-kst {/
+kst {=
         
     dwk mdwk(dwk dd) = dd
 
@@ -5134,7 +5133,7 @@ kst {/
     mdwk.f;
     mdwk.set_f;
     mdwk.f;
-/}
+=}
 
     test_case dynamic_argument_list_test {
         int category = parameters
@@ -5201,7 +5200,7 @@ kst {/
         ho_test_3(func_3);
     }
 
-hot {/
+hot {=
    dynamic func_1(x) {
      x;
    }
@@ -5219,7 +5218,7 @@ hot {/
    ho_test(func_1, "B");
    
    //ho_test_3(func_3);
-/}
+=}
 
 
     test_case type_test {
@@ -5407,7 +5406,7 @@ hot {/
         deeper_obj.q.y;
     }
 
-cot {/
+cot {=
         obj(xx) {
             x = xx
             x;
@@ -5419,7 +5418,7 @@ cot {/
         sub_obj.x;
         sub_obj(: "G" :);
         sub_obj.x;
-/}
+=}
 
     test_case aliased_sub_child_test {
         int category = instantiations
@@ -5453,7 +5452,7 @@ cot {/
         }
         
         base_def_param(*) sub_def_param(x) {
-            child_def {/ x; /}
+            child_def {= x; =}
         }
     
         base_def_param def_param(z) = sub_def_param(z)
@@ -5519,22 +5518,22 @@ cot {/
 
         expected = "ABC"
     
-        dynamic int looped_expression = 1 + for int i = 2 to 5 {/ i /}
-        dynamic int iffed_expression(boolean flag) = 1 + if (flag) {/ 1 /}
+        dynamic int looped_expression = 1 + for int i = 2 to 5 {= i =}
+        dynamic int iffed_expression(boolean flag) = 1 + if (flag) {= 1 =}
         
         if (looped_expression == 10)      [/ A /] else [/ x /]
         if (iffed_expression(true) == 2)  [/ B /] else [/ x /]
         if (iffed_expression(false) == 1) [/ C /] else [/ x /]
     }
 
-ect {/
- dynamic int looped_expression = 1 + for int i = 2 to 5 {/ i /}
- dynamic int iffed_expression(boolean flag) = 1 + if (flag) {/ 1 /}
+ect {=
+ dynamic int looped_expression = 1 + for int i = 2 to 5 {= i =}
+ dynamic int iffed_expression(boolean flag) = 1 + if (flag) {= 1 =}
 
  if (looped_expression == 10)      [/ A /] else [/ x /]
  if (iffed_expression(true) == 2)  [/ B /] else [/ x /]
  if (iffed_expression(false) == 1) [/ C /] else [/ x /]
-/}
+=}
 
     test_case children_of_parameterized_super_test {
         int category = instantiations
@@ -5570,7 +5569,7 @@ ect {/
     list_all_tests {
         for test_case t in all_tests {
             if (t.expected) [/
-                <br><a href="${/ t.type; /}">{/ t.name; /}</a>
+                <br><a href="${= t.type; =}">{= t.name; =}</a>
             /]
         }
     }
@@ -5581,19 +5580,19 @@ ect {/
         }
     }
 
-show_site_name {/
+show_site_name {=
  site_name;
-/}
-show_this_context {/
+=}
+show_this_context {=
  site_name;
  br;
  this_context;
  br;
  site_name;
-/}
+=}
 
 /-----
-    test_case[] test_table = [ for test_case t in all_tests {/ { t.key, t } /} ]
+    test_case[] test_table = [ for test_case t in all_tests {= { t.key, t } =} ]
 ------/
 
     /------------------------------------------------------------------/
@@ -5603,7 +5602,7 @@ show_this_context {/
     page(r, s) basepage(request r, session s) {
         keep in global_stats: int global_page_views = global_stats["global_page_views"] + 1
 
-        title = [/ Fun Test Suite: {/ label; /} /]
+        title = [/ Fun Test Suite: {= label; =} /]
 
         color bgcolor = "#EEDDAA"
 
@@ -5617,7 +5616,7 @@ show_this_context {/
         urlprefix [/]
 
         dynamic menuitem(basepage bp) [/
-            <a href="{/ urlprefix; bp.type; /}.html" title="{/ bp.title; /}">{/ bp.label; /}</a>
+            <a href="{= urlprefix; bp.type; =}.html" title="{= bp.title; =}">{= bp.label; =}</a>
         /]
 
         menuitem[] menuitems = [ menuitem(index),
@@ -5627,24 +5626,24 @@ show_this_context {/
 
         leftmenu [/
             <td width="150" valign="top">&nbsp;<br>
-                <table width=72 border=0 cellspacing=16 cellpadding=0>{/
+                <table width=72 border=0 cellspacing=16 cellpadding=0>{=
                     for m in menuitems [/
-                        <tr><td>{/ m; /}</td></tr>
+                        <tr><td>{= m; =}</td></tr>
                     /]
-                /}</table>
+                =}</table>
             </td>
         /]
 
 
         topbar() [/
-            <div align="center"><h2>Fun Test Suite: {/ label; /}</h2></div>
-            <div align="right"><h3>{/ today; /}</h3></div>
+            <div align="center"><h2>Fun Test Suite: {= label; =}</h2></div>
+            <div align="right"><h3>{= today; =}</h3></div>
         /]
 
         form("start_session") test_session_form(session s) {
             [/ <h3>Test Session</h3> /]
             if (test_session_obj(s)) {
-                [/ <p><b>Current test session: {/ test_session_obj(s).getId; /}</b></p> /]
+                [/ <p><b>Current test session: {= test_session_obj(s).getId; =}</b></p> /]
                 button("command", "Stop");
                 button("command", "Start over");
             } else {
@@ -5657,9 +5656,9 @@ show_this_context {/
         show_request(request r) [/
             <h3>Request Details</h3>
             <ul>
-              <li>URL: {/ r.url; /}</li>
-              <li>query: {/ r.query; /}</li>
-              <li>method: {/ r.method; /}</li>
+              <li>URL: {= r.url; =}</li>
+              <li>query: {= r.query; =}</li>
+              <li>method: {= r.method; =}</li>
             </ul>
         /]
 
@@ -5674,8 +5673,8 @@ show_this_context {/
                     if (r.params[t.key]) {
                         t;
                         [/ <br> /]
-                    } /-- else [/ test {/ t.name; /} not selected.<br> /] --/
-                } /-- else [/ test {/ t.name; /} not in range({/ min; /} to {/ max; /}).<br> /] --/
+                    } /-- else [/ test {= t.name; =} not selected.<br> /] --/
+                } /-- else [/ test {= t.name; =} not in range({= min; =} to {= max; =}).<br> /] --/
             }
             button("command", "Return");
         }
@@ -5747,8 +5746,8 @@ show_this_context {/
         footer [/
             <div align="center" style="font-size: 10pt;">
             <hr align="center" noshade >
-            {/ copyright; /}
-            {/ reload; /}
+            {= copyright; =}
+            {= reload; =}
             </div>
         /]
 
@@ -5774,7 +5773,7 @@ show_this_context {/
             // we expect this to always be called with r and s parameters
 
             if (!r) [/
-                <p><b><font color="#EE0000">No request {/ if (!s) [/ or session /] /} parameter in content!</font></b></p>
+                <p><b><font color="#EE0000">No request {= if (!s) [/ or session /] =} parameter in content!</font></b></p>
             /] else if (!s) [/
                 <p><b><font color="#EE0000">No session parameter in content!</font></b></p>
             /]
@@ -5800,7 +5799,7 @@ show_this_context {/
             [/ <p>Test categories:</p><ul> /]
 
             for int i from 0 until i > highest_category [/
-                <li><b><a href="show_tests?category={/ i; /}">{/ category_titles[i]; /}</a></b></li>
+                <li><b><a href="show_tests?category={= i; =}">{= category_titles[i]; =}</a></b></li>
             /]
 
             [/ </ul> /]
@@ -5849,8 +5848,8 @@ show_this_context {/
 
         content(request r, session s) [/
             <table cellspacing="4">
-            <tr><td><h4>Successful tests:</h4></td><td><h4>{/ results["good"]; /}</h4></td></tr>
-            <tr><td><h4>Failed tests:</h4></td><td><h4>{/ results["bad"]; /}</h4></td></tr>
+            <tr><td><h4>Successful tests:</h4></td><td><h4>{= results["good"]; =}</h4></td></tr>
+            <tr><td><h4>Failed tests:</h4></td><td><h4>{= results["bad"]; =}</h4></td></tr>
             </table>
         /]
     }
@@ -6040,13 +6039,13 @@ show_this_context {/
         end_table;
     }
 
-memt {/
+memt {=
  int z = 0;
  keep as z:
  dynamic int set_z(int n) = n
  z; set_z(3); z;
  
-/}
+=}
 
     /** A table with one initial element, an association between an initial
      *  value of -1 and the name "n".  Because this table is defined at the
@@ -6285,11 +6284,11 @@ page(r, s) gctest(request r, session s) {
         
         [/
             <h3>Per table</h3>
-            <p>{/ (auto_table1 ? "Auto" : "Current"); /} id for table1: {/ id1; /}</p>
-            <p>{/ (auto_table2 ? "Auto" : "Current"); /} id for table2: {/ id2; /}</p>
-            <p>{/ (auto_table3 ? "Auto" : "Current"); /} id for table3: {/ id3; /}</p>
+            <p>{= (auto_table1 ? "Auto" : "Current"); =} id for table1: {= id1; =}</p>
+            <p>{= (auto_table2 ? "Auto" : "Current"); =} id for table2: {= id2; =}</p>
+            <p>{= (auto_table3 ? "Auto" : "Current"); =} id for table3: {= id3; =}</p>
             <h3>Global</h3>
-            <p>Global auto id: {/ id_global; /}</p>
+            <p>Global auto id: {= id_global; =}</p>
         /]
     }
 
@@ -6300,7 +6299,7 @@ page(r, s) gctest(request r, session s) {
     }
 
     
-gid {/
+gid {=
  next_global_id;
  " - ";
  to67x(current_global_id);
@@ -6375,15 +6374,15 @@ gid {/
  to80x(current_minutes);
  " - ";
  to128x(current_minutes);
-/}
+=}
 
-x67 {/
+x67 {=
  to67x(next_global_id);
  '/';
  to67x(current_minutes);
  br;
  to67x(current_seconds);
-/}
+=}
 
     dynamic to67x(long n) {
         dynamic to67(long val) {
@@ -6687,12 +6686,12 @@ x67 {/
             [/ </li></ul> /]
             
             [/ <h4>here</h4>  /]
-            [/ <ul><li><b>site_name: </b> /]          {/ here.site_name;        /} catch {/ "<b>Error</b>"; /}
-            [/ </li><li><b>get("val"): </b> /]        {/ here.get("val");       /} catch {/ "<b>Error</b>"; /} 
-            [/ </li><li><b>construct("val"): </b> /]  {/ here.construct("val"); /} catch {/ "<b>Error</b>"; /}
-            [/ </li><li><b>get("val"): </b> /]        {/ here.get("val");       /} catch {/ "<b>Error</b>"; /}
-            [/ </li><li><b>val: </b> /]               {/ val;                   /} catch {/ "<b>Error</b>"; /}
-            [/ </li><li><b>get("val"): </b> /]        {/ here.get("val");       /} catch {/ "<b>Error</b>"; /}
+            [/ <ul><li><b>site_name: </b> /]          {= here.site_name;        =} catch {= "<b>Error</b>"; =}
+            [/ </li><li><b>get("val"): </b> /]        {= here.get("val");       =} catch {= "<b>Error</b>"; =} 
+            [/ </li><li><b>construct("val"): </b> /]  {= here.construct("val"); =} catch {= "<b>Error</b>"; =}
+            [/ </li><li><b>get("val"): </b> /]        {= here.get("val");       =} catch {= "<b>Error</b>"; =}
+            [/ </li><li><b>val: </b> /]               {= val;                   =} catch {= "<b>Error</b>"; =}
+            [/ </li><li><b>get("val"): </b> /]        {= here.get("val");       =} catch {= "<b>Error</b>"; =}
             [/ </li></ul> /]
 
             [/ <h4>environment variables</h4> /]
@@ -6709,23 +6708,23 @@ x67 {/
         definition site_defs = site.defs
 
         [/
-            <p>site.full_name: {/ site.full_name; /}</p
-            <p>site_defs.count: {/ site_defs.count; /}</p>
+            <p>site.full_name: {= site.full_name; =}</p
+            <p>site_defs.count: {= site_defs.count; =}</p>
             <ul>defs:
         /]
            
         for definition d in site_defs [/
-            <li>{/
-                if (d.type) {/
+            <li>{=
+                if (d.type) {=
                     d.type;
-                /} else if (d) {/
-                    "{/ "; 
+                =} else if (d) {=
+                    "{= "; 
                     d;
-                    " /}";
-                /} else {/
+                    " =}";
+                =} else {=
                     "[/]";
-                /}
-             /}</li>
+                =}
+             =}</li>
         /]
 
         [/ </ul> /]
@@ -6782,44 +6781,44 @@ x67 {/
             dynamic int sv3 = Session_object.val3;
             
             [/
-                <p><b>Local_value:</b> {/ Local_value; /}<br/> 
-                   <b>Session_value:</b> {/ Session_value; /}</p> 
-                <p><b>Local_object:</b> Local_object({/ lv1; /}, {/ lv2; /}, {/ lv3; /}) </p>
-                   <b>Session_object:</b> Session_object({/ sv1; /}, {/ sv2; /}, {/ sv3; /}) </p> 
+                <p><b>Local_value:</b> {= Local_value; =}<br/> 
+                   <b>Session_value:</b> {= Session_value; =}</p> 
+                <p><b>Local_object:</b> Local_object({= lv1; =}, {= lv2; =}, {= lv3; =}) </p>
+                   <b>Session_object:</b> Session_object({= sv1; =}, {= sv2; =}, {= sv3; =}) </p> 
             /]
 
 
             if (r.params["value"]) [/
 
                 <p></p> 
-                <b>r.params["value"]:</b> {/ r.params["value"]; /}
+                <b>r.params["value"]:</b> {= r.params["value"]; =}
                 <p></p> 
-                <p><b>val:</b> {/ val; /}<br/>
-                   <b>val(: r.params["value"] == "yes" ? "yes" : "no" :):</b> {/ val(: r.params["value"] == "yes" ? "yes" : "no" :); /}<br/>
-                   <b>val:</b> {/ val; /}</p>
-                <p><b>Local_value(val):</b> {/ Local_value(val); /}<br/> 
-                   <b>Session_value(val):</b> {/ Session_value(val); /}</p> 
-                <p><b>Local_value:</b> {/ Local_value; /}<br/>
-                   <b>Session_value:</b> {/ Session_value; /}</p>
-                <p><b>Local_value(: val :):</b> {/ Local_value(: val :); /}<br/> 
-                   <b>Session_value(: val :):</b> {/ Session_value(: val :); /}</p> 
-                <p><b>Local_value:</b> {/ Local_value; /}<br/>
-                   <b>Session_value:</b> {/ Session_value; /}</p>
+                <p><b>val:</b> {= val; =}<br/>
+                   <b>val(: r.params["value"] == "yes" ? "yes" : "no" :):</b> {= val(: r.params["value"] == "yes" ? "yes" : "no" :); =}<br/>
+                   <b>val:</b> {= val; =}</p>
+                <p><b>Local_value(val):</b> {= Local_value(val); =}<br/> 
+                   <b>Session_value(val):</b> {= Session_value(val); =}</p> 
+                <p><b>Local_value:</b> {= Local_value; =}<br/>
+                   <b>Session_value:</b> {= Session_value; =}</p>
+                <p><b>Local_value(: val :):</b> {= Local_value(: val :); =}<br/> 
+                   <b>Session_value(: val :):</b> {= Session_value(: val :); =}</p> 
+                <p><b>Local_value:</b> {= Local_value; =}<br/>
+                   <b>Session_value:</b> {= Session_value; =}</p>
 
 
             /] else if (r.params["incvals"]) [/
 
                 <p></p> 
-                <b>r.params["incvals"]:</b> {/ r.params["incvals"]; /}
-                <p>ln: {/ ln; /}  sn: {/ sn; /}</p> 
-                <p><b>eval(Local_object({/ (ln + 1); /}, {/ (ln + 2); /}, {/ (ln + 3); /}));</b> {/ eval(Local_object((ln + 1), (ln + 2), (ln + 3))); /}<br/> 
-                   <b>eval(Session_object({/ (sn + 1); /}, {/ (sn + 2); /}, {/ (sn + 3); /});</b> {/ eval(Session_object((sn + 1), (sn + 2), (sn + 3))); /}</p> 
-                <p><b>Local_object:</b> Local_object({/ lv1; /}, {/ lv2; /}, {/ lv3; /}) </p>
-                   <b>Session_object:</b> Session_object({/ sv1; /}, {/ sv2; /}, {/ sv3; /}) </p> 
-                <p><b>eval(Local_object(: {/ (ln + 2); /}, {/ (ln + 3); /}, {/ (ln + 4); /} :));</b> {/ eval(Local_object(: (ln + 2), (ln + 3), (ln + 4) :)); /}<br/> 
-                   <b>eval(Session_object(: {/ (sn + 2); /}, {/ (sn + 3); /}, {/ (sn + 4); /} :));</b> {/ eval(Session_object(: (sn + 2), (sn + 3), (sn + 4) :)); /}</p> 
-                <p><b>Local_object:</b> Local_object({/ lv1; /}, {/ lv2; /}, {/ lv3; /}) </p>
-                   <b>Session_object:</b> Session_object({/ sv1; /}, {/ sv2; /}, {/ sv3; /}) </p> 
+                <b>r.params["incvals"]:</b> {= r.params["incvals"]; =}
+                <p>ln: {= ln; =}  sn: {= sn; =}</p> 
+                <p><b>eval(Local_object({= (ln + 1); =}, {= (ln + 2); =}, {= (ln + 3); =}));</b> {= eval(Local_object((ln + 1), (ln + 2), (ln + 3))); =}<br/> 
+                   <b>eval(Session_object({= (sn + 1); =}, {= (sn + 2); =}, {= (sn + 3); =});</b> {= eval(Session_object((sn + 1), (sn + 2), (sn + 3))); =}</p> 
+                <p><b>Local_object:</b> Local_object({= lv1; =}, {= lv2; =}, {= lv3; =}) </p>
+                   <b>Session_object:</b> Session_object({= sv1; =}, {= sv2; =}, {= sv3; =}) </p> 
+                <p><b>eval(Local_object(: {= (ln + 2); =}, {= (ln + 3); =}, {= (ln + 4); =} :));</b> {= eval(Local_object(: (ln + 2), (ln + 3), (ln + 4) :)); =}<br/> 
+                   <b>eval(Session_object(: {= (sn + 2); =}, {= (sn + 3); =}, {= (sn + 4); =} :));</b> {= eval(Session_object(: (sn + 2), (sn + 3), (sn + 4) :)); =}</p> 
+                <p><b>Local_object:</b> Local_object({= lv1; =}, {= lv2; =}, {= lv3; =}) </p>
+                   <b>Session_object:</b> Session_object({= sv1; =}, {= sv2; =}, {= sv3; =}) </p> 
 
             /]
  
@@ -6829,8 +6828,8 @@ x67 {/
 
             [/
                 <hr/>
-                <h4>Page views this session: {/ num_page_views; /}</h4>
-                <h4>Total page views in all sessions: {/ global_stats["global_page_views"]; /}</h4>
+                <h4>Page views this session: {= num_page_views; =}</h4>
+                <h4>Total page views in all sessions: {= global_stats["global_page_views"]; =}</h4>
             /]
         } 
     }
@@ -6843,8 +6842,8 @@ x67 {/
         if (example_arg) {
             eval(selected_example(example_arg));
         }
-        [/ <p>example_arg: {/ example_arg; /}</p>
-           <p>selected_example: {/ selected_example; /}</p> /]
+        [/ <p>example_arg: {= example_arg; =}</p>
+           <p>selected_example: {= selected_example; =}</p> /]
     }
 
     basepage(r, s) file_test_page(request r, session s) {
@@ -6856,7 +6855,7 @@ x67 {/
         file[] files = current_dir.files
         
         content(request r, session s) {
-            [/ <h4>Directory of {/ current_dir.canonical_path; /}</h4> /]
+            [/ <h4>Directory of {= current_dir.canonical_path; =}</h4> /]
 
             [/ <ul> /]
             for file f in files {
@@ -6868,11 +6867,11 @@ x67 {/
         }
     }
 
-ft {/
-  for file f in file(".").files {/
+ft {=
+  for file f in file(".").files {=
     f.canonical_path;
-  /} 
- /}
+  =} 
+ =}
 
 
     int ajc(int x) = x
@@ -6923,12 +6922,12 @@ ft {/
             color bgcolor = "#EFCCCC"
             req_id = content_component.id
             
-            [/ <table width="96%" bgcolor="{/ bgcolor; /}"><tr><td>Formlike Component</td></tr><tr><td> /]
+            [/ <table width="96%" bgcolor="{= bgcolor; =}"><tr><td>Formlike Component</td></tr><tr><td> /]
             textarea("content", "", 23, 13);
             [/ </td></tr><tr><td> /]
             submit_button("formlike_component_submit", "Submit", req_id, "content");
-            [/<br>content_component.type: {/ content_component.type; /}
-              <br>content_component.id: {/ content_component.id; /} /]
+            [/<br>content_component.type: {= content_component.type; =}
+              <br>content_component.id: {= content_component.id; =} /]
             [/ </td></tr></table> /]
         } 
             
@@ -7034,23 +7033,23 @@ ft {/
     	}
     }
     
-    big_mem_allocator {/
+    big_mem_allocator {=
     	eval(org.fundev.test.ExternalTest.bigObjects);
-	/}    	
+	=}    	
 
     basepage(r, s) internal_mem_test(request r, session s) {
     	label = "Big internal memory allocation"
     	
-    	big_array[] = [ for int i from 0 to 1048576 {/ i /} ]
-    	big_array[] big_array_array = [ for int i from 0 to 256 {/ big_array /} ]
+    	big_array[] = [ for int i from 0 to 1048576 {= i =} ]
+    	big_array[] big_array_array = [ for int i from 0 to 256 {= big_array =} ]
 
 		length = big_array_array.count * 1048576 * 256 * 4;
 
         content(request r, session s) {
             [/
                <h4>big array</h4>
-               <p>length = {/ length; /}
-               <br>last item = {/ big_array_array[255][1048575]; /}
+               <p>length = {= length; =}
+               <br>last item = {= big_array_array[255][1048575]; =}
                <br>ok.</p>
             /]
         }
@@ -7176,14 +7175,14 @@ ft {/
             }
             
             [/
-                <p><b>test_server started:</b> {/ server_started; /}</p> 
-                <p><b>test_server running:</b> {/ server_is_running; /}</p> 
+                <p><b>test_server started:</b> {= server_started; =}</p> 
+                <p><b>test_server running:</b> {= server_is_running; =}</p> 
             /]
             
             if (r.params["status"]) [/
                 <table>
                 <tr><td><b>expected data from test_server:</b></td><td>ABCDE</td></tr> 
-                <tr><td><b>actual data from test_server:</b></td><td>{/ get_a; bc[0]; bc[1]; de["d"]; de["e"]; /}</td></tr>
+                <tr><td><b>actual data from test_server:</b></td><td>{= get_a; bc[0]; bc[1]; de["d"]; de["e"]; =}</td></tr>
                 </table> 
             /]
             
@@ -7297,12 +7296,12 @@ ft {/
         
             [/ <h2>Test Results</h2><ol> /]
             for test_result rslt in test_test_runner.results {
-                [/ <li>Name: {/ rslt.name; /}<br>
-                      Passed: {/ rslt.result; /}<br>
+                [/ <li>Name: {= rslt.name; =}<br>
+                      Passed: {= rslt.result; =}<br>
                       log:<ul>
                 /]
                 for msg in rslt.messages [/
-                    <li>{/ msg; /}</li>
+                    <li>{= msg; =}</li>
                 /]
                 [/ </ul></li> /]                
             }
@@ -7368,7 +7367,7 @@ tlm {
         tp {
             int nr = 0
             
-            int ap[] = [ for int n from 0 to nr {/ n /} ]
+            int ap[] = [ for int n from 0 to nr {= n =} ]
             
         }
         

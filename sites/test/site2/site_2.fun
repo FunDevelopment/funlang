@@ -23,7 +23,7 @@ site site_2 {
 
 
     /------ configuration properties ------/
-    urlprefix(page p) [/ /{/ if (p.site.type != sitename) { p.site.type; "/"; } /} /]  
+    urlprefix(page p) [/ /{= if (p.site.type != sitename) { p.site.type; "/"; } =} /]  
 	
 	/------ display properties ------/
 
@@ -57,7 +57,7 @@ site site_2 {
                               ]
         
         menuitem(page p) [/
-            <div class="menu_item"><a href="{/ urlprefix(p); p.type; /}">{/ p.label; /}</a></div>
+            <div class="menu_item"><a href="{= urlprefix(p); p.type; =}">{= p.label; =}</a></div>
         /]
 
         content [?]
@@ -73,7 +73,7 @@ site site_2 {
         [/ <table><tr><td> /]
         menu;
         [/ </td><td> /]
-        [/ <p>s2_x = {/ s2_x; /}</p> /]
+        [/ <p>s2_x = {= s2_x; =}</p> /]
         content;
         [/ </td></tr></table> /]
         
@@ -93,7 +93,7 @@ site site_2 {
 
     basepage(r, s) local_page(request r, session s) {
         title [/ Site 2 Local Page/]
-        label [/ Site 2 local_page = {/ owner.type; /} /]
+        label [/ Site 2 local_page = {= owner.type; =} /]
 
         content [/
             <p>This is a Site 2 local page.</p>
@@ -102,7 +102,7 @@ site site_2 {
 
     basepage(r, s) s2_page(request r, session s) {
         title [/ Site 2 Special Page/]
-        label [/ Site 2 s2_page = {/ owner.type; /} /]
+        label [/ Site 2 s2_page = {= owner.type; =} /]
 
         content [/
             <p>This is the Site 2 special page.</p>

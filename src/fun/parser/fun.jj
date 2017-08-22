@@ -394,8 +394,8 @@ TOKEN :
                             }
                           }
 
-    | < LEMBEDCODE: "{/" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
-    | < REMBEDCODE: "/}" >  { if (stateStack.size() > 0) {
+    | < LEMBEDCODE: "{=" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
+    | < REMBEDCODE: "=}" >  { if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                              } else {
@@ -492,7 +492,7 @@ TOKEN :
     |
       <STATIC_1: "[/" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_2: "{/" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_2: "{=" > { input_stream.backup(2); } : DEFAULT
     |
       <STATIC_3: "/]" > { input_stream.backup(2); } : DEFAULT
     |
@@ -1107,7 +1107,7 @@ Block FunBlock() :
 /*@egen*/
     (      ("{" ( DeepStatement() )* "}")
     | 
-      ("{/" ( DeepStatement() )* "/}")
+      ("{=" ( DeepStatement() )* "=}")
     )
     [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -1151,7 +1151,7 @@ Block EmbeddedFunBlock()          :
 {/*@bgen(jjtree) FunBlock */
     try {
 /*@egen*/
-    ("{/" ( DeepStatement() )* "/}")
+    ("{=" ( DeepStatement() )* "=}")
     [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn000, true);
@@ -1295,7 +1295,7 @@ void SiteBlock()          :
 /*@egen*/
     (      ("{" ( Directive() )* ( SiteLevelStatement() )* "}")
     | 
-      ("{/" ( Directive() )* ( SiteLevelStatement() )* "/}")
+      ("{=" ( Directive() )* ( SiteLevelStatement() )* "=}")
     )/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
@@ -1402,14 +1402,14 @@ void NamedExpression()      :
       LOOKAHEAD( NamedConstruction() )
       NamedConstruction()
     |
-      LOOKAHEAD( NamedDefinition() )
-      NamedDefinition()
-    |
       LOOKAHEAD( TypedDefinition() )
       TypedDefinition()
     |
       LOOKAHEAD( TypedOrNamedExternalDefinition(-1, -1) )
       TypedOrNamedExternalDefinition(-1, -1)
+    |
+      LOOKAHEAD( NamedDefinition() )
+      NamedDefinition()
 }
 
 
@@ -3606,7 +3606,7 @@ Block ArrayInitBlock()                     :
     try {
 /*@egen*/
     (
-      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
+      "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
     )
     [ catchBlock = ArrayInitCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -3773,7 +3773,7 @@ Block TableInitBlock()                     :
     try {
 /*@egen*/
     (
-      "{/" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "/}"
+      "{=" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "=}"
     )
     [ catchBlock = TableInitCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -5821,7 +5821,7 @@ Block ComprehensionBlock()          :
     try {
 /*@egen*/
     (
-      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
+      "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
     )
     [ catchBlock = ComprehensionCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {

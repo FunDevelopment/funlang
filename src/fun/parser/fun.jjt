@@ -390,8 +390,8 @@ TOKEN :
                             }
                           }
 
-    | < LEMBEDCODE: "{/" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
-    | < REMBEDCODE: "/}" >  { if (stateStack.size() > 0) {
+    | < LEMBEDCODE: "{=" >  { stateStack.push(currentState); currentState = DEFAULT_STATE; }
+    | < REMBEDCODE: "=}" >  { if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                              } else {
@@ -488,7 +488,7 @@ TOKEN :
     |
       <STATIC_1: "[/" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_2: "{/" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_2: "{=" > { input_stream.backup(2); } : DEFAULT
     |
       <STATIC_3: "/]" > { input_stream.backup(2); } : DEFAULT
     |
@@ -735,7 +735,7 @@ Block FunBlock() :
 {
     (      ("{" ( DeepStatement() )* "}")
     | 
-      ("{/" ( DeepStatement() )* "/}")
+      ("{=" ( DeepStatement() )* "=}")
     )
     [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -748,7 +748,7 @@ Block EmbeddedFunBlock() #FunBlock:
     Block catchBlock;
 }
 {
-    ("{/" ( DeepStatement() )* "/}")
+    ("{=" ( DeepStatement() )* "=}")
     [ catchBlock = CatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
         return jjtThis;
@@ -799,7 +799,7 @@ void SiteBlock() #FunBlock:
 {
     (      ("{" ( Directive() )* ( SiteLevelStatement() )* "}")
     | 
-      ("{/" ( Directive() )* ( SiteLevelStatement() )* "/}")
+      ("{=" ( Directive() )* ( SiteLevelStatement() )* "=}")
     )    
 }
 
@@ -886,14 +886,14 @@ void NamedExpression() #void:
       LOOKAHEAD( NamedConstruction() )
       NamedConstruction()
     |
-      LOOKAHEAD( NamedDefinition() )
-      NamedDefinition()
-    |
       LOOKAHEAD( TypedDefinition() )
       TypedDefinition()
     |
       LOOKAHEAD( TypedOrNamedExternalDefinition(-1, -1) )
       TypedOrNamedExternalDefinition(-1, -1)
+    |
+      LOOKAHEAD( NamedDefinition() )
+      NamedDefinition()
 }
 
 
@@ -1842,7 +1842,7 @@ Block ArrayInitBlock() #DynamicElementBlock:
 }
 {
     (
-      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
+      "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
     )
     [ catchBlock = ArrayInitCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -1926,7 +1926,7 @@ Block TableInitBlock() #DynamicElementBlock:
 }
 {
     (
-      "{/" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "/}"
+      "{=" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "=}"
     )
     [ catchBlock = TableInitCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -2526,7 +2526,7 @@ Block ComprehensionBlock() #FunBlock:
 }
 {
     (
-      "{/" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "/}"
+      "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
     )
     [ catchBlock = ComprehensionCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {

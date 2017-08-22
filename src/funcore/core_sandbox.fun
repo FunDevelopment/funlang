@@ -104,7 +104,7 @@ core {
     
     
     dynamic sandbox_iframe(page p) [/
-        <iframe id="{/ p.type; /}" src="{/ p.type; /}" style="width:100%;height:50%">
+        <iframe id="{= p.type; =}" src="{= p.type; =}" style="width:100%;height:50%">
         </iframe>
     /]
     

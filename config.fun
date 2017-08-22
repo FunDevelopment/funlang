@@ -22,7 +22,7 @@
      **/ 
     site_config[] all_sites = []
     
-    site_config{} site_config_table = { for site_config sc in all_sites {/ sc.name: sc /} }
+    site_config{} site_config_table = { for site_config sc in all_sites {= sc.name: sc =} }
     
     /** If true, the sites in all_sites share the main_site core instead of
      *  loading their own.

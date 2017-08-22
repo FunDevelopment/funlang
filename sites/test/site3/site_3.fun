@@ -23,7 +23,7 @@ site site_3 {
 
 
     /------ configuration properties ------/
-    urlprefix(page p) [/ /{/ if (p.site.type != sitename) { p.site.type; "/"; } /} /]  
+    urlprefix(page p) [/ /{= if (p.site.type != sitename) { p.site.type; "/"; } =} /]  
 	
 	/------ display properties ------/
 
@@ -58,7 +58,7 @@ site site_3 {
                               ]
 
         menuitem(page p) [/
-            <div class="menu_item"><a href="{/ urlprefix(p); p.type; /}">{/ p.label; /}</a></div>
+            <div class="menu_item"><a href="{= urlprefix(p); p.type; =}">{= p.label; =}</a></div>
         /]
 
         content [?]
@@ -66,7 +66,7 @@ site site_3 {
         menu {
             [/ <table border="0" cellspacing="0" cellpadding="4" align="left" valign="top" height="100%"> /]
             for page p in destinations [/
-                <tr><td>{/ menuitem(p); /}</td></tr>
+                <tr><td>{= menuitem(p); =}</td></tr>
             /]
             [/ </table> /]
         }
@@ -93,7 +93,7 @@ site site_3 {
 
     basepage(r, s) local_page(request r, session s) {
         title [/ Site 3 Local Page/]
-        label [/ Site 3 local_page = {/ owner.type; /} /]
+        label [/ Site 3 local_page = {= owner.type; =} /]
 
         content [/
             <p>This is a Site 3 local page.</p>
@@ -102,7 +102,7 @@ site site_3 {
 
     basepage(r, s) s3_page(request r, session s) {
         title [/ Site 3 Special Page/]
-        label [/ Site 3 s3_page = {/ owner.type; /} /]
+        label [/ Site 3 s3_page = {= owner.type; =} /]
 
         content [/
             <p>This is the Site 3 special page.</p>

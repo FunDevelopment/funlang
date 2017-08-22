@@ -142,8 +142,8 @@ core {
     }
   
     fun_domain {
-        fun_site sites{} = {}
-        fun_domain domains{} = {}
+        fun_site{} sites = {}
+        fun_domain{} domains = {}
         main_site [?]
         name [?]
         
@@ -699,13 +699,13 @@ core {
      --/
 
     start_table(table_attribs, row_attribs, cell_attribs) [/
-        <table {/ table_attribs; /}><tr {/ row_attribs; /}><td {/ cell_attribs; /}>
+        <table {= table_attribs; =}><tr {= row_attribs; =}><td {= cell_attribs; =}>
     /]
     next_row(row_attribs, cell_attribs) [/
-        </td></tr><tr {/ row_attribs; /}><td {/ cell_attribs; /}>
+        </td></tr><tr {= row_attribs; =}><td {= cell_attribs; =}>
     /]
     next_column(cell_attribs) [/
-        </td><td {/ cell_attribs; /}>
+        </td><td {= cell_attribs; =}>
     /]
     end_table [/
         </td></tr></table>
@@ -764,11 +764,11 @@ core {
         robots = "all"
 
         meta[] = [ [/ http-equiv="content-type" content="text/html; charset=iso-8859-1" /],
-                   if (expiration)  {/ [/ http-equiv="expires" content="{/ expiration; /}" /] /},
-                   if (author)      {/ [/ name="author" content="{/ author; /}"            /] /},
-                   if (description) {/ [/ name="description" content="{/ description; /}"  /] /},
-                   if (viewport)    {/ [/ name="viewport" content="{/ viewport; /}"        /] /},
-                   if (robots)      {/ [/ name="robots" content="{/ robots; /}"            /] /} ]
+                   if (expiration)  {= [/ http-equiv="expires" content="{= expiration; =}" /] =},
+                   if (author)      {= [/ name="author" content="{= author; =}"            /] =},
+                   if (description) {= [/ name="description" content="{= description; =}"  /] =},
+                   if (viewport)    {= [/ name="viewport" content="{= viewport; =}"        /] =},
+                   if (robots)      {= [/ name="robots" content="{= robots; =}"            /] =} ]
 
         links[] = []
 
@@ -860,22 +860,22 @@ core {
 
         html_header [/
             <head>
-            <title>{/ title; /}</title>
-            {/
+            <title>{= title; =}</title>
+            {=
                 for m in meta [/
-                    <meta {/ m; /} >
+                    <meta {= m; =} >
                 /]
                 
                 for l in links [/
-                    <link {/ l; /} >
+                    <link {= l; =} >
                 /]
 
                 if (style) [/
                     <style type="text/css" media="all">
-                    {/ style; /}
+                    {= style; =}
                     </style>
                 /]
-            /}
+            =}
             </head>
         /]
 
@@ -883,42 +883,42 @@ core {
 
         background {
             if (bgimage) {
-                [/ background="{/ bgimage; /}" /]
+                [/ background="{= bgimage; =}" /]
                 sp;
             }
             if (bgcolor) {
-                [/ bgcolor="{/ bgcolor; /}" /]
+                [/ bgcolor="{= bgcolor; =}" /]
                 sp;
             }
             if (linkcolor) {
-                [/ link="{/ linkcolor; /}" /]
+                [/ link="{= linkcolor; =}" /]
                 sp;
             }
             if (vlinkcolor) {
-                [/ vlink="{/ vlinkcolor; /}" /]
+                [/ vlink="{= vlinkcolor; =}" /]
                 sp;
             }
             if (alinkcolor) {
-                [/ alink="{/ alinkcolor; /}" /]
+                [/ alink="{= alinkcolor; =}" /]
                 sp;
             }
         }
 
         page_begin [/
-            {/ doctype_header; /}
+            {= doctype_header; =}
             <html>
-            {/ html_header; /}
-            <body {/ body_attribs; /}>
+            {= html_header; =}
+            <body {= body_attribs; =}>
         /]
 
         page_end [/
-            {/
+            {=
                 if (script) [/
                     <script>
-                    {/ script; /}
+                    {= script; =}
                     </script>
                 /]
-            /}
+            =}
             </body>
             </html>
         /]
@@ -1070,6 +1070,6 @@ core {
             No additional information available.
         /]
 
-        [/ </h3><p><i>Fun version {/ version; /}</i></p> /]
+        [/ </h3><p><i>Fun version {= version; =}</i></p> /]
     }
 }
