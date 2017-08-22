@@ -67,10 +67,10 @@ site test {
                               text_utilities_test, this_type_test, type_test ]
 
     /** Global statistics table **/
-    global int global_stats[] = {}
+    global int global_stats{} = {}
 
     /** Table for tabulating test results. **/
-    int results[] = {}
+    int results{} = {}
     
     /** Session data **/
     int num_page_views(int n) = n    
@@ -1296,7 +1296,7 @@ at {/
 
         /** aliased table element **/
         table_parent {
-            element[] = { "g": "G" }
+            element{} = { "g": "G" }
         }
 
         aliased_element = table_parent.element["g"]
@@ -1399,22 +1399,22 @@ at {/
         ia_array[] = [ ia_target, ia_table, ia_table_2, "X" ]
         ia_array_2[] = [ "X", "D" ]
         
-        ia_table[] = { "c": "C", "d": ia_array_2 }
-        ia_table_2[] = { "E": "x", "F": "x", "G": "x" }
+        ia_table{} = { "c": "C", "d": ia_array_2 }
+        ia_table_2{} = { "E": "x", "F": "x", "G": "x" }
         
         ia_array_type[] = []
         
         indexed_alias = ia_array[0]
-        indexed_alias_to_table[] = ia_array[1]
-        indexed_alias_to_table_2[] = ia_array[2]
+        indexed_alias_to_table{} = ia_array[1]
+        indexed_alias_to_table_2{} = ia_array[2]
         ia_array_type alias_to_array = ia_array
         ia_array_type complex_def_returning_array {
             if (1) {
                 ia_array;
             }
         }
-        ia_2_to_table_2[] = alias_to_array[2]
-        ia_3_to_table_2[] = complex_def_returning_array[2]
+        ia_2_to_table_2{} = alias_to_array[2]
+        ia_3_to_table_2{} = complex_def_returning_array[2]
         
         indexed_alias;
         indexed_alias.child;
@@ -1437,8 +1437,8 @@ iat {/
         ia_array[] = [ ia_target, ia_table, ia_table_2, "X" ]
         ia_array_2[] = [ "X", "D" ]
         
-        ia_table[] = { "c": "C", "d": ia_array_2 }
-        ia_table_2[] = { "E": "x", "F": "x", "G": "x" }
+        ia_table{} = { "c": "C", "d": ia_array_2 }
+        ia_table_2{} = { "E": "x", "F": "x", "G": "x" }
         
         ia_array_type[] = []
         ia_array_type complex_def_returning_array {
@@ -1447,8 +1447,8 @@ iat {/
             }
         }
         ia_array_type alias_to_array = ia_array
-        ia_2_to_table_2[] = alias_to_array[2]
-        ia_3_to_table_2[] = complex_def_returning_array[2]
+        ia_2_to_table_2{} = alias_to_array[2]
+        ia_3_to_table_2{} = complex_def_returning_array[2]
 
         k2[] = ia_2_to_table_2.keys 
         k2[1];
@@ -1891,8 +1891,8 @@ tpt {/
             item_j = "J"
 
             growable_array[0] = item_h
-            growable_array[+] = "I"
-            growable_array[+] = item_j
+            growable_array[1] = "I"
+            growable_array[2] = item_j
 
             for z in growable_array {
                 z;
@@ -2537,7 +2537,7 @@ aecat {/
         key_array[] = [ "a", "b" ]
         value_array[] = [ "A", "B" ]
         
-        nested_table[] = { c: "C", d: "D" } 
+        nested_table{} = { c: "C", d: "D" } 
        
         boolean tru = true
         boolean fals = false
@@ -2556,7 +2556,7 @@ aecat {/
         ii iiq = iia("I")
         ii[] ii_array = [ iiq ]
     
-        dynamic_table[] = {
+        dynamic_table{} = {
             
             for int i from 0 to 2 {/
                 key_array[i]: value_array[i]
@@ -2640,16 +2640,16 @@ aecat {/
         gum("K") gum_k [/]
         gum("M") gum_m [/]
 
-        gum[] gum_table_1 = { "3": gum_c, "4": gum_d,
+        gum gum_table_1{} = { "3": gum_c, "4": gum_d,
                               "1": gum_a, "2": gum_b,
                               five: gum_e, six: gum_f,
                               seven: gum_g, gum_h_index.x: gum_h,
                               "9": gum_gum("I"),
                               (ten): gum_m  }
-        gum[] gum_table_2 = { "j": gum_j, "k": gum_k }
+        gum gum_table_2{} = { "j": gum_j, "k": gum_k }
         
-        gum[] gum_table_3 = { "x": gum("L") } 
-        
+        gum gum_table_3{} = { "x": gum("L") } 
+
         fv = "five"
         six [/]
         ten = "10"
@@ -2677,7 +2677,7 @@ aecat {/
     }
 
 te {/
-   gum[] = { yo: "ho" }
+   gum{} = { yo: "ho" }
    
    yo [/]
    
@@ -2697,13 +2697,13 @@ te {/
         key_g = "item_g"
         item_f = "F"
 
-        fixed_table[] = { "": "D", "item_a": "A", "item_b": item_b, "item_c": "C" }
-        dynamic_table[] = { for int i from 0 to 3 {/
+        fixed_table{} = { "": "D", "item_a": "A", "item_b": item_b, "item_c": "C" }
+        dynamic_table{} = { for int i from 0 to 3 {/
                                 if (i == 0)      {/ "item_e": "E"    /}
                                 else if (i == 1) {/ "item_f": item_f /}
                                 else             {/    key_g: "G"    /}
-                            /}
-                          }
+                             /}
+                           }
                           
         /--- children of elements in a typed table ---/
         key_hi = "item_hi"
@@ -2713,15 +2713,15 @@ te {/
             subitem_2 = b
         }
           
-        table_item[] typed_table = { "": "x", "item_hi": table_item("H", "I") }
-        tbl[] = { "a": "" }
+        table_item typed_table{} = { "": "x", "item_hi": table_item("H", "I") }
+        tbl{} = { "a": "" }
         
-        table_with_params(l, m)[] = { l: "L", "m": m }
-        table_with_arg(n)[] = { "n": n }
+        table_with_params(l, m){} = { l: "L", "m": m }
+        table_with_arg(n){} = { "n": n }
         
-        tbl2[] = table_with_params("l", "M");
+        tbl2{} = table_with_params("l", "M");
         
-        table_super[] = {}
+        table_super{} = {}
         table_super table_sub = { "o": "O" }
         
         fixed_table["item_a"];
@@ -2756,7 +2756,7 @@ te {/
     }
 
 tt {/
-  table_with_arg(n)[] = { "n": n }
+  table_with_arg(n){} = { "n": n }
   table_with_arg("N")["n"];
 /}    
 
@@ -2768,17 +2768,17 @@ tt {/
 
         expected = "ABCDEFGHIJ"
 
-        x[] = { "a":"A", "b":"B" }
-        y[] = { "c":"C", "d":"D" }
-        z[][] = { "t1":{ "e":"E", "f":"F"}, "t2":{ "g":"G", "h":"H" } }
+        x{} = { "a":"A", "b":"B" }
+        y{} = { "c":"C", "d":"D" }
+        z{}{} = { "t1":{ "e":"E", "f":"F"}, "t2":{ "g":"G", "h":"H" } }
  
         foo(x) {
            i [/ I /]
            j = x
         } 
 
-        foo[] foos = { "foo_i": foo, "foo_j":foo("J") }        
-        show_foo_ij(f[]) {
+        foo foos{} = { "foo_i": foo, "foo_j":foo("J") }        
+        show_foo_ij(f{}) {
            f["foo_i"].i;
            f["foo_j"].j;
         } 
@@ -2805,7 +2805,7 @@ tt {/
     }
 
 tblpt {/
-        z[][] = { "t1":{ "e":"E", "f":"F"}, "t2":{ "g":"G", "h":"H" } }
+        z{}{} = { "t1":{ "e":"E", "f":"F"}, "t2":{ "g":"G", "h":"H" } }
         dynamic show(aa) {
             for k in aa.keys {
                 aa[k];
@@ -2823,11 +2823,11 @@ tblpt {/
 
         expected = "ABCDEFG"
 
-        x[] = { "a":["A", "B"] }
+        x{} = { "a":["A", "B"] }
        
         y[] =  [ {"c":"C"}, {"d":"D"} ]
 
-        z[][] = { "z1":{"e":"E", "f":"F"}, "z2":{"g":"G"} }
+        z{}{} = { "z1":{"e":"E", "f":"F"}, "z2":{"g":"G"} }
 
         for k in x.keys {
             for xx in x[k] {
@@ -2857,7 +2857,7 @@ tblpt {/
         expected = "ABCDEF"
         
         data_array[] = [ "A", "X", "B", "Y", "C", "D" ]
-        mapped_array_table[] = data_array
+        mapped_array_table{} = data_array
         str_ix = "4"
         int int_ix = 5
         
@@ -2898,9 +2898,9 @@ tblpt {/
         array_3[] = array_1 + array_2
         copy_of_array_2[] = [ "b", "c" ]
         
-        table_1[] = { "x": "X" } 
-        table_2[] = { "y": "Y", "z": "Z" }
-        copy_of_table_2[] = { "z": "Z", "y": "Y" } 
+        table_1{} = { "x": "X" } 
+        table_2{} = { "y": "Y", "z": "Z" }
+        copy_of_table_2{} = { "z": "Z", "y": "Y" } 
         
         
         if (a in array_1) [/ A /] else [/ x /]
@@ -2952,7 +2952,7 @@ cop {/
         
         a = "a"
         b[] = [ "b1", "b2" ]
-        c[] = { c1: "1", c2: "2", c3: "3" } 
+        c{} = { c1: "1", c2: "2", c3: "3" } 
         d[] = [ for int n from 0 to 4 {/ ("d" + n) /} ]
         e[] = [ "e1", "e2", "e3", "e4", "e5" ]
         ealias = e
@@ -2979,9 +2979,9 @@ cop {/
         coll_4_str = '{ "gh": { "g": "G", "h": [ "H" ] } }' 
 
         coll_1[] = array.parse(coll_1_str)
-        coll_2[] = table.parse(coll_2_str)
+        coll_2{} = table.parse(coll_2_str)
         coll_3[] = array.parse(coll_3_str)
-        coll_4[] = table.parse(coll_4_str)
+        coll_4{} = table.parse(coll_4_str)
         
         coll_1[0];
         coll_1[1];
@@ -3002,7 +3002,7 @@ cop {/
 
         test_array[] = [ "A", "X" ]
        
-        test_table[] = {"d": "D", "e": "X"}
+        test_table{} = {"d": "D", "e": "X"}
 
         array.get(test_array, 0);
         array.set(test_array, 1, "B");
@@ -3239,7 +3239,7 @@ oct9 {/
         keep: serializable obj1 {
             keep: a = "A"
             keep: bc[] = [ "B", "C" ]
-            keep: de[] = { "d": "D", "e": "E"  }
+            keep: de{} = { "d": "D", "e": "E"  }
             keep: serializable fg {
                 keep: f = "F"
                 keep: g = "G"
@@ -3249,7 +3249,7 @@ oct9 {/
         keep: serializable(str) obj2(str) {
             keep: a [/]
             keep: bc[] = []
-            keep: de[] = {}
+            keep: de{} = {}
             keep: serializable(s) fg(s) {
                 keep: f [/]
                 keep: g [/]
@@ -3282,7 +3282,7 @@ st {/
         keep: serializable obj1 {
             keep: a = "A"
             keep: bc[] = [ "B", "C" ]
-            keep: de[] = { "d": "D", "e": "E"  }
+            keep: de{} = { "d": "D", "e": "E"  }
             keep: serializable fg {
                 keep: f = "F"
                 keep: g = "G"
@@ -3292,7 +3292,7 @@ st {/
         keep: serializable(str) obj2(str) {
             keep: a [/]
             keep: bc[] = []
-            keep: de[] = {}
+            keep: de{} = {}
             keep: serializable(s) fg(s) {
                 keep: f [/]
                 keep: g [/]
@@ -3322,7 +3322,7 @@ st2 {/
         
         serializable od {
             keep:
-            dd[] = { d: "D" }
+            dd{} = { d: "D" }
         }
         
         serializable ob {
@@ -3372,8 +3372,8 @@ st2 {/
         unsorted_array[] = [ "X", "C", "B", "A" ]
         sorted_unsorted_array[] = sorted_array(unsorted_array)
         
-        unsorted_table[] = { "c": "F", "b": "E", "a": "D" }
-        sorted_unsorted_table[] = sorted_table(unsorted_table)
+        unsorted_table{} = { "c": "F", "b": "E", "a": "D" }
+        sorted_unsorted_table{} = sorted_table(unsorted_table)
 
         {        
             for int i from 0 to 3 by 1 {
@@ -3390,8 +3390,8 @@ st2 {/
         
     }
 srt {/
-        unsorted_table[] = { "c": "F", "b": "E", "a": "D" }
-        sorted_unsorted_table[] = sorted_table(unsorted_table)
+        unsorted_table{} = { "c": "F", "b": "E", "a": "D" }
+        sorted_unsorted_table{} = sorted_table(unsorted_table)
             for x in sorted_unsorted_table {
                 x;
             }
@@ -3583,7 +3583,7 @@ ceot {/
 
 extparent {/
     string[] extList = []
-    string[] extMap = {}
+    string{} extMap = {}
 /}
 
 extparent ep = org.fundev.test.ExternalTest
@@ -3594,7 +3594,7 @@ etst {/
     ep.extMap[1];
 /}      
         
-    string[] string_map = []
+    string{} string_map = {}
     string_map[] map_array = [] 
     map_array external_map_array {
          p1 [?]
@@ -3623,10 +3623,10 @@ etst {/
 
         expected = "ABCD"
 
-        string[] map_1_0 = external_map_array_1[0]
-        string[] map_1_1 = external_map_array_1[1]
-        string[] map_2_0 = external_map_array_2[0]
-        string[] map_2_1 = external_map_array_2[1]
+        string{} map_1_0 = external_map_array_1[0]
+        string{} map_1_1 = external_map_array_1[1]
+        string{} map_2_0 = external_map_array_2[0]
+        string{} map_2_1 = external_map_array_2[1]
         
         map_1_0["item"];
         map_1_1["item"];
@@ -3674,8 +3674,8 @@ etst {/
         empty_array[] = []
         nonempty_array[] = [ "x" ]
         
-        empty_table[] = {}
-        nonempty_table[] = { "X": "x" }
+        empty_table{} = {}
+        nonempty_table{} = { "X": "x" }
 
         boolean TRUE = true
         boolean FALSE = false
@@ -4152,8 +4152,8 @@ cat {/
 
         expected = "ABCDEFGHIJKLMN"
 
-        test_cache[] = {}
-        static static_test_cache[] = {}
+        test_cache{} = {}
+        static static_test_cache{} = {}
 
         keep_A {
             keep in test_cache:
@@ -4306,8 +4306,8 @@ cat {/
     }
 
 kt {/
-        keep: parent_cache[] = {}
-        keep in parent_cache: child_cache[] = {}
+        keep: parent_cache{} = {}
+        keep in parent_cache: child_cache{} = {}
         child_cache get_child_cache = parent_cache["child_cache"]
 
         keep_H {
@@ -4348,7 +4348,7 @@ kt {/
 
         expected = "ABCD"
 
-        test_cache[] = {}
+        test_cache{} = {}
         
         keep_A {
             keep in test_cache:
@@ -4401,7 +4401,7 @@ kt {/
 
         expected = "ABCD"
 
-        test_cache[] = {}
+        test_cache{} = {}
         
         keep_A {
             keep by akey in test_cache: z = "A"
@@ -4448,7 +4448,7 @@ kt {/
     }
 
 dkt {/
-    test_cache[] = {}
+    test_cache{} = {}
 
         bkey = "b"
         keep_B {
@@ -4469,7 +4469,7 @@ dkt {/
 
         expected = "ABCDEFGHIJK"
 
-        test_cache[] = {}
+        test_cache{} = {}
 
         abcd_container(cparam, dparam) {
             keep: a(x) = x
@@ -5035,9 +5035,9 @@ capt {
 
         expected = "ABC"
 
-        test_cache[] = {}
+        test_cache{} = {}
         
-        populate(passed_cache[]) {
+        populate(passed_cache{}) {
             keep in passed_cache: b(x) = x
             keep in passed_cache: c(y) = y
 
@@ -5054,8 +5054,8 @@ capt {
     }
 
 pct {/
-      test_cache[] = {}
-      pop(passed_cache[]) {
+      test_cache{} = {}
+      pop(passed_cache{}) {
          table.set(passed_cache, "a", "A");
          passed_cache["a"];
       }
@@ -5918,7 +5918,7 @@ show_this_context {/
             /-------- Definitions --------/
 
         /** Defines a table of integer named values. **/
-        int values[] = {}
+        int values{} = {}
 
         /** tells the runtime system to memoize (i.e. cache evaluations of) the following
          *  function (i.e., x) in the values table defined above.
@@ -6053,7 +6053,7 @@ memt {/
      *  site level, it is cached by session, so that values memoized in it
      *  persist through a session.
      **/
-    int session_values[] = { "n": -1 }
+    int session_values{} = { "n": -1 }
 
 	keep in session_values:
 	boolean initialized = false
@@ -6076,19 +6076,19 @@ memt {/
          *  is initialized only once rather than with each call to counter, and is
          *  therefore shared across all sessions.
          **/
-        static int global_values[] = { "n": -1 }
+        static int global_values{} = { "n": -1 }
 
 
         /** A table with one initial element, an association between an initial
          *  value of -1 and the name "n".  This table will be initialized anew on
          *  every call to counter_example, even in the same session.
          **/
-        int local_values[] = { "n": -1 }
+        int local_values{} = { "n": -1 }
 
 
         /** the counter base type **/
         dynamic int counter {
-            int[] counter_cache [?]
+            int{} counter_cache [?]
         
             /** a simple identity function. **/
             keep in counter_cache: int n(int x) = x
@@ -6105,20 +6105,20 @@ memt {/
         /** the session-level counter object **/
         dynamic counter session_counter {
             /** make session_values the cache for n **/
-            int[] counter_cache = session_values
+            int{} counter_cache = session_values
         }
 
         /** the global counter object **/
         dynamic counter global_counter {
             /** make global_values the cache for n **/
-            int[] counter_cache = global_values
+            int{} counter_cache = global_values
 
         }
 
         /** the local counter object **/
         dynamic counter local_counter {
             /** make local_values the cache for n **/
-            int[] counter_cache = local_values
+            int{} counter_cache = local_values
         }
         
         [/ <h4>Local Counter</h4><b> /]
@@ -6158,7 +6158,7 @@ memt {/
      **/
     dynamic growing_array_example_1 {
         char[] empty_array = []
-        array_cache[] = { "growing_array": empty_array }
+        array_cache{} = { "growing_array": empty_array }
         dynamic char[] _array = array_cache["growing_array"]
         dynamic char next_letter(int n) = (char) (n + (int) 'A')
 
@@ -6210,12 +6210,12 @@ memt {/
     }
 
     session_id(session s) = s.id
-    static global_per_session_cache[] = {}
+    static global_per_session_cache{} = {}
 
     keep by session_id in global_per_session_cache:
     char[] session_char_array = []
    
-    static gps_2[] = {}
+    static gps_2{} = {}
 
     dynamic add_to_session_char_array(char c, session s) {
         keep by session_id in gps_2: char session_c = 'a';
@@ -6247,7 +6247,7 @@ page(r, s) gctest(request r, session s) {
 
 
     dynamic int auto_id(table_name) {
-        static int all_ids[] = { table_name: 0 }
+        static int all_ids{} = { table_name: 0 }
         keep by table_name in all_ids: int next_id = curr_id + 1
         dynamic int curr_id = all_ids[table_name]
         
@@ -6272,7 +6272,7 @@ page(r, s) gctest(request r, session s) {
         }
     }
     
-    dynamic autotest(params[]) {
+    dynamic autotest(params{}) {
         int tname = params["table"]
         boolean auto_table1 = (tname == "table1" || !tname)
         boolean auto_table2 = (tname == "table2" || !tname)
@@ -7072,7 +7072,7 @@ ft {/
         label = "External command exec test"
         boolean ajax_enabled = true
 
-        component input_panel(params[]) {
+        component input_panel(params{}) {
             [/ <table><tr><td> /]
             textedit("command_in", params["command_in"], 23);
             [/ </td></tr><tr><td> /]
@@ -7080,7 +7080,7 @@ ft {/
             [/ </td></tr></table> /]
         }    
         
-        dynamic component command_out(params[]) {
+        dynamic component command_out(params{}) {
             id = "command_out"
             safe_command_in = safe_command(params["command_in"])
             
@@ -7149,7 +7149,7 @@ ft {/
 
         test_server_funpath = main_site.funpath + "/test_server" 
         
-        server_params[] = {}
+        server_params{} = {}
 
         server_params test_server_params = { "funpath": test_server_funpath }
                                 
@@ -7165,7 +7165,7 @@ ft {/
         dynamic deserializable(this_server.get_server("test_server").get("de")) get_de [/]
 
         bc[] = get_bc
-        de[] = get_de
+        de{} = get_de
          
         content(request r, session s) {
             log("test_server funpath: " + test_server_funpath);

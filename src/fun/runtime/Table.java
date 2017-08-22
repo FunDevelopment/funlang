@@ -92,7 +92,7 @@ public class Table {
 
     public static Map<String, Object> parse(Context context, String str) throws ParseException, Redirection {
         try {
-            FunParser parser = new FunParser(new StringReader("parse{}=" + str));
+            FunParser parser = new FunParser(new StringReader("parse[]=" + str));
             Definition owner = context.getDefiningDef();
             
             ParsedCollectionDefinition collectionDef = (ParsedCollectionDefinition) parser.CollectionDefinition();

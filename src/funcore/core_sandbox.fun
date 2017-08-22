@@ -56,7 +56,7 @@ core {
     /---- the UI ----/
 
     /** sandbox page **/
-    page(*) sandbox(params[]) {
+    page(*) sandbox(params{}) {
         boolean auto_style = false
         boolean ajax_enabled = true
        
@@ -109,7 +109,7 @@ core {
     /]
     
     
-    page(*) sandbox_source_page(params[]) {
+    page(*) sandbox_source_page(params{}) {
         boolean ajax_enabled = true
         links[] = [ [/ href="sandbox.css" rel="stylesheet" type="text/css" /] ]
 
@@ -154,11 +154,11 @@ core {
     
     target_id = "/sandbox_output_page.sandbox_target"
 
-    page(*) sandbox_output_page(params[]) {
+    page(*) sandbox_output_page(params{}) {
         boolean ajax_enabled = true
         links[] = [ [/ href="sandbox.css" rel="stylesheet" type="text/css" /] ]
 
-        dynamic component sandbox_target(params[]) {
+        dynamic component sandbox_target(params{}) {
             log(" ------> passed to sandbox_target: " + params["sandbox_contents"]);
             if (params["sandbox_contents"]) {
                 eval(sandbox_editor_contents(: params["sandbox_contents"] :));

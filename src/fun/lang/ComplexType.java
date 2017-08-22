@@ -377,32 +377,11 @@ public class ComplexType extends AbstractType implements Initializable {
        if (dims.size() > 0) {
            String className;
            if (typeClass.isPrimitive() || typeClass.equals(String.class)) {
-
-               className = "Ljava.lang.Object;";
-
-            /********************
-               if (valueClass.equals(Boolean.TYPE)) {
-                   className = "Z";
-               } else if (valueClass.equals(Byte.TYPE)) {
-                   className = "B";
-               } else if (valueClass.equals(Character.TYPE)) {
-                   className = "C";
-               } else if (valueClass.equals(Integer.TYPE)) {
-                   className = "I";
-               } else if (valueClass.equals(Short.TYPE)) {
-                   className = "S";
-               } else if (valueClass.equals(Long.TYPE)) {
-                   className = "J";
-               } else if (valueClass.equals(Float.TYPE)) {
-                   className = "F";
-               } else if (valueClass.equals(Double.TYPE)) {
-                   className = "D";
-               } else {
-                   className = "Ljava.lang.String";
-               }
-       ************************/
+               className = "[Ljava.lang.Object;";
+           } else if (Map.class.isAssignableFrom(typeClass)) {
+        	   className = typeClass.getName();
            } else {
-                className = 'L' + typeClass.getName() + ';';
+                className = "[L" + typeClass.getName() + ';';
            }
 
            Iterator<Dim> it = dims.iterator();

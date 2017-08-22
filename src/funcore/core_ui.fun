@@ -10,7 +10,7 @@
 core {
 
     /** Construct standard styles, given a configuration table. **/
-    core_styles(options[]) {
+    core_styles(options{}) {
        
         if (options["drag"]) {
             vlog("dragging enabled, adding handle styles");
@@ -332,7 +332,7 @@ core {
     }
 
 
-    dynamic layout border_layout(c), (n, c, s), (n, w, c, e, s), (x[]), (comp_table[]) {
+    dynamic layout border_layout(c), (n, c, s), (n, w, c, e, s), (x[]), (comp_table{}) {
 
         dynamic center_if_not_aligned(p), (component c) {
             with (c) { if (!c.align) [| align="center" /] }
@@ -406,7 +406,7 @@ core {
     }
 
 
-    dynamic border_layout(n, w, c, e, s) compass_layout(nw, n, ne, w, c, e, sw, s, se), (comp_table[]) {
+    dynamic border_layout(n, w, c, e, s) compass_layout(nw, n, ne, w, c, e, sw, s, se), (comp_table{}) {
         dynamic northwest(panel) {
             [/ <table> /]
             west(panel);
@@ -445,7 +445,7 @@ core {
     }
 
 
-    dynamic layout stage_layout(c), (w, c, e), (w, n, c, s, e), (x[]), (comp_table[]) {
+    dynamic layout stage_layout(c), (w, c, e), (w, n, c, s, e), (x[]), (comp_table{}) {
         dynamic west(panel) [/
             <td rowspan="3" {/ cell_props(panel); /}>{/ panel; /}</td>
         /]
@@ -505,7 +505,7 @@ core {
     }
 
 
-    dynamic border_layout(*) css_border_layout(c), (n, c, s), (n, w, c, e, s), (x[]), (comp_table[]) {
+    dynamic border_layout(*) css_border_layout(c), (n, c, s), (n, w, c, e, s), (x[]), (comp_table{}) {
 
         dynamic north(panel) [/
             <div style="{/ style_props(panel); /}">
@@ -660,8 +660,8 @@ core {
     }
 
 
-    dynamic standard_control submit_button(name, value, component req_component, field_ids[], params[]),
-                                          (name, value, req_id, field_ids[], params[]),
+    dynamic standard_control submit_button(name, value, component req_component, field_ids[], params{}),
+                                          (name, value, req_id, field_ids[], params{}),
                                           (name, value, component req_component, field_ids[]),
                                           (name, value, req_id, field_ids[]),
                                           (name, value, component req_component, field_id),
@@ -670,7 +670,7 @@ core {
                                           (name, value) {
 
         submit_script(id) {
-            query_params[] = params
+            query_params{} = params
 
             if (field_id) [/
                 requestComponent("{/ id; /}", "{/ field_id; /}", document.getElementById("{/ field_id; /}").value);

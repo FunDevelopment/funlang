@@ -56,7 +56,7 @@ core {
     table = fun.runtime.Table;
     
     dynamic string[] sorted_array(string[] ary) = fun.runtime.Utils.sortedArray(ary)
-    dynamic string[] sorted_table(string[] tbl) = fun.runtime.Utils.sortedTable(tbl) 
+    dynamic string{} sorted_table(string{} tbl) = fun.runtime.Utils.sortedTable(tbl) 
 
     /------ Database objects ------/
 
@@ -64,7 +64,7 @@ core {
 
     java.sql.ResultSet result_set [/]
 
-    string[] db_row(result_set results, int row) = fun.runtime.DatabaseRow(results, row)
+    string{} db_row(result_set results, int row) = fun.runtime.DatabaseRow(results, row)
 
     /------ Math ------/
     
@@ -284,7 +284,7 @@ core {
         dynamic read_in(str) [?]
     }
     
-    exec_interface exec(cmd), (cmd, string[] env), (cmd, string[] env, file run_dir) = fun.runtime.Exec.execFactory(cmd, env, run_dir);
+    exec_interface exec(cmd), (cmd, string{} env), (cmd, string{} env, file run_dir) = fun.runtime.Exec.execFactory(cmd, env, run_dir);
     
 
 	/----- System Information -----/

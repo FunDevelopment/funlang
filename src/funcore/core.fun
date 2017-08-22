@@ -80,7 +80,7 @@ core {
     fun_processor {
         name [?]
         version [?]
-        props[] = {}
+        props{} = {}
         
         /** Compile Fun source code and return a fun_domain object. **/
         fun_domain compile(funpath, boolean recursive, boolean autoload_core),
@@ -111,7 +111,7 @@ core {
          *  string.  If, however, there is a string in this table associated with a site's name,
          *  that string is used as the path for requests to that site.
          */
-        site_paths[] = {}
+        site_paths{} = {}
 
         /** Returns true if the server was successfully started and has not yet
          *  been stopped.
@@ -119,7 +119,7 @@ core {
         dynamic boolean is_running [/] 
 
         /** Requests data from the server. **/
-        dynamic get(requestName, requestParams[]) [/]
+        dynamic get(requestName, requestParams{}) [/]
 
         /-- support for launching of fun_servers --/
 
@@ -128,23 +128,22 @@ core {
          *  server.  (To launch a new server even if it has already been launched,
          *  use relaunch_server.)
          **/
-        dynamic fun_server launch_server(name, params[]) [/]
+        dynamic fun_server launch_server(name, params{}) [/]
         
         /** Launches a new fun_server, initialized with the passed parameters, after
          *  stopping any previously launched server with the passed name.
          */
-        dynamic fun_server relaunch_server(name, params[]) [/]
+        dynamic fun_server relaunch_server(name, params{}) [/]
     
         /** Returns the fun_server with the specified name that was launched by this server, or null if
          *  no such fun_server exists.
          **/
         dynamic fun_server get_server(name) [/] 
     }
-
-    
+  
     fun_domain {
-        fun_site[] sites = {}
-        fun_domain[] domains = {}
+        fun_site sites{} = {}
+        fun_domain domains{} = {}
         main_site [?]
         name [?]
         
@@ -152,7 +151,7 @@ core {
         dynamic definition get_definition(expr) [?]
         dynamic get_instance(expr) [?]
         dynamic get_array(expr)[] = []
-        dynamic get_table(expr)[] = {}
+        dynamic get_table(expr){} = {}
 
         fun_context context [&]
         fun_domain child_domain(name),
@@ -185,7 +184,7 @@ core {
         fun_domain[] domains = []
     }
 
-
+ 
     /** A Fun statement; base class for the various types of statements. **/
     fun_node {
         fun_node[] children = []
@@ -248,7 +247,7 @@ core {
         /-- instantiate this definition as an object, an array or a table --/
         dynamic instantiate(arg[] args) [&] 
         dynamic instantiate_array[] = []
-        dynamic instantiate_table[] = []
+        dynamic instantiate_table{} = {}
         fun_context owner_context [?]
     }
 
@@ -257,13 +256,13 @@ core {
     }
 
     /** object serialization **/
-    
+
     deserializable(*) serializable(str),(field_names[], field_values[]) {
  
         dynamic serialize(child_names[]) {
 
             dynamic handle_def(definition d) {
-                t[] = d.get_table
+                t{} = d.get_table
 
                 if (d isa serializable) {
                     d.serialize;
@@ -349,7 +348,7 @@ core {
     deserializable(str),(field_names[], field_values[]) {
         if (str) {
             log("deserializing " + type + " from string \"" + str + "\"");    
-            deserialized_obj[] = table.parse(str)
+            deserialized_obj{} = table.parse(str)
             for k in deserialized_obj.keys {
                 here.put(k, deserialized_obj[k]);
             }
@@ -424,7 +423,7 @@ core {
         
         ( "(w: " + width + "  h: " + height + "  d: " + depth + ")" );
     }
-    
+ 
     rect(rect r),
         (float fx1, float fy1, float fx2, float fy2),
         (int ix1, int iy1, int ix2, int iy2) {
@@ -490,15 +489,15 @@ core {
         query [/]
 
         /** a table containing the HTTP headers */
-        headers[] = {}
+        headers{} = {}
 
         /** a table containing the parameters, either parsed from the query
          *  string or extracted from the posted form data.
          */
-        params[] = {}
+        params{} = {}
 
         /** a table containing any cookies passed by the client. */
-        cookies[] = {}
+        cookies{} = {}
 
         /** the HTTP method used to sent this request, either "GET" or "POST" */
         method [?]
@@ -513,7 +512,7 @@ core {
     session {
         id [?]
 
-        attributes[] = {}
+        attributes{} = {}
 
         long created = 0
 
@@ -564,7 +563,7 @@ core {
         boolean enabled [?]
         
         /------- Fun/database table mapping --------/
-        string[] table(record, key) = {}        
+        string table(record, key){} = {}        
 
         /------- direct sql functions -------/
         db_row[] query(sql),(sql, values[]) = []
@@ -715,7 +714,7 @@ core {
     /----------- session cache -------------/
 
     /** Table containing id values, used by next_id. **/
-    int ids_in_session[] = { "next_id": -1 } 
+    int ids_in_session{} = { "next_id": -1 } 
 
 
     /** id generator **/
@@ -729,7 +728,7 @@ core {
     /**
      *  Standard base class for all pages.
      */
-    response page(),(params[]),(request r),(request r, session s) {
+    response page(),(params{}),(request r),(request r, session s) {
       
       /---------------------------------------------/
       /------------ page initialization ------------/
@@ -812,7 +811,7 @@ core {
             }
         }
 
-        boolean options[] = { "ajax": ajax_enabled,
+        boolean options{} = { "ajax": ajax_enabled,
                               "drag": drag_enabled,
                               "debug": debug_enabled,
                               "use_wait_cursor": use_wait_cursor }
@@ -1073,5 +1072,4 @@ core {
 
         [/ </h3><p><i>Fun version {/ version; /}</i></p> /]
     }
-
 }

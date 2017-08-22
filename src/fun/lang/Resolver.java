@@ -42,6 +42,9 @@ public class Resolver extends FunVisitor {
             // resolve children first
             super.handleNode(node, data);
             ((NamedDefinition) node).resolveKeeps();
+            if (node instanceof CollectionDefinition) {
+            	((CollectionDefinition) node).resolveDims();
+            }
             return data;
         }
         return super.handleNode(node, data);

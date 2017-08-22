@@ -21,7 +21,7 @@ options {
                          
     DEBUG_PARSER = false;
     DEBUG_TOKEN_MANAGER = false;
-    JDK_VERSION = "1.7";
+    JDK_VERSION = "1.8";
 }
 
 PARSER_BEGIN(FunParser)
@@ -1775,8 +1775,6 @@ Scoped CollectionDefinition() :
     |
       LOOKAHEAD(DefTypeName() (IndefiniteDim())+ "=")
       DefTypeName() (IndefiniteDim())+ "=" ValueInstanceExpression() [ ";" ]
-    |
-      DefTypeName() (IndefiniteDim())+ Block()
     )/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn000, true);
@@ -1937,8 +1935,6 @@ Scoped TypedCollectionDefinition()                      :
     |
       LOOKAHEAD(SuperType() DefTypeName() (IndefiniteDim())+ "=")
       SuperType() DefTypeName() (IndefiniteDim())+ "=" ValueInstanceExpression() [ ";" ]
-    |
-      SuperType() DefTypeName() (IndefiniteDim())+ Block()
     )/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn000, true);
@@ -2705,8 +2701,13 @@ void IndefiniteCollectionType()      :
 /*@egen*/
 }
 
+void Dim()      :
+{}
+{
+    ArrayDim() | TableDim()
+}
 
-void Dim()     :
+void ArrayDim()     :
 {/*@bgen(jjtree) Dim */
   ParsedDim jjtn000 = new ParsedDim(JJTDIM);
   boolean jjtc000 = true;
@@ -2802,44 +2803,6 @@ void DefiniteDim()     :
 /*@egen*/
 }
 
-void AppendDim()     :
-{/*@bgen(jjtree) Dim */
-  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Dim */
-    try {
-/*@egen*/
-    { jjtn000.setDimType(Dim.TYPE.APPEND); }
-    "[" "+" "]"/*@bgen(jjtree)*/
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
-
-void StreamDim()     :
-{/*@bgen(jjtree) Dim */
-  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Dim */
-    try {
-/*@egen*/
-    { jjtn000.setDimType(Dim.TYPE.STREAM); }
-    "[" "^" "]"/*@bgen(jjtree)*/
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
-
 void IndefiniteDim()     :
 {/*@bgen(jjtree) Dim */
   ParsedDim jjtn000 = new ParsedDim(JJTDIM);
@@ -2852,6 +2815,13 @@ void IndefiniteDim()     :
     { jjtn000.setDimType(Dim.TYPE.INDEFINITE); }
     (
       "[" "]"
+    |
+      "{" "}"/*@bgen(jjtree)*/
+              {
+                jjtree.closeNodeScope(jjtn000, true);
+                jjtc000 = false;
+              }
+/*@egen*/ { jjtn000.setTable(true); }
     )/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
@@ -2861,6 +2831,29 @@ void IndefiniteDim()     :
 /*@egen*/
 }
 
+void TableDim()     :
+{/*@bgen(jjtree) Dim */
+  ParsedDim jjtn000 = new ParsedDim(JJTDIM);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) Dim */
+    try {
+/*@egen*/
+    {
+      jjtn000.setTable(true);
+      jjtn000.setDimType(Dim.TYPE.INDEFINITE);
+    }
+    (
+      "{" "}"
+    )/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
 
 //
 // Names
@@ -2979,12 +2972,6 @@ void DefElementName() :
 /*@egen*/
     t = <IDENTIFIER> { jjtn000.setName(t.image); }
     (
-      LOOKAHEAD("[" "+")
-      AppendDim()
-    |
-      LOOKAHEAD("[" "^")
-      StreamDim()
-    |
       LOOKAHEAD("[")
       DefiniteDim()
     )+/*@bgen(jjtree)*/
@@ -6464,4 +6451,3 @@ void ExternalBlock()             :
     }
 /*@egen*/
 }
-

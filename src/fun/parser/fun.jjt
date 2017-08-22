@@ -20,7 +20,7 @@ options {
     NODE_FACTORY = false;
     DEBUG_PARSER = false;
     DEBUG_TOKEN_MANAGER = false;
-    JDK_VERSION = "1.7";
+    JDK_VERSION = "1.8";
 }
 
 PARSER_BEGIN(FunParser)
@@ -1103,8 +1103,6 @@ Scoped CollectionDefinition() :
     |
       LOOKAHEAD(DefTypeName() (IndefiniteDim())+ "=")
       DefTypeName() (IndefiniteDim())+ "=" ValueInstanceExpression() [ ";" ]
-    |
-      DefTypeName() (IndefiniteDim())+ Block()
     )
     {
         return jjtThis;
@@ -1172,8 +1170,6 @@ Scoped TypedCollectionDefinition() #CollectionDefinition:
     |
       LOOKAHEAD(SuperType() DefTypeName() (IndefiniteDim())+ "=")
       SuperType() DefTypeName() (IndefiniteDim())+ "=" ValueInstanceExpression() [ ";" ]
-    |
-      SuperType() DefTypeName() (IndefiniteDim())+ Block()
     )
     {
         return jjtThis;
@@ -1492,8 +1488,13 @@ void IndefiniteCollectionType() #Type:
     ( IndefiniteDim() )+
 }
 
+void Dim() #void:
+{}
+{
+    ArrayDim() | TableDim()
+}
 
-void Dim() #Dim:
+void ArrayDim() #Dim:
 {}
 {
     "[" (
@@ -1517,29 +1518,28 @@ void DefiniteDim() #Dim:
     "[" ValueExpression() "]"
 }
 
-void AppendDim() #Dim:
-{}
-{
-    { jjtThis.setDimType(Dim.TYPE.APPEND); }
-    "[" "+" "]"
-}
-
-void StreamDim() #Dim:
-{}
-{
-    { jjtThis.setDimType(Dim.TYPE.STREAM); }
-    "[" "^" "]"
-}
-
 void IndefiniteDim() #Dim:
 {}
 {
     { jjtThis.setDimType(Dim.TYPE.INDEFINITE); }
     (
       "[" "]"
+    |
+      "{" "}" { jjtThis.setTable(true); }
     )
 }
 
+void TableDim() #Dim:
+{}
+{
+    {
+      jjtThis.setTable(true);
+      jjtThis.setDimType(Dim.TYPE.INDEFINITE);
+    }
+    (
+      "{" "}"
+    )
+}
 
 //
 // Names
@@ -1574,12 +1574,6 @@ void DefElementName() :
 {
     t = <IDENTIFIER> { jjtThis.setName(t.image); }
     (
-      LOOKAHEAD("[" "+")
-      AppendDim()
-    |
-      LOOKAHEAD("[" "^")
-      StreamDim()
-    |
       LOOKAHEAD("[")
       DefiniteDim()
     )+
