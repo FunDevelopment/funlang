@@ -161,7 +161,7 @@ site test {
                                  "External Objects", "Redirection", "Scope", "Access", "Recursion", "Caching",
                                  "Requests", "Sessions", "Database", "Layouts", "Utilities", "Dynamic Code" ]
 
-    test_case syntax_test {
+    public test_case syntax_test {
         int category = syntax
         name = "Syntax Test"
         key = "syntax"
@@ -170,7 +170,7 @@ site test {
     }
 
 
-    test_case arithmetic_test {
+    public test_case arithmetic_test {
         int category = arithmetic
         name = "Arithmetic Test"
         key = "arithmetic"
@@ -192,7 +192,7 @@ site test {
     }
 
 
-    test_case array_arithmetic_test {
+    public test_case array_arithmetic_test {
         int category = arithmetic
         name = "Array Arithmetic Test"
         key = "array arithmetic"
@@ -215,7 +215,7 @@ site test {
         for x in sum_3 { x; }
     }
     
-    test_case bitwise_array_operator_test {
+    public test_case bitwise_array_operator_test {
         int category = collections
         name = "Bitwise Array Operator Test"
         key = "bitwise array"
@@ -252,7 +252,7 @@ bb[0];
 =}
 
 
-    test_case name_resolution_test {
+    public test_case name_resolution_test {
         int category = definitions
         name = "Name Resolution Test"
         key = "resolution"
@@ -374,7 +374,7 @@ bb[0];
     stat_super[] stat_array = [ stat_sub_1, stat_sub_2 ]
 
 
-    test_case children_of_static_test {
+    public test_case children_of_static_test {
         int category = scope
         name = "Children of Static Test"
         key = "children_of_static"
@@ -449,7 +449,7 @@ ss1 {=
     
     glob_super[] glob_array = [ glob_sub_1, glob_sub_2 ]
 
-    test_case children_of_global_test {
+    public test_case children_of_global_test {
         int category = scope
         name = "Children of Global Test"
         key = "children_of_global"
@@ -488,7 +488,7 @@ ss1 {=
         
     }
 
-    test_case children_of_overridden_super_test {
+    public test_case children_of_overridden_super_test {
         int category = instantiations
         name = "Children of Overridden Super Test"
         key = "base_child_subclass"
@@ -529,7 +529,7 @@ ss1 {=
     }
     
 
-    test_case base_child_subclass_test {
+    public test_case base_child_subclass_test {
         int category = types
         name = "Base Child Subclass Test"
         key = "base_child_subclass"
@@ -560,7 +560,7 @@ ss1 {=
     }
 
 
-    test_case corresponding_super_test {
+    public test_case corresponding_super_test {
         int category = types
         name = "Corresponding Super Test"
         key = "corresponding_super"
@@ -604,7 +604,7 @@ ss1 {=
     }       
 
 
-    test_case super_in_sub_test {
+    public test_case super_in_sub_test {
         int category = instantiations
         name = "Super In Sub Test"
         key = "super_in_sub"
@@ -629,7 +629,7 @@ ss1 {=
     }
     
     
-    test_case special_names_test {
+    public test_case special_names_test {
         int category = syntax
         name = "Special Names Test"
         key = "special_names"
@@ -707,7 +707,7 @@ ss1 {=
         oinstance;
     }
 
-    test_case this_type_test {    
+    public test_case this_type_test {    
         int category = types
         name = "This Type Test"
         key = "this_type"
@@ -753,7 +753,7 @@ ss1 {=
          this_def;       
     }
 
-    test_case owner_type_test {
+    public test_case owner_type_test {
         int category = types
         name = "Owner Type Test"
         key = "owner_type"
@@ -858,7 +858,7 @@ ott {=
         }
 =}
 
-    test_case simple_instantiation_test {
+    public test_case simple_instantiation_test {
         int category = instantiations
         name = "Simple Instantiation Test"
         key = "instantiation"
@@ -887,7 +887,7 @@ ott {=
     }
 
 
-    test_case simple_inheritance_test {
+    public test_case simple_inheritance_test {
         int category = instantiations
         name = "Simple Inheritance Test"
         key = "inheritance"
@@ -935,7 +935,7 @@ ott {=
     }
 
 
-    test_case multiple_inheritance_test {
+    public test_case multiple_inheritance_test {
         int category = instantiations
         name = "Multiple Inheritance Test"
         key = "multiple_inheritance"
@@ -1007,7 +1007,7 @@ ott {=
     }
 
 
-    test_case lateral_inheritance_test {
+    public test_case lateral_inheritance_test {
         int category = instantiations
         name = "Lateral Inheritance Test"
         key = "lateral_inheritance"
@@ -1071,7 +1071,7 @@ ott {=
     }
 
 
-    test_case over_inheritance_test {
+    public test_case over_inheritance_test {
         int category = instantiations
         name = "Overinheritance Test"
         key = "over_inheritance"
@@ -1138,7 +1138,7 @@ ott {=
     }
 
 
-    test_case abstract_test {
+    public test_case abstract_test {
         int category = instantiations
         name = "Abstract Definition Test"
         key = "abstract"
@@ -1208,7 +1208,7 @@ at {=
 =}
 
 
-    test_case return_type_test {
+    public test_case return_type_test {
         int category = types
         name = "Return Type Test"
         key = "return_types"
@@ -1246,7 +1246,7 @@ at {=
     }
 
 
-    test_case alias_test {
+    public test_case alias_test {
         int category = instantiations
         name = "Alias Test"
         key = "alias"
@@ -1383,7 +1383,7 @@ at {=
     }
 
 
-    test_case indexed_alias_test {
+    public test_case indexed_alias_test {
         int category = instantiations
         name = "Indexed Alias Test"
         key = "indexed_alias"
@@ -1456,7 +1456,7 @@ iat {=
 =}    
 
     
-    test_case aliased_array_test {
+    public test_case aliased_array_test {
         int category = instantiations
         name = "Aliased Array Test"
         key = "aliased_array"
@@ -1490,7 +1490,7 @@ iat {=
     }
 
 
-    test_case parameter_test {
+    public test_case parameter_test {
         int category = parameters
         name = "Parameter Test"
         key = "param"
@@ -1596,7 +1596,7 @@ pt {=
 =}
 
 
-    test_case loop_parameter_test {
+    public test_case loop_parameter_test {
         int category = parameters
         name = "Loop Parameter Test"
         key = "loop_param"
@@ -1673,7 +1673,7 @@ lpt {=
         }
 =}
 
-    test_case nested_parameter_test {
+    public test_case nested_parameter_test {
         int category = parameters
         name = "Nested Parameter Test"
         key = "nested_param"
@@ -1806,7 +1806,7 @@ tpt {=
         tp(ap(p));        
 =}
 
-    test_case parameter_child_array_test {
+    public test_case parameter_child_array_test {
         int category = parameters
         name = "Parameter Child Array Test"
         key = "parameter_child_array"
@@ -1844,7 +1844,7 @@ tpt {=
     }
 
 
-    test_case parameter_as_child_test {
+    public test_case parameter_as_child_test {
         int category = parameters
         name = "Parameter as Child Test"
         key = "param_as_child"
@@ -1867,7 +1867,7 @@ tpt {=
     }
 
 
-    test_case array_test {
+    public test_case array_test {
         int category = collections
         name = "Array Test"
         key = "array"
@@ -1922,7 +1922,7 @@ tpt {=
     }
 
 
-    test_case multidimensional_array_test {
+    public test_case multidimensional_array_test {
         int category = collections
         name = "Multidimensional Array Test"
         key = "multidim_array"
@@ -1947,7 +1947,7 @@ tpt {=
     }
 
 
-    test_case array_parameter_test {
+    public test_case array_parameter_test {
         int category = collections
         name = "Array Parameter Test"
         key = "array_param"
@@ -1988,7 +1988,7 @@ tpt {=
     }
 
 
-    test_case array_builder_test {
+    public test_case array_builder_test {
         int category = collections
         name = "Array Builder Test"
         key = "array_builder"
@@ -2044,7 +2044,7 @@ abt {=
  =}
 =}
 
-    test_case array_element_builder_test {
+    public test_case array_element_builder_test {
         int category = collections
         name = "Array Element Builder Test"
         key = "array_element_builder"
@@ -2107,7 +2107,7 @@ abt {=
     }
 
 
-    test_case complex_array_test {
+    public test_case complex_array_test {
         int category = collections
         name = "Complex Array Test"
         key = "complex_array"
@@ -2167,7 +2167,7 @@ abt {=
     }
 
 
-    test_case array_element_type_test {
+    public test_case array_element_type_test {
         int category = collections
         name = "Array Element Type Test"
         key = "array_element_type"
@@ -2243,7 +2243,7 @@ fum_g;
 
 =}
 
-    test_case array_element_child_array_test {
+    public test_case array_element_child_array_test {
         int category = collections
         name = "Array Element Child Array Test"
         key = "array_element_child_array"
@@ -2328,7 +2328,7 @@ aecat {=
 =}
 
 	
-	test_case dynamic_array_test {
+	public test_case dynamic_array_test {
         int category = collections
         name = "Dynamic Array Test"
         key = "dynamic_array"
@@ -2402,7 +2402,7 @@ aecat {=
         }
     }
 
-    test_case dynamic_array_element_child_test {
+    public test_case dynamic_array_element_child_test {
         int category = collections
         name = "Dynamic Array Element Child Test"
         key = "dynamic_array_element_child"
@@ -2488,7 +2488,7 @@ aecat {=
         }
     }
 
-    test_case recursive_dynamic_array_test {    
+    public test_case recursive_dynamic_array_test {    
         int category = collections
         name = "Recursive Dynamic Array Test"
         key = "recursive_dynamic_array"
@@ -2526,7 +2526,7 @@ aecat {=
         }
     }
 
-    test_case dynamic_table_test {
+    public test_case dynamic_table_test {
         int category = collections
         name = "Dynamic Table Test"
         key = "dynamic_table"
@@ -2595,7 +2595,7 @@ aecat {=
         dynamic_table["i"];
     }        
 
-    test_case table_element_type_test {
+    public test_case table_element_type_test {
         int category = collections
         name = "Table Element Type Test"
         key = "table_element_type"
@@ -2683,7 +2683,7 @@ te {=
    gum[yo.type];
 =}
 
-    test_case table_test {
+    public test_case table_test {
         int category = collections
         name = "Table Test"
         key = "table"
@@ -2760,7 +2760,7 @@ tt {=
 =}    
 
 
-    test_case table_parameter_test {
+    public test_case table_parameter_test {
         int category = collections
         name = "Table Parameter Test"
         key = "table_param"
@@ -2815,7 +2815,7 @@ tblpt {=
 =}
 
     
-    test_case multidimensional_table_test {
+    public test_case multidimensional_table_test {
         int category = collections
         name = "Multidimensional Table Test"
         key = "multidim_table"
@@ -2848,7 +2848,7 @@ tblpt {=
     }
 
 
-    test_case mapped_array_table_test {
+    public test_case mapped_array_table_test {
         int category = collections
         name = "Mapped Array Table Test"
         key = "mapped_array_table"
@@ -2879,7 +2879,7 @@ tblpt {=
     }
 
 
-    test_case collection_operators_test {
+    public test_case collection_operators_test {
         int category = collections
         name = "Collection Operators Test"
         key = "collection_operators"
@@ -2942,7 +2942,7 @@ cop {=
   array_3.count;
 =}
 
-    test_case count_test {
+    public test_case count_test {
         int category = collections
         name = "Count Test"
         key = "count"
@@ -2966,7 +2966,7 @@ cop {=
         if (fsub.count == 6)   [/ F /] else [/ x /]
     }
 
-    test_case collection_parse_test {
+    public test_case collection_parse_test {
         int category = collections
         name = "Collection Parse Test"
         key = "collection_parse"
@@ -2992,7 +2992,7 @@ cop {=
         coll_4["gh"]["h"][0];           
     }
 
-    test_case collection_utilities_test {
+    public test_case collection_utilities_test {
         int category = utilities
         name = "Collection Utilities Test"
         key = "collection_utils"
@@ -3032,7 +3032,7 @@ cu {=
     else [/ X /]
 =}
 
-    test_case object_child_test {
+    public test_case object_child_test {
         int category = instantiations
         name = "Object Child Test"
         key = "object_child"
@@ -3228,7 +3228,7 @@ oct9 {=
         po.child_obj.co_co;
     }
 
-    test_case serialization_test {
+    public test_case serialization_test {
         int category = utilities
         name = "Serialization Test"
         key = "serialization"
@@ -3361,7 +3361,7 @@ st2 {=
         o2.fg.f;
 =}
 
-    test_case sort_test {
+    public test_case sort_test {
         int category = utilities
         name = "Sort Test"
         key = "sort"
@@ -3396,7 +3396,7 @@ srt {=
             }
 =}
 
-    test_case external_test {
+    public test_case external_test {
         int category = external_objects
         name = "External Object Test"
         key = "external"
@@ -3493,7 +3493,7 @@ rtst {
     external_sub.rr;
 }
     
-    test_case cached_external_object_test {
+    public test_case cached_external_object_test {
         int category = external_objects
         name = "Cached External Object Test"
         key = "cached_external"
@@ -3553,7 +3553,7 @@ ceot {=
 =}        
         
         
-    test_case external_argument_test {
+    public test_case external_argument_test {
         int category = external_objects
         name = "External Argument Test"
         key = "external_arg"
@@ -3615,7 +3615,7 @@ etst {=
     }
 
 
-    test_case external_map_array_test {
+    public test_case external_map_array_test {
         int category = external_objects
         name = "External Map Array Test"
         key = "external_map_array"
@@ -3633,7 +3633,7 @@ etst {=
         map_2_1["item"];
     }
     
-    test_case external_array_parameter_test {
+    public test_case external_array_parameter_test {
         int category = external_objects
         name = "External Array Parameter Test"
         key = "external_array_param"
@@ -3661,7 +3661,7 @@ etst {=
     }
 
 
-    test_case logic_test {
+    public test_case logic_test {
         int category = logic
         name = "Logic Test"
         key = "logic"
@@ -3718,7 +3718,7 @@ etst {=
     }
 
 
-    test_case conditional_inheritance_test {
+    public test_case conditional_inheritance_test {
         int category = logic
         name = "Conditional Inheritance Test"
         key = "conditional_inheritance"
@@ -3750,7 +3750,7 @@ etst {=
     }
 
 
-    test_case redirection_test {
+    public test_case redirection_test {
         int category = redirection
         name = "Redirection Test"
         key = "redirection"
@@ -3819,7 +3819,7 @@ def_of {
     
 }
 
-    test_case text_utilities_test {
+    public test_case text_utilities_test {
         int category = utilities
         name = "Text Utilities Test"
         key = "text_utils"
@@ -3847,7 +3847,7 @@ def_of {
     }
 
 
-    test_case char_utilities_test {
+    public test_case char_utilities_test {
         int category = utilities
         name = "Char Utilities Test"
         key = "char_utils"
@@ -3870,7 +3870,7 @@ def_of {
     }
 
 
-    test_case recursion_test {
+    public test_case recursion_test {
         int category = recursion
         name = "Recursion Test"
         key = "recursion"
@@ -3890,7 +3890,7 @@ def_of {
     }
 
 
-    test_case self_referential_update_test {
+    public test_case self_referential_update_test {
         int category = recursion
         name = "Self-Referential Update Test"
         key = "self_reference"
@@ -3931,7 +3931,7 @@ srut {
 
 }
 
-    test_case border_layout_test {
+    public test_case border_layout_test {
         int category = layouts
         name = "Border Layout Test"
         key = "border_layout"
@@ -3973,7 +3973,7 @@ blt {
    border_layout(comp_array);
 }
 
-    test_case compass_layout_test {
+    public test_case compass_layout_test {
         int category = layouts
         name = "Compass Layout Test"
         key = "compass_layout"
@@ -4006,7 +4006,7 @@ blt {
     }
 
 
-    test_case cache_test {
+    public test_case cache_test {
         int category = caching
         name = "Cache Test"
         key = "cache"
@@ -4099,7 +4099,7 @@ blt {
 
     array_parent cached_array_parent(array_parent ap) = ap
 
-    test_case cached_array_test {
+    public test_case cached_array_test {
         int category = caching
         name = "Cached Array Test"
         key = "cached_array"
@@ -4144,7 +4144,7 @@ cat {=
 
 
     
-    test_case keep_test {
+    public test_case keep_test {
         int category = caching
         name = "Keep Test"
         key = "keep"
@@ -4340,7 +4340,7 @@ kt {=
     }
 
 
-    test_case keep_prefix_test {
+    public test_case keep_prefix_test {
         int category = caching
         name = "Keep Prefix Test"
         key = "keep_prefix"
@@ -4393,7 +4393,7 @@ kt {=
     }
 
 
-    test_case dynamic_keep_test {
+    public test_case dynamic_keep_test {
         int category = caching
         name = "Dynamic Keep Test"
         key = "dynamic_keep"
@@ -4461,7 +4461,7 @@ dkt {=
     test_cache["b"];
 =}
 
-    test_case nested_keep_test {
+    public test_case nested_keep_test {
         int category = caching
         name = "Nested Keep Test"
         key = "nested_keep"
@@ -4537,7 +4537,7 @@ nkt {=
     abcd_container.b; 
 =}
 
-    test_case cached_identity_test {
+    public test_case cached_identity_test {
         int category = caching
         name = "Cached Identity Test"
         key = "cached_identity"
@@ -4644,7 +4644,7 @@ cit {=
         identity_sub.p2;  ---/ 
 =}
 
-    test_case nested_cached_identity_test {
+    public test_case nested_cached_identity_test {
         int category = caching
         name = "Nested Cached Identity Test"
         key = "nested_cached_identity"
@@ -4786,7 +4786,7 @@ cnit {=
         mwp.cv.f;
 =}
 
-    test_case cached_child_of_alias_test {
+    public test_case cached_child_of_alias_test {
         int category = caching
         name = "Cached Child of Alias Test"
         key = "cached_child_of_alias"
@@ -4935,7 +4935,7 @@ ccat {=
 =}
     
     
-    test_case cached_aliased_parameter_test {
+    public test_case cached_aliased_parameter_test {
         int category = parameters
         name = "Cached Aliased Parameter Test"
         key = "cached_aliased_parameter"
@@ -5027,7 +5027,7 @@ capt {
     }         
  
          
-    test_case passed_cache_test {
+    public test_case passed_cache_test {
         int category = caching
         name = "Passed Cache Test"
         key = "passed_cache"
@@ -5064,7 +5064,7 @@ pct {=
       test_cache["a"];
 =}
 
-    test_case keep_scope_test {
+    public test_case keep_scope_test {
         int category = caching
         name = "Keep Scope Test"
         key = "keep_scope"
@@ -5135,7 +5135,7 @@ kst {=
     mdwk.f;
 =}
 
-    test_case dynamic_argument_list_test {
+    public test_case dynamic_argument_list_test {
         int category = parameters
         name = "Dynamic Argument List Test"
         key = "dyn_arg"
@@ -5162,7 +5162,7 @@ kst {=
     }
 
 
-    test_case higher_order_def_test {
+    public test_case higher_order_def_test {
         int category = definitions
         name = "Higher Order Definition Test"
         key = "ho_def"
@@ -5221,7 +5221,7 @@ hot {=
 =}
 
 
-    test_case type_test {
+    public test_case type_test {
         int category = types
         name = "Type Test"
         key = "type"
@@ -5306,7 +5306,7 @@ hot {=
     }
      
     
-    test_case expression_arg_type_test {
+    public test_case expression_arg_type_test {
         int category = types
         name = "Expression Argument Type Test"
         key = "expression_arg_type"
@@ -5361,7 +5361,7 @@ hot {=
     }
 
 
-    test_case cached_object_test {
+    public test_case cached_object_test {
         int category = caching
         
         name = "Cached Object Test"
@@ -5420,7 +5420,7 @@ cot {=
         sub_obj.x;
 =}
 
-    test_case aliased_sub_child_test {
+    public test_case aliased_sub_child_test {
         int category = instantiations
         
         name = "Aliased Sub Child Test"
@@ -5510,7 +5510,7 @@ cot {=
         childless_alias_def_2.super_child_2;
     }
 
-    test_case expression_comprehension_test {
+    public test_case expression_comprehension_test {
         int category = arithmetic
         
         name = "Expression Comprehension Test"
@@ -5535,7 +5535,7 @@ ect {=
  if (iffed_expression(false) == 1) [/ C /] else [/ x /]
 =}
 
-    test_case children_of_parameterized_super_test {
+    public test_case children_of_parameterized_super_test {
         int category = instantiations
         name = "Children of Parameterized Super Test"
         key = "parameterized_super_children"
@@ -5761,7 +5761,7 @@ show_this_context {=
 
    
 
-    basepage(r, s) index(request r, session s) {
+    public basepage(r, s) index(request r, session s) {
         label = "Home"
         title = "Fun Test Suite"
         int min_category = 0
@@ -5791,7 +5791,7 @@ show_this_context {=
         }
     }
 
-    basepage(r, s) categories(request r, session s) {
+    public basepage(r, s) categories(request r, session s) {
 
         label = "Test Categories"
 
@@ -5806,7 +5806,7 @@ show_this_context {=
         }
     }
 
-    basepage(r, s) category_page(request r, session s, cat) {
+    public basepage(r, s) category_page(request r, session s, cat) {
 
         label = category_titles[cat]
 
@@ -5814,14 +5814,14 @@ show_this_context {=
         int max_category = cat
     }
 
-    basepage(r, s) show_tests(request r, session s) {
+    public basepage(r, s) show_tests(request r, session s) {
         int nnn = r.params["category"]
         label = category_titles[nnn]
         int min_category = nnn
         int max_category = nnn
     }
 
-    basepage(r, s) custom(request r, session s) {
+    public basepage(r, s) custom(request r, session s) {
         label = "Nonstandard Tests"
 
         content(request r, session s) {
@@ -5829,21 +5829,21 @@ show_this_context {=
         }
     }
 
-    basepage(r, s) standard(request r, session s) {
+    public basepage(r, s) standard(request r, session s) {
         label = "Standard Tests"
 
         int min_category = 0
         int max_category = 1000
     }
 
-    basepage(r, s) run(request r, session s) {
+    public basepage(r, s) run(request r, session s) {
         label = (command_param(r) == "Run tests" ? "Test Results" : "Standard Tests")
 
         int min_category = 0
         int max_category = 1000
     }
 
-    basepage(r, s) session_summary(request r, session s) {
+    public basepage(r, s) session_summary(request r, session s) {
         label = "Test Session Summary"
 
         content(request r, session s) [/
@@ -5856,7 +5856,7 @@ show_this_context {=
 
 
     /** for testing purposes **/
-    basepage(r, s) empty_test_page(request r, session s) {
+    public basepage(r, s) empty_test_page(request r, session s) {
         label = "Empty Test"
 
         topbar [/]
@@ -5878,7 +5878,7 @@ show_this_context {=
                                      cli_int_test_page, internal_mem_test, external_mem_test, exec_test_page, server_launch_test_page,
                                      base_test_test_page, error_test_page ]
 
-    basepage(r, s) memoization_test_page(request r, session s) {
+    public basepage(r, s) memoization_test_page(request r, session s) {
         label = "Memoization Tests"
 
         content(request r, session s) {
@@ -6661,7 +6661,7 @@ x67 {=
     }
         
 
-    basepage(r, s) reflection_test_page(request r, session s) {
+    public basepage(r, s) reflection_test_page(request r, session s) {
         label = "Reflection Tests"
 
         content(request r, session s) {
@@ -6732,7 +6732,7 @@ x67 {=
 
 
 
-    page(r, s) test_holder_page(request r, session s) {
+    public page(r, s) test_holder_page(request r, session s) {
         s.attributes["num_page_views"];
     }
 
@@ -6747,7 +6747,7 @@ x67 {=
         val3;
     }
   
-    basepage(r, s) session_test_page(request r, session s) {
+    public basepage(r, s) session_test_page(request r, session s) {
         label = "Session Tests"
 
         form("session_test_page") value_buttons {
@@ -6846,7 +6846,7 @@ x67 {=
            <p>selected_example: {= selected_example; =}</p> /]
     }
 
-    basepage(r, s) file_test_page(request r, session s) {
+    public basepage(r, s) file_test_page(request r, session s) {
 
         label = "File Test"
         
@@ -6886,7 +6886,7 @@ ft {=
     }
     
     
-    basepage(r, s) ajax_test_page(request r, session s) {
+    public basepage(r, s) ajax_test_page(request r, session s) {
 
         label = "AJAX Test"
         boolean ajax_enabled = true
@@ -6962,7 +6962,7 @@ ft {=
         }
     }        
 
-    basepage(r, s) cli_int_test_page(request r, session s) {
+    public basepage(r, s) cli_int_test_page(request r, session s) {
 
         label = "Interactive Client Test"
         boolean drag_enabled = true
@@ -7022,7 +7022,7 @@ ft {=
         }
     }
     
-    basepage(r, s) external_mem_test(request r, session s) {
+    public basepage(r, s) external_mem_test(request r, session s) {
     	label = "Big external memory allocation"
     
         
@@ -7037,7 +7037,7 @@ ft {=
     	eval(org.fundev.test.ExternalTest.bigObjects);
 	=}    	
 
-    basepage(r, s) internal_mem_test(request r, session s) {
+    public basepage(r, s) internal_mem_test(request r, session s) {
     	label = "Big internal memory allocation"
     	
     	big_array[] = [ for int i from 0 to 1048576 {= i =} ]
@@ -7067,7 +7067,7 @@ ft {=
         }
     }
     
-    basepage(r, s) exec_test_page(request r, session s) {
+    public basepage(r, s) exec_test_page(request r, session s) {
         label = "External command exec test"
         boolean ajax_enabled = true
 
@@ -7137,7 +7137,7 @@ ft {=
         
     }
     
-    basepage(r, s) server_launch_test_page(request r, session s) {
+    public basepage(r, s) server_launch_test_page(request r, session s) {
         label = "Server Launch Test"
 
         form("server_launch_test_page") control_panel {
@@ -7274,7 +7274,7 @@ ft {=
     
     }
     
-    page(r, s) anim_test_page(request r, session s) {
+    public page(r, s) anim_test_page(request r, session s) {
         label = "Animation Test"
         boolean animation_enabled = true
         
@@ -7286,7 +7286,7 @@ ft {=
     }
     
     
-    basepage(r, s) base_test_test_page(request r, session s) {
+    public basepage(r, s) base_test_test_page(request r, session s) {
 
         label = "Test Core Test Features"
     
@@ -7384,7 +7384,7 @@ tlm {
     }
 
 
-    basepage(r, s) error_test_page(request r, session s) {
+    public basepage(r, s) error_test_page(request r, session s) {
         label = "Error Tests"
 
         dynamic throw_null_pointer = org.fundev.test.ErrorTest.throwNullPointerException

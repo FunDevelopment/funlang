@@ -33,7 +33,7 @@ public class FunServer extends HttpServlet implements FunProcessor {
     private static final long serialVersionUID = 1L;
 
     public static final String NAME = "FunServer";
-    public static final String MAJOR_VERSION = "1.9";
+    public static final String MAJOR_VERSION = "1.0";
     public static final String MINOR_VERSION = "0";
     public static final String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     public static final String NAME_AND_VERSION = NAME + " " + VERSION;

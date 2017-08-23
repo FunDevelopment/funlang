@@ -371,6 +371,7 @@ public class FunSite extends FunDomain {
                     instance = getGeneralResponseInstance(argLists, context);
                 }
                 if (instance == null) {
+                    log("Object " + pageName + " is undefined.");
                     return FunServer.NOT_FOUND;
                 }
                 // record the page name (which has the $ prefix) rather than the
@@ -385,6 +386,11 @@ public class FunSite extends FunDomain {
                     }
                     
                     Definition instanceDef = instance.getDefinition(context);
+                    if (instanceDef == null || instanceDef.getAccess() != Definition.PUBLIC_ACCESS) {
+                        log("Object " + pageName + " is not public.");
+                        return FunServer.NOT_FOUND;
+                    }
+                    
                     Site instanceSite = instanceDef.getSite();
                     Object data = null;
                     if (!instanceSite.equals(context.peek().def) && !(instanceSite instanceof Core)) {
@@ -469,6 +475,9 @@ public class FunSite extends FunDomain {
             Definition pageDef = page.getDefinition(context);
             if (pageDef == null) {
                 log("Page " + pageName + " is undefined.");
+                return FunServer.NOT_FOUND;
+            } else if (pageDef.getAccess() != Definition.PUBLIC_ACCESS) {
+                log("Page " + pageName + " is not public.");
                 return FunServer.NOT_FOUND;
             }
             Site pageSite = pageDef.getSite();
