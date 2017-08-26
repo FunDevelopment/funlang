@@ -169,6 +169,9 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
             // values are inherently static
             setDynStat(false, true);
         }
+        if (reference.getName().equals(Name.ANONYMOUS)) {
+        	setAnonymous(true);
+        }
     }
 
     public FunNode getReference() {
@@ -223,27 +226,7 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
         return false;
     }
    
-    /** Returns true if this instantiation constructs an over **/
-    public boolean hasOver() {
-        if (getName().equals(Name.OVER)) {
-            return true;
-        }
-        ArgumentList args = getArguments();
-        if (args != null) {
-            Iterator<Construction> it = args.iterator();
-            while (it.hasNext()) {
-                Construction arg = it.next(); 
-                if (arg instanceof AbstractConstruction) {
-                    if (((AbstractConstruction) arg).hasOver()) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-   
-   
+
     /** Returns true if this instantiation constructs a sub **/
     public boolean hasSub() {
         if (getName().equals(Name.SUB)) {
@@ -793,7 +776,7 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
    /** If this is a parameter, and the associated argument in the given context is an instantiation,
     *  then return it, otherwise return this instantiation. */
    public Instantiation getUltimateInstance(Context context) throws Redirection {
-       if (isParam || isParamChild) {
+	   if (isParam || isParamChild) {
            NameNode name = (NameNode) reference;
            Object arg = context.getArgumentForParameter(name, isParamChild, isContainerParameter(context));
            if (arg != null && arg != ArgumentList.MISSING_ARG) {
@@ -802,49 +785,51 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
                }
                if (arg instanceof Instantiation) {
                    Instantiation instance = (Instantiation) arg;
-                   int kind = instance.getKind();
-                   NameNode newName = null;
-                   if (isParamChild) {
-                       kind = childOfKind(kind);
-                       NameNode childName = new ComplexName(name, 1, name.numParts());
-                       newName = new ComplexName(instance.getReferenceName(), childName);
-                   } else if (name.hasIndexes()) {
-                       NameNode argName = instance.getReferenceName();
-                       int numParts = argName.numParts();
-                       if (numParts > 1) {
-                           NameNode newSuffix = new NameWithIndexes(argName.getLastPart().getName(), instance.getArguments(), name.getIndexes());
-                           NameNode newPrefix = new ComplexName(argName, 0, numParts - 1);
-                           newName = new ComplexName(newPrefix, newSuffix);
-                       } else {
-                           newName = new NameWithIndexes(argName.getName(), instance.getArguments(), name.getIndexes());
+                   if (!instance.isAnonymous()) {
+                       int kind = instance.getKind();
+                       NameNode newName = null;
+                       if (isParamChild) {
+                           kind = childOfKind(kind);
+                           NameNode childName = new ComplexName(name, 1, name.numParts());
+                           newName = new ComplexName(instance.getReferenceName(), childName);
+                       } else if (name.hasIndexes()) {
+                           NameNode argName = instance.getReferenceName();
+                           int numParts = argName.numParts();
+                           if (numParts > 1) {
+                               NameNode newSuffix = new NameWithIndexes(argName.getLastPart().getName(), instance.getArguments(), name.getIndexes());
+                               NameNode newPrefix = new ComplexName(argName, 0, numParts - 1);
+                               newName = new ComplexName(newPrefix, newSuffix);
+                           } else {
+                               newName = new NameWithIndexes(argName.getName(), instance.getArguments(), name.getIndexes());
+                           }
                        }
-                   }
-                   
-                   if (newName != null) {
-                       Definition instanceOwner = instance.getOwner();
-                       if (instanceOwner == null) {
-                           instanceOwner = getOwner();
+                       
+                       if (newName != null) {
+                           Definition instanceOwner = instance.getOwner();
+                           if (instanceOwner == null) {
+                               instanceOwner = getOwner();
+                           }
+                           instance = new Instantiation(newName, instanceOwner);
+                           instance.setKind(kind);
                        }
-                       instance = new Instantiation(newName, instanceOwner);
-                       instance.setKind(kind);
-                   }
-                   if (instance != null && instance != this && context.size() > 1) {
-                       int numUnpushes = 0;
-                       int limit = context.size() - 1;
-                       try {
-                           while (!context.paramIsPresent(name) && numUnpushes < limit) {
+                       if (instance != null && instance != this && context.size() > 1) {
+                           int numUnpushes = 0;
+                           int limit = context.size() - 1;
+                           try {
+                               while (!context.paramIsPresent(name) && numUnpushes < limit) {
+                                   context.unpush();
+                                   numUnpushes++;
+                               }
+                               if (numUnpushes >= limit) {
+                                   return instance;
+                               }
                                context.unpush();
                                numUnpushes++;
-                           }
-                           if (numUnpushes >= limit) {
-                               return instance;
-                           }
-                           context.unpush();
-                           numUnpushes++;
-                           return instance.getUltimateInstance(context);
-                       } finally {
-                           while (numUnpushes-- > 0) {
-                               context.repush();
+                               return instance.getUltimateInstance(context);
+                           } finally {
+                               while (numUnpushes-- > 0) {
+                                   context.repush();
+                               }
                            }
                        }
                    }
@@ -1667,35 +1652,6 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
             } else if (name == Name.SUPER) {
                 def = owner.getSuperDefinition(context);
 
-            } else if (name == Name.UNDER) {
-                def = null;
-                Definition underOwner = owner;
-                NameNode underOwnerName = underOwner.getNameNode();
-                Definition underOwnerOwner = underOwner.getOwner();
-                Definition superdef = underOwnerOwner.getSuperDefinition(context);
-                while (superdef != null) {
-                    def = superdef.getChildDefinition(underOwnerName, underOwnerName.getArguments(), underOwnerName.getIndexes(), null, context, null);
-                    if (def != null) {
-                        break;
-                    }
-                    superdef = superdef.getSuperDefinition(context);
-                }
-            
-            } else if (name == Name.OVER) {
-                def = null;
-                Definition overOwner = owner;
-                NameNode overOwnerName = overOwner.getNameNode();
-                Definition overOwnerOwner = overOwner.getOwner();
-                Definition subdef = overOwnerOwner.getImmediateSubdefinition(context);
-                while (subdef != null) {
-                    def = subdef.getChildDefinition(overOwnerName, overOwnerName.getArguments(), overOwnerName.getIndexes(), null, context, null);
-                    if (def != null) {
-                        break;
-                    }
-                    subdef = subdef.getImmediateSubdefinition(context);
-                }
-                
-
             } else if (name == Name.SITE || name == Name.CORE) {
                 def = context.getRootEntry().def;
                 while (def != null) {
@@ -1803,7 +1759,6 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
         
         } else if (reference instanceof NameNode) {
             NameNode nameNode = getReferenceName();
-            String name = nameNode.getName();
 
             if (localDef != null) {
                 data = instantiate(context, localDef);

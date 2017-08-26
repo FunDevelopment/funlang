@@ -68,7 +68,7 @@ public class FunDomain implements fun_domain {
      *
      *  The name parameter specifies the main site, which is the site queried for names
      *  that do not explicitly specify a site.  The sitename may be null or an empty string,
-     *  in which case the name of the site is obtained from the main_site Fun object,
+     *  in which case the name of the site is obtained from the main_site object,
      *  loaded from the default site.
      */
     public FunDomain(String name, fun_processor processor) {

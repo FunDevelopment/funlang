@@ -54,12 +54,12 @@ public class FunBlock extends Block {
 //    }
 
     public String getTokenString(String prefix) {
-        String str = prefix + "[=\n" + getChildrenTokenString(prefix + "    ") + prefix + "=]\n";
+        String str = prefix + "{=\n" + getChildrenTokenString(prefix + "    ") + prefix + "=}\n";
         return str;
     }
 
     public String toString(String prefix) {
-        String str = "[=\n" + super.toString(prefix) + prefix + "=]";
+        String str = "{=\n" + super.toString(prefix) + prefix + "=}";
         return str;
     }
 

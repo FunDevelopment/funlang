@@ -863,14 +863,14 @@ public class FunSite extends FunDomain {
                 out.println();
 
             } else if (node instanceof FunBlock) {
-                out.println("[=");
+                out.println("{=");
                 data = super.handleNode(node, prefix + indent);
-                out.println(prefix + "=]");
+                out.println(prefix + "=}");
 
             } else if (node instanceof StaticBlock) {
-                out.println("[|");
+                out.println("[/");
                 data = super.handleNode(node, prefix);
-                out.println(prefix + "|]");
+                out.println(prefix + "/]");
 
             } else if (node instanceof DynamicFunBlock || node instanceof DynamicElementBlock) {
                 out.println("[[");
@@ -878,9 +878,9 @@ public class FunSite extends FunDomain {
                 out.println(prefix + "]]");
 
             } else if (node instanceof ConcurrentFunBlock) {
-                out.println("[++");
+                out.println("{+");
                 data = super.handleNode(node, prefix);
-                out.println(prefix + "++]");
+                out.println(prefix + "+}");
 
             } else {
                 printNode(node, prefix);

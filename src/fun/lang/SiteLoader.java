@@ -129,7 +129,7 @@ public class SiteLoader {
         } else if (sourceString != null) {            
             loadString(sourceString, loaders, true);
             log(siteName + " loaded from source code");
-        } else {
+        } else if (externalPath != null) {
             String[] paths = parsePath(externalPath);
             for (int i = 0; i < paths.length; i++) {
                 loadFile(new File(paths[i]), filter, loaders, recursive, true);

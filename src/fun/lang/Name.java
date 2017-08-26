@@ -49,34 +49,19 @@ public interface Name {
     /** A special name referring to the keys in a table. */
     public final static String KEYS = "keys";
 
-    /** A special name referring to a local type that is a subclass of a
-     *  more global type with the same name, e.g.
-     *  
-     *      foo [=
-     *          my page [/]
-     *      =]
-     *
-     *  defines a type called page local to foo which is a subclass
-     *  of the page type defined in the container hierarchy above foo 
-     */
-    public final static String MY = "my";
-
     /** A special name referring to the object which this object extends
      *  laterally, i.e. which this object is inserted in front of in the sub
      *  or super inheritance chain. 
      */
     public final static String NEXT = "next";
 
-    /** A special name referring to the object which overrides this object,
-     *  i.e., an object of the same name as this object which is a child of 
-     *  the immediate subclass of the owner of this object.
-     */
-    public final static String OVER = "over";
-
     /** A special name referring to the owner of an object, or, if no object
      *  is specified, the owner of the definition currently being constructed.
      */
     public final static String OWNER = "owner";
+
+    /** A special name referring to the current script. */
+    public final static String SCRIPT = "script";
 
     /** A special name referring to the current site. */
     public final static String SITE = "site";
@@ -105,12 +90,6 @@ public interface Name {
 
     /** A special name referring to the type of a definition. */
     public final static String TYPE = "type";
-
-    /** A special name referring to the object being overridden, i.e., the 
-     *  object of the same name as this object which is a child of the immediate
-     *  superclass of the owner of this object.
-     */
-    public final static String UNDER = "under";
 
     public String getName();
     

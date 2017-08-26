@@ -11,6 +11,9 @@
 package fun.runtime;
 
 import fun.lang.*;
+import fun.parser.FunParser;
+import fun.parser.Node;
+import fun.parser.ParseException;
 
 import java.io.*;
 import java.util.*;
@@ -24,27 +27,25 @@ import java.util.*;
  * @version
  */
 
-public class FunScript implements fun_processor {
+public class FunScript {
     public static final String NAME = "FunScript";
     public static final String VERSION = "1.0";
     public static final String NAME_AND_VERSION = NAME + " " + VERSION;
 
-    protected Exception exception = null;
-    protected FunSite mainSite = null;
+    protected Site mainScript = null;
     protected Map<String, FunSite> sites = new HashMap<String, FunSite>();
 
     private boolean initedOk = false;
     private String logFileName = null;
     private boolean appendToLog = true;
     private String fileBase = ".";
-    private boolean multithreaded = false;
-    private String funPath = ".";
     private boolean recursive = false;
+    private boolean multithreaded = false;
     private boolean customCore = false;
+    private String funPath = ".";
     private Core sharedCore = null;
     private HashMap<String, Object> properties = new HashMap<String, Object>();
-    protected String fileHandlerName = null;
-    private String request = null;
+    private Exception[] exceptions = null;
 
     /** Main entry point.  The following flags are recognized (in any order).  All flags are optional.
      *  <table><tr><th>argument</th><th>default</th><th>effect</th></tr><tr>
@@ -67,30 +68,30 @@ public class FunScript implements fun_processor {
      *
      */
     public static void main(String[] args) {
-
-        boolean noProblems = true;
-        
         Map<String, String> initParams = new HashMap<String, String>();
         String[] scriptArgs = processArgs(args, initParams);        
         String problems = initParams.get("problems");
-        if (problems != null && !problems.equals("0")) {
-            noProblems = false;
-        }
-        
-        if (noProblems) {
+        if (problems == null || problems.equals("0")) {
             FunScript runner = new FunScript(initParams);
-            Writer writer = new OutputStreamWriter(System.out);
             if (runner.initedOk) {
-                try {
-                    runner.loadSite();
-                    runner.run(writer, scriptArgs);
-                } catch (Throwable t) {
-                    noProblems = false;
-                    System.err.println("Problem running FunRunner: " + t.getMessage());
-                    t.printStackTrace(System.err);
-                }
-            } else {
-                noProblems = false;
+                Writer writer = new OutputStreamWriter(System.out);
+                runner.runScript(writer, scriptArgs);
+            }
+            List<Exception> exceptions = runner.getExceptions();
+            if (exceptions != null && exceptions.size() > 0) {
+            	if (exceptions.size() == 1) {
+            		Exception e = exceptions.get(0);
+                    System.err.println("Problem running FunScript: " + e);
+                    e.printStackTrace(System.err);
+            	} else {
+                    System.err.println("Mutliple problems running FunScript.");
+                    int i = 1;
+                    for (Exception e: exceptions) {
+                    	System.err.println("-------------------------------------");
+                    	System.err.println("Problem " + i++ + ": " + e);
+                        e.printStackTrace(System.err);
+                    }
+            	}
             }
 
         } else {
@@ -100,7 +101,7 @@ public class FunScript implements fun_processor {
             System.out.println("the optional flags are among the following (in any order):\n");
             System.out.println("Flag                              Effect");
             System.out.println("----------------------------------------------------------------------------");
-            System.out.println("-funpath <pathnames>       Sets the initial funpath, which is a string");
+            System.out.println("-funpath <pathnames>         Sets the initial funpath, which is a string");
             System.out.println("                             of pathnames separated by the platform-specific");
             System.out.println("                             path separator character (e.g., colon on Unix");
             System.out.println("                             and semicolon on Windows).  Pathnames may");
@@ -135,7 +136,6 @@ public class FunScript implements fun_processor {
     /** Constructor */
     public FunScript(Map<String, String> initParams) {
         initedOk = init(initParams);
-        request = initParams.get("request");
     }
 
     private static String[] processArgs(String[] args, Map<String, String> initParams) {
@@ -153,36 +153,6 @@ public class FunScript implements fun_processor {
                     i++;
                 } else {
                     initParams.put("site", nextArg);
-                }
-
-            } else if (arg.equals("-address") || arg.equals("-a")) {
-                if (noNextArg) {
-                    numProblems++;
-                    String msg = "address not provided";
-                    initParams.put("problem" + numProblems, msg);
-                } else {
-                    initParams.put("address", nextArg);
-                    i++;
-                }
-
-            } else if (arg.equals("-port") || arg.equals("-p")) {
-                if (noNextArg) {
-                    numProblems++;
-                    String msg = "port not provided";
-                    initParams.put("problem" + numProblems, msg);
-                } else {
-                    initParams.put("port", nextArg);
-                    i++;
-                }
-
-            } else if (arg.equals("-host") || arg.equals("-h")) {
-                if (noNextArg) {
-                    numProblems++;
-                    String msg = "host not provided";
-                    initParams.put("problem" + numProblems, msg);
-                } else {
-                    initParams.put("host", nextArg);
-                    i++;
                 }
 
             } else if (arg.equals("-filebase") || arg.equals("-docbase") || arg.equals("-d")) {
@@ -216,9 +186,6 @@ public class FunScript implements fun_processor {
 
             } else if (arg.equals("-customcore") || arg.equals("-cc")) {
                 initParams.put("customcore", "true");
-
-            } else if (arg.equals("-sharecore") || arg.equals("-sc")) {
-                initParams.put("sharecore", "true");
 
             } else if (arg.equals("-log") || arg.equals("-l")) {
                 if (noNextArg) {
@@ -255,8 +222,8 @@ public class FunScript implements fun_processor {
             } else {
             	scriptArgs = new String[args.length - i];
                 int j = 0;
-            	while (i++ < args.length - 1) {
-                    scriptArgs[j++] = args[i];
+            	while (i < args.length) {
+                    scriptArgs[j++] = args[i++];
                 }
                 break;
             }
@@ -270,7 +237,8 @@ public class FunScript implements fun_processor {
         try {    
             initGlobalSettings(initParams);
         } catch (Exception e) {
-            exception = e;
+            exceptions = new Exception[1];
+            exceptions[0] = e;
             return false;
         }
         return true;
@@ -292,9 +260,6 @@ public class FunScript implements fun_processor {
         }
 
         funPath = initParams.get("funpath");
-        if (funPath == null) {
-            funPath = ".";
-        }
 
         fileBase = initParams.get("filebase");
         if (fileBase == null) {
@@ -313,54 +278,83 @@ public class FunScript implements fun_processor {
     private static boolean isTrue(String param) {
         return ("true".equalsIgnoreCase(param) || "yes".equalsIgnoreCase(param) || "1".equalsIgnoreCase(param));
     }
-
-    private void loadSite() throws Exception {
-        mainSite = load("[runner]", funPath, recursive);
-        if (mainSite == null) {
-            System.err.println("Unable to run.");
-            return;
-        } else if (mainSite.getException() != null) {
-            throw mainSite.getException(); 
-        }
-        mainSite.globalInit();
-        mainSite.siteInit();
-    }
     
+    private List<Exception> getExceptions() {
+    	List<Exception> list = new ArrayList<Exception>();
+    	for (Exception e: exceptions) {
+    		if (e != null) {
+    			list.add(e);
+    		}
+    	}
+    	return list;
+    }
+
+   
     //
     // Run a program
     //
     
-    private void run(Writer out, String[] args) throws Redirection, IOException {
-        String req = request;
-        FunSite site = mainSite; 
+    private void runScript(Writer out, String[] args) {
+    	if (args == null || args.length == 0) {
+            System.err.println("No script specified.");
+            return;
+    	}
+        sharedCore = new Core(true);
+        try {
+    	    load(funPath, recursive);
+        } catch (Exception e) {
+            System.err.println("Exception parsing funpath: " + e);
+        }
+    	
+    	String path = args[0];
+        Node script = loadScript(path);
+        if (script == null) {
+            System.err.println("Unable to parse script");
+            return;
+        }
         
-        if (req != null && req.length() > 0) {
-            if (sites != null) {
-                int ix = req.indexOf('/');
-                while (ix == 0) {
-                    req = req.substring(1);
-                    ix = req.indexOf('/');
-                }
-                if (ix < 0) {
-                    if (sites.containsKey(req)) {
-                        site = (FunSite) sites.get(req);
-                        req = null;
-                    }
-                } else if (ix > 0) {
-                    String siteName = req.substring(0, ix);
-                    if (sites.containsKey(siteName)) {
-                        site = (FunSite) sites.get(siteName);
-                        req = req.substring(ix + 1);
-                    }
-                }
+        if (script instanceof Site) {
+            mainScript = (Site) script;
+        } else {
+        	Node child = script.jjtGetChild(0);
+        	if (child instanceof Site) {
+        		mainScript = (Site) child;
+            } else {
+                System.err.println("Illegal script format.");
+                return;
             }
         }
-        
-        if (req == null || req.length() == 0) {
-            req = "run";
+
+        Context scriptContext = null;
+        try {
+            scriptContext = new Context(mainScript);
+        } catch (Redirection r) {
+            System.err.println("Unable to instantiate script context: " + r.getMessage());
+            return;
         }
-        if (site != null) {
-            site.run(req, out);
+        
+        String expr = "main";
+        if (args.length > 1) {
+        	expr = expr + "([";
+        	for (int i = 1; i < args.length; i++) {
+        		expr = expr + '"' + args[i] + '"';
+        		if (i < args.length - 1) {
+        			expr = expr + ',';
+        		}
+        	}
+        	expr = expr + "])";
+        }
+        
+        try {
+            FunParser parser = new FunParser(new StringReader(expr));
+            Instantiation instance = parser.parseInstance();
+            instance.setOwner(mainScript);
+            Object data = instance.getData(scriptContext);
+            System.out.print(data.toString());
+        } catch (Exception e) {
+            System.err.println("Exception running script: " + e);
+        } catch (Redirection r) {
+            System.err.println("Redirection running script: " + r);
         }
     }
     
@@ -383,51 +377,10 @@ public class FunScript implements fun_processor {
         return properties;
     }
 
-    public FunSite getMainSite () {
-    	return mainSite;
-    }
-    
-    public Map<String, FunSite> getSiteMap() {
-    	return sites;
-    }
-    
-  
-    /** Compile the Fun source files found at the locations specified in <code>funpath</code>
-     *  and return a fun_domain object.  If a location is a directory and <code>recursive</code>
-     *  is true, scan subdirectories recursively for Fun source files.  If <code>autoloadCore</code>
-     *  is true, and the core definitions required by the system cannot be found in the files
-     *  specified in <code>funpath</code>, the processor will attempt to load the core
-     *  definitions automatically from a known source (e.g. from the same jar file that the
-     *  processor was loaded from).
-     */
-    public fun_domain compile(String siteName, String funpath, boolean recursive, boolean autoloadCore) {
-        FunSite site = new FunSite(siteName, this);
-        site.load(funpath, "*.fun", recursive, multithreaded, autoloadCore, sharedCore);
-        return site;
-    }
-
-    /** Compile Fun source code passed in as a string and return a fun_domain object.  If
-     *  <code>autoloadCore</code> is true, and the core definitions required by the system cannot
-     *  be found in the files specified in <code>funpath</code>, the processor will attempt to
-     *  load the core definitions automatically from a known source (e.g. from the same jar file
-     *  that the processor was loaded from).
-     */
-    public fun_domain compile(String siteName, String funtext, boolean autoloadCore) {
-        return null;
-    }
-
-    /** Compile Fun source code passed in as a string and merge the result into the specified
-     *  fun_domain.  If there is a fatal error in the code, the result is not merged and
-     *  a Redirection is thrown.
-     */
-    public void compile_into(fun_domain domain, String funtext) throws Redirection {
-        ;
-    }
 
     public String domain_type() {
-        return Name.SITE;
+        return Name.SCRIPT;
     }
-    
     
     /** Writes to log file and system out. **/
     static void slog(String msg) {
@@ -439,19 +392,68 @@ public class FunScript implements fun_processor {
     }
 
     /** Load the site files */
-    public FunSite load(String sitename, String funPath, boolean recurse) throws Exception {
-        FunSite site = null;
+    public boolean load(String funPath, boolean recurse) throws Exception {
+        boolean loadError = false;
 
         slog(NAME_AND_VERSION);
-        slog("Loading site " + (sitename == null ? "(no name yet)" : sitename));
-        site = (FunSite) compile(sitename, funPath, recurse, !customCore);
-        Exception e = site.getException();
-        if (e != null) {
-            slog("Exception loading site " + site.getName() + ": " + e);
-            throw e;
+        slog("funpath: " + funPath);
+
+        SiteLoader.LoadOptions options = SiteLoader.getDefaultLoadOptions();
+        options.multiThreaded = multithreaded;
+        options.autoLoadCore = !customCore;
+
+        SiteLoader loader = new SiteLoader(sharedCore, null, funPath, "*.fun", recurse, options);
+        loader.load();
+        exceptions = loader.getExceptions();
+        
+        for (int i = 0; i < exceptions.length; i++) {
+            if (exceptions[i] != null) {
+                loadError = true;
+                break;
+            }
         }
-        return site;
+
+        return loadError;
     }
+
+    public Node loadScript(String path) {
+    	Node parseResult = null;
+    	Exception exception = null;
+        SiteBuilder siteBuilder = new SiteBuilder(sharedCore);
+        try {
+            InputStream is = new BufferedInputStream(new FileInputStream(path));
+        	FunParser parser = new FunParser(is);;
+            parseResult = parser.parse(path);
+            siteBuilder.build(parseResult);
+            exception = siteBuilder.getException();
+            if (exception != null) {
+            	throw exception;
+            }
+
+        } catch (ParseException pe) {
+        	System.err.println("...syntax error in " + path + ": " + pe.getMessage());
+            exception = pe;
+
+        } catch (DuplicateDefinitionException dde) {
+        	System.err.println("...duplicate definition in " + path + ": " + dde.getMessage());
+            exception = dde;
+
+        } catch (Exception e) {
+            exception = e;
+            System.err.println("...exception loading " + path + ": " + e);
+            System.out.flush();
+            e.printStackTrace();
+
+        } catch (fun.parser.TokenMgrError error) {
+            exception = new ParseException(error.toString());
+            System.err.println("...error loading " + path + ": " + error);
+            System.out.flush();
+            error.printStackTrace();
+        }
+        return parseResult;
+    }
+
+
 }
 
 

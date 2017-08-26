@@ -121,9 +121,9 @@ public class NameNode extends AbstractNode implements Name {
     
     public static boolean isSpecialName(String name) {
         if (name == DEFAULT || name == CONTAINER || name == COUNT || name == CORE
-        		|| name == KEYS || name == HERE || name == OVER || name == OWNER
+        		|| name == KEYS || name == HERE || name == OWNER
         		|| name == SITE || name == SOURCE || name == SUB || name == SUPER
-        		|| name == THIS || name == TYPE || name == UNDER) {
+        		|| name == THIS || name == TYPE) {
             return true;
         } else {
             return false;
