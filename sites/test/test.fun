@@ -1630,7 +1630,7 @@ pt {=
 
         tp {
             int nr = 0
-            char ap[] = [ for int n from 0 to nr {= 'L' =} ]
+            char ap[] = [ for int n from 0 to nr { 'L' } ]
         }
 
         tp[] tps = [ tp1 ]
@@ -1876,11 +1876,11 @@ tpt {=
 
         fixed_array[3] = [ "A", "B", "C" ]
 
-        dynamic_array[] = [ for int i from 0 to 3 {=
-                                if (i == 0) {= "D" =}
-                                else if (i == 1) {= "E" =}
-                                else {= "F" =}
-                            =}
+        dynamic_array[] = [ for int i from 0 to 3 {
+                                if (i == 0) { "D" }
+                                else if (i == 1) { "E" }
+                                else { "F" }
+                            }
                           ]
 
         growable_array[] = [ "G" ]
@@ -2009,8 +2009,8 @@ tpt {=
 
         xy[] xy_array_builder_1 = [ xy(init_vals_1[0][0], init_vals_1[0][1]),  xy(init_vals_1[1][0], init_vals_1[1][1]) ]
         xy[] xy_array_builder_2(val_matrix[][]) = [ xy(val_matrix[0][0], val_matrix[0][1]),  xy(val_matrix[1][0], val_matrix[1][1]) ]
-        xy[] xy_array_builder_3(val_matrix[][]) = [ for v in val_matrix {= xy(v[0], v[1]) =} ]
-        xy[] xy_array_builder_4(val_matrix[][]) = [ for v in val_matrix {= xy_from(v) =} ]
+        xy[] xy_array_builder_3(val_matrix[][]) = [ for v in val_matrix { xy(v[0], v[1]) } ]
+        xy[] xy_array_builder_4(val_matrix[][]) = [ for v in val_matrix { xy_from(v) } ]
 
 
         for xy aa in xy_array_builder_1 {
@@ -2351,16 +2351,16 @@ aecat {=
             else             [/ x /]
         }
 	    
-	    nested_dynamic_array[] = [ for c in jk {= c =} ] 
-        nested_array_with_loop_param[] = [ for i from 1 to 3 {= lm(i) =} ]
+	    nested_dynamic_array[] = [ for c in jk { c } ] 
+        nested_array_with_loop_param[] = [ for i from 1 to 3 { lm(i) } ]
         
         no[] = [ "x", "N", "O" ]
-        nested_array_with_loop_index[] = [ for i from 1 to 3 {= no[i] =} ]
+        nested_array_with_loop_index[] = [ for i from 1 to 3 { no[i] } ]
         
         pq[] = [ "x", "P", "x", "Q" ]
-        nested_array_with_expression_index[] = [ for i from 0 to 2 {= pq[(2 * i + 1)] =} ]
+        nested_array_with_expression_index[] = [ for i from 0 to 2 { pq[(2 * i + 1)] } ]
 
-        rs[] = [ for i from 0 to 2 {= if (i == 0) {= "R" =} else {= "S" =} =} ]
+        rs[] = [ for i from 0 to 2 { if (i == 0) { "R" } else { "S" } } ]
         
         nested_array_with_dynamic_array_reference[] = [ for i from 0 to 2 {= rs[i] =} ]
 
@@ -2370,24 +2370,24 @@ aecat {=
         super_array dimless_dynamic_array = [ for t in tt {= t =} ]
 	    
 	    dynamic_array[] = [ 
-	                        if (true_flag)  {= [/ A /] =},
+	                        if (true_flag)  { [/ A /] },
 
-	                        if (false_flag) {= [/ x /] =},
+	                        if (false_flag) { [/ x /] },
 
-	                        if (true_flag)  {= [/ B /] =}
-	                                  else  {= [/ x /] =},
+	                        if (true_flag)  { [/ B /] }
+	                                  else  { [/ x /] },
 
                             if (false_flag) {= [/ x /] =}
                                        else {= [/ C /] =},
                                        
-                            if (true_flag)  {= if (true_flag) {= d =} =},
+                            if (true_flag)  { if (true_flag) {= d =} },
 
-                            if (true_flag)  {= if (false_flag) {= x =} =},
+                            if (true_flag)  {= if (false_flag) { x } =},
 
                             if (true_flag)  {= {= e; [/ F /] g; =} =},
                            
-                            for hh in hi {= hh =},
-                            for jj in nested_dynamic_array {= jj =},
+                            for hh in hi { hh },
+                            for jj in nested_dynamic_array { jj },
                             for ll in nested_array_with_loop_param {= ll =},
                             for nn in nested_array_with_loop_index {= nn =},
                             for pp in nested_array_with_expression_index {= pp =},
@@ -5526,9 +5526,9 @@ cot {=
         if (iffed_expression(false) == 1) [/ C /] else [/ x /]
     }
 
-ect {=
- dynamic int looped_expression = 1 + for int i = 2 to 5 {= i =}
- dynamic int iffed_expression(boolean flag) = 1 + if (flag) {= 1 =}
+public ect {=
+ dynamic int looped_expression = 1 + for int i = 2 to 5 { i }
+ dynamic int iffed_expression(boolean flag) = 1 + if (flag) { 1 }
 
  if (looped_expression == 10)      [/ A /] else [/ x /]
  if (iffed_expression(true) == 2)  [/ B /] else [/ x /]
@@ -6894,7 +6894,7 @@ ft {=
         
         status_msg = "Next best thing."
         
-        component top_bar(request r) {
+        public component top_bar(request r) {
             color bgcolor = "#8A8081"
             
             [/ <h2> /]
@@ -6931,7 +6931,7 @@ ft {=
             [/ </td></tr></table> /]
         } 
             
-        component right_side_bar {
+        public component right_side_bar {
             color bgcolor = "#8AB0C1"
             
             [/ <h3> /]
@@ -6943,7 +6943,7 @@ ft {=
             [/ </h3> /]
         }
         
-        component content_component(request r) {
+        public component content_component(request r) {
             with (r) {
                 r.params["content"];
             } else [/
@@ -6951,7 +6951,7 @@ ft {=
             /]
         }
         
-        component bottom_bar {
+        public component bottom_bar {
             color bgcolor = "#8A8081"
             
             status_msg;
@@ -7281,9 +7281,9 @@ ft {=
     }
 
 
-    animation_test {
+    animation_test {=
     
-    }
+    =}
     
     
     public basepage(r, s) base_test_test_page(request r, session s) {

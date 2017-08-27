@@ -16,7 +16,7 @@
  
      public main(args[]) {
          bentofile = args[0]
-         funfile = args[1] ? args[1] : 
+         funfile = args[1] ? args[1] : replace(bentofile, ".bento", ".fun")
      
          if (args.count < 1) {
              "Usage: bento2fun bentofile [funfile]\n";

@@ -185,117 +185,125 @@ public interface FunParserConstants {
   /** RegularExpression Id. */
   int RCONCURRENT = 102;
   /** RegularExpression Id. */
-  int LPAREN = 103;
+  int ARRAYTYPE = 103;
   /** RegularExpression Id. */
-  int RPAREN = 104;
+  int STREAMTYPE = 104;
   /** RegularExpression Id. */
-  int LDYNAMICPAREN = 105;
+  int APPENDTYPE = 105;
   /** RegularExpression Id. */
-  int RDYNAMICPAREN = 106;
+  int TABLETYPE = 106;
   /** RegularExpression Id. */
-  int LCONCURRENTPAREN = 107;
+  int LPAREN = 107;
   /** RegularExpression Id. */
-  int RCONCURRENTPAREN = 108;
+  int RPAREN = 108;
   /** RegularExpression Id. */
-  int LBRACKET = 109;
+  int LDYNAMICPAREN = 109;
   /** RegularExpression Id. */
-  int RBRACKET = 110;
+  int RDYNAMICPAREN = 110;
   /** RegularExpression Id. */
-  int SEMICOLON = 111;
+  int LCONCURRENTPAREN = 111;
   /** RegularExpression Id. */
-  int COMMA = 112;
+  int RCONCURRENTPAREN = 112;
   /** RegularExpression Id. */
-  int DOT = 113;
+  int LBRACKET = 113;
   /** RegularExpression Id. */
-  int HASH = 114;
+  int RBRACKET = 114;
   /** RegularExpression Id. */
-  int ASSIGN = 115;
+  int SEMICOLON = 115;
   /** RegularExpression Id. */
-  int GT = 116;
+  int COMMA = 116;
   /** RegularExpression Id. */
-  int LT = 117;
+  int DOT = 117;
   /** RegularExpression Id. */
-  int THPPPT_DING = 118;
+  int HASH = 118;
   /** RegularExpression Id. */
-  int TILDE = 119;
+  int ASSIGN = 119;
   /** RegularExpression Id. */
-  int QMARK = 120;
+  int GT = 120;
   /** RegularExpression Id. */
-  int QQMARK = 121;
+  int LT = 121;
   /** RegularExpression Id. */
-  int COLON = 122;
+  int THPPPT_DING = 122;
   /** RegularExpression Id. */
-  int EQ = 123;
+  int TILDE = 123;
   /** RegularExpression Id. */
-  int LE = 124;
+  int QMARK = 124;
   /** RegularExpression Id. */
-  int GE = 125;
+  int QQMARK = 125;
   /** RegularExpression Id. */
-  int NE = 126;
+  int COLON = 126;
   /** RegularExpression Id. */
-  int EQ_IGNORE_CASE = 127;
+  int EQ = 127;
   /** RegularExpression Id. */
-  int LE_IGNORE_CASE = 128;
+  int LE = 128;
   /** RegularExpression Id. */
-  int LT_IGNORE_CASE = 129;
+  int GE = 129;
   /** RegularExpression Id. */
-  int GE_IGNORE_CASE = 130;
+  int NE = 130;
   /** RegularExpression Id. */
-  int GT_IGNORE_CASE = 131;
+  int EQ_IGNORE_CASE = 131;
   /** RegularExpression Id. */
-  int NE_IGNORE_CASE = 132;
+  int LE_IGNORE_CASE = 132;
   /** RegularExpression Id. */
-  int LOGICAL_AND = 133;
+  int LT_IGNORE_CASE = 133;
   /** RegularExpression Id. */
-  int LOGICAL_OR = 134;
+  int GE_IGNORE_CASE = 134;
   /** RegularExpression Id. */
-  int PLUS = 135;
+  int GT_IGNORE_CASE = 135;
   /** RegularExpression Id. */
-  int MINUS = 136;
+  int NE_IGNORE_CASE = 136;
   /** RegularExpression Id. */
-  int TIMES = 137;
+  int LOGICAL_AND = 137;
   /** RegularExpression Id. */
-  int DIVIDED_BY = 138;
+  int LOGICAL_OR = 138;
   /** RegularExpression Id. */
-  int BITWISE_AND = 139;
+  int PLUS = 139;
   /** RegularExpression Id. */
-  int BITWISE_OR = 140;
+  int MINUS = 140;
   /** RegularExpression Id. */
-  int CARET = 141;
+  int TIMES = 141;
   /** RegularExpression Id. */
-  int MOD = 142;
+  int DIVIDED_BY = 142;
   /** RegularExpression Id. */
-  int LSHIFT = 143;
+  int BITWISE_AND = 143;
   /** RegularExpression Id. */
-  int RSIGNEDSHIFT = 144;
+  int BITWISE_OR = 144;
   /** RegularExpression Id. */
-  int RUNSIGNEDSHIFT = 145;
+  int CARET = 145;
   /** RegularExpression Id. */
-  int NULL_BLOCK = 146;
+  int MOD = 146;
   /** RegularExpression Id. */
-  int ABSTRACT_NULL = 147;
+  int LSHIFT = 147;
   /** RegularExpression Id. */
-  int EXTERNAL_BLOCK = 148;
+  int RSIGNEDSHIFT = 148;
   /** RegularExpression Id. */
-  int ELLIPSIS = 149;
+  int RUNSIGNEDSHIFT = 149;
   /** RegularExpression Id. */
-  int INDEFINITE_NAMERANGE = 150;
+  int NULL_BLOCK = 150;
   /** RegularExpression Id. */
-  int CONTEXT = 151;
+  int ABSTRACT_NULL = 151;
   /** RegularExpression Id. */
-  int STATIC_0 = 153;
+  int EXTERNAL_BLOCK = 152;
   /** RegularExpression Id. */
-  int STATIC_1 = 154;
+  int ELLIPSIS = 153;
   /** RegularExpression Id. */
-  int STATIC_2 = 155;
+  int INDEFINITE_NAMERANGE = 154;
   /** RegularExpression Id. */
-  int STATIC_3 = 156;
+  int CONTEXT = 155;
   /** RegularExpression Id. */
-  int STATIC_4 = 157;
+  int STATIC_0 = 157;
   /** RegularExpression Id. */
-  int STATIC_5 = 158;
+  int STATIC_1 = 158;
   /** RegularExpression Id. */
-  int LITERAL_1 = 160;
+  int STATIC_2 = 159;
+  /** RegularExpression Id. */
+  int STATIC_3 = 160;
+  /** RegularExpression Id. */
+  int STATIC_4 = 161;
+  /** RegularExpression Id. */
+  int STATIC_5 = 162;
+  /** RegularExpression Id. */
+  int LITERAL_1 = 164;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -413,6 +421,10 @@ public interface FunParserConstants {
     "\"=}\"",
     "\"{+\"",
     "\"+}\"",
+    "\"[]\"",
+    "\"[^]\"",
+    "\"[+]\"",
+    "\"{}\"",
     "\"(\"",
     "\")\"",
     "\"(:\"",
@@ -462,14 +474,14 @@ public interface FunParserConstants {
     "\"...\"",
     "\"**\"",
     "\"@\"",
-    "<token of kind 152>",
+    "<token of kind 156>",
     "\"[``\"",
     "\"[/\"",
     "\"{=\"",
     "\"/]\"",
     "\"[|\"",
     "\"|]\"",
-    "<token of kind 159>",
+    "<token of kind 163>",
     "\"``]\"",
     "\"[=\"",
     "\"++\"",

@@ -58,7 +58,7 @@ public class FunParser {
         FunParser parser;
 
         if (args.length == 0) {
-            System.out.println("Reading Fun from standard input.\n\n[= ");
+            System.out.println("Reading Fun from standard input.\n\n {");
             parser = new FunParser(System.in);
         } else if (args.length == 1) {
             String filename = args[0];
@@ -404,6 +404,11 @@ TOKEN :
     // need the logic that the code and static brackets have
     | < LCONCURRENT: "{+" >
     | < RCONCURRENT: "+}" >
+
+    | < ARRAYTYPE: "[]" >
+    | < STREAMTYPE: "[^]" >
+    | < APPENDTYPE: "[+]" >
+    | < TABLETYPE: "{}" >
 
     | < LPAREN: "(" >
     | < RPAREN: ")" >
@@ -814,7 +819,7 @@ void SiteLevelStatement() #void:
       LOOKAHEAD( KeepPrefix() )
       KeepPrefixedDefinition()
     | 
-      LOOKAHEAD( "site" Name() "[=" )
+      LOOKAHEAD( "site" Name() ("{" | "{=") )
       SiteStatement()
     |
       LOOKAHEAD( ModifiedExternalDefinition() )
@@ -1089,16 +1094,16 @@ Scoped CollectionDefinition() :
 {}
 {
     (
-      LOOKAHEAD(DefCollectionName() "=" "[")
+      LOOKAHEAD(DefCollectionName() "=" ("[" | "[]") )
       DefCollectionName() "=" ArrayInitExpression() [ ";" ] { jjtThis.setIsTable(false); }
     |
-      LOOKAHEAD(DefCollectionName() "=" "{")
+      LOOKAHEAD(DefCollectionName() "=" ("{" | "{}") )
       DefCollectionName() "=" TableInitExpression() [ ";" ] { jjtThis.setIsTable(true); }
     |
-      LOOKAHEAD(DefTypeName() "=" "[")
+      LOOKAHEAD(DefTypeName() "=" ("[" | "[]") )
       DefTypeName() "=" ArrayInitExpression() [ ";" ] { jjtThis.setIsTable(false); }
     |
-      LOOKAHEAD(DefTypeName() "=" "{")
+      LOOKAHEAD(DefTypeName() "=" ("{" | "{}") )
       DefTypeName() "=" TableInitExpression() [ ";" ] { jjtThis.setIsTable(true); }
     |
       LOOKAHEAD(DefTypeName() (IndefiniteDim())+ "=")
@@ -1138,10 +1143,10 @@ Scoped TypedCollectionDefinition() #CollectionDefinition:
 {}
 {
     (
-      LOOKAHEAD(CollectionType() DefCollectionName() "=" "[")
+      LOOKAHEAD(CollectionType() DefCollectionName() "=" ("[" | "[]"))
       CollectionType() DefCollectionName() "=" ArrayInitExpression() { jjtThis.setIsTable(false); }
     |
-      LOOKAHEAD(CollectionType() DefCollectionName() "=" "{")
+      LOOKAHEAD(CollectionType() DefCollectionName() "=" ("{" | "{}"))
       CollectionType() DefCollectionName() "=" TableInitExpression() { jjtThis.setIsTable(true); }
     |
       LOOKAHEAD(IndefiniteCollectionType() DefTypeName() "=" ValueInstanceExpression())
@@ -1150,22 +1155,22 @@ Scoped TypedCollectionDefinition() #CollectionDefinition:
       LOOKAHEAD(IndefiniteCollectionType() DefTypeName() Block())
       IndefiniteCollectionType() DefTypeName() Block()
     |
-      LOOKAHEAD(CollectionType() DefTypeName() "=" "[")
+      LOOKAHEAD(CollectionType() DefTypeName() "=" ("[" | "[]"))
       CollectionType() DefTypeName() "=" ArrayInitExpression() { jjtThis.setIsTable(false); }
     |
-      LOOKAHEAD(CollectionType() DefTypeName() "=" "{")
+      LOOKAHEAD(CollectionType() DefTypeName() "=" ("{" | "{}"))
       CollectionType() DefTypeName() "=" TableInitExpression() { jjtThis.setIsTable(true); }
     |
-      LOOKAHEAD(SuperType() DefCollectionName() "=" "[")
+      LOOKAHEAD(SuperType() DefCollectionName() "=" ("[" | "[]"))
       SuperType() DefCollectionName() "=" ArrayInitExpression() { jjtThis.setIsTable(false); }
     | 
-      LOOKAHEAD(SuperType() DefCollectionName() "=" "{")
+      LOOKAHEAD(SuperType() DefCollectionName() "=" ("{" | "{}"))
       SuperType() DefCollectionName() "=" TableInitExpression() { jjtThis.setIsTable(true); }
     |
-      LOOKAHEAD(SuperType() DefTypeName() "=" "[")
+      LOOKAHEAD(SuperType() DefTypeName() "=" ("[" | "[]"))
       SuperType() DefTypeName() "=" ArrayInitExpression() { jjtThis.setIsTable(false); }
     | 
-      LOOKAHEAD(SuperType() DefTypeName() "=" "{")
+      LOOKAHEAD(SuperType() DefTypeName() "=" ("{" | "{}"))
       SuperType() DefTypeName() "=" TableInitExpression() { jjtThis.setIsTable(true); }
     |
       LOOKAHEAD(SuperType() DefTypeName() (IndefiniteDim())+ "=")
@@ -1180,13 +1185,13 @@ void ArrayInitExpression() #Arguments(>0):
 {}
 {
    (
-      "["
       (
-        "]"       // empty array
+        "[]"       // empty array
       |
-        ( Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
+        LOOKAHEAD(2)
+        "[" ( Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
       |
-        ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ LOOKAHEAD(2) "," Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* ] [ "," ] "]" )
+        "[" ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ LOOKAHEAD(2) "," Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* ] [ "," ] "]" )
       )
    )
    {
@@ -1213,11 +1218,10 @@ AbstractNode AnonymousArray() :
 {}
 {
    (
-      "["
       (
-        "]"       // empty array
+        "[]"       // empty array
       |
-        ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
+        "[" ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
       )
    )
    {       return jjtThis;
@@ -1229,11 +1233,10 @@ void TableInitExpression() #Arguments(>0):
 {}
 {
    (
-      "{"
       (
-        "}"       // empty table
+        "{}"       // empty table
       |
-        ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
+        "{" ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
       )
    )
    {
@@ -1245,11 +1248,10 @@ AbstractNode AnonymousTable() :
 {}
 {
     (
-      "{"
       (
-        "}"       // empty table
+        "{}"       // empty table
       |
-        ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
+        "{" ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
       )
     )
     {
@@ -1497,18 +1499,15 @@ void Dim() #void:
 void ArrayDim() #Dim:
 {}
 {
-    "[" (
-
-          "]"                    { jjtThis.setDimType(Dim.TYPE.INDEFINITE); }
-        |
-          LOOKAHEAD("+" "]")
-          "+" "]"                { jjtThis.setDimType(Dim.TYPE.APPEND); }
-        |
-          LOOKAHEAD("^" "]")
-          "^" "]"                { jjtThis.setDimType(Dim.TYPE.STREAM); }
-        |
-          ValueExpression() "]"  { jjtThis.setDimType(Dim.TYPE.DEFINITE); }
-        )
+    (
+      "[]"                 { jjtThis.setDimType(Dim.TYPE.INDEFINITE); }
+    |
+      "[+]"                { jjtThis.setDimType(Dim.TYPE.APPEND); }
+    |
+      "[^]"                { jjtThis.setDimType(Dim.TYPE.STREAM); }
+    |
+      "[" ValueExpression() "]"  { jjtThis.setDimType(Dim.TYPE.DEFINITE); }
+    )
 }
 
 void DefiniteDim() #Dim:
@@ -1523,9 +1522,9 @@ void IndefiniteDim() #Dim:
 {
     { jjtThis.setDimType(Dim.TYPE.INDEFINITE); }
     (
-      "[" "]"
+      "[]"
     |
-      "{" "}" { jjtThis.setTable(true); }
+      "{}" { jjtThis.setTable(true); }
     )
 }
 
@@ -1537,7 +1536,7 @@ void TableDim() #Dim:
       jjtThis.setDimType(Dim.TYPE.INDEFINITE);
     }
     (
-      "{" "}"
+      "{}"
     )
 }
 
@@ -1600,7 +1599,7 @@ void DefParameter() :
       LOOKAHEAD( IndefiniteCollectionType() Name() )
       IndefiniteCollectionType()  Name() [ ParameterList() ]
     |
-      LOOKAHEAD( <IDENTIFIER> ("[" | "{") )
+      LOOKAHEAD( <IDENTIFIER> ("[]" | "{}") )
       DefCollectionParamName()
     |
       Name()  [ ParameterList() ]
@@ -1843,6 +1842,8 @@ Block ArrayInitBlock() #DynamicElementBlock:
 {
     (
       "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
+    | 
+      "{" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "}"
     )
     [ catchBlock = ArrayInitCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -1927,6 +1928,8 @@ Block TableInitBlock() #DynamicElementBlock:
 {
     (
       "{=" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "=}"
+    | 
+      "{" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "}"
     )
     [ catchBlock = TableInitCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -2527,6 +2530,8 @@ Block ComprehensionBlock() #FunBlock:
 {
     (
       "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
+    | 
+      "{" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "}"
     )
     [ catchBlock = ComprehensionCatchBlock() { jjtThis.setCatch(catchBlock); } ]
     {
@@ -2598,8 +2603,11 @@ void CastLookahead() #void:
     LOOKAHEAD(2)
     "(" PrimitiveType()
   |
-    LOOKAHEAD("(" TypeName() "[")
-    "(" TypeName() "[" "]"
+    LOOKAHEAD("(" TypeName() "[]")
+    "(" TypeName() "[]"
+  |
+    LOOKAHEAD("(" TypeName() "{}")
+    "(" TypeName() "{}"
   |
     // the java grammar file didn't have "+" or "-" below
     "(" TypeName() ")" ( "~" | "!" | "+" | "-" | "(" | Name() | "this" | "super" | Literal() )

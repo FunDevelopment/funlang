@@ -169,7 +169,8 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
             // values are inherently static
             setDynStat(false, true);
         }
-        if (reference.getName().equals(Name.ANONYMOUS)) {
+        String name = reference.getName();
+        if (name == null || name.equals(Name.ANONYMOUS)) {
         	setAnonymous(true);
         }
     }
@@ -1727,11 +1728,11 @@ public class Instantiation extends AbstractConstruction implements ValueGenerato
     public Object getData(Context context, Definition def) throws Redirection {
         Object data = null;
         
-        if (isAnonymous() && reference instanceof Definition) {
-            data = context.construct((Definition) reference, getArguments());    
-        } else {
+        //if (isAnonymous() && reference instanceof Definition) {
+        //    data = context.construct((Definition) reference, getArguments());    
+        //} else {
             data = super.getData(context, def);
-        }
+        //}
         return data;
     }
         

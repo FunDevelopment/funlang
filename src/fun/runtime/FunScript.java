@@ -11,6 +11,7 @@
 package fun.runtime;
 
 import fun.lang.*;
+import fun.lang.SiteLoader.Linker;
 import fun.parser.FunParser;
 import fun.parser.Node;
 import fun.parser.ParseException;
@@ -429,6 +430,8 @@ public class FunScript {
             if (exception != null) {
             	throw exception;
             }
+            System.out.println("--- LINK PASS ---");
+            parseResult.jjtAccept(new SiteLoader.Linker(), null);
 
         } catch (ParseException pe) {
         	System.err.println("...syntax error in " + path + ": " + pe.getMessage());

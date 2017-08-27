@@ -525,9 +525,9 @@ core {
         int status = 200
     }
     
-    response server_response {
+    response server_response {=
     
-    }
+    =}
 
     /--------------- Runtime management ---------------/
 

@@ -62,7 +62,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants/*@egen*
         FunParser parser;
 
         if (args.length == 0) {
-            System.out.println("Reading Fun from standard input.\n\n[= ");
+            System.out.println("Reading Fun from standard input.\n\n {");
             parser = new FunParser(System.in);
         } else if (args.length == 1) {
             String filename = args[0];
@@ -408,6 +408,11 @@ TOKEN :
     // need the logic that the code and static brackets have
     | < LCONCURRENT: "{+" >
     | < RCONCURRENT: "+}" >
+
+    | < ARRAYTYPE: "[]" >
+    | < STREAMTYPE: "[^]" >
+    | < APPENDTYPE: "[+]" >
+    | < TABLETYPE: "{}" >
 
     | < LPAREN: "(" >
     | < RPAREN: ")" >
@@ -1330,7 +1335,7 @@ void SiteLevelStatement()      :
       LOOKAHEAD( KeepPrefix() )
       KeepPrefixedDefinition()
     | 
-      LOOKAHEAD( "site" Name() "[=" )
+      LOOKAHEAD( "site" Name() ("{" | "{=") )
       SiteStatement()
     |
       LOOKAHEAD( ModifiedExternalDefinition() )
@@ -1761,16 +1766,16 @@ Scoped CollectionDefinition() :
     try {
 /*@egen*/
     (
-      LOOKAHEAD(DefCollectionName() "=" "[")
+      LOOKAHEAD(DefCollectionName() "=" ("[" | "[]") )
       DefCollectionName() "=" ArrayInitExpression() [ ";" ] { jjtn000.setIsTable(false); }
     |
-      LOOKAHEAD(DefCollectionName() "=" "{")
+      LOOKAHEAD(DefCollectionName() "=" ("{" | "{}") )
       DefCollectionName() "=" TableInitExpression() [ ";" ] { jjtn000.setIsTable(true); }
     |
-      LOOKAHEAD(DefTypeName() "=" "[")
+      LOOKAHEAD(DefTypeName() "=" ("[" | "[]") )
       DefTypeName() "=" ArrayInitExpression() [ ";" ] { jjtn000.setIsTable(false); }
     |
-      LOOKAHEAD(DefTypeName() "=" "{")
+      LOOKAHEAD(DefTypeName() "=" ("{" | "{}") )
       DefTypeName() "=" TableInitExpression() [ ";" ] { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(DefTypeName() (IndefiniteDim())+ "=")
@@ -1903,10 +1908,10 @@ Scoped TypedCollectionDefinition()                      :
     try {
 /*@egen*/
     (
-      LOOKAHEAD(CollectionType() DefCollectionName() "=" "[")
+      LOOKAHEAD(CollectionType() DefCollectionName() "=" ("[" | "[]"))
       CollectionType() DefCollectionName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     |
-      LOOKAHEAD(CollectionType() DefCollectionName() "=" "{")
+      LOOKAHEAD(CollectionType() DefCollectionName() "=" ("{" | "{}"))
       CollectionType() DefCollectionName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(IndefiniteCollectionType() DefTypeName() "=" ValueInstanceExpression())
@@ -1915,22 +1920,22 @@ Scoped TypedCollectionDefinition()                      :
       LOOKAHEAD(IndefiniteCollectionType() DefTypeName() Block())
       IndefiniteCollectionType() DefTypeName() Block()
     |
-      LOOKAHEAD(CollectionType() DefTypeName() "=" "[")
+      LOOKAHEAD(CollectionType() DefTypeName() "=" ("[" | "[]"))
       CollectionType() DefTypeName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     |
-      LOOKAHEAD(CollectionType() DefTypeName() "=" "{")
+      LOOKAHEAD(CollectionType() DefTypeName() "=" ("{" | "{}"))
       CollectionType() DefTypeName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
-      LOOKAHEAD(SuperType() DefCollectionName() "=" "[")
+      LOOKAHEAD(SuperType() DefCollectionName() "=" ("[" | "[]"))
       SuperType() DefCollectionName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     | 
-      LOOKAHEAD(SuperType() DefCollectionName() "=" "{")
+      LOOKAHEAD(SuperType() DefCollectionName() "=" ("{" | "{}"))
       SuperType() DefCollectionName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
-      LOOKAHEAD(SuperType() DefTypeName() "=" "[")
+      LOOKAHEAD(SuperType() DefTypeName() "=" ("[" | "[]"))
       SuperType() DefTypeName() "=" ArrayInitExpression() { jjtn000.setIsTable(false); }
     | 
-      LOOKAHEAD(SuperType() DefTypeName() "=" "{")
+      LOOKAHEAD(SuperType() DefTypeName() "=" ("{" | "{}"))
       SuperType() DefTypeName() "=" TableInitExpression() { jjtn000.setIsTable(true); }
     |
       LOOKAHEAD(SuperType() DefTypeName() (IndefiniteDim())+ "=")
@@ -1976,13 +1981,13 @@ void ArrayInitExpression()               :
    try {
 /*@egen*/
    (
-      "["
       (
-        "]"       // empty array
+        "[]"       // empty array
       |
-        ( Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
+        LOOKAHEAD(2)
+        "[" ( Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
       |
-        ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ LOOKAHEAD(2) "," Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* ] [ "," ] "]" )
+        "[" ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ LOOKAHEAD(2) "," Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* ] [ "," ] "]" )
       )
    )/*@bgen(jjtree)*/
    {
@@ -2052,11 +2057,10 @@ AbstractNode AnonymousArray() :
    try {
 /*@egen*/
    (
-      "["
       (
-        "]"       // empty array
+        "[]"       // empty array
       |
-        ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
+        "[" ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
       )
    )/*@bgen(jjtree)*/
    {
@@ -2099,11 +2103,10 @@ void TableInitExpression()               :
    try {
 /*@egen*/
    (
-      "{"
       (
-        "}"       // empty table
+        "{}"       // empty table
       |
-        ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
+        "{" ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
       )
    )/*@bgen(jjtree)*/
    {
@@ -2146,11 +2149,10 @@ AbstractNode AnonymousTable() :
     try {
 /*@egen*/
     (
-      "{"
       (
-        "}"       // empty table
+        "{}"       // empty table
       |
-        ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
+        "{" ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
       )
     )/*@bgen(jjtree)*/
     {
@@ -2716,38 +2718,35 @@ void ArrayDim()     :
 {/*@bgen(jjtree) Dim */
     try {
 /*@egen*/
-    "[" (
-
-          "]"/*@bgen(jjtree)*/
-                                 {
-                                   jjtree.closeNodeScope(jjtn000, true);
-                                   jjtc000 = false;
-                                 }
-/*@egen*/                    { jjtn000.setDimType(Dim.TYPE.INDEFINITE); }
-        |
-          LOOKAHEAD("+" "]")
-          "+" "]"/*@bgen(jjtree)*/
-                                 {
-                                   jjtree.closeNodeScope(jjtn000, true);
-                                   jjtc000 = false;
-                                 }
+    (
+      "[]"/*@bgen(jjtree)*/
+                           {
+                             jjtree.closeNodeScope(jjtn000, true);
+                             jjtc000 = false;
+                           }
+/*@egen*/                 { jjtn000.setDimType(Dim.TYPE.INDEFINITE); }
+    |
+      "[+]"/*@bgen(jjtree)*/
+                           {
+                             jjtree.closeNodeScope(jjtn000, true);
+                             jjtc000 = false;
+                           }
 /*@egen*/                { jjtn000.setDimType(Dim.TYPE.APPEND); }
-        |
-          LOOKAHEAD("^" "]")
-          "^" "]"/*@bgen(jjtree)*/
-                                 {
-                                   jjtree.closeNodeScope(jjtn000, true);
-                                   jjtc000 = false;
-                                 }
+    |
+      "[^]"/*@bgen(jjtree)*/
+                           {
+                             jjtree.closeNodeScope(jjtn000, true);
+                             jjtc000 = false;
+                           }
 /*@egen*/                { jjtn000.setDimType(Dim.TYPE.STREAM); }
-        |
-          ValueExpression() "]"/*@bgen(jjtree)*/
+    |
+      "[" ValueExpression() "]"/*@bgen(jjtree)*/
                                  {
                                    jjtree.closeNodeScope(jjtn000, true);
                                    jjtc000 = false;
                                  }
 /*@egen*/  { jjtn000.setDimType(Dim.TYPE.DEFINITE); }
-        )/*@bgen(jjtree)*/
+    )/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -2814,13 +2813,13 @@ void IndefiniteDim()     :
 /*@egen*/
     { jjtn000.setDimType(Dim.TYPE.INDEFINITE); }
     (
-      "[" "]"
+      "[]"
     |
-      "{" "}"/*@bgen(jjtree)*/
-              {
-                jjtree.closeNodeScope(jjtn000, true);
-                jjtc000 = false;
-              }
+      "{}"/*@bgen(jjtree)*/
+           {
+             jjtree.closeNodeScope(jjtn000, true);
+             jjtc000 = false;
+           }
 /*@egen*/ { jjtn000.setTable(true); }
     )/*@bgen(jjtree)*/
     } finally {
@@ -2845,7 +2844,7 @@ void TableDim()     :
       jjtn000.setDimType(Dim.TYPE.INDEFINITE);
     }
     (
-      "{" "}"
+      "{}"
     )/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
@@ -3050,7 +3049,7 @@ void DefParameter() :
       LOOKAHEAD( IndefiniteCollectionType() Name() )
       IndefiniteCollectionType()  Name() [ ParameterList() ]
     |
-      LOOKAHEAD( <IDENTIFIER> ("[" | "{") )
+      LOOKAHEAD( <IDENTIFIER> ("[]" | "{}") )
       DefCollectionParamName()
     |
       Name()  [ ParameterList() ]
@@ -3607,6 +3606,8 @@ Block ArrayInitBlock()                     :
 /*@egen*/
     (
       "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
+    | 
+      "{" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "}"
     )
     [ catchBlock = ArrayInitCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -3774,6 +3775,8 @@ Block TableInitBlock()                     :
 /*@egen*/
     (
       "{=" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "=}"
+    | 
+      "{" [ TableDynamicElementExpression() ( LOOKAHEAD(2) "," TableDynamicElementExpression() )* [ "," ] ] "}"
     )
     [ catchBlock = TableInitCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -5822,6 +5825,8 @@ Block ComprehensionBlock()          :
 /*@egen*/
     (
       "{=" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "=}"
+    | 
+      "{" [ ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] ] "}"
     )
     [ catchBlock = ComprehensionCatchBlock() { jjtn000.setCatch(catchBlock); } ]/*@bgen(jjtree)*/
     {
@@ -6032,8 +6037,11 @@ void CastLookahead()      :
     LOOKAHEAD(2)
     "(" PrimitiveType()
   |
-    LOOKAHEAD("(" TypeName() "[")
-    "(" TypeName() "[" "]"
+    LOOKAHEAD("(" TypeName() "[]")
+    "(" TypeName() "[]"
+  |
+    LOOKAHEAD("(" TypeName() "{}")
+    "(" TypeName() "{}"
   |
     // the java grammar file didn't have "+" or "-" below
     "(" TypeName() ")" ( "~" | "!" | "+" | "-" | "(" | Name() | "this" | "super" | Literal() )
