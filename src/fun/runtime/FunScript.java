@@ -335,16 +335,14 @@ public class FunScript {
         }
         
         String expr = "main";
-        if (args.length > 1) {
-        	expr = expr + "([";
-        	for (int i = 1; i < args.length; i++) {
-        		expr = expr + '"' + args[i] + '"';
-        		if (i < args.length - 1) {
-        			expr = expr + ',';
-        		}
-        	}
-        	expr = expr + "])";
-        }
+    	expr = expr + "([";
+    	for (int i = 1; i < args.length; i++) {
+    		expr = expr + '"' + args[i] + '"';
+    		if (i < args.length - 1) {
+    			expr = expr + ',';
+    		}
+    	}
+    	expr = expr + "])";
         
         try {
             FunParser parser = new FunParser(new StringReader(expr));

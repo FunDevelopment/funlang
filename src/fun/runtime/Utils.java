@@ -15,6 +15,7 @@ import fun.lang.Redirection;
 import java.util.regex.Pattern;
 import java.util.*;
 import java.io.*;
+import java.nio.file.*;
 import java.net.*;
 
 /**
@@ -699,6 +700,19 @@ public class Utils {
         }
         return builder.toString();
     }
+
+    public static List<String> linesFromFile(String filename) throws Redirection {
+    	try {
+            Path path = Paths.get(filename);
+    		List<String> lines = Files.readAllLines(path);
+    		return lines;
+    	} catch (Exception e) {
+            String errmsg = "Exception reading " + filename + ": " + e.toString();
+            SiteBuilder.log(errmsg);
+            throw new Redirection(Redirection.STANDARD_ERROR, errmsg);
+    	}
+    }
+    
     
     public static List<String> safeLinesFromFile(String filename, String baseDir) throws Redirection {
         List<String> list = new ArrayList<String>();

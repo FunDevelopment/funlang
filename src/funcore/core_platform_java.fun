@@ -268,6 +268,8 @@ core {
 
     persistent_cache = fun.runtime.FunFileCache(cache_path)
 
+    dynamic string[] lines_from_file(filename) = fun.runtime.Utils.linesFromFile(filename)  
+
     dynamic string[] safe_lines_from_file(filename, basedir) = fun.runtime.Utils.safeLinesFromFile(filename, basedir)  
 
 
