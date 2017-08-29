@@ -344,6 +344,7 @@ public class FunScript {
     	}
     	expr = expr + "])";
         
+    	int exitCode = 0;
         try {
             FunParser parser = new FunParser(new StringReader(expr));
             Instantiation instance = parser.parseInstance();
@@ -352,6 +353,15 @@ public class FunScript {
             System.out.print(data.toString());
         } catch (Exception e) {
             System.err.println("Exception running script: " + e);
+        
+        } catch (ScriptExit se) {
+        	exitCode = se.getStatus();
+            if (exitCode == 0) {
+            	System.out.print(se.getTextOut());
+            } else {
+            	System.err.println(se.getMessage());
+            }
+        	
         } catch (Redirection r) {
             System.err.println("Redirection running script: " + r);
         }

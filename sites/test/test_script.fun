@@ -13,7 +13,8 @@ script test_script {
             " arguments: ";
             args;
         } else {
-            "test script called with no arguments.";
+            "test script called with no arguments.\n";
+            exit(0);
         }
     } 
 }

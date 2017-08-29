@@ -835,7 +835,7 @@ public class Context {
         // No need to push external definitions, because external names are
         // resolved externally
         if (!definition.isAnonymous() && !definition.isExternal()) {
-if (definition.getName().startsWith("add_piece")) {
+if (definition.getName().equals("exit")) {
  System.out.println(definition.getName() + " at ctx 886, owner: " + definition.getOwner().getName());    
 }
             // get the arguments and parameters, if any, to push on the
@@ -982,36 +982,23 @@ if (definition.getName().startsWith("add_piece")) {
         Object data = null;
         if (constructions != null) {
             StringBuffer sb = null;
-            int n = constructions.size();
-            for (int i = 0; i < n; i++) {
-                Construction object = constructions.get(i);
-                            
-                if (object instanceof RedirectStatement) {
-                    RedirectStatement redir = (RedirectStatement) object;
-                    throw redir.getRedirection(this);
+            try {
+                int n = constructions.size();
+                for (int i = 0; i < n; i++) {
+                    Construction object = constructions.get(i);
+                                
+                    if (object instanceof RedirectStatement) {
+                        RedirectStatement redir = (RedirectStatement) object;
+                        throw redir.getRedirection(this);
 
-                } else if (data == null) {
-                    if (object instanceof SubStatement) {
-                        NamedDefinition sub = getSubdefinition();
-                        data = (sub == null ? null : constructSub(sub, instantiatedDef));
+                    } else if (data == null) {
+                        if (object instanceof SubStatement) {
+                            NamedDefinition sub = getSubdefinition();
+                            data = (sub == null ? null : constructSub(sub, instantiatedDef));
 
-                    } else if (object instanceof SuperStatement) {
-                        Definition def = peek().def;
-                        NamedDefinition superDef = def.getSuperDefinition();
-                        if (superDef == null) {
-                            if (errorThreshhold <= Context.IGNORABLE_ERRORS) {
-                                throw new Redirection(Redirection.STANDARD_ERROR, "Undefined superdefinition reference in " + def.getFullName());
-                            } else {
-                                data = null;
-                            }
-                        } else {
-                            LinkedList<Definition> nextList = null;
-                            if (superDef.hasNext(this)) {
-                                  nextList = superDef.getNextList(this);
-                            }
-                            
-                            // get the specific definition for this context
-                            superDef = def.getSuperDefinition(this);
+                        } else if (object instanceof SuperStatement) {
+                            Definition def = peek().def;
+                            NamedDefinition superDef = def.getSuperDefinition();
                             if (superDef == null) {
                                 if (errorThreshhold <= Context.IGNORABLE_ERRORS) {
                                     throw new Redirection(Redirection.STANDARD_ERROR, "Undefined superdefinition reference in " + def.getFullName());
@@ -1019,61 +1006,61 @@ if (definition.getName().startsWith("add_piece")) {
                                     data = null;
                                 }
                             } else {
-                                Type st = def.getSuper(this);
-                                ArgumentList superArgs = (st != null ? st.getArguments(this) : null);
-                                NamedDefinition superFlavor = (NamedDefinition) superDef.getDefinitionForArgs(superArgs, this);
-                                data = constructSuper(superFlavor, superArgs, instantiatedDef, nextList);
+                                LinkedList<Definition> nextList = null;
+                                if (superDef.hasNext(this)) {
+                                      nextList = superDef.getNextList(this);
+                                }
+                                
+                                // get the specific definition for this context
+                                superDef = def.getSuperDefinition(this);
+                                if (superDef == null) {
+                                    if (errorThreshhold <= Context.IGNORABLE_ERRORS) {
+                                        throw new Redirection(Redirection.STANDARD_ERROR, "Undefined superdefinition reference in " + def.getFullName());
+                                    } else {
+                                        data = null;
+                                    }
+                                } else {
+                                    Type st = def.getSuper(this);
+                                    ArgumentList superArgs = (st != null ? st.getArguments(this) : null);
+                                    NamedDefinition superFlavor = (NamedDefinition) superDef.getDefinitionForArgs(superArgs, this);
+                                    data = constructSuper(superFlavor, superArgs, instantiatedDef, nextList);
+                                }
                             }
-                        }
 
-                    } else if (object instanceof Value) {
-                        data = object;
-                    } else if (object instanceof Chunk) {
-                        data = object.getData(this);
-                    } else if (object instanceof ValueGenerator) {
-                        data = ((ValueGenerator) object).getData(this);
-                    } else {
-                        data = object;
-                    }
-                    
-                    if (data instanceof Value) {
-                        data = ((Value) data).getValue();
-                    } else if (data instanceof AbstractNode) {
-                        if (instantiatedDef != null) {
-                            instantiatedDef.initNode((AbstractNode) data);
+                        } else if (object instanceof Value) {
+                            data = object;
+                        } else if (object instanceof Chunk) {
+                            data = object.getData(this);
+                        } else if (object instanceof ValueGenerator) {
+                            data = ((ValueGenerator) object).getData(this);
                         } else {
-                            vlog("Null instantiatedDef in constructions for " + peek().def.getFullName());
+                            data = object;
                         }
-                    }
-
-                } else {
-                    String str = null;
-                    if (object instanceof SubStatement) {
-                        NamedDefinition sub = getSubdefinition();
-                        if (sub != null) {
-                            Object obj = constructSub(sub, instantiatedDef);
-                            if (obj != null && !obj.equals(NullValue.NULL_VALUE)) {
-                                str = obj.toString();
-                            }
-                        }
-                            
-                    } else if (object instanceof SuperStatement) {
-                        Definition def = peek().def;
-                        NamedDefinition superDef = def.getSuperDefinition();
-                        if (superDef == null) {
-                            if (errorThreshhold <= Context.IGNORABLE_ERRORS) {
-                                throw new Redirection(Redirection.STANDARD_ERROR, "Undefined superdefinition reference in " + def.getFullName());
+                        
+                        if (data instanceof Value) {
+                            data = ((Value) data).getValue();
+                        } else if (data instanceof AbstractNode) {
+                            if (instantiatedDef != null) {
+                                instantiatedDef.initNode((AbstractNode) data);
                             } else {
-                                str = null;
+                                vlog("Null instantiatedDef in constructions for " + peek().def.getFullName());
                             }
-                        } else {
-                            LinkedList<Definition> nextList = null;
-                            if (superDef.hasNext(this)) {
-                                  nextList = superDef.getNextList(this);
+                        }
+
+                    } else {
+                        String str = null;
+                        if (object instanceof SubStatement) {
+                            NamedDefinition sub = getSubdefinition();
+                            if (sub != null) {
+                                Object obj = constructSub(sub, instantiatedDef);
+                                if (obj != null && !obj.equals(NullValue.NULL_VALUE)) {
+                                    str = obj.toString();
+                                }
                             }
-                            
-                            // get the specific definition for this context
-                            superDef = def.getSuperDefinition(this);
+                                
+                        } else if (object instanceof SuperStatement) {
+                            Definition def = peek().def;
+                            NamedDefinition superDef = def.getSuperDefinition();
                             if (superDef == null) {
                                 if (errorThreshhold <= Context.IGNORABLE_ERRORS) {
                                     throw new Redirection(Redirection.STANDARD_ERROR, "Undefined superdefinition reference in " + def.getFullName());
@@ -1081,35 +1068,63 @@ if (definition.getName().startsWith("add_piece")) {
                                     str = null;
                                 }
                             } else {
-                                Type st = def.getSuper(this);
-                                ArgumentList superArgs = (st != null ? st.getArguments(this) : null);
-                                NamedDefinition superFlavor = (NamedDefinition) superDef.getDefinitionForArgs(superArgs, this);
-                                Object obj = constructSuper(superFlavor, superArgs, instantiatedDef, nextList);
-                                if (obj != null && !obj.equals(NullValue.NULL_VALUE)) {
-                                    str = obj.toString();
+                                LinkedList<Definition> nextList = null;
+                                if (superDef.hasNext(this)) {
+                                      nextList = superDef.getNextList(this);
+                                }
+                                
+                                // get the specific definition for this context
+                                superDef = def.getSuperDefinition(this);
+                                if (superDef == null) {
+                                    if (errorThreshhold <= Context.IGNORABLE_ERRORS) {
+                                        throw new Redirection(Redirection.STANDARD_ERROR, "Undefined superdefinition reference in " + def.getFullName());
+                                    } else {
+                                        str = null;
+                                    }
+                                } else {
+                                    Type st = def.getSuper(this);
+                                    ArgumentList superArgs = (st != null ? st.getArguments(this) : null);
+                                    NamedDefinition superFlavor = (NamedDefinition) superDef.getDefinitionForArgs(superArgs, this);
+                                    Object obj = constructSuper(superFlavor, superArgs, instantiatedDef, nextList);
+                                    if (obj != null && !obj.equals(NullValue.NULL_VALUE)) {
+                                        str = obj.toString();
+                                    }
                                 }
                             }
+                        } else if (object instanceof Value) {
+                            if (!object.equals(NullValue.NULL_VALUE)) {
+                                str = ((Value) object).getString();
+                            }
+                        } else if (object instanceof Chunk) {
+                            str = ((Chunk) object).getText(this);
+                        } else if (object instanceof ValueGenerator) {
+                            str = ((ValueGenerator) object).getValue(this).getString();
+                        } else if (object != null) {
+                            str = object.toString();
                         }
-                    } else if (object instanceof Value) {
-                        if (!object.equals(NullValue.NULL_VALUE)) {
-                            str = ((Value) object).getString();
+                        if (str != null && str.length() > 0) {
+                            if (sb == null) {
+                                sb = new StringBuffer(PrimitiveValue.getStringFor(data));
+                                data = sb;
+                            }
+                            sb.append(str);
                         }
-                    } else if (object instanceof Chunk) {
-                        str = ((Chunk) object).getText(this);
-                    } else if (object instanceof ValueGenerator) {
-                        str = ((ValueGenerator) object).getValue(this).getString();
-                    } else if (object != null) {
-                        str = object.toString();
-                    }
-                    if (str != null && str.length() > 0) {
-                        if (sb == null) {
-                            sb = new StringBuffer(PrimitiveValue.getStringFor(data));
-                            data = sb;
-                        }
-                        sb.append(str);
                     }
                 }
+
+            } catch (ScriptExit se) {
+            	String textOut = null;
+                if (sb != null) {
+                	textOut = sb.toString();
+                } else if (data != null) {
+                    textOut = data.toString();
+                }
+                if (textOut != null) {
+                	se.setTextOut(textOut);
+                }
+                throw se;
             }
+
             if (sb != null && data == sb) {
                 data = sb.toString();
             }

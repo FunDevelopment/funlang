@@ -18,6 +18,10 @@ core {
     
     dynamic redirection = fun.lang.Redirection
 
+    /------ Exit a script ------/
+    
+    exit(int code) = fun.lang.ScriptExit.exit(code)
+
     /------ Concurrent execution control ------/
     
     dynamic sleep(int millis) = fun.runtime.Utils.sleep(millis)

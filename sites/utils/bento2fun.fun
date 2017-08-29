@@ -23,11 +23,13 @@
      
          if (args.count < 2) {
              "Usage: bento2fun bentofile [funfile]\n";
+             exit(1);
          } else {
              "Called with bento file: ";
              bentofile;
-             convert(bentofile, funfile);
          }
+         convert(bentofile, funfile);
+         exit(0);
      }
      
      convert(bentofile, funfile) {
