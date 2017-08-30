@@ -3,12 +3,11 @@
  --
  --  Converts bento source files to fun source files
  --
- --  Works as follows:
+ --  For each Bento file does the following:
  --
- --    * open Bento file and read past header
- --    * create new Fun file and write new header
- --    * read Bento file a line at a time 
- --    * process each line and write to Fun file
+ --    * creates new Fun file
+ --    * loads lines from Bento file
+ --    * processes each line and writes to Fun file
  --    * swap [| and |] with [/ and /], and vice versa
  --    * keep track of entering and exiting data blocks
  --    * swap [= and =] with { and } outside of data blocks
@@ -19,24 +18,26 @@
  
      public main(args[]) {
          bentofile = args[0]
-         funfile = args[1] ? args[1] : replace(bentofile, ".bento", ".fun")
      
          if (args.count < 2) {
-             "Usage: bento2fun bentofile [funfile]\n";
+             "Usage: bento2fun bentofile\n";
              exit(1);
          } else {
              "Called with bento file: ";
              bentofile;
          }
-         convert(bentofile, funfile);
+         convert(bentofile);
          exit(0);
      }
      
-     convert(bentofile, funfile) {
-         lines[] = lines_from_file(bentofile)
-         for line in lines {
-             log(line);
-         }
+     convert(bentofile) {
+         funfile = ends_with(bentofile, ".bento") ? replace(bentofile, ".bento", ".fun") : (bentofile + ".fun") 
+         bento_lines[] = lines_from_file(bentofile)
+         fun_lines[] = [
+             for line in lines {
+                 log(line);
+             }
+         ]
      }
  }
  
