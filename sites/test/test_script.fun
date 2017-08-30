@@ -12,10 +12,11 @@ script test_script {
             num_args;
             " arguments: ";
             args;
+            newline;
         } else {
             "test script called with no arguments.\n";
-            exit(0);
         }
+        exit(0);
     } 
 }
  

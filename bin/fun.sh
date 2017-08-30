@@ -81,7 +81,7 @@ then
 fi
 
 
-RUN_ARGS=(${JAVA_OPTIONS[@]} -cp ${CLASSPATH} fun.runtime.FunScript ${FUN_ARGS[*]})
+RUN_ARGS=(${JAVA_OPTIONS[@]} -cp ${CLASSPATH} fun.runtime.FunScript "$@")
 RUN_CMD=("$JAVA" ${RUN_ARGS[@]})
 
 run

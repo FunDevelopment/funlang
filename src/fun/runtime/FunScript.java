@@ -410,6 +410,7 @@ public class FunScript {
         SiteLoader.LoadOptions options = SiteLoader.getDefaultLoadOptions();
         options.multiThreaded = multithreaded;
         options.autoLoadCore = !customCore;
+        options.configurable = false;
 
         SiteLoader loader = new SiteLoader(sharedCore, null, funPath, "*.fun", recurse, options);
         loader.load();
@@ -426,6 +427,8 @@ public class FunScript {
     }
 
     public Node loadScript(String path) {
+        slog("loading script " + path);
+    	
     	Node parseResult = null;
     	Exception exception = null;
         SiteBuilder siteBuilder = new SiteBuilder(sharedCore);
