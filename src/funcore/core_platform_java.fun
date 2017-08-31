@@ -278,6 +278,8 @@ core {
 
     dynamic string[] safe_lines_from_file(filename, basedir) = fun.runtime.Utils.safeLinesFromFile(filename, basedir)  
 
+    dynamic boolean rename_file(oldfilename, newfilename) = fun.runtime.Utils.renameFile(oldfilename, newfilename) 
+
 
     /----- Run a System Command -----/ 
 

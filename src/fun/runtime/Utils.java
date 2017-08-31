@@ -876,9 +876,29 @@ public class Utils {
     }
     
     
+    public static void writeToFile(File file, String[] lines) throws Exception {
+        FileWriter fw = new FileWriter(file, false);
+        for (String line: lines) {
+            fw.write(line);
+            fw.write("\n");
+        }
+        fw.close();
+    }
+    
+    
     public static void appendToFile(File file, String data) throws Exception {
         FileWriter fw = new FileWriter(file, true);
         fw.write(data);
+        fw.close();
+    }
+
+    
+    public static void appendToFile(File file, String[] lines) throws Exception {
+        FileWriter fw = new FileWriter(file, true);
+        for (String line: lines) {
+            fw.write(line);
+            fw.write("\n");
+        }
         fw.close();
     }
     
@@ -924,6 +944,20 @@ public class Utils {
         return fileList.toArray(new String[0]);
     }
 
+    public static boolean renameFile(String oldFilename, String newFilename) {
+    	boolean success = false;
+    	try {
+            File oldFile = new File(oldFilename);
+            File newFile = new File(newFilename);
+            success = oldFile.renameTo(newFile);
+    		
+    	} catch (Exception e) {
+    		success = false;
+    	}
+    	return success;
+    }
+    
+    
     /** Get the current time in milliseconds elapsed since 1/1/1970 **/
     public static long current_time() {
     	return System.currentTimeMillis();

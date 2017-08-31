@@ -97,6 +97,7 @@ public class FunFile {
         }
     }
     
+    
     public boolean overwrite(String newContents) {
         try {
             Utils.writeToFile(file, newContents);
@@ -107,9 +108,29 @@ public class FunFile {
         }
     }
 
+    public boolean overwrite(String[] newLines) {
+        try {
+            Utils.writeToFile(file, newLines);
+            return true;
+        } catch (Throwable t) {
+            monkeyWrench = t;
+            return false;
+        }
+    }
+
     public boolean append(String newContents) {
         try {
             Utils.appendToFile(file, newContents);
+            return true;
+        } catch (Throwable t) {
+            monkeyWrench = t;
+            return false;
+        }
+    }
+
+    public boolean append(String[] newLines) {
+        try {
+            Utils.appendToFile(file, newLines);
             return true;
         } catch (Throwable t) {
             monkeyWrench = t;

@@ -34,9 +34,12 @@ public class InOperator extends BinaryOperator {
         Object collectionObj = secondVal.getValue();
         boolean isIn = false;
 
-        
-        if (collectionObj instanceof Map) {
+        if (collectionObj instanceof String) {
+            isIn = (((String) collectionObj).indexOf(memberObj.toString()) > -1);
+        	
+        } else if (collectionObj instanceof Map) {
             isIn = ((Map) collectionObj).containsValue(memberObj);
+
         } else {
             List<?> list = null;
             Class clazz = collectionObj.getClass();

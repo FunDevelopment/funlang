@@ -337,7 +337,7 @@ public class FunScript {
         
         String expr = "main";
     	expr = expr + "([";
-    	for (int i = 1; i < args.length; i++) {
+    	for (int i = 0; i < args.length; i++) {
     		expr = expr + '"' + args[i] + '"';
     		if (i < args.length - 1) {
     			expr = expr + ',';
