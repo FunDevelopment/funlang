@@ -15,26 +15,39 @@
  --    * close file
  --/
  
- script bento2fun {
+ script bjava2fjava {
  
      public main(args[]) {
-         bentofile = args[0]
+         src_path = args[0]
      
          if (args.count < 2) {
-             "Usage: bento2fun bentofile\n";
-             exit(1);
+             "Usage: bjava2fjava <path>\n";
+              exit(1);
          } else {
-             "Called with bento file: ";
-             bentofile;
+             "Called with path: ";
+             src_path;
          }
-         convert(bentofile, funfile);
+         
+         walk(src_path);
          exit(0);
      }
+     
+     walk(path) {
+         files[] = dir_tree(path)
+         
+         for f in files {
+             " * ";
+             f;
+             newline;
+         }
+     }
+     
+     
      
      convert(bentofile) {
          funfile = ends_with(bentofile, ".bento") ? replace(bentofile, ".bento", ".fun") : (bentofile + ".fun") 
          bento_lines[] = lines_from_file(bentofile)
-         fun_lines[] = 
+         fun_lines[] = []
          
          for line in lines {
              log(line);

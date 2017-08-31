@@ -42,8 +42,15 @@ public class SiteBuilder {
     public static int verbosity = TERSE;
     private static PrintStream ps = null;
     private static String logFile = "(none)";
+    
+    
+    
     public static void log(String str) {
-        if (echoSystemOut) {
+        log(str, false);
+    }
+    
+    public static void log(String str, boolean urgent) {
+    	if (echoSystemOut || urgent) {
             System.out.println(str);
         }
         if (ps != null) {
@@ -107,13 +114,13 @@ public class SiteBuilder {
                 parseResult.jjtAccept(new Logger(), null);
             }
 
-            System.out.println("--- INIT PASS ---");
+            log("--- INIT PASS ---");
             parseResult.jjtAccept(new Initializer(core), core);
 
-            System.out.println("--- RESOLVE PASS ---");
+            log("--- RESOLVE PASS ---");
             parseResult.jjtAccept(new Resolver(), null);
 
-            System.out.println("--- VALIDATE PASS ---");
+            log("--- VALIDATE PASS ---");
             Validater validater = new Validater();
             parseResult.jjtAccept(validater, null);
             List<String> problems = validater.getProblems();
@@ -131,15 +138,15 @@ public class SiteBuilder {
                 Context context = new Context(core);
 
                 if ((actions & DUMP_SOURCE) != 0) {
-                    System.out.println("--- SOURCE DUMPING PASS ---");
+                    log("--- SOURCE DUMPING PASS ---");
                     parseResult.jjtAccept(new Dumper(), null);
                 }
                 if ((actions & DUMP_TYPES) != 0) {
-                    System.out.println("--- TYPE DUMPING PASS ---");
+                    log("--- TYPE DUMPING PASS ---");
                     parseResult.jjtAccept(new TypeDumper(), context);
                 }
                 if ((actions & DUMP_PAGES) != 0) {
-                    System.out.println("--- PAGE DUMPING PASS ---");
+                    log("--- PAGE DUMPING PASS ---");
                     parseResult.jjtAccept(new PageDumper(), context);
                 }
             }

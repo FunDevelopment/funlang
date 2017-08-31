@@ -468,7 +468,7 @@ public class SiteLoader {
             FunSourceLoader loader = loaders.get(i);
             Node parseResult = loader.getParseResult();
             if (parseResult != null) {
-                System.out.println("--- LINK PASS ---");
+                log("--- LINK PASS ---");
                 parseResult.jjtAccept(new Linker(), null);
             }
         }

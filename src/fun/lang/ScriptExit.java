@@ -19,14 +19,16 @@ public class ScriptExit extends Redirection {
     private static final long serialVersionUID = 1L;
 
     
-    public static void exit(int exitCode) throws ScriptExit {
-        throw new ScriptExit(exitCode);
+    public static void exit(int exitCode, boolean preserveOutput) throws ScriptExit {
+        throw new ScriptExit(exitCode, preserveOutput);
     }
     
     private String textOut = "";
+    private boolean preserveOutput = false;
     
-    public ScriptExit(int exitCode) {
+    public ScriptExit(int exitCode, boolean preserveOutput) {
         super(exitCode, "", "Exiting with code " + exitCode);
+        this.preserveOutput = preserveOutput;
     }
     
     public void setTextOut(String textOut) {
@@ -36,4 +38,11 @@ public class ScriptExit extends Redirection {
     public String getTextOut() {
     	return textOut;
     }
+
+    public boolean getPreserveOutput() {
+    	return preserveOutput;
+    }
+
 }
+
+

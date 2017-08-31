@@ -69,6 +69,7 @@ public class FunScript {
      *
      */
     public static void main(String[] args) {
+    	SiteBuilder.echoSystemOut = false;
         Map<String, String> initParams = new HashMap<String, String>();
         String[] scriptArgs = processArgs(args, initParams);        
         String problems = initParams.get("problems");
@@ -359,6 +360,9 @@ public class FunScript {
             if (exitCode == 0) {
             	System.out.print(se.getTextOut());
             } else {
+            	if (se.getPreserveOutput()) {
+                	System.out.print(se.getTextOut());
+            	}
             	System.err.println(se.getMessage());
             }
         	
@@ -393,18 +397,18 @@ public class FunScript {
     
     /** Writes to log file and system out. **/
     static void slog(String msg) {
-        SiteBuilder.log(msg);
-        // avoid redundant echo
-        if (!SiteBuilder.echoSystemOut) {
-            System.out.println(msg);
-        }
+        slog(msg, false);
+    }
+
+    static void slog(String msg, boolean urgent) {
+        SiteBuilder.log(msg, urgent);
     }
 
     /** Load the site files */
     public boolean load(String funPath, boolean recurse) throws Exception {
         boolean loadError = false;
 
-        slog(NAME_AND_VERSION);
+        slog(NAME_AND_VERSION, true);
         slog("funpath: " + funPath);
 
         SiteLoader.LoadOptions options = SiteLoader.getDefaultLoadOptions();
@@ -441,7 +445,7 @@ public class FunScript {
             if (exception != null) {
             	throw exception;
             }
-            System.out.println("--- LINK PASS ---");
+            slog("--- LINK PASS ---");
             parseResult.jjtAccept(new SiteLoader.Linker(), null);
 
         } catch (ParseException pe) {

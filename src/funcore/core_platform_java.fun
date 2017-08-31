@@ -20,7 +20,7 @@ core {
 
     /------ Exit a script ------/
     
-    exit(int code) = fun.lang.ScriptExit.exit(code)
+    exit(int code),(int code, boolean preserveOutput) = fun.lang.ScriptExit.exit(code, preserveOutput)
 
     /------ Concurrent execution control ------/
     
@@ -243,6 +243,8 @@ core {
     dynamic encode_url(path) = fun.runtime.Utils.encodeURL(path)
     
     dynamic string[] dir(path) = fun.runtime.Utils.dir(path)
+    
+    dynamic string[] dir_tree(path) = fun.runtime.Utils.dirTree(path)
 
     file_interface file_impl(file_interface fbase, path),(base, path),(base) = fun.runtime.Utils.getFunFile(fbase, base, path)
     

@@ -539,7 +539,7 @@ Node parse(String filename)      :
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);
 /*@egen*/
-    System.out.println("Parsing " + filename + "...");
+    fun.runtime.SiteBuilder.log("Parsing " + filename + "...");
 }
 {/*@bgen(jjtree) Root */
     try {
@@ -551,7 +551,7 @@ Node parse(String filename)      :
     }
 /*@egen*/
     {
-        System.out.println("Parsing completed.");
+        fun.runtime.SiteBuilder.log("Parsing completed.");
         return jjtn000;
     }/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
@@ -6459,3 +6459,4 @@ void ExternalBlock()             :
     }
 /*@egen*/
 }
+

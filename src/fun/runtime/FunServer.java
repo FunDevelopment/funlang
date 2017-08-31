@@ -595,7 +595,7 @@ public class FunServer extends HttpServlet implements FunProcessor {
             }
             
             // have to relink to catch intersite references
-            System.out.println("--- SUPERLINK PASS ---");
+            SiteBuilder.log("--- SUPERLINK PASS ---");
             link(mainSite.getParseResults());
             Iterator<FunSite> it = sites.values().iterator();
             while (it.hasNext()) {

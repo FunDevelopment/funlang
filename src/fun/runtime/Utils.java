@@ -13,6 +13,8 @@ package fun.runtime;
 import fun.lang.Redirection;
 
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
@@ -913,6 +915,13 @@ public class Utils {
         File file = new File(path);
         String[] files = file.list();
         return files;
+    }
+
+    public static String[] dirTree(String path) throws IOException  {
+        Stream<Path> tree = Files.walk(Paths.get(path));
+        List<String> fileList = tree.map(p->p.toString()).collect(Collectors.toList());
+        tree.close();
+        return fileList.toArray(new String[0]);
     }
 
     /** Get the current time in milliseconds elapsed since 1/1/1970 **/

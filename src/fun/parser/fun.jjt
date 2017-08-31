@@ -531,12 +531,12 @@ TOKEN :
 
 Node parse(String filename) #Root:
 {
-    System.out.println("Parsing " + filename + "...");
+    fun.runtime.SiteBuilder.log("Parsing " + filename + "...");
 }
 {
     ( SiteStatement() | CoreStatement() | LOOKAHEAD( Name() ) DomainStatement() | DefaultStatement() )+ <EOF>
     {
-        System.out.println("Parsing completed.");
+        fun.runtime.SiteBuilder.log("Parsing completed.");
         return jjtThis;
     }
 }
