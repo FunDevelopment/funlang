@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ParsedNextConstruction.java
  *
- * $Id: ParsedNextConstruction.java,v 1.5 2013/04/10 03:29:30 sthippo Exp $
- *
- * Copyright (c) 2002-2013 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.parser;

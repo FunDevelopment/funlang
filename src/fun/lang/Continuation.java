@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * Continuation.java
  *
- * $Id: Continuation.java,v 1.4 2011/09/12 13:20:58 sthippo Exp $
- *
- * Copyright (c) 2003-2011 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

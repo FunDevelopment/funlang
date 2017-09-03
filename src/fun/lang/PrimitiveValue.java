@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * PrimitiveValue.java
  *
- * $Id: PrimitiveValue.java,v 1.38 2015/07/04 17:41:13 sthippo Exp $
- *
- * Copyright (c) 2002-2017 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

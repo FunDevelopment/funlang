@@ -1,12 +1,9 @@
-/* Fun
-*
-* $Id: Table.java,v 1.11 2014/05/05 13:15:25 sthippo Exp $
-*
-* Copyright (c) 2007-2015 by fundev.org
-*
-* Use of this code in source or compiled form is subject to the
-* Fun Poetic License at http://www.fundev.org/poetic-license.html
-*/
+/* Fun Compiler and Runtime Engine
+ * Table.java
+ *
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
+ */
 
 package fun.runtime;
 

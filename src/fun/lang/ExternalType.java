@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ExternalType.java
  *
- * $Id: ExternalType.java,v 1.11 2014/12/30 13:54:36 sthippo Exp $
- *
- * Copyright (c) 2002-2014 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

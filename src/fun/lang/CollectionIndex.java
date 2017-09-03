@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * CollectionIndex.java
  *
- * $Id: CollectionIndex.java,v 1.5 2012/04/26 13:41:17 sthippo Exp $
- *
- * Copyright (c) 2002-2012 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

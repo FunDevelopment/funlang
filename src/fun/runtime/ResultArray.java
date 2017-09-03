@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ResultArray.java
  *
- * $Id: ResultArray.java,v 1.5 2007/10/24 04:22:27 sthippo Exp $
- *
- * Copyright (c) 2007 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.runtime;

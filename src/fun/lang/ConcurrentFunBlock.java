@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ConcurrentFunBlock.java
  *
- * $Id: ConcurrentFunBlock.java,v 1.5 2014/10/24 20:01:36 sthippo Exp $
- *
- * Copyright (c) 2003-2014 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

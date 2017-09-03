@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * Instantiation.java
  *
- * $Id: Instantiation.java,v 1.272 2015/06/16 14:46:12 sthippo Exp $
- *
- * Copyright (c) 2002-2017 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

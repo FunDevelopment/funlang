@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * FunContext.java
  *
- * $Id: FunContext.java,v 1.19 2014/12/31 14:03:17 sthippo Exp $
- *
- * Copyright (c) 2003-2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.runtime;

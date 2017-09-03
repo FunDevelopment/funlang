@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * CollectionInstance.java
  *
- * $Id: CollectionInstance.java,v 1.9 2012/06/01 12:56:15 sthippo Exp $
- *
- * Copyright (c) 2004-2016 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

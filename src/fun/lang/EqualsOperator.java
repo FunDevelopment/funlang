@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * EqualsOperator.java
  *
- * $Id: EqualsOperator.java,v 1.7 2015/06/01 12:58:56 sthippo Exp $
- *
- * Copyright (c) 2002-2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

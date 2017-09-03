@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ComplexName.java
  *
- * $Id: ComplexName.java,v 1.14 2014/05/19 13:15:20 sthippo Exp $
- *
- * Copyright (c) 2002-2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

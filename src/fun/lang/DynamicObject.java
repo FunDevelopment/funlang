@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * DynamicObject.java
  *
- * $Id: DynamicObject.java,v 1.10 2012/04/25 13:10:07 sthippo Exp $
- *
- * Copyright (c) 2002-2012 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

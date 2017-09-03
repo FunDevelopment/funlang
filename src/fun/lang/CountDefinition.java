@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * CountDefinition.java
  *
- * $Id: CountDefinition.java,v 1.24 2015/06/30 19:46:33 sthippo Exp $
- *
- * Copyright (c) 2002-2016 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

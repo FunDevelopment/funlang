@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * IndexedInstanceReference.java
  *
- * $Id: IndexedInstanceReference.java,v 1.10 2015/04/06 13:52:55 sthippo Exp $
- *
- * Copyright (c) 2012-2016 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * FunDebugger.java
  *
- * $Id: FunDebugger.java,v 1.2 2010/11/29 14:20:05 sthippo Exp $
- *
- * Copyright (c) 2010 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.runtime;

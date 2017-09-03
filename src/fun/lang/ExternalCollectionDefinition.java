@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ExternalCollectionDefinition.java
  *
- * $Id: ExternalCollectionDefinition.java,v 1.5 2015/04/06 13:52:55 sthippo Exp $
- *
- * Copyright (c) 2002-2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

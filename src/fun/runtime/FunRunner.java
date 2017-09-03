@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * FunRunner.java
  *
- * $Id: FunRunner.java,v 1.2 2014/11/01 19:49:43 sthippo Exp $
- *
- * Copyright (c) 2014 fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.runtime;

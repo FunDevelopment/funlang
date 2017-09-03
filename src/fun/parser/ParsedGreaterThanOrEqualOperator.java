@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ParsedGreaterThanOrEqualOperator.java
  *
- * $Id: ParsedGreaterThanOrEqualOperator.java,v 1.4 2009/02/09 14:05:08 sthippo Exp $
- *
- * Copyright (c) 2002-2009 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.parser;

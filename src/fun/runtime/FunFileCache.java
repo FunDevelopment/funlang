@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * FunFileCache.java
  *
- * $Id: FunFileCache.java,v 1.3 2015/05/14 12:35:17 sthippo Exp $
- *
- * Copyright (c) 2006-2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.runtime;

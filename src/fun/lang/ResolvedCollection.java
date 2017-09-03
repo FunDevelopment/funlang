@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ResolvedCollection.java
  *
- * $Id: ResolvedCollection.java,v 1.16 2015/03/02 14:14:25 sthippo Exp $
- *
- * Copyright (c) 2004-2017 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

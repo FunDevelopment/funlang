@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ParsedIteratorValues.java
  *
- * $Id: ParsedIteratorValues.java,v 1.6 2014/10/20 12:57:28 sthippo Exp $
- *
- * Copyright (c) 2003-2014 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.parser;

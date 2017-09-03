@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * DefinitionTable.java
  *
- * $Id: DefinitionTable.java,v 1.10 2010/04/12 14:33:39 sthippo Exp $
- *
- * Copyright (c) 2002-2010 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

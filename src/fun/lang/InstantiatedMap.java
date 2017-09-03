@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * InstantiatedMap.java
  *
- * $Id: InstantiatedMap.java,v 1.18 2015/04/01 19:10:31 sthippo Exp $
- *
- * Copyright (c) 2004-2013 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

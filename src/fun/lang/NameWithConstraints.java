@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * NameWithConstraints.java
  *
- * $Id: NameWithConstraints.java,v 1.2 2011/08/29 19:29:58 sthippo Exp $
- *
- * Copyright (c) 2007-2011 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * IsaExpression.java
  *
- * $Id: IsaExpression.java,v 1.10 2015/06/18 13:18:09 sthippo Exp $
- *
- * Copyright (c) 2003-2016 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

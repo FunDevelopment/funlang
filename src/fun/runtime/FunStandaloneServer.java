@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * FunStandaloneServer.java
  *
- * $Id: FunStandaloneServer.java,v 1.4 2015/02/02 04:36:20 sthippo Exp $
- *
- * Copyright (c) 2010-2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.runtime;

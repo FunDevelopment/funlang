@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * element_decorator.java
  *
- * $Id: element_decorator.java,v 1.2 2012/04/18 18:26:46 sthippo Exp $
- *
- * Copyright (c) 2012 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

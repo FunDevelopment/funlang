@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * site_config.java
  *
- * $Id: site_config.java,v 1.4 2007/11/12 14:28:08 sthippo Exp $
- *
- * Copyright (c) 2005-2007 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

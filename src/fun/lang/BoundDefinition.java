@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * BoundDefinition.java
  *
- * $Id: BoundDefinition.java,v 1.5 2015/05/31 17:11:45 sthippo Exp $
- *
- * Copyright (c) 2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

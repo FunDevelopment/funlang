@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ConstructionGenerator.java
  *
- * $Id: ConstructionGenerator.java,v 1.6 2011/08/13 19:22:14 sthippo Exp $
- *
- * Copyright (c) 2002-2011 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.lang;

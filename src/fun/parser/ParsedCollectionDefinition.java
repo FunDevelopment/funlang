@@ -1,11 +1,8 @@
-/* Fun
+/* Fun Compiler and Runtime Engine
+ * ParsedCollectionDefinition.java
  *
- * $Id: ParsedCollectionDefinition.java,v 1.4 2015/05/18 13:06:26 sthippo Exp $
- *
- * Copyright (c) 2013-2015 by fundev.org
- *
- * Use of this code in source or compiled form is subject to the
- * Fun Poetic License at http://www.fundev.org/poetic-license.html
+ * Copyright (c) 2017 by Fun Development
+ * All rights reserved.
  */
 
 package fun.parser;
