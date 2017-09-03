@@ -835,7 +835,7 @@ public class Context {
         // No need to push external definitions, because external names are
         // resolved externally
         if (!definition.isAnonymous() && !definition.isExternal()) {
-if (definition.getName().equals("exit")) {
+if (definition.getName().equals("is_convertible")) {
  System.out.println(definition.getName() + " at ctx 886, owner: " + definition.getOwner().getName());    
 }
             // get the arguments and parameters, if any, to push on the
@@ -854,7 +854,7 @@ if (definition.getName().equals("exit")) {
             NamedDefinition superDef = definition.getSuperDefinition(this);
             Type st = definition.getSuper(this);
             
-            if (!constructed && superDef != null && definition.getName() != Name.SUB) {
+            if (!constructed && superDef != null && !superDef.isPrimitive() && definition.getName() != Name.SUB) {
 
                 // check to see if this is an alias, and the alias definition extends or equals the
                 // superdefinition, in which case we shouldn't bother constructing the superdef here,
