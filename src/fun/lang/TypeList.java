@@ -776,19 +776,6 @@ class MultiDefinition extends NamedDefinition {
 
     /** Returns true if any of the definitions return true.
      */
-    public boolean hasOver(Context context) {
-        Iterator<Definition> it = definitions.iterator();
-        while (it.hasNext()) {
-            Definition def = it.next();
-            if (def instanceof NamedDefinition && ((NamedDefinition) def).hasOver(context)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Returns true if any of the definitions return true.
-     */
     public boolean hasSub(Context context) {
         Iterator<Definition> it = definitions.iterator();
         while (it.hasNext()) {

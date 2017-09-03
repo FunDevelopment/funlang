@@ -306,12 +306,6 @@ public class PrimitiveType extends AbstractType {
 
         /** Returns <code>false</code>.
          */
-        public boolean hasOver() {
-            return false;
-        }
-
-        /** Returns <code>false</code>.
-         */
         public boolean hasSub() {
             return false;
         }

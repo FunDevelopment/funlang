@@ -94,9 +94,6 @@ public class Initializer extends FunVisitor {
                 if (((AbstractConstruction) node).hasSub()) {
                     def.setHasSub(true);
                 }
-                if (((AbstractConstruction) node).hasOver()) {
-                    def.setHasOver(true);
-                }
                 if (((AbstractConstruction) node).hasNext()) {
                     def.setHasNext(true);
                 }

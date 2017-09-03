@@ -285,11 +285,6 @@ abstract public class AbstractConstruction extends AbstractNode implements Const
         return false;
     }
     
-    /** Returns true if this construction constructs an over **/
-    public boolean hasOver() {
-        return false;
-    }
-    
     /** Returns true if this construction constructs a sub **/
     public boolean hasSub() {
         return false;

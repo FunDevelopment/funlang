@@ -522,28 +522,6 @@ public class NamedDefinition extends AnonymousDefinition {
         }
     }
 
-    
-    /** Returns true if this definition contains an <code>over</code> statement,
-     *  or is empty and <code>hasOver</code> called on its underdefinition (if any)
-     *  returns true.
-     */
-    public boolean hasOver(Context context) {
-        if (getConstructions(context).size() > 0) {
-            return ownerOfOver;
-        } else {
-            NamedDefinition underDef = getUnderDefinition(context);
-            if (underDef != null) {
-                return underDef.hasOver(context);
-            } else {
-                return false;
-            }
-        }
-    }
-
-    void setHasOver(boolean hasOver) {
-        ownerOfOver = hasOver;
-    }
-
     /** Returns true if this definition contains a <code>sub</code> statement,
      *  or is empty and <code>hasSub</code> called on its superdefinition (if any)
      *  returns true.

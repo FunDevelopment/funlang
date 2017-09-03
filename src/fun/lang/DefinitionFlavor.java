@@ -167,14 +167,6 @@ public class DefinitionFlavor extends ComplexDefinition {
         return def.getUnderDefinition(context);
     }
 
-    /** Returns true if this definition contains an <code>over</code> statement,
-     *  or is empty and <code>hasOver</code> called on its superdefinition (if any)
-     *  returns true.
-     */
-    public boolean hasOver(Context context) {
-        return (def instanceof NamedDefinition && ((NamedDefinition) def).hasOver(context));
-    }
-
     /** Returns true if this definition contains a <code>sub</code> statement,
      *  or is empty and <code>hasSub</code> called on its superdefinition (if any)
      *  returns true.
