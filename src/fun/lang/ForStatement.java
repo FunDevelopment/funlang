@@ -377,13 +377,20 @@ public class ForStatement extends AbstractConstruction implements ConstructionCo
                     Instantiation lastInstance = null;
                     Definition def = null;
                     Definition lastDef = null;
+                    Object data = null;
                     
                     while (!instance.equals(lastInstance)) {
                         lastInstance = instance;
                         def = instance.getUltimateDefinition(context);
-
+                        if (def != null && def.getDurability() != Definition.DYNAMIC && !instance.isDynamic() && !instance.getReferenceName().hasIndexes()) {
+                            data = context.getData(def, instance.getName(), instance.getArguments(), instance.getIndexes());
+                        }
+                        if (data != null) {
+                        	break;
+                        }
+                        
                         if (def != null && def != lastDef) {
-                            lastDef = def;
+                        	lastDef = def;
                             if (!def.isExternal()) {
                                 NameNode nameNode = instance.getReferenceName();
                                 if (nameNode != null && nameNode.isComplex()) {
@@ -407,7 +414,8 @@ public class ForStatement extends AbstractConstruction implements ConstructionCo
                         } 
                     }
                     
-                    if (def instanceof CollectionDefinition) {
+
+                    if (data == null && def instanceof CollectionDefinition) {
 
                         // push the collection definition on the stack, because getting
                         // the iterator may trigger the instantiation of the array
@@ -422,11 +430,9 @@ public class ForStatement extends AbstractConstruction implements ConstructionCo
 //                        it = collection.initCollection(context, args).iterator(context);
 //                        context.pop();
                     } else {
-                        Type type = null;
-                        if (forDef != null) {
-                            type = forDef.getType();
-                        }
-                        Object data = instance.generateData(context, def);
+                    	if (data == null) {
+                            data = instance.generateData(context, def);
+                    	}
                         if (data instanceof FunObjectWrapper) {
                             data = ((FunObjectWrapper) data).getData();
                         }
@@ -451,6 +457,10 @@ public class ForStatement extends AbstractConstruction implements ConstructionCo
                         } else if (data instanceof FunArray) {
                             it = new ConstructionObjectIterator(((FunArray) data).iterator());
                         } else if (data.getClass().isArray()) {
+                            Type type = null;
+                            if (forDef != null) {
+                                type = forDef.getType();
+                            }
                         	it = new ConstructionArrayIterator(data, type);
                         } else {
                             if (!(data instanceof Construction)) {

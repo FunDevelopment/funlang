@@ -2803,14 +2803,17 @@ tt {=
         show_foo_ij(foos);
     }
 
-tblpt {=
+public tblpt {=
         z{}{} = { "t1":{ "e":"E", "f":"F"}, "t2":{ "g":"G", "h":"H" } }
         dynamic show(aa) {
-            for k in aa.keys {
+          for k in aa.keys {
+            if (aa[k].count > 1) {
+                show(aa[k]);
+            } else {
                 aa[k];
             }
+          }
         }
-
         show(z);
 =}
 
@@ -2846,6 +2849,15 @@ tblpt {=
             }
         }
     }
+
+public mtt {
+  z{}{} = { "z1":{"e":"E", "f":"F"}, "z2":{"g":"G"} }
+  for k in z.keys {
+    for kk in z[k].keys {
+      z[k][kk];
+    }
+  }
+}
 
 
     public test_case mapped_array_table_test {

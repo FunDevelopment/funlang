@@ -52,6 +52,9 @@ public class NameNode extends AbstractNode implements Name {
 
     public void setName(String name) {
         this.name = name;
+if ("z.keys".equals(name)) {
+ System.out.println("ooo at namenode 56");	
+}
         cachedName = stripDelims(name);
         parts = cachedName.split("\\.");
     }

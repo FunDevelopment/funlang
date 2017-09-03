@@ -937,11 +937,22 @@ public class Utils {
         return files;
     }
 
-    public static String[] dirTree(String path) throws IOException  {
-        Stream<Path> tree = Files.walk(Paths.get(path));
-        List<String> fileList = tree.map(p->p.toString()).collect(Collectors.toList());
-        tree.close();
-        return fileList.toArray(new String[0]);
+    public static String[] dirTree(String pathName) throws IOException  {
+        String[] strs = new String[0];
+    	Path path = Paths.get(pathName);
+    	File f = new File(".");
+    	System.out.println("current dir: " + f.getAbsolutePath());
+        f = new File(pathName);
+    	System.out.println("target dir: " + f.getAbsolutePath() + "--" + (f.exists() ? "exists" : "does not exist"));
+    	if (Files.exists(path)) {
+            Stream<Path> tree = Files.walk(path);
+            List<String> fileList = tree.map(p->p.toString()).collect(Collectors.toList());
+            tree.close();
+            strs = fileList.toArray(new String[0]);
+    	} else {
+    		throw new FileNotFoundException("File " + pathName + " not found in dir_tree call");
+    	}
+        return strs;
     }
 
     public static boolean renameFile(String oldFilename, String newFilename) {

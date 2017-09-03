@@ -113,7 +113,15 @@ public class ComplexName extends NameNode implements Name, Initializable {
         FunNode node = null;
         while (it.hasNext()) {
             node = it.next();
-            if (node instanceof Name) {
+//            if (it.hasNext() && node instanceof NameWithIndexes) {
+//                String n = node.toString();
+//                if (name == null) {
+//                    name = n;
+//                } else {
+//                    name = name + '.' + n;
+//                }
+//            } else 
+            	if (node instanceof Name) {
                 String n = ((Name) node).getName();
                 if (name == null) {
                     name = n;
