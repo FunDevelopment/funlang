@@ -18,12 +18,12 @@
 script bjava2fjava {
 
     /** Header to replace old header with.  Assumes the second line will be replaced with the file name. **/
-    static new_header[] = [ "/**",
-                            "  *",
-                            "  *",
-                            "  * Copyright (c) 2017 by Fun Development",
-                            "  * All rights reserved.",
-                            "  **/" ]
+    static new_header[] = [ "/* Fun Compiler and Runtime Engine",
+                            " *",
+                            " *",
+                            " * Copyright (c) 2017 by Fun Development",
+                            " * All rights reserved.",
+                            " */" ]
     
  
     public main(args[]) {
@@ -39,6 +39,7 @@ script bjava2fjava {
         }
          
         walk(src_path);
+        "Done.\n";
         exit(0);
     }
      
@@ -53,32 +54,44 @@ script bjava2fjava {
     }
      
 
-    dynamic boolean is_convertible(lines[]) {
-        (lines.count > 0 && !("Generated" in lines[0] || "generated" in lines[0])
-            && "/*" in lines[0] && "*/" in lines[8]);    
-    }     
+    dynamic boolean is_convertible(lines[]) = lines.count > 0
+                                                 && !("Generated" in lines[0] || "generated" in lines[0])
+                                                     && "/*" in lines[0] && "*/" in lines[8]    
+
+    dynamic boolean show_convertible(lines_to_check[]) {
+        lines[] = lines_to_check
+        "    -- lines count: ";
+        lines.count;
+        newline;
+        "    -- line 0: ";
+        lines[0];
+        newline;
+        if (lines.count > 8) {
+            "    -- line 8: ";
+            lines[8];
+            newline;
+        }
+    }
      
     dynamic convert(srcfile) {
+        srcfilename = substring(srcfile, last_index_of(srcfile, "/") + 1)
+        dynamic new_header_1 = " * " + srcfilename 
         lines[] = lines_from_file(srcfile)
         lines_after_header[] = [ for int i from 0 and line in lines { if (i > 8) { line } } ]
-        converted_lines[] = new_header + lines_after_header
+        dynamic header_lines[] = [ new_header[0], new_header_1, for int i from 2 to 6 { new_header[i] } ]
+        converted_lines[] = header_lines + lines_after_header
+        converted_text { for line in converted_lines { line; newline; } }
+
         if (is_convertible(lines)) {
             "Converting source file ";
             srcfile;
             newline;
-            eval(lines);
             if (rename_file(srcfile, srcfile + ".old")) {
-                "lines_after_header: ";
-                lines_after_header;
-                newline;
-                "converted_lines: ";
-                converted_lines;
-                newline;
-                //if (!file(srcfile).overwrite(converted_lines)) {
-                //   "  ...unable to convert ";
-                //   srcfile;
-                //   newline;
-                //}
+                if (!file(srcfile).overwrite(converted_text)) {
+                   "  ...unable to convert ";
+                   srcfile;
+                   newline;
+                }
             
             } else {
                "  ...unable to rename ";
