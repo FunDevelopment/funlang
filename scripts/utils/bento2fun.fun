@@ -78,13 +78,21 @@ script bento2fun {
         step_7(str) = replace(str, CLOSE_DATA_2, CLOSE_DATA_1)      
         step_8(str) = replace(str, close_data_temp, CLOSE_DATA_2)      
         step_9(str) = replace(str, null_block_temp, NULL_BLOCK)
+
+        funcs_A[10] = [ step_0, step_1A, step_2A, step_3, step_4, step_5, step_6, step_7, step_8, step_9 ]          
+        funcs_B[10] = [ step_0, step_1B, step_2B, step_3, step_4, step_5, step_6, step_7, step_8, step_9 ]          
         
-        dynamic apply(funcs[], x) {
-            cache_x(xx) = xx
+        dynamic apply(funcs[], x), (funcs[], int n, x) {
+            int last_func_ix = funcs.count - 1
+            last_func = funcs[last_func_ix]
+            int func_ix = n ?? n : 0
+            func = funcs[func_ix]
             
-            eval(cache_x(x));
-            for f in funcs { eval(cache_x(: f(cache_x) :)); }
-            cache_x;
+            if (ix == last_func_ix) {
+                last_func(x);
+            } else if (func_ix < last_func && func_ix >= 0) {
+                apply(funcs, func_ix + 1, func(x));
+            }
         }
        
         dynamic process_line(x) {
@@ -95,9 +103,9 @@ script bento2fun {
             eval(add_to_data_levels(num_open_data));
             
             if (data_levels > 0) {
-                step_9( step_8( step_7( step_6( step_5( step_4 (step_3( step_2B (step_1B ( step_0(x) )))))))));
+                apply_funcs(funcs_B, x);
             } else {
-                step_9( step_8( step_7( step_6( step_5( step_4 (step_3( step_2A (step_1A ( step_0(x) )))))))));
+                apply_funcs(funcs_A, x);
             }
             
             eval(add_to_data_levels(-num_close_data));
