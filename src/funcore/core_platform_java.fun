@@ -145,6 +145,11 @@ core {
         }
     }
 
+    /** Returns the number of instances of a substring in a string. **/
+    dynamic int count_instances_of(str, substr) {
+        fun.runtime.Utils.countInstancesOf(str, substr);
+    }
+
     /** Returns a portion of the passed string, starting at position start_ix and ending
      *  just before position end_ix, or, if end_ix is not provided, to the end of string.
      **/
@@ -210,7 +215,7 @@ core {
 	 */ 
     dynamic replace(str, oldstr, newstr) = fun.runtime.Utils.replaceOccurrences(str, oldstr, newstr)
 
-    dynamic replace_all(str, strmap[]) = fun.runtime.Utils.replaceAllOccurrences(str, strmap)
+    dynamic replace_all(str, strmap{}) = fun.runtime.Utils.replaceAllOccurrences(str, strmap)
 
     dynamic concat(str1, str2),(strs[]) = (strs ? fun.runtime.Utils.concat(strs) : fun.runtime.Utils.concat(str1, str2)) 
 

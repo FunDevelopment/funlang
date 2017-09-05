@@ -53,7 +53,6 @@ public class NamedDefinition extends AnonymousDefinition {
     private NameNode paramAlias = null;
     private NameNode reference = null;
     private boolean ownerOfNext = false;
-    private boolean ownerOfOver = false;
     private boolean ownerOfSub = false;
     private boolean ownerOfDefs = false;
     private List<KeepStatement> keeps = null;
@@ -76,7 +75,6 @@ public class NamedDefinition extends AnonymousDefinition {
             alias = ndef.alias;
             paramAlias = ndef.paramAlias;
             ownerOfNext = ndef.ownerOfNext;
-            ownerOfOver = ndef.ownerOfOver;
             ownerOfSub = ndef.ownerOfSub;
             ownerOfDefs = ndef.ownerOfDefs;
             keeps = ndef.keeps;

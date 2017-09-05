@@ -888,17 +888,17 @@ void DeepStatement() #void:
 void NamedExpression() #void:
 {}
 {
-      LOOKAHEAD( NamedConstruction() )
-      NamedConstruction()
-    |
-      LOOKAHEAD( TypedDefinition() )
-      TypedDefinition()
-    |
-      LOOKAHEAD( TypedOrNamedExternalDefinition(-1, -1) )
+    (      LOOKAHEAD(TypedOrNamedExternalDefinition(-1, -1))  
       TypedOrNamedExternalDefinition(-1, -1)
+    |
+      LOOKAHEAD((CollectionType() | SuperType()) (DefElementName() | DefTypeName() | DefCollectionName()))
+      TypedDefinition()
     |
       LOOKAHEAD( NamedDefinition() )
       NamedDefinition()
+    | 
+      NamedConstruction()
+    )
 }
 
 
@@ -965,6 +965,25 @@ Scoped ModifiedExternalDefinition() #void:
         def.setModifiers(access, dur);
         return def;
     }
+}
+
+
+void TypedOrNamedExternalDefinitionLookahead() #void:
+{}
+{
+    (
+      LOOKAHEAD(DefTypeName() "[&]")
+      NameComponent()
+    |       
+      LOOKAHEAD(CollectionType() | (StandardType() DefCollectionName()) ("[&]" | "=" "[&]"))
+      NameComponent()
+    |
+      LOOKAHEAD(ExternalTypedDefinition())
+      NameComponent()
+    |
+      LOOKAHEAD(ExternalCollectionDefinition())
+      NameComponent()
+    )
 }
 
 Scoped TypedOrNamedExternalDefinition(int access, int dur) #void:
@@ -1071,6 +1090,20 @@ Scoped NamedDefinition() #void:
     {
         return def;
     }
+}
+
+ 
+
+void TypedDefinitionLookahead() #void:
+{}
+{
+    (
+      LOOKAHEAD((CollectionType() | SuperType()) (DefElementName() | DefTypeName() | DefCollectionName()))
+      NameComponent()
+    |
+      LOOKAHEAD(SuperType() (DefElementName() | DefTypeName()))
+      NameComponent()
+    )
 }
 
 Scoped TypedDefinition() #void:

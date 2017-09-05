@@ -148,6 +148,18 @@ public class Utils {
         }
     }
 
+    public static int countInstancesOf(String str, String substr) {
+    	int n = 0;
+    	int lensubstr = (substr == null ? 0 : substr.length());
+    	if (str != null && lensubstr > 0) {
+    		for (int ix = str.indexOf(substr); ix >= 0; str = str.substring(ix + lensubstr)) {
+    			n++;
+    		}
+     	}
+    	return n;
+    }
+    
+    
     public static String substring(String str, int startIx) {
         return str.substring(startIx);
     }
