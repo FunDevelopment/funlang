@@ -4096,6 +4096,16 @@ blt {
         if (rand_6("p") == rand_6("q")) [/ P /] else [/ x /]
     }
 
+public ct {
+    dynamic double rand = java.lang.Math.random
+    double cached_rand = rand
+    double rand_1 {
+        cached_rand;
+    }
+    if (cached_rand == rand_1(::)) [/ N /] else [/ x /]
+}
+
+
 
     string[] abc = [ "A", "B", "C" ]
     string[] defg = [ "D", "E", "F", "G" ]
@@ -5179,7 +5189,7 @@ kst {=
         name = "Higher Order Definition Test"
         key = "ho_def"
 
-        expected = "ABCDE"
+        expected = "ABCDEF"
 
         dynamic func_1(x) {
             x;
@@ -5192,7 +5202,7 @@ kst {=
         dynamic func_3(ff, y) {
             ff(y);
         }
-
+        
         ho_test_1(f, b) {
             f("A");
             f(b);
@@ -5206,30 +5216,27 @@ kst {=
         ho_test_3(f) {
             f(func_1, "E");
         }
+        
+        ho_test_4 = func_3
 
         ho_test_1(func_1, "B");
         ho_test_2(func_2);
         ho_test_3(func_3);
+        ho_test_4(func_1, "F");
     }
 
-hot {=
+public hot {=
    dynamic func_1(x) {
      x;
    }
    dynamic func_3(ff, y) {
        ff(y);
    }
-   ho_test_3(f) {
-       f(func_1, "E");
-   }
-   
-   ho_test(f, b) {
-       f(b);
-   }
-   
-   ho_test(func_1, "B");
-   
-   //ho_test_3(func_3);
+
+   func_4 = func_3
+
+   func_3(func_1, 'G');
+   func_4(func_1, 'H');      
 =}
 
 

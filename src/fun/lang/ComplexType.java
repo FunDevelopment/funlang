@@ -337,7 +337,7 @@ public class ComplexType extends AbstractType implements Initializable {
                            context.push(aliasDef, aliasParams, aliasArgs, false);
                            numPushes++;
                            Instantiation aliasInstance = aliasDef.getAliasInstance();
-                           aliasDef = (Definition) aliasInstance.getDefinition(context);
+                           aliasDef = aliasInstance.getDefinition(context);
                            if (aliasDef == null || aliasDef instanceof ExternalDefinition) {
                                break;
                            }

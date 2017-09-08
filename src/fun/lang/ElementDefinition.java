@@ -339,6 +339,10 @@ System.err.println("***** ElementDefinition getBaseDefinition null due to null o
         return getBaseDefinition(context).getSuperDefinition(context);
     }
     
+    protected ParameterList getMatch(ArgumentList args, Context argContext) {
+    	return ((AnonymousDefinition) getBaseDefinition(argContext)).getMatch(args, argContext);
+    }
+
     public String toString(String prefix) {
         StringBuffer sb = new StringBuffer(prefix);
         sb.append(getContents().toString());

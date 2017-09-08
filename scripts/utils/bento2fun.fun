@@ -24,6 +24,7 @@ script bento2fun {
         } else {
             "Called with path: ";
             bentosrc;
+            newline;
         }
         walk(bentosrc);
         "Done.\n";
@@ -82,16 +83,16 @@ script bento2fun {
         funcs_A[10] = [ step_0, step_1A, step_2A, step_3, step_4, step_5, step_6, step_7, step_8, step_9 ]          
         funcs_B[10] = [ step_0, step_1B, step_2B, step_3, step_4, step_5, step_6, step_7, step_8, step_9 ]          
         
-        dynamic apply(funcs[], x), (funcs[], int n, x) {
+        dynamic apply_funcs(funcs[], x), (funcs[], int n, x) {
             int last_func_ix = funcs.count - 1
             last_func = funcs[last_func_ix]
             int func_ix = n ?? n : 0
             func = funcs[func_ix]
             
-            if (ix == last_func_ix) {
+            if (func_ix == last_func_ix) {
                 last_func(x);
-            } else if (func_ix < last_func && func_ix >= 0) {
-                apply(funcs, func_ix + 1, func(x));
+            } else if (func_ix < last_func_ix && func_ix >= 0) {
+                apply_funcs(funcs, func_ix + 1, func(x));
             }
         }
        

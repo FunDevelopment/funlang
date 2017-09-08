@@ -152,7 +152,7 @@ public class Utils {
     	int n = 0;
     	int lensubstr = (substr == null ? 0 : substr.length());
     	if (str != null && lensubstr > 0) {
-    		for (int ix = str.indexOf(substr); ix >= 0; str = str.substring(ix + lensubstr)) {
+    		for (int ix = str.indexOf(substr); ix >= 0; str = str.substring(ix + lensubstr), ix = str.indexOf(substr)) {
     			n++;
     		}
      	}

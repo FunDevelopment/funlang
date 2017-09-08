@@ -302,7 +302,18 @@ public class ElementReference extends AnonymousDefinition {
         return instance;
     }
     
-    
+    public ParameterList getParamsForArgs(ArgumentList args, Context argContext) {
+        try {
+        	Definition def = getElementDefinition(argContext);
+            if (def != null) {
+                return ((AnonymousDefinition) def).getMatch(args, argContext);
+            }
+        } catch (Redirection r) {
+        	;
+        }
+    	return null;
+    }
+
     public String toString(String prefix) {
         StringBuffer sb = new StringBuffer(prefix);
 

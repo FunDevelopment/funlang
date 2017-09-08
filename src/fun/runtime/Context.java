@@ -825,7 +825,11 @@ public class Context {
         if (definition instanceof NamedDefinition) {
             instantiatedDef = (NamedDefinition) definition;
         }
-
+if (definition.getName().equals("last_func")) {
+  System.out.println(definition.getName() + " at ctx 829");
+}
+        
+        
         ParameterList params = null;
 
         // determine if this defines a namespace and therefore a new context level.
@@ -835,6 +839,21 @@ public class Context {
             // get the arguments and parameters, if any, to push on the
             // context stack with the definition
             params = definition.getParamsForArgs(args, this);
+            
+            // if there are args but this definition has no params, check to see if it's an
+            // alias and if so look for params there
+            if (params == null && args != null && definition.isAlias()) {
+                Definition aliasDef = definition;
+                while (params == null && aliasDef.isAlias() && (aliasDef.getDurability() == Definition.DYNAMIC || getData(aliasDef, aliasDef.getName(), args, null) == null)) {
+                	Instantiation aliasInstance = aliasDef.getAliasInstance();
+                    aliasDef = aliasInstance.getDefinition(this);
+                    if (aliasDef == null) {
+                        break;
+                    }
+                    params = aliasDef.getParamsForArgs(args, this);
+                }
+                definition = aliasDef;
+            }
             push(definition, params, args, true);
             pushedContext = true;
         }
@@ -887,20 +906,20 @@ public class Context {
 
             // not handled by one of the above cases
             if (!constructed) {
-                if (definition.isAlias()) {
-                    Construction construction = constructions.get(0);
-                    if (construction instanceof Value) {
-                        data = construction;
-                    } else if (aliasInstance != null) {
-                        data = aliasInstance.getData(this, aliasDef);
-                    } else if (construction instanceof ValueGenerator) {
-                        data = ((ValueGenerator) construction).getData(this);
-                    } else {
-                        data = construction.getData(this);
-                    }
-                } else {
+//                if (definition.isAlias()) {
+//                    Construction construction = constructions.get(0);
+//                    if (construction instanceof Value) {
+//                        data = construction;
+//                    } else if (aliasInstance != null) {
+//                        data = aliasInstance.getData(this, aliasDef);
+//                    } else if (construction instanceof ValueGenerator) {
+//                        data = ((ValueGenerator) construction).getData(this);
+//                    } else {
+//                        data = construction.getData(this);
+//                    }
+//                } else {
                     data = construct(constructions);
-                }
+//                }
             }
             
             if (data instanceof Value) {
