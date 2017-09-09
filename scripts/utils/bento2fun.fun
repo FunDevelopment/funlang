@@ -112,7 +112,7 @@ script bento2fun {
             eval(add_to_data_levels(-num_close_data));
         }
 
-        "Converting source file ";
+        "Converting ";
         bentofile;
         newline;
         for line in bento_lines {
