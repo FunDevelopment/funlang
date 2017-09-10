@@ -1148,8 +1148,7 @@ class ExternalConstruction extends AbstractConstruction implements ValueGenerato
             } catch (NoSuchMethodException nsme) {
                 constructor = ExternalDefinition.getClosestConstructor(instanceClass, params, paramDefs);
                 if (constructor == null) {
-                    vlog("No appropriate constructor in class " + instanceClass.getName());
-                    throw nsme;
+                    vlog("No constructor found for class " + instanceClass.getName());
                 }
             }
 

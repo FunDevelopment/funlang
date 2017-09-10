@@ -39,6 +39,7 @@ script bento2fun {
                 convert(f);
             }
         }
+        console_println("done walking");
     }
 
     dynamic convert(bentofile) {
@@ -49,7 +50,7 @@ script bento2fun {
         keep as data_levels: dynamic int add_to_data_levels(int n) = data_levels + n
         
         keep: fun_text = ""
-        keep as fun_text: dynamic add_to_fun_text(text) = fun_text + text
+        keep as fun_text: dynamic add_to_fun_text(text) = fun_text + text + newline
 
         static OPEN_CODE_0 = "[="
         static CLOSE_CODE_0 = "=]"
@@ -79,9 +80,10 @@ script bento2fun {
         step_7(str) = replace(str, CLOSE_DATA_2, CLOSE_DATA_1)      
         step_8(str) = replace(str, close_data_temp, CLOSE_DATA_2)      
         step_9(str) = replace(str, null_block_temp, NULL_BLOCK)
+        step_10(str) = replace(str, "bento", "fun")
 
-        funcs_A[10] = [ step_0, step_1A, step_2A, step_3, step_4, step_5, step_6, step_7, step_8, step_9 ]          
-        funcs_B[10] = [ step_0, step_1B, step_2B, step_3, step_4, step_5, step_6, step_7, step_8, step_9 ]          
+        funcs_A[11] = [ step_0, step_1A, step_2A, step_3, step_4, step_5, step_6, step_7, step_8, step_9, step_10 ]          
+        funcs_B[11] = [ step_0, step_1B, step_2B, step_3, step_4, step_5, step_6, step_7, step_8, step_9, step_10 ]          
         
         dynamic apply_funcs(funcs[], x), (funcs[], int n, x) {
             int last_func_ix = funcs.count - 1

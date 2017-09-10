@@ -319,7 +319,7 @@ core {
     dynamic vlog(str) = fun.runtime.SiteBuilder.vlog(str)
     
     /** sends a string and a newline to the console, bypasses log file **/
-    dynamic println(str) = java.lang.System.out.println
+    dynamic console_println(str) = java.lang.System.out.println(str)
     
     /** sends an error message to log file/console **/
     dynamic err(str) = fun.runtime.SiteBuilder.err(str)
