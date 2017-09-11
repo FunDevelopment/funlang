@@ -1618,7 +1618,7 @@ pt {=
         bam {
             dynamic boo(x) = x
         }
-
+/-----
         foo[] de = [ foo("D"), foo("E") ]
         foo[] fg = [ foo("F"), foo("G") ]
         char[] hi = [ 'H', 'I' ]
@@ -1634,7 +1634,7 @@ pt {=
         }
 
         tp[] tps = [ tp1 ]
-        
+-----/        
         tp tp1 {
             int nr = 1
         }

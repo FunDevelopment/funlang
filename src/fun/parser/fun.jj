@@ -4443,9 +4443,9 @@ void NameComponent()      :
     (
       SpecialName()
     |
-      LOOKAHEAD(Name() "[") NameWithIndexes()
+      LOOKAHEAD(Name() Index()) NameWithIndexes()
     | 
-      LOOKAHEAD(Name() Arguments() "[") NameWithIndexes()
+      LOOKAHEAD(Name() Arguments() Index()) NameWithIndexes()
     |
       LOOKAHEAD(Name() ("(:" | "(")) NameWithArguments()
     |
@@ -4626,7 +4626,8 @@ void NameWithIndexes() :
 {/*@bgen(jjtree) NameWithIndexes */
     try {
 /*@egen*/
-    t = <IDENTIFIER> { jjtn000.setName(t.image); } [ Arguments() ] ( Index() )+/*@bgen(jjtree)*/
+    t = <IDENTIFIER> { jjtn000.setName(t.image); } [ Arguments() ]
+    ( LOOKAHEAD(Index()) Index() )+/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -6492,3 +6493,4 @@ void ExternalBlock()             :
     }
 /*@egen*/
 }
+

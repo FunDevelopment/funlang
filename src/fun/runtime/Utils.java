@@ -25,7 +25,7 @@ import java.net.*;
  */
 
 public class Utils {
-	
+    
     
     /** Causes the current thread (i.e., the current instantiation) to sleep.  Should
      *  only be called from a concurrent instantiation. 
@@ -41,13 +41,13 @@ public class Utils {
         }
     }
     
-	public static String chr$(int n) {
-	    return Character.toString((char) n);	
-	}
-	
-	public static String hex(int n) {
-	    return Integer.toHexString(n);
-	}
+    public static String chr$(int n) {
+        return Character.toString((char) n);    
+    }
+    
+    public static String hex(int n) {
+        return Integer.toHexString(n);
+    }
 
     public static Map<String, Object> newSortedTable() {
         return new TreeMap<String, Object>();
@@ -77,10 +77,10 @@ public class Utils {
     }
     
     public static int strlen(String str) {
-    	if (str != null) {
-    		return str.length();
+        if (str != null) {
+            return str.length();
         } else {
-        	return 0;
+            return 0;
         }
     }
 
@@ -149,14 +149,14 @@ public class Utils {
     }
 
     public static int countInstancesOf(String str, String substr) {
-    	int n = 0;
-    	int lensubstr = (substr == null ? 0 : substr.length());
-    	if (str != null && lensubstr > 0) {
-    		for (int ix = str.indexOf(substr); ix >= 0; str = str.substring(ix + lensubstr), ix = str.indexOf(substr)) {
-    			n++;
-    		}
-     	}
-    	return n;
+        int n = 0;
+        int lensubstr = (substr == null ? 0 : substr.length());
+        if (str != null && lensubstr > 0) {
+            for (int ix = str.indexOf(substr); ix >= 0; str = str.substring(ix + lensubstr), ix = str.indexOf(substr)) {
+                n++;
+            }
+         }
+        return n;
     }
     
     
@@ -295,7 +295,7 @@ public class Utils {
         if (ix >= 0) {
             return str.substring(ix + 1);
         } else {
-        	return null;
+            return null;
         }
     }
 
@@ -448,7 +448,7 @@ public class Utils {
                 if (c == '<') {
                     sb.append("&lt;");
                 } else {
-                	sb.append(c);
+                    sb.append(c);
                 }
             }   
             return sb.toString();
@@ -474,13 +474,13 @@ public class Utils {
         }
     }
     public static String replaceAllOccurrences(String str, Map<String, String> replacementMap) {
-    	Set<Map.Entry<String, String>> entries = replacementMap.entrySet();
-    	Iterator<Map.Entry<String, String>> it = entries.iterator();
-    	while (it.hasNext()) {
-        	Map.Entry<String, String> entry = it.next();
-        	str = replaceOccurrences(str, entry.getKey(), entry.getValue());
-    	}
-    	return str;
+        Set<Map.Entry<String, String>> entries = replacementMap.entrySet();
+        Iterator<Map.Entry<String, String>> it = entries.iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, String> entry = it.next();
+            str = replaceOccurrences(str, entry.getKey(), entry.getValue());
+        }
+        return str;
     }
     
 
@@ -491,7 +491,7 @@ public class Utils {
         }
         int ix = str.indexOf(oldField);
         if (ix < 0) {
-        	return str;
+            return str;
         }
 
         StringBuilder sb = new StringBuilder();
@@ -713,15 +713,15 @@ public class Utils {
     }
 
     public static List<String> linesFromFile(String filename) throws Redirection {
-    	try {
+        try {
             Path path = Paths.get(filename);
-    		List<String> lines = Files.readAllLines(path);
-    		return lines;
-    	} catch (Exception e) {
+            List<String> lines = Files.readAllLines(path);
+            return lines;
+        } catch (Exception e) {
             String errmsg = "Exception reading " + filename + ": " + e.toString();
             SiteBuilder.log(errmsg);
             throw new Redirection(Redirection.STANDARD_ERROR, errmsg);
-    	}
+        }
     }
     
     
@@ -836,11 +836,11 @@ public class Utils {
     }
 
     public static String getenv(String varname) {
-    	String envvar = null;
+        String envvar = null;
         try {
-        	envvar = System.getenv(varname);
+            envvar = System.getenv(varname);
         } catch (Throwable t) {
-        	SiteBuilder.log("Unable to get environment variable " + varname + ": " + t.toString());
+            SiteBuilder.log("Unable to get environment variable " + varname + ": " + t.toString());
         }
         
         return envvar;
@@ -848,7 +848,7 @@ public class Utils {
     
     
     public static String getFileContents(String fileName) throws Exception {
-    	return getFileContents(fileName, 4096);
+        return getFileContents(fileName, 4096);
     }
     
     public static String getFileContents(File file) throws Exception {
@@ -871,10 +871,10 @@ public class Utils {
 
         
     public static String getFileContents(Reader reader) throws Exception {       
-  		StringBuilder sb = new StringBuilder();
-		for (int c = reader.read(); c >= 0; c = reader.read()) {
-			sb.append((char) c);
-		}
+          StringBuilder sb = new StringBuilder();
+        for (int c = reader.read(); c >= 0; c = reader.read()) {
+            sb.append((char) c);
+        }
         return sb.toString();
     }
 
@@ -948,39 +948,39 @@ public class Utils {
 
     public static String[] dirTree(String pathName) throws IOException  {
         String[] strs = new String[0];
-    	Path path = Paths.get(pathName);
-    	File f = new File(".");
-    	System.out.println("current dir: " + f.getAbsolutePath());
+        Path path = Paths.get(pathName);
+        File f = new File(".");
+        System.out.println("current dir: " + f.getAbsolutePath());
         f = new File(pathName);
-    	System.out.println("target dir: " + f.getAbsolutePath() + "--" + (f.exists() ? "exists" : "does not exist"));
-    	if (Files.exists(path)) {
+        System.out.println("target dir: " + f.getAbsolutePath() + "--" + (f.exists() ? "exists" : "does not exist"));
+        if (Files.exists(path)) {
             Stream<Path> tree = Files.walk(path);
             List<String> fileList = tree.map(p->p.toString()).collect(Collectors.toList());
             tree.close();
             strs = fileList.toArray(new String[0]);
-    	} else {
-    		throw new FileNotFoundException("File " + pathName + " not found in dir_tree call");
-    	}
+        } else {
+            throw new FileNotFoundException("File " + pathName + " not found in dir_tree call");
+        }
         return strs;
     }
 
     public static boolean renameFile(String oldFilename, String newFilename) {
-    	boolean success = false;
-    	try {
+        boolean success = false;
+        try {
             File oldFile = new File(oldFilename);
             File newFile = new File(newFilename);
             success = oldFile.renameTo(newFile);
-    		
-    	} catch (Exception e) {
-    		success = false;
-    	}
-    	return success;
+            
+        } catch (Exception e) {
+            success = false;
+        }
+        return success;
     }
     
     
     /** Get the current time in milliseconds elapsed since 1/1/1970 **/
     public static long current_time() {
-    	return System.currentTimeMillis();
+        return System.currentTimeMillis();
     }
 }
 
