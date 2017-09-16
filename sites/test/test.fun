@@ -6,7 +6,7 @@ site test {
     extern java java.**
 
     copyright [/
-        Copyright &copy; 2004-2016 by <a href="http://www.fundev.org">fundev.org</a><br>
+        Copyright &copy; 2017 by <a href="http://www.fundev.org">fundev.org</a><br>
     /]
 
     /------------------------------------------------------------------/
@@ -243,14 +243,6 @@ site test {
         else [/ x /]
     }
 
-bat {=
-
-byte[2] bb = [ 257, 256 ]
-
-bb[0];
-
-=}
-
 
     public test_case name_resolution_test {
         int category = definitions
@@ -413,11 +405,6 @@ bb[0];
         
     }
     
-ss1 {=
-        stat_sub_1.hi;
-    stat_sub_1.b;
-=}    
-
 
     global glob_super {
         a = "A"
@@ -817,46 +804,6 @@ ss1 {=
     
     }
 
-ott {=
-        owner_base {
-        
-            id = owner.type;
-            
-            "X";
-        }
-        
-        owner_base A [/]
-        
-        A B [/]
-        
-        owner_base C [/]
-        
-        C D [/]
-        
-        owner_base owner_array_1[] = [ C, D ]
-        
-        owner_base E {
-            id;
-        }
-        
-        owner_base F {
-            id;
-        }
-        
-        F G [/]
-        
-        owner_base owner_array_2[] = [ F, G ]
-        
-        A.id;
-        B.id;
-        for owner_base ob in owner_array_1 {
-           ob.id;
-        }
-        E; 
-        for owner_base ob in owner_array_2 {
-           ob;
-        }
-=}
 
     public test_case simple_instantiation_test {
         int category = instantiations
@@ -927,7 +874,6 @@ ott {=
         super_3 sub_null [/]
 
         sub_null sub_sub_3 [/ L /]
-        
 
         sub_sub_1;
         sub_2;
@@ -1003,7 +949,6 @@ ott {=
         test_sub.k;
         test_super('M');
         test_super('x', 'P');
-        
     }
 
 
@@ -1186,26 +1131,6 @@ ott {=
         else [/ x /]
         
     }
-
-at {=
-    test_super {
-        test_child [?]
-    
-        [/ A /] catch [/ x /]
-    }
-    
-    test_super test_sub_1 {
-        [/ B /] catch [/ x /]
-    }
-    
-    test_super test_sub_2 {
-        {
-            test_child;
-            [/ x /]
-        } catch [/ C /]
-    }
-    test_sub_2;
-=}
 
 
     public test_case return_type_test {
@@ -1427,34 +1352,6 @@ at {=
         k3[2];
     }
 
-iat {=
-        ia_target {
-            child [/ B /]
-            [/ A /]  
-        }
-               
-        ia_array[] = [ ia_target, ia_table, ia_table_2, "X" ]
-        ia_array_2[] = [ "X", "D" ]
-        
-        ia_table{} = { "c": "C", "d": ia_array_2 }
-        ia_table_2{} = { "E": "x", "F": "x", "G": "x" }
-        
-        ia_array_type[] = []
-        ia_array_type complex_def_returning_array {
-            if (1) {
-                ia_array;
-            }
-        }
-        ia_array_type alias_to_array = ia_array
-        ia_2_to_table_2{} = alias_to_array[2]
-        ia_3_to_table_2{} = complex_def_returning_array[2]
-
-        k2[] = ia_2_to_table_2.keys 
-        k2[1];
-        k3[] = ia_3_to_table_2.keys
-        k3[2];
-=}    
-
     
     public test_case aliased_array_test {
         int category = instantiations
@@ -1581,20 +1478,6 @@ iat {=
         parent_with_param("Q").child;
     }
 
-pt {=
-        l_param = "L"
-        p_2(p1, p2) {
-            param_1 = p1
-            param_2 {
-                p2;
-            }
-        }
-        p_2(*) any_param_in_super(a, b) [/]
-
-        any_param_in_super(l_param, "x").param_1;
-        any_param_in_super("x", "M").param_2;
-=}
-
 
     public test_case loop_parameter_test {
         int category = parameters
@@ -1618,7 +1501,7 @@ pt {=
         bam {
             dynamic boo(x) = x
         }
-/-----
+
         foo[] de = [ foo("D"), foo("E") ]
         foo[] fg = [ foo("F"), foo("G") ]
         char[] hi = [ 'H', 'I' ]
@@ -1634,7 +1517,7 @@ pt {=
         }
 
         tp[] tps = [ tp1 ]
------/        
+        
         tp tp1 {
             int nr = 1
         }
@@ -1659,19 +1542,6 @@ pt {=
         }
     }
 
-lpt {=
-        dynamic foo(a) {
-            x = a
-        }
-
-        dynamic bar(foo f) {
-            f.x;
-        }
-        foo[] de = [ foo("D"), foo("E") ]
-        for foo f: de {
-            bar(f);
-        }
-=}
 
     public test_case nested_parameter_test {
         int category = parameters
@@ -1751,60 +1621,6 @@ lpt {=
         tp(ap(p));        
     }
 
-npt {=
-        parent_param {
-            child [/ F /]
-        }
-
-        parent_param_container(parent_param pp) {
-           parent_param aliased_parent_param = pp
-        }
-
-        show_param_child(parent_param_container ppc) {
-            parent_param p_p = ppc.aliased_parent_param
-            
-            show(parent_param p) {
-                p.child;
-            }
-            
-           show(p_p);
-        }
-        show_param_child(parent_param_container(parent_param));
-=}
-
-tpt {=
-
-        apc {
-            g [/ x /]
-            h [/ x /]
-            i [/ x /]
-        }
-        
-        ap(apc aa) {
-            apc pc = aa
-        }
-        
-        apc p {
-            g [/ G /]
-            h [/ H /]
-            i [/ I /]
-        }
-        
-        tp(ap pp) {
-            apc ppc = pp.pc
-            
-            vw(apc pac) {
-                pac.i;    
-            }       
-            
-            
-           /--- pp.pc.g; --/
-            ppc.h;
-            vw(pp.pc);
-        }
-
-        tp(ap(p));        
-=}
 
     public test_case parameter_child_array_test {
         int category = parameters
@@ -1863,7 +1679,7 @@ tpt {=
         else [/ X /]
         param_parent(0, "B", string_x, string_x).b;
         param_parent(0, "X", string_c, string_x).c;
-   /--     pp_1.d; --/
+        pp_1.d;
     }
 
 
@@ -2031,18 +1847,6 @@ tpt {=
         }
     }
 
-abt {=
- dynamic xy(xx, yy) {=
-    x = xx
-    y = yy
- =}
- init_vals_2[][] = [ ["E", "F"], ["G", "H"] ]
- xy[] xy_array_builder_2(val_matrix[][]) = [ xy(val_matrix[0][0], val_matrix[0][1]),  xy(val_matrix[1][0], val_matrix[1][1]) ]
- for xy bb in xy_array_builder_2(init_vals_2) {=
-    bb.x;
-    bb.y;
- =}
-=}
 
     public test_case array_element_builder_test {
         int category = collections
@@ -2228,20 +2032,6 @@ abt {=
         show_fum(fum_array_2[2]);
     }
 
-aet {=
-fum(xx) {=
-    x = xx
-
-    x;
-=}
-
-
-fum("G") fum_gg [/]
-fum(fum_gg.x) fum_g [/]
-
-fum_g;
-
-=}
 
     public test_case array_element_child_array_test {
         int category = collections
@@ -2259,12 +2049,12 @@ fum_g;
         fo fo1 {
             fum[] fofum = [ "A", "B" ]
         }
-		
+        
         fo fo2 {
             fum[] fofum = [ "C", "D" ]
         }
 
-		fo fo3 {
+        fo fo3 {
             fum[] fofum = [ "E", "F" ]
         }
 
@@ -2273,7 +2063,7 @@ fum_g;
         }
 
         fo[] fos = [ fo2, fo3 ] 
-		
+        
         sho_fo(fo f),(x) {
             with (f) {
                 for int iii from 0 to 2 {
@@ -2292,66 +2082,42 @@ fum_g;
             } 
         }
 
-		sho_fo(fo1);
+        sho_fo(fo1);
 
-		for fo ff in fos {
-		    for int ii from 0 to 2 {
-		    	ff.fofum[ii];
-		    }
-        }
-        
-        sho_fum(fo4.fofum[0]);
-	}		
-
-aecat {=
-        fum [/]
-
-        fo {
-            fum[] fofum = []
-        }
-
-        fo fo2 {
-            fum[] fofum = [ "C", "D" ]
-        }
-
-        fo fo3 {
-            fum[] fofum = [ "E", "F" ]
-        }
-
-        fo[] fos = [ fo2, fo3 ] 
-        
         for fo ff in fos {
             for int ii from 0 to 2 {
                 ff.fofum[ii];
             }
         }
-=}
+        
+        sho_fum(fo4.fofum[0]);
+    }        
 
-	
-	public test_case dynamic_array_test {
+    
+    public test_case dynamic_array_test {
         int category = collections
         name = "Dynamic Array Test"
         key = "dynamic_array"
-	
-	    expected = "ABCDEFGHIJKLMNOPQRST" 
-	
-	    boolean true_flag = true
-	    boolean false_flag = false
-	    
-	    d = "D"
-	    e = "E"
-	    g = "G"
-	    x = "x"
-	    
-	    hi[] = [ "H", "I" ]
+    
+        expected = "ABCDEFGHIJKLMNOPQRST" 
+    
+        boolean true_flag = true
+        boolean false_flag = false
+        
+        d = "D"
+        e = "E"
+        g = "G"
+        x = "x"
+        
+        hi[] = [ "H", "I" ]
         jk[] = [ "J", "K" ]
         dynamic lm(n) {
             if (n == 1)      [/ L /]
             else if (n == 2) [/ M /]
             else             [/ x /]
         }
-	    
-	    nested_dynamic_array[] = [ for c in jk { c } ] 
+        
+        nested_dynamic_array[] = [ for c in jk { c } ] 
         nested_array_with_loop_param[] = [ for i from 1 to 3 { lm(i) } ]
         
         no[] = [ "x", "N", "O" ]
@@ -2368,14 +2134,14 @@ aecat {=
         super_array[] = []
         
         super_array dimless_dynamic_array = [ for t in tt {= t =} ]
-	    
-	    dynamic_array[] = [ 
-	                        if (true_flag)  { [/ A /] },
+        
+        dynamic_array[] = [ 
+                            if (true_flag)  { [/ A /] },
 
-	                        if (false_flag) { [/ x /] },
+                            if (false_flag) { [/ x /] },
 
-	                        if (true_flag)  { [/ B /] }
-	                                  else  { [/ x /] },
+                            if (true_flag)  { [/ B /] }
+                                      else  { [/ x /] },
 
                             if (false_flag) {= [/ x /] =}
                                        else {= [/ C /] =},
@@ -6081,9 +5847,9 @@ memt {=
      **/
     int session_values{} = { "n": -1 }
 
-	keep in session_values:
-	boolean initialized = false
-	
+    keep in session_values:
+    boolean initialized = false
+    
     /** Site initialization test **/
     boolean init {
         keep in session_values:
@@ -7050,27 +6816,27 @@ ft {=
     }
     
     public basepage(r, s) external_mem_test(request r, session s) {
-    	label = "Big external memory allocation"
+        label = "Big external memory allocation"
     
         
         content(request r, session s) {
             [/ <h4>big array</h4> /]
-    	    big_mem_allocator;
-    	    [/ <p>ok.</p> /]
-    	}
+            big_mem_allocator;
+            [/ <p>ok.</p> /]
+        }
     }
     
     big_mem_allocator {=
-    	eval(org.fundev.test.ExternalTest.bigObjects);
-	=}    	
+        eval(org.fundev.test.ExternalTest.bigObjects);
+    =}        
 
     public basepage(r, s) internal_mem_test(request r, session s) {
-    	label = "Big internal memory allocation"
-    	
-    	big_array[] = [ for int i from 0 to 1048576 {= i =} ]
-    	big_array[] big_array_array = [ for int i from 0 to 256 {= big_array =} ]
+        label = "Big internal memory allocation"
+        
+        big_array[] = [ for int i from 0 to 1048576 {= i =} ]
+        big_array[] big_array_array = [ for int i from 0 to 256 {= big_array =} ]
 
-		length = big_array_array.count * 1048576 * 256 * 4;
+        length = big_array_array.count * 1048576 * 256 * 4;
 
         content(request r, session s) {
             [/
@@ -7356,39 +7122,6 @@ ft {=
             "x";
         }
     }
-    
-    
-tbt {
-  test_result[] test_results = test_test_runner.results
-  test_test_runner.run;
-  
-  for test_result tr in test_results {
-      for msg in tr.messages { msg; }
-      tr.result;
-      tr.name;
-  }
-}
-
-tlm {
-        test_result tr = test_result(: "test", true, logged_messages :)
-        test_result[] trs = [ tr ]
-
-        /** accumulator for logging messages **/
-        string[] logged_messages(msgs[]) = msgs
-        
-        /** a test can log a message at any point **/
-        dynamic test_log(msg) {
-            eval(logged_messages(: logged_messages + msg :));
-        }
-
-        test_log(" a message ");
-        "----";
-        for test_result ttr in trs {
-          for msg in ttr.messages {
-              msg;
-          }
-        }
-}
 
     tloop {
         tp {

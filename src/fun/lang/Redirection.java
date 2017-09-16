@@ -33,7 +33,7 @@ public class Redirection extends Throwable {
         super();
         this.instance = new ResolvedInstance(instance, context, false);
         Type type = this.instance.getType();
-        if (type.isTypeOf("error")) {
+        if (type != null && type.isTypeOf("error")) {
             FunObjectWrapper obj = new FunObjectWrapper(this.instance, null);
             status = obj.getChildInt("status");
             message = obj.getChildText("message");

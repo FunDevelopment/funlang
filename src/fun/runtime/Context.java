@@ -901,20 +901,20 @@ public class Context {
 
             // not handled by one of the above cases
             if (!constructed) {
-//                if (definition.isAlias()) {
-//                    Construction construction = constructions.get(0);
-//                    if (construction instanceof Value) {
-//                        data = construction;
-//                    } else if (aliasInstance != null) {
-//                        data = aliasInstance.getData(this, aliasDef);
-//                    } else if (construction instanceof ValueGenerator) {
-//                        data = ((ValueGenerator) construction).getData(this);
-//                    } else {
-//                        data = construction.getData(this);
-//                    }
-//                } else {
+                if (definition.isAlias()) {
+                    Construction construction = constructions.get(0);
+                    if (construction instanceof Value) {
+                        data = construction;
+                    } else if (aliasInstance != null) {
+                        data = aliasInstance.getData(this, aliasDef);
+                    } else if (construction instanceof ValueGenerator) {
+                        data = ((ValueGenerator) construction).getData(this);
+                    } else {
+                        data = construction.getData(this);
+                    }
+                } else {
                     data = construct(constructions);
-//                }
+                }
             }
             
             if (data instanceof Value) {
