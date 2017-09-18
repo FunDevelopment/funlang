@@ -73,7 +73,7 @@ public class Redirection extends Throwable {
 
     public String getLocation() {
         if (instance != null) {
-            return instance.getString();
+            return instance.getName();
         } else {
             return location;
         }

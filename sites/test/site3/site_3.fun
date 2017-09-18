@@ -23,7 +23,7 @@ site site_3 {
 
 
     /------ configuration properties ------/
-    urlprefix(page p) [/ /{= if (p.site.type != sitename) { p.site.type; "/"; } =} /]  
+    urlprefix(page p) [| /{= if (p.site.type != sitename) { p.site.type; "/"; } =} |]  
 	
 	/------ display properties ------/
 
@@ -36,8 +36,8 @@ site site_3 {
 
     page(r, s) basepage(request r, session s) {
         /-- metadata --/
-        title [/ Site 3 /]
-        label [/ Site 3 test site /]
+        title [| Site 3 |]
+        label [| Site 3 test site |]
 
         /-- appearance variables --/
         color bgcolor = main_bgcolor
@@ -57,25 +57,25 @@ site site_3 {
                               , site_3.s3_page
                               ]
 
-        menuitem(page p) [/
+        menuitem(page p) [|
             <div class="menu_item"><a href="{= urlprefix(p); p.type; =}">{= p.label; =}</a></div>
-        /]
+        |]
 
         content [?]
 
         menu {
-            [/ <table border="0" cellspacing="0" cellpadding="4" align="left" valign="top" height="100%"> /]
-            for page p in destinations [/
+            [| <table border="0" cellspacing="0" cellpadding="4" align="left" valign="top" height="100%"> |]
+            for page p in destinations [|
                 <tr><td>{= menuitem(p); =}</td></tr>
-            /]
-            [/ </table> /]
+            |]
+            [| </table> |]
         }
         
-        [/ <table><tr><td> /]
+        [| <table><tr><td> |]
         menu;
-        [/ </td><td> /]
+        [| </td><td> |]
         content;
-        [/ </td></tr></table> /]
+        [| </td></tr></table> |]
         
     }
 
@@ -83,30 +83,30 @@ site site_3 {
 
     /** The front end of the application. **/    
     basepage(r, s) index(request r, session s) {
-        title [/ Site 3 /]
-        label [/ Site 3 Home /]
+        title [| Site 3 |]
+        label [| Site 3 Home |]
 
-        content [/
+        content [|
             <p>This is the Site 3 home page.</p>
-        /]
+        |]
     }
 
     basepage(r, s) local_page(request r, session s) {
-        title [/ Site 3 Local Page/]
-        label [/ Site 3 local_page = {= owner.type; =} /]
+        title [| Site 3 Local Page|]
+        label [| Site 3 local_page = {= owner.type; =} |]
 
-        content [/
+        content [|
             <p>This is a Site 3 local page.</p>
-        /]
+        |]
     }
 
     basepage(r, s) s3_page(request r, session s) {
-        title [/ Site 3 Special Page/]
-        label [/ Site 3 s3_page = {= owner.type; =} /]
+        title [| Site 3 Special Page|]
+        label [| Site 3 s3_page = {= owner.type; =} |]
 
-        content [/
+        content [|
             <p>This is the Site 3 special page.</p>
-        /]
+        |]
     }
 
 }

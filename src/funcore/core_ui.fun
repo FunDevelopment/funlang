@@ -56,15 +56,15 @@ core {
          **/
         tag_attribs[] = []
 
-        [/ <{= outer_tag; =} class="{= component_class; =}" /]
+        [| <{= outer_tag; =} class="{= component_class; =}" |]
         sp;
-        if (id) [/ id="{= id; =}" /]
+        if (id) [| id="{= id; =}" |]
         sp;
         if (style || bgcolor) {
-            [/ style=" /]
-            if (bgcolor) [/ background-color: {= bgcolor; =}; /]
+            [| style=" |]
+            if (bgcolor) [| background-color: {= bgcolor; =}; |]
             style;
-            [/ " /]
+            [| " |]
         }
         if (tag_attribs) {
             for a in tag_attribs {
@@ -74,9 +74,9 @@ core {
                 }
             }
         }
-        [/ > /]
+        [| > |]
         sub; 
-        [/ </{= outer_tag; =}> /]   
+        [| </{= outer_tag; =}> |]   
     }
 
     
@@ -84,7 +84,7 @@ core {
         int left = 0
         int top = 0
     
-        style [/
+        style [|
             #{= owner.id; =} {
                 position: absolute;
                 left: {= left; =}px; top: {= top; =}px;
@@ -92,7 +92,7 @@ core {
                 background-color: #000000;
                 opacity: 1.0;
             }
-         /]
+         |]
          
          purpose = "resize"
          direction [?]      
@@ -102,17 +102,17 @@ core {
              dy_filter_script;
          } 
          
-         dx_filter_script [/ 
+         dx_filter_script [| 
              {= owner.id; =}.dx_filter = function(dx) {
                                              return dx;
                                          }
-         /]  
+         |]  
          
-         dy_filter_script [/
+         dy_filter_script [|
              {= owner.id; =}.dx_filter = function(dx) {
                                              return dx;
                                          }
-         /]
+         |]
     }
 
     component, draggable, resizable seldeco(),(component target) {
@@ -123,13 +123,13 @@ core {
         int height { with (target) { (target.height + 8); } else { 7; } }
            
         style {
-            [/
+            [|
                 #{= id; =} {
                     position: absolute;
                     left: {= x; =}px; top: {= y; =}px;
                     width: {= width; =}px; height: {= height; =}px; 
                 }
-            /]
+            |]
 
             /** add handle styles **/
             nw_handle.style;
@@ -304,11 +304,11 @@ core {
 
         dynamic cell_props(p), (component c) {
             with (c) {
-                if (c.width >= 0) [| width="{= c.width; =}" /]
-                if (c.height >= 0) [| height="{= c.height; =}" /]
-                if (c.bgcolor) [| bgcolor="{= c.bgcolor; =}" /]
-                if (c.align) [| align="{= c.align; =}" /]
-                if (c.valign) [| valign="{= c.valign; =}" /]
+                if (c.width >= 0) [/ width="{= c.width; =}" |]
+                if (c.height >= 0) [/ height="{= c.height; =}" |]
+                if (c.bgcolor) [/ bgcolor="{= c.bgcolor; =}" |]
+                if (c.align) [/ align="{= c.align; =}" |]
+                if (c.valign) [/ valign="{= c.valign; =}" |]
             } else {
                 /-- cell_props called on non-component; does nothing --/
             }
@@ -319,11 +319,11 @@ core {
                 if (c.style) {
                     c.style;
                 } else {
-                    if (c.width >= 0) [| width: {= c.width; =}px; /]
-                    if (c.height >= 0) [| height: {= c.height; =}px; /]
-                    if (c.bgcolor) [| background-color: {= c.bgcolor; =}; /]
-                    if (c.align) [| text-align: {= c.align; =}; /]
-                    if (c.valign) [| vertical-align: {= c.valign; =}; /]
+                    if (c.width >= 0) [/ width: {= c.width; =}px; |]
+                    if (c.height >= 0) [/ height: {= c.height; =}px; |]
+                    if (c.bgcolor) [/ background-color: {= c.bgcolor; =}; |]
+                    if (c.align) [/ text-align: {= c.align; =}; |]
+                    if (c.valign) [/ vertical-align: {= c.valign; =}; |]
                 }
             } else {
                 /-- cell_props called on non-component; does nothing --/
@@ -335,34 +335,34 @@ core {
     dynamic layout border_layout(c), (n, c, s), (n, w, c, e, s), (x[]), (comp_table{}) {
 
         dynamic center_if_not_aligned(p), (component c) {
-            with (c) { if (!c.align) [| align="center" /] }
-            else [| align="center" /]         
+            with (c) { if (!c.align) [/ align="center" |] }
+            else [/ align="center" |]         
 		}            
 
-        dynamic north(panel) [/
+        dynamic north(panel) [|
             <table{= table_props; =}>{=
-                if (panel) [/
+                if (panel) [|
                     <tr><td colspan="3"{= cell_props(panel); center_if_not_aligned(panel); =}>{= panel; =}</td></tr>
-                /]
+                |]
             =}
-        /]
-        dynamic west(panel) [/
+        |]
+        dynamic west(panel) [|
             <tr><td{= cell_props(panel); =}>{= panel; =}</td>
-        /]
-        dynamic center(panel) [/
+        |]
+        dynamic center(panel) [|
             <td{= cell_props(panel); =}>{= panel; =}</td>
-        /]
+        |]
         dynamic east(panel) {
-            if (panel) [/
+            if (panel) [|
                 <td{= cell_props(panel); =}>{= panel; =}</td>
-            /]
-            [/ </tr>  /]
+            |]
+            [| </tr>  |]
         }
         dynamic south(panel) {
-            if (panel) [/
+            if (panel) [|
                 <tr><td colspan="3"{= cell_props(panel); center_if_not_aligned(panel); =}>{= panel; =}</td></tr>
-            /]
-            [/ </table> /]
+            |]
+            [| </table> |]
         }
 
         with (x) {
@@ -408,7 +408,7 @@ core {
 
     dynamic border_layout(n, w, c, e, s) compass_layout(nw, n, ne, w, c, e, sw, s, se), (comp_table{}) {
         dynamic northwest(panel) {
-            [/ <table> /]
+            [| <table> |]
             west(panel);
         }
         dynamic north(panel) = center(panel)
@@ -417,7 +417,7 @@ core {
         dynamic south(panel) = center(panel)
         dynamic southeast(panel) {
             east(panel);
-            [/ </table> /]
+            [| </table> |]
         }
 
         with (comp_table) {
@@ -446,22 +446,22 @@ core {
 
 
     dynamic layout stage_layout(c), (w, c, e), (w, n, c, s, e), (x[]), (comp_table{}) {
-        dynamic west(panel) [/
+        dynamic west(panel) [|
             <td rowspan="3" {= cell_props(panel); =}>{= panel; =}</td>
-        /]
-        dynamic north(panel) [/
+        |]
+        dynamic north(panel) [|
             <td {= cell_props(panel); =}>{= panel; =}</td>
-        /]
-        dynamic center(panel) [/
+        |]
+        dynamic center(panel) [|
             <td {= cell_props(panel); =}>{= panel; =}</td>
-        /]
-        dynamic south(panel) [/
+        |]
+        dynamic south(panel) [|
             <td {= cell_props(panel); =}>{= panel; =}</td>
-        /]
-        dynamic east(panel) [/
+        |]
+        dynamic east(panel) [|
             <td rowspan= "3" {= cell_props(panel); =}>{= panel; =}</td>
-        /]
-        [/ <table {= table_props; =} ><tr> /]
+        |]
+        [| <table {= table_props; =} ><tr> |]
         with (x) {
             if (x.count < 2) {
                 center(x[0]);
@@ -477,9 +477,9 @@ core {
                 if (x.count > 4) {
                     east(x[4]);
                 }
-                [/ </tr><tr> /]
+                [| </tr><tr> |]
                 center(x[2]);
-                [/ </tr><tr> /]
+                [| </tr><tr> |]
                 south(x[3]);
             }
 
@@ -487,51 +487,51 @@ core {
             west(comp_table["west"]);
             north(comp_table["north"]);
             east(comp_table["east"]);
-            [/ </tr><tr> /]
+            [| </tr><tr> |]
             center(comp_table["center"]);
-            [/ </tr><tr> /]
+            [| </tr><tr> |]
             south(comp_table["south"]);
 
         } else {
             west(w);
             north(n);
             east(e);
-            [/ </tr><tr> /]
+            [| </tr><tr> |]
             center(c);
-            [/ </tr><tr> /]
+            [| </tr><tr> |]
             south(s);
         }
-        [/ </tr></table> /]
+        [| </tr></table> |]
     }
 
 
     dynamic border_layout(*) css_border_layout(c), (n, c, s), (n, w, c, e, s), (x[]), (comp_table{}) {
 
-        dynamic north(panel) [/
+        dynamic north(panel) [|
             <div style="{= style_props(panel); =}">
             {= panel; =}
             </div>
-        /]
-        dynamic west(panel) [/
+        |]
+        dynamic west(panel) [|
             <div style="float: left; {= style_props(panel); =}">
             {= panel; =}
             </div>
-        /]
-        dynamic center(panel) [/
+        |]
+        dynamic center(panel) [|
             <div style="{= style_props(panel); =}">
             {= panel; =}
             </div>
-        /]
-        dynamic east(panel) [/
+        |]
+        dynamic east(panel) [|
             <div style="float: right; {= style_props(panel); =}">
             {= panel; =}
             </div>
-        /]
-        dynamic south(panel) [/
+        |]
+        dynamic south(panel) [|
             <div style="clear: both; {= style_props(panel); =}">
             {= panel; =}
             </div>
-        /]
+        |]
     }
 
 
@@ -542,53 +542,53 @@ core {
     }
 
 
-    dynamic standard_control hidden(name, value) [/
+    dynamic standard_control hidden(name, value) [|
         <input type="hidden" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" />
-    /]
+    |]
 
 
     dynamic standard_control textarea(name, value, int cols, int rows, req_id),
                                      (name, value, int cols, int rows),
                                      (name, value, req_id),
-                                     (name, value) [/
+                                     (name, value) [|
         <textarea id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" {= 
-            if (cols) [/ cols="{= cols; =}" |]
-            if (rows) [/ rows="{= rows; =}" |] 
-            with (req_id) [/ onchange='requestComponent("{= req_id; =}", this.name, this.value)' /]
+            if (cols) [| cols="{= cols; =}" /]
+            if (rows) [| rows="{= rows; =}" /] 
+            with (req_id) [| onchange='requestComponent("{= req_id; =}", this.name, this.value)' |]
         =}>{= value; =}</textarea>
-    /]
+    |]
 
 
     dynamic standard_control textedit(name, value, int size, int maxlength, req_id),
                                      (name, value, int size, int maxlength),
                                      (name, value, int size, boolean disabled),
                                      (name, value, int size),
-                                     (name, value) [/
+                                     (name, value) [|
         <input type="text" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" {=
-            with (size) [/ size="{= size; =}" /] with (maxlength) [| maxlength="{= maxlength; =}" /]
-            with (req_id) [| onchange='requestComponent("{= req_id; =}", this.name, this.value)' /]
-            if (disabled) [| disabled /]
+            with (size) [| size="{= size; =}" |] with (maxlength) [/ maxlength="{= maxlength; =}" |]
+            with (req_id) [/ onchange='requestComponent("{= req_id; =}", this.name, this.value)' |]
+            if (disabled) [/ disabled |]
         =}>
-    /]
+    |]
 
 
     dynamic standard_control autosubmit_textedit(form_name, name, value, int size, int maxlength),
                                                 (form_name, name, value, int size),
-                                                (form_name, name, value) [/
+                                                (form_name, name, value) [|
         <input type="text" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" {=
-            with (size) [/ size="{= size; =}" /] with (maxlength) [| maxlength="{= maxlength; =}" /]
+            with (size) [| size="{= size; =}" |] with (maxlength) [/ maxlength="{= maxlength; =}" |]
         =} onchange="document.forms['{= form_name; =}'].submit()" />
-    /]
+    |]
 
 
     dynamic standard_control scripted_textedit(name, value, int size, int maxlength, onchange_script),
                                               (name, value, int size, int maxlength, onchange_script),
                                               (name, value, int size, onchange_script),
-                                              (name, value, onchange_script) [/
+                                              (name, value, onchange_script) [|
         <input type="text" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" {=
-            with (size) [/ size="{= size; =}" /] with (maxlength) [| maxlength="{= maxlength; =}" /]
+            with (size) [| size="{= size; =}" |] with (maxlength) [/ maxlength="{= maxlength; =}" |]
         =} onchange='{= onchange_script; =}' oninput='{= onchange_script; =}'>
-    /]
+    |]
 
 
     dynamic standard_control request_textedit(name, value, int size, req_id),
@@ -596,29 +596,29 @@ core {
                                              (name, value, req_id),
                                              (name, value, component req_component) {
    
-        [/ <input type="text" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" /]
-        with (size) [/ size="{= size; =}" /]
-        with (req_id) [| onchange="requestComponent('{= req_id; =}', this.name, this.value)" /]
-        else with (req_component) [| onchange="requestComponent('{= req_component.id; =}', this.name, this.value)" /]
-        [/ /> /]
+        [| <input type="text" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" |]
+        with (size) [| size="{= size; =}" |]
+        with (req_id) [/ onchange="requestComponent('{= req_id; =}', this.name, this.value)" |]
+        else with (req_component) [/ onchange="requestComponent('{= req_component.id; =}', this.name, this.value)" |]
+        [| /> |]
     }
 
 
     dynamic standard_control passwordedit(name, value, int size, int maxlength),
-                                         (name, value, int size) [/
+                                         (name, value, int size) [|
         <input type="password" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" {=
-            with (size) [/ size="{= size; =}" /] with (maxlength) [/ maxlength="{= maxlength; =}" /]
+            with (size) [| size="{= size; =}" |] with (maxlength) [| maxlength="{= maxlength; =}" |]
         =}>
-    /]
+    |]
 
 
     dynamic standard_control autosubmit_passwordedit(form_name, name, value, int size, int maxlength),
                                                     (form_name, name, value, int size),
-                                                    (form_name, name, value) [/
+                                                    (form_name, name, value) [|
         <input type="password" id="{= (id ? id : name); =}" class="{= owner.type; =}" name="{= name; =}" value="{= value; =}" {=
-            with (size) [/ size="{= size; =}" /] with (maxlength) [| maxlength="{= maxlength; =}" /]
+            with (size) [| size="{= size; =}" |] with (maxlength) [/ maxlength="{= maxlength; =}" |]
         =} onchange="document.forms['{= form_name; =}'].submit()" />
-    /]
+    |]
 
 
     dynamic standard_control button(name, value, component req_component, onclick_script),
@@ -627,12 +627,12 @@ core {
                                    (name, value, req_id),
                                    (name, value) {
 
-        [/ <input name="{= name; =}" value="{= value; =}" id="{= name; =}_button" class="{= owner.type; =}" /]
-        with (onclick_script)     [| type="button" onclick='{= onclick_script; =}' /]
-        else with (req_id)        [| type="button" onclick="refreshComponent('{= req_id; =}')" /]
-        else with (req_component) [| type="button" onclick="refreshComponent('{= req_component.id; =}')" /]
-        else                      [| type="submit" /]
-        [/ /> /]
+        [| <input name="{= name; =}" value="{= value; =}" id="{= name; =}_button" class="{= owner.type; =}" |]
+        with (onclick_script)     [/ type="button" onclick='{= onclick_script; =}' |]
+        else with (req_id)        [/ type="button" onclick="refreshComponent('{= req_id; =}')" |]
+        else with (req_component) [/ type="button" onclick="refreshComponent('{= req_component.id; =}')" |]
+        else                      [/ type="submit" |]
+        [| /> |]
     }
 
 
@@ -641,22 +641,22 @@ core {
                                            (name, value, component req_component, param, paramval),
                                            (name, value, element_id, component req_component, param, paramval) {
 
-        [/ <input type="button" name="{= name; =}" value="{= value; =}" id="{= name; =}_button" class="{= owner.type; =}" /]
-        with (onclick_script) [| onclick='{= onclick_script; =}' /]
-        else with (element_id) [| onclick="requestComponentByName('{= element_id; =}', '{= req_component.name; =}', '{= param; =}', '{= paramval; =}')" /]
-        else with (req_id) [| onclick="requestComponent('{= req_id; =}', '{= param; =}', '{= paramval; =}')" /]
-        else with (req_component) [| onclick="requestComponent('{= req_component.id; =}', '{= param; =}', '{= paramval; =}')" /]
-        [/ /> /]
+        [| <input type="button" name="{= name; =}" value="{= value; =}" id="{= name; =}_button" class="{= owner.type; =}" |]
+        with (onclick_script) [/ onclick='{= onclick_script; =}' |]
+        else with (element_id) [/ onclick="requestComponentByName('{= element_id; =}', '{= req_component.name; =}', '{= param; =}', '{= paramval; =}')" |]
+        else with (req_id) [/ onclick="requestComponent('{= req_id; =}', '{= param; =}', '{= paramval; =}')" |]
+        else with (req_component) [/ onclick="requestComponent('{= req_component.id; =}', '{= param; =}', '{= paramval; =}')" |]
+        [| /> |]
     }
 
 
     dynamic standard_control query_button(name, value, element_id, component req_component, params[]),
                                          (name, value, element_id, req_id, params[]) {
 
-        [/ <input type='button' name='{= name; =}' value='{= value; =}' id='{= name; =}_button' class=''{= owner.type; =}' onclick=' /]
+        [| <input type='button' name='{= name; =}' value='{= value; =}' id='{= name; =}_button' class=''{= owner.type; =}' onclick=' |]
 
-        with (req_component) [/ queryComponentByName("{= element_id; =}", "{= req_component.name; =}", {= params; =}, null, null)'/> /]
-        else                 [/ queryComponentByName("{= element_id; =}", "{= req_id; =}", {= params; =}, null, null)'/> /]
+        with (req_component) [| queryComponentByName("{= element_id; =}", "{= req_component.name; =}", {= params; =}, null, null)'/> |]
+        else                 [| queryComponentByName("{= element_id; =}", "{= req_id; =}", {= params; =}, null, null)'/> |]
     }
 
 
@@ -672,80 +672,80 @@ core {
         submit_script(id) {
             query_params{} = params
 
-            if (field_id) [/
+            if (field_id) [|
                 requestComponent("{= id; =}", "{= field_id; =}", document.getElementById("{= field_id; =}").value);
-            /] else with (field_ids) [/
+            |] else with (field_ids) [|
                 var params = {};
                 {=
                     with (params) { 
-                        for k in query_params.keys [/
+                        for k in query_params.keys [|
                             params["{= k; =}"] = "{= query_params[k]; =}";
-                        /]
+                        |]
                     }
                 =}
-                {= for f in field_ids [/
+                {= for f in field_ids [|
                 params["{= f; =}"] = encodeURIComponent(document.getElementById("{= f; =}").value);
-                /] =}  
+                |] =}  
                 queryComponent("{= id; =}", params);
-            /] else [/
+            |] else [|
                 refreshComponent("{= id; =}");
-            /]
-            [/
+            |]
+            [|
                 return true;
-            /]
+            |]
         }
 
-        [/ <input type="submit" name="{= name;=}" value="{= value; =}" class="{= owner.type; =}" id="{= name; =}_button" {=
-        with (req_id)             [/ onclick='{= submit_script(req_id); =}' {= log("req_id " + req_id); =} /]
-        else with (req_component) [/ onclick='{= submit_script(req_component.id); =}' {= log("req_component.id " + req_component.id); =} /]
-        =}/> /]
+        [| <input type="submit" name="{= name;=}" value="{= value; =}" class="{= owner.type; =}" id="{= name; =}_button" {=
+        with (req_id)             [| onclick='{= submit_script(req_id); =}' {= log("req_id " + req_id); =} |]
+        else with (req_component) [| onclick='{= submit_script(req_component.id); =}' {= log("req_component.id " + req_component.id); =} |]
+        =}/> |]
     }
 
 
-    dynamic standard_control disabled_button(name, value) [/
+    dynamic standard_control disabled_button(name, value) [|
         <input type="submit" name="{= name; =}" value="{= value; =}" class="{= owner.type; =}" id="{= name; =}_button" disabled />
-    /]
+    |]
 
 
     dynamic standard_control checkbox(name, label, boolean checked),
                                      (name, label, boolean checked, value),
-                                     (name, label, boolean checked, value, onclick_script)  [/
+                                     (name, label, boolean checked, value, onclick_script)  [|
         <input type="checkbox" name="{= name; =}" class="{= owner.type; =}" id="{= name; =}_checkbox" {=
-            with (value) [/ value="{= value; =}" /]
-            if (checked) [| checked /]
-            with (onclick_script) [| onclick='{= onclick_script; =}' /]
+            with (value) [| value="{= value; =}" |]
+            if (checked) [/ checked |]
+            with (onclick_script) [/ onclick='{= onclick_script; =}' |]
         =} >{= label; =}</input>
-    /]
+    |]
 
 
     dynamic standard_control radiobutton(groupname, label, boolean checked, value),
-                                        (groupname, label, boolean checked, value, onclick_script) [/
+                                        (groupname, label, boolean checked, value, onclick_script) [|
         <input type="radio" name="{= groupname; =}" value="{= value; =}"{=
-            if (value) [| id="{= groupname; =}_{= value; =}_radiobutton" class="{= groupname; =}_radiobutton" /]
-            if (checked) [| checked /]
-            with (onclick_script) [| onclick='{= onclick_script; =}' /]
+            if (value) [/ id="{= groupname; =}_{= value; =}_radiobutton" class="{= groupname; =}_radiobutton" |]
+            if (checked) [/ checked |]
+            with (onclick_script) [/ onclick='{= onclick_script; =}' |]
         =} >{= label; =}</input>
-    /]
+    |]
 
 
     dynamic standard_control dropdown(id, name, option[] options, onchange_script),
                                      (name, option[] options, onchange_script),
                                      (name, option[] options, boolean disabled),
-                                     (name, option[] options) [/
+                                     (name, option[] options) [|
         <select name="{= name; =}" class="{= owner.type; =}" id="{= (id ? id : name + "_dropdown"); =}"{=
-            with (onchange_script) [| onchange='{= onchange_script; =}' /] 
-            if (disabled) [| disabled /] 
-            [/ > /]
+            with (onchange_script) [/ onchange='{= onchange_script; =}' |] 
+            if (disabled) [/ disabled |] 
+            [| > |]
             for option o in options {
                 o;
             }
         =}</select>
-    /]
+    |]
 
 
-    dynamic option(name, value, boolean selected) [/
-        <option value="{= value; =}" {= if (selected) [/ selected="selected" /] =}>{= name; =}</option>    
-    /]
+    dynamic option(name, value, boolean selected) [|
+        <option value="{= value; =}" {= if (selected) [| selected="selected" |] =}>{= name; =}</option>    
+    |]
 
 
     dynamic form(action),(page action_page) {
@@ -755,14 +755,14 @@ core {
         /** The onreset event occurs when a form is reset. It only applies to the FORM element. **/
         onreset [/]
 
-        [/ <form name="/] type; [/" action=" /]
+        [| <form name="|] type; [|" action=" |]
         with (action) { action; }
         else { action_page.type; }
-        [/ " method="POST /]
-        if (onsubmit) [/ " onsubmit="{= onsubmit; =} /]
-        if (onreset) [/ " onreset="{= onreset; =} /]
-        [/ "> /]
+        [| " method="POST |]
+        if (onsubmit) [| " onsubmit="{= onsubmit; =} |]
+        if (onreset) [| " onreset="{= onreset; =} |]
+        [| "> |]
         sub;
-        [/ </form> /]
+        [| </form> |]
     }
 }

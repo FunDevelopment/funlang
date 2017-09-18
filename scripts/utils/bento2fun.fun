@@ -8,7 +8,6 @@
  --    * creates new Fun file
  --    * loads lines from Bento file
  --    * processes each line and writes to Fun file
- --    * swap [| and |] with [/ and /], and vice versa
  --    * keep track of entering and exiting data blocks
  --    * swap [= and =] with { and } outside of data blocks
  --    * swap [= and =] with {= and =} inside of data blocks
@@ -58,10 +57,10 @@ script bento2fun {
         static CLOSE_CODE_1 = "}"
         static OPEN_CODE_2 = "{="
         static CLOSE_CODE_2 = "=}"
-        static OPEN_DATA_1 = "[|"
-        static CLOSE_DATA_1 = "|]"
-        static OPEN_DATA_2 = "[/"
-        static CLOSE_DATA_2 = "/]"
+        static OPEN_DATA_1 = "[/"
+        static CLOSE_DATA_1 = "/]"
+        static OPEN_DATA_2 = "[|"
+        static CLOSE_DATA_2 = "|]"
         static NULL_BLOCK = "[/]"
         
         static open_data_temp = "[#"
@@ -73,17 +72,11 @@ script bento2fun {
         step_1B(str) = replace(str, OPEN_CODE_0, OPEN_CODE_2)
         step_2A(str) = replace(str, CLOSE_CODE_0, CLOSE_CODE_1)
         step_2B(str) = replace(str, CLOSE_CODE_0, CLOSE_CODE_2)
-        step_3(str) = replace(str, OPEN_DATA_1, open_data_temp)      
-        step_4(str) = replace(str, OPEN_DATA_2, OPEN_DATA_1)      
-        step_5(str) = replace(str, open_data_temp, OPEN_DATA_2)      
-        step_6(str) = replace(str, CLOSE_DATA_1, close_data_temp)      
-        step_7(str) = replace(str, CLOSE_DATA_2, CLOSE_DATA_1)      
-        step_8(str) = replace(str, close_data_temp, CLOSE_DATA_2)      
-        step_9(str) = replace(str, null_block_temp, NULL_BLOCK)
-        step_10(str) = replace(str, "bento", "fun")
+        step_3(str) = replace(str, null_block_temp, NULL_BLOCK)
+        step_4(str) = replace(str, "bento", "fun")
 
-        funcs_A[11] = [ step_0, step_1A, step_2A, step_3, step_4, step_5, step_6, step_7, step_8, step_9, step_10 ]          
-        funcs_B[11] = [ step_0, step_1B, step_2B, step_3, step_4, step_5, step_6, step_7, step_8, step_9, step_10 ]          
+        funcs_A[11] = [ step_0, step_1A, step_2A, step_3, step_4 ]          
+        funcs_B[11] = [ step_0, step_1B, step_2B, step_3, step_4 ]          
         
         dynamic apply_funcs(funcs[], x), (funcs[], int n, x) {
             int last_func_ix = funcs.count - 1

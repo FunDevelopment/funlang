@@ -53,7 +53,7 @@ core {
     }
 
     /** Base class for cross-browser functions to handle events. **/
-    javascript event_handler [/
+    javascript event_handler [|
         function {= type; =}(e) {
             if (!e) {
                e = window.event;
@@ -62,10 +62,10 @@ core {
             {= sub; =}
             return false;
         }
-    /]
+    |]
     
     /** Inspired by Scott Andrew's code at http://www.scottandrew.com/weblog/articles/cbs-events **/
-    javascript add_handler(event_type, event_handler eh) [/
+    javascript add_handler(event_type, event_handler eh) [|
         {=/** W3C support **/=}
         if (document.addEventListener) {
             document.addEventListener({= event_type; =}, {= eh.type; =}, false);
@@ -77,9 +77,9 @@ core {
         } else {
             alert("Sorry, this web site won't work correctly in your browser.  Either JavaScript has been disabled, or your browser is too old, new or weird.");  
         }
-    /]        
+    |]        
     
-    event_handler select_handler [/
+    event_handler select_handler [|
         selectedElement = targetElement;
         while (selectedElement != null && (selectedElement.id == null || !selectable[selectedElement.id])) {
             selectedElement = selectedElement.parentNode;
@@ -88,32 +88,32 @@ core {
             showSelected(selectedElement);
             dragStart(selectedElement, e);
         }
-    /]                    
+    |]                    
 
     javascript init_draggable {
         for d in site.descendants_of_type("draggable") {
-            if (d.id) [/
+            if (d.id) [|
                 draggable["{= d.id; =}"] = true;
-            /]
+            |]
         }
     }
 
     javascript init_selectable { 
-        [/ var selectableElement; /]
+        [| var selectableElement; |]
         for s in site.descendants_of_type("selectable") {
-            if (s.id) [/
+            if (s.id) [|
                 selectableElement = document.getElementById("{= s.id; =}");
                 if (selectableElement != null) {
                     topz++;
                     selectable["{= s.id; =}"] = true;
                     selectableElement.style.zIndex = topz;
                 }
-            /]
+            |]
         }
-        [/ selectable.length = topz; /]
+        [| selectable.length = topz; |]
     }
     
-    javascript drag_script [/
+    javascript drag_script [|
         var eventModel;
         var selectedElement;
         var dragElement;
@@ -325,9 +325,9 @@ core {
             return true;
         }
         window.onload = pageLoad;
-    /]
+    |]
 
-    javascript ajax_script(page_name, find_element_function, boolean use_wait_cursor) [/
+    javascript ajax_script(page_name, find_element_function, boolean use_wait_cursor) [|
     
         {= find_element_function; =}
         
@@ -533,7 +533,7 @@ core {
         }
 
         function getComponentResponder(req, id, successFunction, successParam) {
-            {= if (use_wait_cursor) [/ document.body.style.cursor = 'wait'; /] =}
+            {= if (use_wait_cursor) [| document.body.style.cursor = 'wait'; |] =}
             return function() {
                 var element;
                 if (req.readyState == 4) {
@@ -555,7 +555,7 @@ core {
                     } else {
                         console.log("Error " + req.status + ": " + req.statusText);
                     }
-                    {= if (use_wait_cursor) [/ document.body.style.cursor = 'default'; /] =}
+                    {= if (use_wait_cursor) [| document.body.style.cursor = 'default'; |] =}
                 }
             }
         }
@@ -633,9 +633,9 @@ core {
 	             parent.replaceChild(newElement, element);
 	         }
          }
-    /]
+    |]
 
-    javascript graphics_script [/
+    javascript graphics_script [|
         function getWindowHeight() {
             var windowHeight = 0;
             if (typeof(window.innerHeight) == 'number') {
@@ -649,9 +649,9 @@ core {
             }
             return windowHeight;
         } 
-    /]
+    |]
 
-    debug_script [/
+    debug_script [|
 
-    /]
+    |]
 }

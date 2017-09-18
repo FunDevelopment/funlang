@@ -4,5 +4,5 @@
 
 site lib_2 {
 
-    lib_2_statement [/ This is lib_2. /] 
+    lib_2_statement [| This is lib_2. |] 
 }

@@ -355,8 +355,8 @@ TOKEN :
 
 TOKEN :
 {
-      < LSTATIC: "[/" > {   stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
-    | < RSTATIC: "/]" > {   if (stateStack.size() > 0) {
+      < LSTATIC: "[|" > {   stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
+    | < RSTATIC: "|]" > {   if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -364,8 +364,8 @@ TOKEN :
                                 SwitchTo(DEFAULT);
                             }
                         }
-    | < LSTATICW: "[|" > {  stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
-    | < RSTATICW: "|]" > {   if (stateStack.size() > 0) {
+    | < LSTATICW: "[/" > {  stateStack.push(currentState); currentState = STATIC_STATE; } : IN_STATIC_TEXT
+    | < RSTATICW: "/]" > {   if (stateStack.size() > 0) {
                                 currentState = (Integer) stateStack.pop();
                                 SwitchTo(currentState.intValue());
                             } else {
@@ -495,15 +495,15 @@ TOKEN :
 {
       <STATIC_0: "[``" > { input_stream.backup(3); } : DEFAULT
     |
-      <STATIC_1: "[/" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_1: "[|" > { input_stream.backup(2); } : DEFAULT
     |
       <STATIC_2: "{=" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_3: "/]" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_3: "|]" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_4: "[|" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_4: "[/" > { input_stream.backup(2); } : DEFAULT
     |
-      <STATIC_5: "|]" > { input_stream.backup(2); } : DEFAULT
+      <STATIC_5: "/]" > { input_stream.backup(2); } : DEFAULT
 }
 
 //<IN_STATIC_TEXT>
@@ -973,7 +973,7 @@ void RedirectStatement() :
 /*@egen*/
     "redirect"
     (
-        "(" Instance() ")"
+        "(" ValueInstanceExpression() ")" {  jjtn000.setDynamic(true); }
       |         LOOKAHEAD(Name() ("." | "[" | "(:" | "("))
         Instance()
       | 
@@ -1063,9 +1063,9 @@ Block StaticBlock() :
       LOOKAHEAD(2)
       ("[|" | "[/") ("|]" | "/]")
     |
-      "[/" ( StaticText() | Block() )+ ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
+      "[|" ( StaticText() | Block() )+ ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
     |
-      "[|" LeadingStaticText() ( StaticText() | Block() )*  ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
+      "[/" LeadingStaticText() ( StaticText() | Block() )*  ("|]" | "/]") [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
     |
       "[``" LiteralText() "``]" [ catchBlock = CatchBlock() { jjtn000.setCatch(catchBlock); } ]
     )/*@bgen(jjtree)*/

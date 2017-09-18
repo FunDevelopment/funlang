@@ -60,9 +60,9 @@ core {
         boolean auto_style = false
         boolean ajax_enabled = true
        
-        links[] = [ [/ href="sandbox.css" rel="stylesheet" type="text/css" /] ]
+        links[] = [ [| href="sandbox.css" rel="stylesheet" type="text/css" |] ]
         
-        css [/
+        css [|
             body {
                 width: 100%;
                 height: 100%;
@@ -80,14 +80,14 @@ core {
                 height: 90%;
                 border: 0;
             }
-        /]
+        |]
     
-        script [/
+        script [|
             window.sandbox_frames = {
                 source_frame: document.getElementById("sandbox_source_page"),
                 output_frame: document.getElementById("sandbox_output_page")
             };
-        /]
+        |]
 
         if (allow_sandbox) {        
 
@@ -103,17 +103,17 @@ core {
     }
     
     
-    dynamic sandbox_iframe(page p) [/
+    dynamic sandbox_iframe(page p) [|
         <iframe id="{= p.type; =}" src="{= p.type; =}" style="width:100%;height:50%">
         </iframe>
-    /]
+    |]
     
     
     page(*) sandbox_source_page(params{}) {
         boolean ajax_enabled = true
-        links[] = [ [/ href="sandbox.css" rel="stylesheet" type="text/css" /] ]
+        links[] = [ [| href="sandbox.css" rel="stylesheet" type="text/css" |] ]
 
-        find_element_function [/
+        find_element_function [|
             function findElement(id) { 
                 var element = document.getElementById(id);
                 if (!element && window.parent) {
@@ -128,7 +128,7 @@ core {
                 }
                 return element;
             }
-        /]
+        |]
 
 
         source_code = params["sandbox_contents"] ? sandbox_editor_contents(: params["sandbox_contents"] :) : sandbox_editor_contents
@@ -156,7 +156,7 @@ core {
 
     page(*) sandbox_output_page(params{}) {
         boolean ajax_enabled = true
-        links[] = [ [/ href="sandbox.css" rel="stylesheet" type="text/css" /] ]
+        links[] = [ [| href="sandbox.css" rel="stylesheet" type="text/css" |] ]
 
         dynamic component sandbox_target(params{}) {
             log(" ------> passed to sandbox_target: " + params["sandbox_contents"]);

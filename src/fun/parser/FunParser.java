@@ -580,8 +580,9 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case LPAREN:
         jj_consume_token(LPAREN);
-        Instance();
+        ValueInstanceExpression();
         jj_consume_token(RPAREN);
+                                             jjtn000.setDynamic(true);
         break;
       default:
         jj_la1[12] = jj_gen;
@@ -729,11 +730,11 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     try {
       if (jj_2_3(2)) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case LSTATICW:
-          jj_consume_token(LSTATICW);
-          break;
         case LSTATIC:
           jj_consume_token(LSTATIC);
+          break;
+        case LSTATICW:
+          jj_consume_token(LSTATICW);
           break;
         default:
           jj_la1[18] = jj_gen;
@@ -741,11 +742,11 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           throw new ParseException();
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case RSTATICW:
-          jj_consume_token(RSTATICW);
-          break;
         case RSTATIC:
           jj_consume_token(RSTATIC);
+          break;
+        case RSTATICW:
+          jj_consume_token(RSTATICW);
           break;
         default:
           jj_la1[19] = jj_gen;
@@ -805,11 +806,11 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             }
           }
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case RSTATICW:
-            jj_consume_token(RSTATICW);
-            break;
           case RSTATIC:
             jj_consume_token(RSTATIC);
+            break;
+          case RSTATICW:
+            jj_consume_token(RSTATICW);
             break;
           default:
             jj_la1[22] = jj_gen;
@@ -878,11 +879,11 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             }
           }
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case RSTATICW:
-            jj_consume_token(RSTATICW);
-            break;
           case RSTATIC:
             jj_consume_token(RSTATIC);
+            break;
+          case RSTATICW:
+            jj_consume_token(RSTATICW);
             break;
           default:
             jj_la1[26] = jj_gen;
@@ -13038,9 +13039,9 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       if (jj_3R_391()) { jj_scanpos = xsp; break; }
     }
     xsp = jj_scanpos;
-    if (jj_scan_token(94)) {
+    if (jj_scan_token(92)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(92)) return true;
+    if (jj_scan_token(94)) return true;
     }
     xsp = jj_scanpos;
     if (jj_3R_392()) jj_scanpos = xsp;
@@ -13056,9 +13057,9 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       if (jj_3R_388()) { jj_scanpos = xsp; break; }
     }
     xsp = jj_scanpos;
-    if (jj_scan_token(94)) {
+    if (jj_scan_token(92)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(92)) return true;
+    if (jj_scan_token(94)) return true;
     }
     xsp = jj_scanpos;
     if (jj_3R_389()) jj_scanpos = xsp;
@@ -13073,14 +13074,14 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
   private boolean jj_3_3() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(93)) {
+    if (jj_scan_token(91)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(91)) return true;
+    if (jj_scan_token(93)) return true;
     }
     xsp = jj_scanpos;
-    if (jj_scan_token(94)) {
+    if (jj_scan_token(92)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(92)) return true;
+    if (jj_scan_token(94)) return true;
     }
     return false;
   }
@@ -13257,7 +13258,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
 
   private boolean jj_3R_618() {
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_380()) return true;
+    if (jj_3R_105()) return true;
     if (jj_scan_token(RPAREN)) return true;
     return false;
   }

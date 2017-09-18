@@ -5,9 +5,9 @@ site test {
     extern java org.**
     extern java java.**
 
-    copyright [/
+    copyright [|
         Copyright &copy; 2017 by <a href="http://www.fundev.org">fundev.org</a><br>
-    /]
+    |]
 
     /------------------------------------------------------------------/
     /---                       Site options                         ---/
@@ -99,25 +99,25 @@ site test {
 
         expected [/]
 
-        [/
+        [|
            <table bgcolor="#F7F1DD" cellpadding="2" cellspacing="4" width="400">
            <tr><th bgcolor="#CCBB77" colspan="2">{= name; =}</th></tr>
-        /]
+        |]
 
-        if (expected) [/
+        if (expected) [|
            <tr><td><b>Expected:</b></td><td>{= expected; =} </td></tr>
-        /]
+        |]
 
-        [/ <tr><td><b>Result:</b></td> /]
+        [| <tr><td><b>Result:</b></td> |]
 
-        if (need_exact_match && sub != expected) [/
+        if (need_exact_match && sub != expected) [|
             <td style="color: red">
-        /] else [/
+        |] else [|
             <td>
-        /]
+        |]
         sub;
 
-        [/ </td></tr></table> /]
+        [| </td></tr></table> |]
 
         if (expected) {
             tabulate(sub == expected);
@@ -182,13 +182,13 @@ site test {
         long x = 0x7fffffffffffffffL
 
         float expr1 = (n * f) / f
-        if (expr1 == 2.0) [/ A /]
+        if (expr1 == 2.0) [| A |]
 
         long expr2 = (n - x) * -1 + n
-        if (expr2 == x) [/ B /]
+        if (expr2 == x) [| B |]
 
         int expr3 = (int) f
-        if (expr3 == 1) [/ C /]
+        if (expr3 == 1) [| C |]
     }
 
 
@@ -230,17 +230,17 @@ site test {
         byte[] xor_array = (array_1 ^ array_2)
         byte[] not_array = ~array_1
     
-        if (and_array[0] == #AA && and_array[1] == #00) [/ A /]
-        else [/ x /]
+        if (and_array[0] == #AA && and_array[1] == #00) [| A |]
+        else [| x |]
             
-        if (or_array[0] == #FF && or_array[1] == #55) [/ B /]
-        else [/ x /]
+        if (or_array[0] == #FF && or_array[1] == #55) [| B |]
+        else [| x |]
             
-        if (xor_array[0] == #55 && xor_array[1] == #55) [/ C /]
-        else [/ x /]
+        if (xor_array[0] == #55 && xor_array[1] == #55) [| C |]
+        else [| x |]
         
-        if (not_array[0] == #00 && not_array[1] == #FF) [/ D /]
-        else [/ x /]
+        if (not_array[0] == #00 && not_array[1] == #FF) [| D |]
+        else [| x |]
     }
 
 
@@ -254,24 +254,24 @@ site test {
         test_set_1 {
 
             super_1 {
-                defn [/ X /]
+                defn [| X |]
             }
 
             super_1 test_local_def {
-                defn [/ A /]
+                defn [| A |]
 
                 defn;
             }
 
             super_2 {
-                defn [/ B /]
+                defn [| B |]
             }
 
             super_2 test_class_def {
                 defn;
             }
 
-            defn [/ C /]
+            defn [| C |]
 
             test_container_local_def {
                 defn;
@@ -284,7 +284,7 @@ site test {
 
 
         super_set_2 {
-            defn [/ D /]
+            defn [| D |]
         }
 
         super_set_2 test_set_2 {
@@ -298,7 +298,7 @@ site test {
 
         test_set_3 {
             container_3 {
-                defn [/ E /]
+                defn [| E |]
                 super_3 [/]
             }
 
@@ -310,17 +310,17 @@ site test {
         }
         
         test_set_4 {
-            `back-quoted name` [/ F /]
+            `back-quoted name` [| F |]
             
             normal_parent {
-                `back-quoted child name` [/ G /]
+                `back-quoted child name` [| G |]
             }
             
             normal_function(`back-quoted parameter`) {
                 `back-quoted parameter`;
             }
             
-            `back-quoted name` normal_sub [/ I /]
+            `back-quoted name` normal_sub [| I |]
                         
             `back-quoted name`;
             normal_parent.`back-quoted child name`;
@@ -484,10 +484,10 @@ site test {
     
     
         super_parent {
-            a [/ A /]
-            b [/ B /]
+            a [| A |]
+            b [| B |]
             char c = 'C'
-            d [/ D /]
+            d [| D |]
             char e = 'E'
             show(char x) = x
             
@@ -524,10 +524,10 @@ site test {
         expected = "ABCD"
 
         base_owner {
-            a [/ A /]
-            b [/ B /]
+            a [| A |]
+            b [| B |]
             b bb [/]
-            c [/ C /]
+            c [| C |]
             d(x) = x
         }
         
@@ -634,7 +634,7 @@ site test {
                x {
                
                    y {
-                       c [/ C /]
+                       c [| C |]
 
                        z;
                    }
@@ -655,8 +655,8 @@ site test {
         
         mn_base {
         
-            m [/ x /]
-            n [/ x /]
+            m [| x |]
+            n [| x |]
             
             show_m = owner.m;
             show_n { 
@@ -666,26 +666,26 @@ site test {
         }
         
         mn_base mn {
-            m [/ M /]
-            n [/ N /]
+            m [| M |]
+            n [| N |]
         }
         
         otype [/]
         
         otype oinstance {
-           if (super isa otype)       [/ O /] else [/ x /]
+           if (super isa otype)       [| O |] else [| x |]
         }
                 
         a.b.x;
        
-        if (owner isa definition)     [/ D /] else [/ x /]
-        if (container isa definition) [/ E /] else [/ x /]
-        if (this isa definition)      [/ F /] else [/ x /]
-        if (super isa definition)     [/ G /] else [/ x /]
-        if (sub isa definition)       [/ H /] else [/ x /]
-        if (site isa definition)      [/ I /] else [/ x /]
-        if (core isa definition)      [/ J /] else [/ x /]
-        if (def isa definition)       [/ K /] else [/ x /]
+        if (owner isa definition)     [| D |] else [| x |]
+        if (container isa definition) [| E |] else [| x |]
+        if (this isa definition)      [| F |] else [| x |]
+        if (super isa definition)     [| G |] else [| x |]
+        if (sub isa definition)       [| H |] else [| x |]
+        if (site isa definition)      [| I |] else [| x |]
+        if (core isa definition)      [| J |] else [| x |]
+        if (def isa definition)       [| K |] else [| x |]
         
         l_def.instantiate;
         
@@ -702,18 +702,18 @@ site test {
         expected = "ABCDEF"
 
         super_def {
-            c [/ x /]
-            d [/ x /]
-            f [/ F /]
+            c [| x |]
+            d [| x |]
+            f [| F |]
         }
         
         super_def this_def {
-            c [/ C /]
-            d [/ D /]
-            e [/ E /]
+            c [| C |]
+            d [| D |]
+            e [| E |]
             
-            if (this isa super_def) [/ A /] else [/ x /]
-            if (this isa this_def)  [/ B /] else [/ x /]
+            if (this isa super_def) [| A |] else [| x |]
+            if (this isa this_def)  [| B |] else [| x |]
             show_c(this);
             show_d(this);
             this.e;
@@ -787,8 +787,8 @@ site test {
         }
     
         owner_checker {
-            if (owner isa right_owner) [/ H /]
-            else                       [/ I /]        
+            if (owner isa right_owner) [| H |]
+            else                       [| I |]        
         } 
     
         right_owner {
@@ -813,14 +813,14 @@ site test {
         expected = "ABCDEFGH"
 
         a = "A"
-        b [/ B /]
+        b [| B |]
         cprime = "C"
         c = cprime
         dprime = "D"
         d {= dprime; =}
         char e = 'E'
-        f {= [/ F /] =}
-        g [/ {= [/ G /] =} /]
+        f {= [| F |] =}
+        g [| {= [| G |] =} |]
         h [``H``]
 
         a;
@@ -842,38 +842,38 @@ site test {
         expected = "ABCDEFGHIJKLM"
 
         super_1 {
-           [/ A /]
+           [| A |]
            sub;
-           [/ E /]
+           [| E |]
         }
         super_1 sub_1 {
-            [/ B /]
+            [| B |]
             sub;
-            [/ D /]
+            [| D |]
         }
-        sub_1 sub_sub_1 [/ C /]
+        sub_1 sub_sub_1 [| C |]
 
 
-        super_super_2 [/ H /]
+        super_super_2 [| H |]
         super_super_2 super_2 {
-            [/ G /]
+            [| G |]
             super;
-            [/ I /]
+            [| I |]
         }
         super_2 sub_2 {
-            [/ F /]
+            [| F |]
             super;
-            [/ J /]
+            [| J |]
         }
         
         super_3 {
-           [/ K /]
+           [| K |]
            sub;
-           [/ M /]
+           [| M |]
         }
         super_3 sub_null [/]
 
-        sub_null sub_sub_3 [/ L /]
+        sub_null sub_sub_3 [| L |]
 
         sub_sub_1;
         sub_2;
@@ -889,34 +889,34 @@ site test {
         expected = "ABCDEFGHIJKLMNOPQ"
 
         super_1 {
-           [/ A /]
+           [| A |]
            sub;
-           [/ C /]
+           [| C |]
         }
-        super_1 sub_1 [/ B /]
+        super_1 sub_1 [| B |]
 
         super_2 {
-           [/ D /]
+           [| D |]
            sub;
-           [/ F /]
+           [| F |]
         }
-        super_2 sub_2(int n) [/ E /]
+        super_2 sub_2(int n) [| E |]
 
         super_3 {
-           [/ G /]
+           [| G |]
            sub;
-           [/ I /]
+           [| I |]
         }
         dynamic super_3 sub_3(x) {
             x;
         }
         
         super_4 sub_4 {
-            j [/ J /]
+            j [| J |]
         }
         
         super_4 {
-            k [/ K /]
+            k [| K |]
         }
 
         dynamic sub_1,sub_2(i),sub_3(c),sub_4 test_sub(),(int i),(c) [/]
@@ -927,15 +927,15 @@ site test {
 
 
         dynamic super_5(x) sub_5(x) {
-            [/ L /]
+            [| L |]
             super;
-            [/ N /]
+            [| N |]
         }
 
         dynamic super_5(z) sub_6(y, z) {
-            [/ O /]
+            [| O |]
             super;
-            [/ Q /]
+            [| Q |]
         }
 
         dynamic sub_5(a),sub_6(b, c) test_super(a),(b, c) {
@@ -960,21 +960,21 @@ site test {
         expected = "ABCDEFGHIJKLMN"
         
         super_1 {
-            [/ A /]
+            [| A |]
             sub;
-            [/ G /]
+            [| G |]
         }
         
         next_1 {
-            [/ B /]
+            [| B |]
             next;
-            [/ F /]
+            [| F |]
         }
         
         next_2 {
-            [/ C /]
+            [| C |]
             next;
-            [/ E /]
+            [| E |]
         }
         
         next_3 {
@@ -982,17 +982,17 @@ site test {
         }
        
         next_1, next_2, next_3, super_1 sub_1 {
-            [/ D /]
+            [| D |]
         }
       
         super_2 {
-            [/ K /]
+            [| K |]
         }
         
         next_4 {
-            [/ I /]
+            [| I |]
             next;
-            [/ M /]
+            [| M |]
         }
         
         next_5 {
@@ -1000,15 +1000,15 @@ site test {
         }
         
         next_6 {
-            [/ J /]
+            [| J |]
             next;
-            [/ L /]
+            [| L |]
         }
         
         next_4, next_5, next_6, super_2 sub_2 {
-            [/ H /]
+            [| H |]
             super;
-            [/ N /]
+            [| N |]
         }
 
         sub_1;
@@ -1025,56 +1025,56 @@ site test {
 
         super_1 {
             under_1 {
-                [/ A /]
+                [| A |]
                 sub;
-                [/ E /]
+                [| E |]
             }
         }
 
 
         super_1 sub_1 {
             this under_1 {
-                [/ B /]
+                [| B |]
                 sub;
-                [/ D /]
+                [| D |]
             }
         }
         
         sub_1 sub_sub_1 { 
-            this under_1 [/ C /]
+            this under_1 [| C |]
         }
 
 
         super_super_2 {
-            over_2 [/ H /]
+            over_2 [| H |]
         }
         
         super_super_2 super_2 {
             this over_2 {
-                [/ G /]
+                [| G |]
                 super;
-                [/ I /]
+                [| I |]
             }
         }
         super_2 sub_2 {
            this over_2 {
-                [/ F /]
+                [| F |]
                 super;
-                [/ J /]
+                [| J |]
             }
         }
         
         super_3 {
             under_3 {
-                [/ K /]
+                [| K |]
                 sub;
-                [/ M /]
+                [| M |]
             }
         }
         super_3 sub_null [/]
 
         sub_null sub_sub_3 {
-            this under_3 [/ L /]
+            this under_3 [| L |]
         }
         
         sub_sub_1.under_1;
@@ -1093,18 +1093,18 @@ site test {
         test_super {
             test_child [?]
         
-            [/ A /] catch [/ x /]
+            [| A |] catch [| x |]
         }
         
         test_super test_sub_1 {
-            [/ B /] catch [/ x /]
+            [| B |] catch [| x |]
         }
         
         test_super test_sub_2 {
             {
                 test_child;
-                [/ x /]
-            } catch [/ C /]
+                [| x |]
+            } catch [| C |]
         }
 
         test_super test_sub_3 {
@@ -1112,8 +1112,8 @@ site test {
         
             {
                 test_child;
-                [/ D /]
-            } catch [/ x /]
+                [| D |]
+            } catch [| x |]
         }
         
         test_abs [?]
@@ -1124,11 +1124,11 @@ site test {
         test_sub_2;
         test_sub_3;
         
-        with (test_abs) [/ x /]
-        else [/ E /]
+        with (test_abs) [| x |]
+        else [| E |]
         
-        with (test_nonabs) [/ F /]
-        else [/ x /]
+        with (test_nonabs) [| F |]
+        else [| x |]
         
     }
 
@@ -1161,10 +1161,10 @@ site test {
         val3 = return_int(true)
         val4 = return_int(false)
         
-        if (val1 isa boolean) [/ A /]
-        else [/ x /]
-        if (val2 isa boolean) [/ B /]
-        else [/ x /]
+        if (val1 isa boolean) [| A |]
+        else [| x |]
+        if (val2 isa boolean) [| B |]
+        else [| x |]
         
         ('A' + val3);
         ('A' + val4);
@@ -1250,8 +1250,8 @@ site test {
         aliased_parent_with_param = parent_with_param('K').child;
         
         aliased_param_with_arg_interface {
-            aliased_arg_param_1 [/ x /]
-            aliased_arg_param_2 [/ z /]
+            aliased_arg_param_1 [| x |]
+            aliased_arg_param_2 [| z |]
         }
         
         aliased_param_with_arg_interface aliased_param_with_arg(w, z) {
@@ -1316,8 +1316,8 @@ site test {
         expected = "ABCDEFG"
 
         ia_target {
-            child [/ B /]
-            [/ A /]  
+            child [| B |]
+            [| A |]  
         }
                
         ia_array[] = [ ia_target, ia_table, ia_table_2, "X" ]
@@ -1409,10 +1409,10 @@ site test {
         }
 
         gtype [/]
-        gtype g_param [/ G /]
+        gtype g_param [| G |]
 
         dynamic typed_params(int e, char f, gtype g) {
-            if (e == 5) [/ E /]
+            if (e == 5) [| E |]
             f;
             g;
         }
@@ -1428,8 +1428,8 @@ site test {
         }
 
         dynamic p_with_p(i) {
-            if (i == "III") [/ I /]
-            else [/ x /]
+            if (i == "III") [| I |]
+            else [| x |]
         }
 
         iii = "III"
@@ -1438,7 +1438,7 @@ site test {
             simple_param(p_with_p(iii));
         }
 
-        p_2("J", [/ K /]) param_in_super [/]
+        p_2("J", [| K |]) param_in_super [/]
 
         p_2(*) any_param_in_super(a, b) [/]
         
@@ -1464,7 +1464,7 @@ site test {
         }
         
         simple_param("A");
-        multiple_params([/ B /], [``C``], d_param);
+        multiple_params([| B |], [``C``], d_param);
         typed_params(5, 'F', g_param);
         param_child(h_param);
         param_with_param;
@@ -1566,7 +1566,7 @@ site test {
         aliased_nested_parent = nested_parent;
 
         parent_param {
-            child [/ F /]
+            child [| F |]
         }
 
         parent_param_container(parent_param pp) {
@@ -1584,9 +1584,9 @@ site test {
         }
 
         apc {
-            g [/ x /]
-            h [/ x /]
-            i [/ x /]
+            g [| x |]
+            h [| x |]
+            i [| x |]
         }
         
         ap(apc aa) {
@@ -1594,9 +1594,9 @@ site test {
         }
         
         apc p {
-            g [/ G /]
-            h [/ H /]
-            i [/ I /]
+            g [| G |]
+            h [| H |]
+            i [| I |]
         }
         
         tp(ap pp) {
@@ -1675,8 +1675,8 @@ site test {
         
         param_parent(0, "X", string_x, string_d) pp_1 [/]
         
-        if (param_parent(1, string_x, string_x, string_x).a == 1) [/ A /]
-        else [/ X /]
+        if (param_parent(1, string_x, string_x, string_x).a == 1) [| A |]
+        else [| X |]
         param_parent(0, "B", string_x, string_x).b;
         param_parent(0, "X", string_c, string_x).c;
         pp_1.d;
@@ -1860,7 +1860,7 @@ site test {
             y = yy
         }
 
-        xy[2] xy_array_1 = [ xy("A", "B"), xy([/ C /], [``D``]) ]
+        xy[2] xy_array_1 = [ xy("A", "B"), xy([| C |], [``D``]) ]
 
         xy ef {
             x = "E"
@@ -1870,16 +1870,16 @@ site test {
 
         xy[] xy_array_2 = [ ef ]
 
-        xy("G", "H") gh [/ x /]
+        xy("G", "H") gh [| x |]
 
         xy[] xy_array_3 = [ gh ]
 
-        xy(p, q) ij(p, q) [/ x /]
-        xy(p, q) kl(p, q) [/ x /]
+        xy(p, q) ij(p, q) [| x |]
+        xy(p, q) kl(p, q) [| x |]
 
         xy[] xy_array_4(i, j, k, l) = [ ij(i, j), kl(k, l) ]
 
-        xy(a, b) mn(a, b) [/ x /]
+        xy(a, b) mn(a, b) [| x |]
         xy[] xy_5(p1, p2) = [ mn(p1, p2) ]
         show_array_5(m, n) {
 
@@ -1991,7 +1991,7 @@ site test {
         }
 
         fum("x") fum_c {
-            [/ C /]
+            [| C |]
         }
 
         fum("x") fum_y(y) {
@@ -2112,9 +2112,9 @@ site test {
         hi[] = [ "H", "I" ]
         jk[] = [ "J", "K" ]
         dynamic lm(n) {
-            if (n == 1)      [/ L /]
-            else if (n == 2) [/ M /]
-            else             [/ x /]
+            if (n == 1)      [| L |]
+            else if (n == 2) [| M |]
+            else             [| x |]
         }
         
         nested_dynamic_array[] = [ for c in jk { c } ] 
@@ -2136,21 +2136,21 @@ site test {
         super_array dimless_dynamic_array = [ for t in tt {= t =} ]
         
         dynamic_array[] = [ 
-                            if (true_flag)  { [/ A /] },
+                            if (true_flag)  { [| A |] },
 
-                            if (false_flag) { [/ x /] },
+                            if (false_flag) { [| x |] },
 
-                            if (true_flag)  { [/ B /] }
-                                      else  { [/ x /] },
+                            if (true_flag)  { [| B |] }
+                                      else  { [| x |] },
 
-                            if (false_flag) {= [/ x /] =}
-                                       else {= [/ C /] =},
+                            if (false_flag) {= [| x |] =}
+                                       else {= [| C |] =},
                                        
                             if (true_flag)  { if (true_flag) {= d =} },
 
                             if (true_flag)  {= if (false_flag) { x } =},
 
-                            if (true_flag)  {= {= e; [/ F /] g; =} =},
+                            if (true_flag)  {= {= e; [| F |] g; =} =},
                            
                             for hh in hi { hh },
                             for jj in nested_dynamic_array { jj },
@@ -2308,8 +2308,8 @@ site test {
         boolean fals = false
 
         dynamic ghval(boolean g) {
-            if (g) [/ G /]
-            else   [/ H /]
+            if (g) [| G |]
+            else   [| H |]
         }
         
         hkey = "h"
@@ -2381,7 +2381,7 @@ site test {
         }
 
         gum("x") gum_c {
-            [/ C /]
+            [| C |]
         }
 
         gum("x") gum_y(y) {
@@ -2538,7 +2538,7 @@ tt {=
         z{}{} = { "t1":{ "e":"E", "f":"F"}, "t2":{ "g":"G", "h":"H" } }
  
         foo(x) {
-           i [/ I /]
+           i [| I |]
            j = x
         } 
 
@@ -2680,30 +2680,30 @@ public mtt {
         copy_of_table_2{} = { "z": "Z", "y": "Y" } 
         
         
-        if (a in array_1) [/ A /] else [/ x /]
-        if (a in array_2) [/ x /] else [/ B /]
-        if (c in array_3) [/ C /] else [/ x /]
+        if (a in array_1) [| A |] else [| x |]
+        if (a in array_2) [| x |] else [| B |]
+        if (c in array_3) [| C |] else [| x |]
         
-        if (array_1.count == 1) [/ D /] else [/ x /]
-        if (array_2.count == 2) [/ E /] else [/ x /]
-        if (array_3.count == 3) [/ F /] else [/ x /]
+        if (array_1.count == 1) [| D |] else [| x |]
+        if (array_2.count == 2) [| E |] else [| x |]
+        if (array_3.count == 3) [| F |] else [| x |]
         
-        if (X in table_1) [/ G /] else [/ x /]
-        if (y in table_2) [/ x /] else [/ H /]
-        if (Z in table_2) [/ I /] else [/ x /]
+        if (X in table_1) [| G |] else [| x |]
+        if (y in table_2) [| x |] else [| H |]
+        if (Z in table_2) [| I |] else [| x |]
 
-        if (y in table_2.keys) [/ J /] else [/ x /]
-        if (Z in table_2.keys) [/ x /] else [/ K /]
+        if (y in table_2.keys) [| J |] else [| x |]
+        if (Z in table_2.keys) [| x |] else [| K |]
         
-        if (table_1.count == 1) [/ L /] else [/ x /]
-        if (table_2.count == 2) [/ M /] else [/ x /]
+        if (table_1.count == 1) [| L |] else [| x |]
+        if (table_2.count == 2) [| M |] else [| x |]
         
-        if (array_2 == copy_of_array_2) [/ N /] else [/ x /]
-        if (array_2 == array_1) [/ x /] else [/ O /]
-        if (array_2 != array_1) [/ P /] else [/ x /]
-        if (table_2 == copy_of_table_2) [/ Q /] else [/ x /]
-        if (table_2 == table_1) [/ x /] else [/ R /]
-        if (table_2 != table_1) [/ S /] else [/ x /]
+        if (array_2 == copy_of_array_2) [| N |] else [| x |]
+        if (array_2 == array_1) [| x |] else [| O |]
+        if (array_2 != array_1) [| P |] else [| x |]
+        if (table_2 == copy_of_table_2) [| Q |] else [| x |]
+        if (table_2 == table_1) [| x |] else [| R |]
+        if (table_2 != table_1) [| S |] else [| x |]
         
     }
 cop {=
@@ -2712,9 +2712,9 @@ cop {=
   array_3[] = array_1 + array_2
         a = "a"
         c = "c"
-        if (a in array_1) [/ A /] else [/ x /]
-        if (a in array_2) [/ x /] else [/ B /]
-        if (c in array_3) [/ C /] else [/ x /]
+        if (a in array_1) [| A |] else [| x |]
+        if (a in array_2) [| x |] else [| B |]
+        if (c in array_3) [| C |] else [| x |]
   array_1.count;
   array_2.count;
   array_3.count;
@@ -2736,12 +2736,12 @@ cop {=
         f[] = [ "f1", "f2", "f3", "f4", "f5", "f6" ]
         f fsub [/]
         
-        if (a.count == 1)      [/ A /] else [/ x /]
-        if (b.count == 2)      [/ B /] else [/ x /]
-        if (c.count == 3)      [/ C /] else [/ x /]
-        if (d.count == 4)      [/ D /] else [/ x /]
-        if (ealias.count == 5) [/ E /] else [/ x /]
-        if (fsub.count == 6)   [/ F /] else [/ x /]
+        if (a.count == 1)      [| A |] else [| x |]
+        if (b.count == 2)      [| B |] else [| x |]
+        if (c.count == 3)      [| C |] else [| x |]
+        if (d.count == 4)      [| D |] else [| x |]
+        if (ealias.count == 5) [| E |] else [| x |]
+        if (fsub.count == 6)   [| F |] else [| x |]
     }
 
     public test_case collection_parse_test {
@@ -2784,20 +2784,20 @@ cop {=
         array.get(test_array, 0);
         array.set(test_array, 1, "B");
         test_array[1];
-        if (array.size(test_array) == 2) [/ C /]
-        else [/ X /]
+        if (array.size(test_array) == 2) [| C |]
+        else [| X |]
  
         table.get(test_table, "d");
         table.set(test_table, "e", "E");
         test_table["e"];
         table.set(test_table, "f", "F");
         test_table["f"];
-        if (table.size(test_table) == 3 && test_table.count == 3) [/ G /]
-        else [/ X /]
+        if (table.size(test_table) == 3 && test_table.count == 3) [| G |]
+        else [| X |]
         
         array.add(test_array, "I");
-        if (array.size(test_array) == 3 && test_array.count == 3) [/ H /]
-        else [/ X /]
+        if (array.size(test_array) == 3 && test_array.count == 3) [| H |]
+        else [| X |]
         test_array[2];
     }
 
@@ -2806,8 +2806,8 @@ cu {=
     array.get(test_array, 0);
     array.set(test_array, 1, "B");
     test_array[1];
-    if (array.size(test_array) == 2) [/ C /]
-    else [/ X /]
+    if (array.size(test_array) == 2) [| C |]
+    else [| X |]
 =}
 
     public test_case object_child_test {
@@ -2818,12 +2818,12 @@ cu {=
         expected = "ABCDEFGHIJK"
 
         obj {
-            a [/ x /]
-            b [/ x /]
-            c [/ x /]
-            d [/ x /]
-            e [/ x /]
-            f [/ x /]
+            a [| x |]
+            b [| x |]
+            c [| x |]
+            d [| x |]
+            e [| x |]
+            f [| x |]
             g(z) = z
             hi(y) = y
 
@@ -2831,12 +2831,12 @@ cu {=
         }
 
         obj sub_1 {
-            a [/ A /]
-            b [/ B /]
-            c [/ C /]
-            d [/ D /]
-            e [/ E /]
-            f [/ F /]
+            a [| A |]
+            b [| B |]
+            c [| C |]
+            d [| D |]
+            e [| E |]
+            f [| F |]
         }
 
         dynamic obj sub_2 {
@@ -3257,7 +3257,7 @@ itst {=
 
 rtst {
     external_interface {
-        r [/ x /]
+        r [| x |]
         show(x) [?]
     }
 
@@ -3420,21 +3420,21 @@ etst {=
     
         dynamic val(x) = x
         array_1[3] = [ "x", "y", "z" ]
-        array_2[3] = [ [/ x /], [/ y /], [/ z /] ]
-        array_3[3] = [ val("x"), val([/ y /]), val(val("z")) ] 
+        array_2[3] = [ [| x |], [| y |], [| z |] ]
+        array_3[3] = [ val("x"), val([| y |]), val(val("z")) ] 
         
         str1 = org.fundev.test.ExternalTest.concatElements(array_1)
         str2 = org.fundev.test.ExternalTest.concatElements(array_2)
         str3 = org.fundev.test.ExternalTest.concatElements(array_3)
 
-        if (str1 == "xyz") [/ A /]
-        else               [/ x /]
+        if (str1 == "xyz") [| A |]
+        else               [| x |]
         
-        if (str2 == "xyz") [/ B /]
-        else               [/ x /]
+        if (str2 == "xyz") [| B |]
+        else               [| x |]
 
-        if (str3 == "xyz") [/ C /]
-        else               [/ x /]
+        if (str3 == "xyz") [| C |]
+        else               [| x |]
     
     }
 
@@ -3457,24 +3457,24 @@ etst {=
         boolean TRUE = true
         boolean FALSE = false
 
-        if (TRUE) [/ A /]
-        else [/ x /]
+        if (TRUE) [| A |]
+        else [| x |]
 
-        if (FALSE) [/ x /]
-        else [/ B /]
+        if (FALSE) [| x |]
+        else [| B |]
 
-        if (TRUE == FALSE) [/ x /]
-        else if (FALSE) [/ x /]
-        else [/ C /]
+        if (TRUE == FALSE) [| x |]
+        else if (FALSE) [| x |]
+        else [| C |]
 
         for int m from 0 to 6 by 3 {
             for int i from m to (m + 3) where (i != 4) {
-                if (i == 0) [/ D /]
-                else if (i <= 1) [/ E /]
-                else if (i < 3) [/ F /]
+                if (i == 0) [| D |]
+                else if (i <= 1) [| E |]
+                else if (i < 3) [| F |]
                 else if (i >= 3) {
-                    if (i > 3) [/ H /]
-                    else [/ G /]
+                    if (i > 3) [| H |]
+                    else [| G |]
                 }
             }
         }
@@ -3482,17 +3482,17 @@ etst {=
             ij[k];
         }
         
-        if (empty_array) [/ x /]
-        else [/ K /]
+        if (empty_array) [| x |]
+        else [| K |]
         
-        if (nonempty_array) [/ L /]
-        else [/ x /]
+        if (nonempty_array) [| L |]
+        else [| x |]
         
-        if (empty_table) [/ x /]
-        else [/ M /]
+        if (empty_table) [| x |]
+        else [| M |]
         
-        if (nonempty_table) [/ N /]
-        else [/ x /]
+        if (nonempty_table) [| N |]
+        else [| x |]
     }
 
 
@@ -3503,23 +3503,23 @@ etst {=
 
         expected = "ABCD"
 
-        super_1 [/ A /]
+        super_1 [| A |]
         dynamic super_1 sub_1(boolean flag) {
             if (flag) {
                 super;
             } else {
-                [/ B /]
+                [| B |]
             }
         }
 
         dynamic super_2(boolean flag) {
             if (flag) {
-                [/ C /]
+                [| C |]
             } else {
                 sub;
             }
         }
-        dynamic super_2(flag) sub_2(boolean flag) [/ D /]
+        dynamic super_2(flag) sub_2(boolean flag) [| D |]
 
         sub_1(true);
         sub_1(false);
@@ -3541,54 +3541,54 @@ etst {=
         dd = "d"
 
         {
-            [/ A /]
+            [| A |]
 
         } catch {
-            [/ w /]
+            [| w |]
         }
 
         {
-            [/ X /]
+            [| X |]
             redirect r
 
         } catch c {
-            [/ x /]
+            [| x |]
 
         } catch {
-            [/ B /]
+            [| B |]
         }
 
         {
-            [/ X /]
+            [| X |]
             redirect c
 
         } catch r {
-            [/ y /] 
+            [| y |] 
 
         } catch c {
             c;
 
         } catch {
-            [/ z /]
+            [| z |]
         }
         
         {
-            [/ X /]
+            [| X |]
             redirect (dd)
 
         } catch dd {
-            [/ x /]
+            [| x |]
 
         } catch d {
-            [/ D /]
+            [| D |]
         
         } catch {
-            [/ y /]
+            [| y |]
         }
         
     }
 
-a_def [/ A /]
+a_def [| A |]
 
 def_of {
     definition a_def_def = definition_of("a_def")
@@ -3607,11 +3607,11 @@ def_of {
         abc = "ABC"
         dxf = "DxF"
 
-        if (starts_with(abc, "A")) [/ A /]
-        else [/ x /]
+        if (starts_with(abc, "A")) [| A |]
+        else [| x |]
 
-        if (starts_with("xyz", dxf)) [/ x /]
-        else [/ B /]
+        if (starts_with("xyz", dxf)) [| x |]
+        else [| B |]
 
         trim_leading(abc, "AB");
 
@@ -3620,8 +3620,8 @@ def_of {
         lead_paragraph("G<p>xxx");
         lead_paragraph("H<h6/>zzz");
 
-        if (lead_paragraph("  <li>XYZ <blockquote id=1>xyz") == "  <li>XYZ ") [/ I /]
-        else [/ x /]
+        if (lead_paragraph("  <li>XYZ <blockquote id=1>xyz") == "  <li>XYZ ") [| I |]
+        else [| x |]
     }
 
 
@@ -3715,7 +3715,7 @@ srut {
         key = "border_layout"
         boolean need_exact_match = false
 
-        expected [/
+        expected [|
             <table><tr><td>
                 <table>
                 <tr><td colspan="3" align="center">ABC</td></tr>
@@ -3729,7 +3729,7 @@ srut {
                 <tr><td colspan="3" align="center">PQR</td></tr>
                 </table>
             </td></tr></table>
-        /]
+        |]
 
         north = "ABC"
         west = "D"
@@ -3757,7 +3757,7 @@ blt {
         key = "compass_layout"
         boolean need_exact_match = false
 
-        expected [|
+        expected [/
             <table><tr><td>A</td>
             <td>B</td>
             <td>C</td>
@@ -3768,7 +3768,7 @@ blt {
             <td>H</td>
             <td>I</td>
             </tr></table>
-        /]
+        |]
 
         nw = "A"
         n = "B"
@@ -3830,36 +3830,36 @@ blt {
 
         /-- a reference cached in a scope is not saved between leaving and reentering
          -- the scope --/
-        if (rand_5 != rand_5) [/ A /] else [/ x /]
+        if (rand_5 != rand_5) [| A |] else [| x |]
 
         /-- caching should make two references cached in the same scope the same --/
-        if (cached_rand == cached_rand) [/ B /] else [/ x /]
-        if (rand_1 == rand_1) [/ C /] else [/ x /]
-        if (rand_2 == rand_2) [/ D /] else [/ x /]
+        if (cached_rand == cached_rand) [| B |] else [| x |]
+        if (rand_1 == rand_1) [| C |] else [| x |]
+        if (rand_2 == rand_2) [| D |] else [| x |]
 
         /-- references in subscopes of the scope where a value is cached resolve to 
          -- the value in the cache --/
-        if (rand_1 == cached_rand) [/ E /] else [/ x /]
-        if (test_child) [/ F /] else [/ x /]
-        if (rand_2 == cached_rand) [/ G /] else [/ x /]
-        if (rand_1 == rand_2) [/ H /] else [/ x /]
+        if (rand_1 == cached_rand) [| E |] else [| x |]
+        if (test_child) [| F |] else [| x |]
+        if (rand_2 == cached_rand) [| G |] else [| x |]
+        if (rand_1 == rand_2) [| H |] else [| x |]
 
         /-- a second reference to the dynamic value gets a new value --/
-        if (a_second_cached_rand != cached_rand) [/ I /] else [/ x /]
-        if (rand_3 == a_second_cached_rand) [/ J /] else [/ x /]
-        if (rand_3 == rand_4) [/ K /] else [/ x /]
+        if (a_second_cached_rand != cached_rand) [| I |] else [| x |]
+        if (rand_3 == a_second_cached_rand) [| J |] else [| x |]
+        if (rand_3 == rand_4) [| K |] else [| x |]
 
         /-- a dynamic instantiation of a cached value causes the value to change --/
-        if (cached_rand(::) != rand_1) [/ L /] else [/ x /]
-        if (cached_rand == cached_rand) [/ M /] else [/ x /]
-        if (cached_rand == rand_1(::)) [/ N /] else [/ x /]
+        if (cached_rand(::) != rand_1) [| L |] else [| x |]
+        if (cached_rand == cached_rand) [| M |] else [| x |]
+        if (cached_rand == rand_1(::)) [| N |] else [| x |]
 
         /-- a reference cached in a scope is not saved between leaving and reentering
          -- the scope --/
-        if (rand_5 != rand_5) [/ O /] else [/ x /]
+        if (rand_5 != rand_5) [| O |] else [| x |]
         
         /-- the presence of an argument should not affext caching --/
-        if (rand_6("p") == rand_6("q")) [/ P /] else [/ x /]
+        if (rand_6("p") == rand_6("q")) [| P |] else [| x |]
     }
 
 public ct {
@@ -3868,7 +3868,7 @@ public ct {
     double rand_1 {
         cached_rand;
     }
-    if (cached_rand == rand_1(::)) [/ N /] else [/ x /]
+    if (cached_rand == rand_1(::)) [| N |] else [| x |]
 }
 
 
@@ -4300,7 +4300,7 @@ dkt {=
          -- once more.
          --/ 
         abcd_container.a; 
-        if (abcd_container.b != "B") [/ x /]
+        if (abcd_container.b != "B") [| x |]
 
         abcd_container.c;
         abcd_container.d;
@@ -4332,26 +4332,26 @@ nkt {=
 
         expected = "ABCDEFG"
         sup {
-            b [/ X /]
+            b [| X |]
             c [?]
  
             keep: d(z) = z
             keep: child_sup child_sub(child_sup w) = w
             
-            p1 [/ X /]  
-            p2 [/ X /]  
+            p1 [| X |]  
+            p2 [| X |]  
 
-            [/ X /]
+            [| X |]
         }
 
         sup cached_sub {
-            b [/ B /]
-            c [/ C /]
+            b [| B |]
+            c [| C |]
             
             eval(d("D"));
             eval(child_sub(child_sup_sub));
 
-            [/ A /]
+            [| A |]
         }
         
         child_sup {
@@ -4383,26 +4383,26 @@ nkt {=
 
 cit {=
         sup {
-            b [/ X /]
+            b [| X |]
             c [?]
  
             keep: d(z) = z
             keep: child_sup child_sub(child_sup w) = w
             
-            p1 [/ X /]  
-            p2 [/ X /]  
+            p1 [| X |]  
+            p2 [| X |]  
 
-            [/ X /]
+            [| X |]
         }
 
         sup cached_sub {
-            b [/ B /]
-            c [/ C /]
+            b [| B |]
+            c [| C |]
             
           /---  d("D"); ---/
             child_sub(child_sup_sub);
 
-            [/ A /]
+            [| A |]
         }
         
         child_sup {
@@ -4934,7 +4934,7 @@ kst {=
         
         cd(y) {
             with (y) { y; }
-            else     [/ D /]
+            else     [| D |]
         }
         
         eval(ab("x"));
@@ -4977,8 +4977,8 @@ kst {=
         }
 
         ho_test_2(boolean f) {
-            if (f("yes")) [/ C /] else [/ x /]
-            if (f("no")) [/ x /] else [/ D /]
+            if (f("yes")) [| C |] else [| x |]
+            if (f("no")) [| x |] else [| D |]
         }
 
         ho_test_3(f) {
@@ -5120,14 +5120,14 @@ public hot {=
         
 
         dynamic foo(int i),(int[] ii),(float f),(char c),(char[] cc),(subchar[] s),(subchar_array ss),(x) {
-            with (i)       [/ A /]
-            else with (ii) [/ B /]
-            else with (f)  [/ C /]
-            else with (c)  [/ D /]
-            else with (cc) [/ E /]
-            else with (s)  [/ F /]
-            else with (ss) [/ G /]
-            else           [/ x /]
+            with (i)       [| A |]
+            else with (ii) [| B |]
+            else with (f)  [| C |]
+            else with (c)  [| D |]
+            else with (cc) [| E |]
+            else with (s)  [| F |]
+            else with (ss) [| G |]
+            else           [| x |]
         }
 
         foo(2 * a);
@@ -5224,13 +5224,13 @@ cot {=
         /---- plain ----/
        
         base_def {
-            child_def [/ x /]
+            child_def [| x |]
         
             child_def;
         }
         
         base_def sub_def {
-            child_def [/ A /]
+            child_def [| A |]
         }
     
         base_def plain_def = sub_def
@@ -5239,7 +5239,7 @@ cot {=
         /---- with param ----/
     
         base_def_param(x) {
-            child_def [/ x /]
+            child_def [| x |]
         
             child_def;
         }
@@ -5254,7 +5254,7 @@ cot {=
         /---- child with param ----/
     
         base_def_child_param(x) {
-            child_def(y) [/ x /]
+            child_def(y) [| x |]
         
             child_def(x);
         }
@@ -5268,7 +5268,7 @@ cot {=
     
         /---- aliased child with param ----/
     
-        child_base [/ z /]
+        child_base [| z |]
         
         child_base child_base_sub(w) = w
         
@@ -5284,13 +5284,13 @@ cot {=
     
         base_def_aliased_child def_aliased_child(z) = sub_def_aliased_child(z)
         super_def {
-            super_child [/ E /]
-            super_child_2 [/ F /]
+            super_child [| E |]
+            super_child_2 [| F |]
         }
         childless_def = "x"
         complex_def {
             different_child = "y"
-            [/ z /]
+            [| z |]
         }
         super_def childless_alias_def = childless_def
         super_def childless_alias_def_2 = complex_def
@@ -5314,18 +5314,18 @@ cot {=
         dynamic int looped_expression = 1 + for int i = 2 to 5 {= i =}
         dynamic int iffed_expression(boolean flag) = 1 + if (flag) {= 1 =}
         
-        if (looped_expression == 10)      [/ A /] else [/ x /]
-        if (iffed_expression(true) == 2)  [/ B /] else [/ x /]
-        if (iffed_expression(false) == 1) [/ C /] else [/ x /]
+        if (looped_expression == 10)      [| A |] else [| x |]
+        if (iffed_expression(true) == 2)  [| B |] else [| x |]
+        if (iffed_expression(false) == 1) [| C |] else [| x |]
     }
 
 public ect {=
  dynamic int looped_expression = 1 + for int i = 2 to 5 { i }
  dynamic int iffed_expression(boolean flag) = 1 + if (flag) { 1 }
 
- if (looped_expression == 10)      [/ A /] else [/ x /]
- if (iffed_expression(true) == 2)  [/ B /] else [/ x /]
- if (iffed_expression(false) == 1) [/ C /] else [/ x /]
+ if (looped_expression == 10)      [| A |] else [| x |]
+ if (iffed_expression(true) == 2)  [| B |] else [| x |]
+ if (iffed_expression(false) == 1) [| C |] else [| x |]
 =}
 
     public test_case children_of_parameterized_super_test {
@@ -5361,9 +5361,9 @@ public ect {=
  
     list_all_tests {
         for test_case t in all_tests {
-            if (t.expected) [/
+            if (t.expected) [|
                 <br><a href="${= t.type; =}">{= t.name; =}</a>
-            /]
+            |]
         }
     }
 
@@ -5395,7 +5395,7 @@ show_this_context {=
     page(r, s) basepage(request r, session s) {
         keep in global_stats: int global_page_views = global_stats["global_page_views"] + 1
 
-        title = [/ Fun Test Suite: {= label; =} /]
+        title = [| Fun Test Suite: {= label; =} |]
 
         color bgcolor = "#EEDDAA"
 
@@ -5408,66 +5408,66 @@ show_this_context {=
 
         urlprefix [/]
 
-        dynamic menuitem(basepage bp) [/
+        dynamic menuitem(basepage bp) [|
             <a href="{= urlprefix; bp.type; =}.html" title="{= bp.title; =}">{= bp.label; =}</a>
-        /]
+        |]
 
         menuitem[] menuitems = [ menuitem(index),
                                  menuitem(standard),
                                  menuitem(custom),
                                  menuitem(session_summary) ]
 
-        leftmenu [/
+        leftmenu [|
             <td width="150" valign="top">&nbsp;<br>
                 <table width=72 border=0 cellspacing=16 cellpadding=0>{=
-                    for m in menuitems [/
+                    for m in menuitems [|
                         <tr><td>{= m; =}</td></tr>
-                    /]
+                    |]
                 =}</table>
             </td>
-        /]
+        |]
 
 
-        topbar() [/
+        topbar() [|
             <div align="center"><h2>Fun Test Suite: {= label; =}</h2></div>
             <div align="right"><h3>{= today; =}</h3></div>
-        /]
+        |]
 
         form("start_session") test_session_form(session s) {
-            [/ <h3>Test Session</h3> /]
+            [| <h3>Test Session</h3> |]
             if (test_session_obj(s)) {
-                [/ <p><b>Current test session: {= test_session_obj(s).getId; =}</b></p> /]
+                [| <p><b>Current test session: {= test_session_obj(s).getId; =}</b></p> |]
                 button("command", "Stop");
                 button("command", "Start over");
             } else {
-                [/ <p><b>Test session not started.</b></p> /]
+                [| <p><b>Test session not started.</b></p> |]
                 disabled_button("command", "Stop");
                 button("command", "Start");
             }
         }
 
-        show_request(request r) [/
+        show_request(request r) [|
             <h3>Request Details</h3>
             <ul>
               <li>URL: {= r.url; =}</li>
               <li>query: {= r.query; =}</li>
               <li>method: {= r.method; =}</li>
             </ul>
-        /]
+        |]
 
         run_tests(request r, int min, int max) {
             test_run_form(r, min, max);
         }
 
         form("run") test_run_form(request r, int min, int max) {
-            [/ <h3>Results</h3> /]
+            [| <h3>Results</h3> |]
             for test_case t in all_tests {
                 if (t.category >= min && t.category <= max) {
                     if (r.params[t.key]) {
                         t;
-                        [/ <br> /]
-                    } /-- else [/ test {= t.name; =} not selected.<br> /] --/
-                } /-- else [/ test {= t.name; =} not in range({= min; =} to {= max; =}).<br> /] --/
+                        [| <br> |]
+                    } /-- else [| test {= t.name; =} not selected.<br> |] --/
+                } /-- else [| test {= t.name; =} not in range({= min; =} to {= max; =}).<br> |] --/
             }
             button("command", "Return");
         }
@@ -5485,41 +5485,41 @@ show_this_context {=
         }
 
         test_select_menu(basepage[] test_pages) {
-            [/
+            [|
                <p>This page lists tests that cannot be run in batches because they
                require interaction or do not follow the standard format for tests.</p>
                <p>Select test page to run:</p>
                <ul>
-            /]
+            |]
 
             for basepage bp in test_pages {
-                [/ <li> /]
+                [| <li> |]
                 menuitem(bp);
-                [/ </li> /]
+                [| </li> |]
             }
 
-            [/ </ul> /]
+            [| </ul> |]
         }
 
 
         form("run") test_select_form(int min, int max, command) {
             boolean checked = (command != "Unselect all")
 
-            [/
+            [|
                <p>This page lists standard format tests which may be run in batches.</p>
                <p>Select tests to run:</p>
-            /]
+            |]
             for test_case t in all_tests {
                 if (t.expected && t.category >= min && t.category <= max) {
                    checkbox(t.key, t.name, checked);
                    br;
                 }
             }
-            [/ <p> /]
+            [| <p> |]
             button("command", "Run tests");
             button("command", "Select all");
             button("command", "Unselect all");
-            [/ </p> /]
+            [| </p> |]
         }
 
         content(request r, session s) {
@@ -5532,17 +5532,17 @@ show_this_context {=
 
         rightbar [/]
 
-        reload [/
+        reload [|
             <a href="$reload">reload site</a>
-        /]
+        |]
 
-        footer [/
+        footer [|
             <div align="center" style="font-size: 10pt;">
             <hr align="center" noshade >
             {= copyright; =}
             {= reload; =}
             </div>
-        /]
+        |]
 
       /------------ Construction ------------/
 
@@ -5565,13 +5565,13 @@ show_this_context {=
             
             // we expect this to always be called with r and s parameters
 
-            if (!r) [/
-                <p><b><font color="#EE0000">No request {= if (!s) [/ or session /] =} parameter in content!</font></b></p>
-            /] else if (!s) [/
+            if (!r) [|
+                <p><b><font color="#EE0000">No request {= if (!s) [| or session |] =} parameter in content!</font></b></p>
+            |] else if (!s) [|
                 <p><b><font color="#EE0000">No session parameter in content!</font></b></p>
-            /]
+            |]
                
-            [/ <p>This web application is designed to test an implementation of the Fun
+            [| <p>This web application is designed to test an implementation of the Fun
                language. It provides access to two kinds of tests, standard and advanced.
                Standard tests are non-interactive and report the test results in a simple,
                standardized format, making it possible to automate their execution and the
@@ -5579,7 +5579,7 @@ show_this_context {=
                require user interaction or cannot report results in the standard format.</p>
 
                <p>Select from the menu at left to view available tests.</p>
-            /]
+            |]
 
         }
     }
@@ -5589,13 +5589,13 @@ show_this_context {=
         label = "Test Categories"
 
         content(request r, session s) {
-            [/ <p>Test categories:</p><ul> /]
+            [| <p>Test categories:</p><ul> |]
 
-            for int i from 0 until i > highest_category [/
+            for int i from 0 until i > highest_category [|
                 <li><b><a href="show_tests?category={= i; =}">{= category_titles[i]; =}</a></b></li>
-            /]
+            |]
 
-            [/ </ul> /]
+            [| </ul> |]
         }
     }
 
@@ -5639,12 +5639,12 @@ show_this_context {=
     public basepage(r, s) session_summary(request r, session s) {
         label = "Test Session Summary"
 
-        content(request r, session s) [/
+        content(request r, session s) [|
             <table cellspacing="4">
             <tr><td><h4>Successful tests:</h4></td><td><h4>{= results["good"]; =}</h4></td></tr>
             <tr><td><h4>Failed tests:</h4></td><td><h4>{= results["bad"]; =}</h4></td></tr>
             </table>
-        /]
+        |]
     }
 
 
@@ -5658,9 +5658,9 @@ show_this_context {=
 
         content(request r, session s) {
             empty_test;
-            [/ <h3>Good: |]
+            [| <h3>Good: /]
             results["good"];
-            [/ </h3> /]
+            [| </h3> |]
         }
     }
 
@@ -5675,28 +5675,28 @@ show_this_context {=
         label = "Memoization Tests"
 
         content(request r, session s) {
-            [/ <h3>Memoization Example</h3> /]
+            [| <h3>Memoization Example</h3> |]
             memoization_example;
 
-            [/ <p/><h3>Counter Example</h3> /]
+            [| <p/><h3>Counter Example</h3> |]
             counter_example;
 
-            [/ <p/><h3>Growing Array Example</h3> /]
+            [| <p/><h3>Growing Array Example</h3> |]
             growing_array_example;
 
-            [/ <p/><h3>Growing Array Example 1</h3> /]
+            [| <p/><h3>Growing Array Example 1</h3> |]
             growing_array_example_1;
 
-            [/ <p/><h3>Growing Array Example 2</h3> /]
+            [| <p/><h3>Growing Array Example 2</h3> |]
             growing_array_example_2;
 
-            [/ <p/><h3>Growing Array Example 3</h3> /]
+            [| <p/><h3>Growing Array Example 3</h3> |]
             growing_array_example_3;
 
-            [/ <p/><h3>Growing Array Example 4 (globally cached per-session array) </h3> /]
+            [| <p/><h3>Growing Array Example 4 (globally cached per-session array) </h3> |]
             growing_array_example_4(s);
 
-            [/ <p/><h3>Mutation Example</h3> /]
+            [| <p/><h3>Mutation Example</h3> |]
             mutation_example;
         }
     }
@@ -5705,7 +5705,7 @@ show_this_context {=
 
     dynamic memoization_example {
 
-        table_props [/ cellpadding="6" /]
+        table_props [| cellpadding="6" |]
 
             /-------- Definitions --------/
 
@@ -5758,75 +5758,75 @@ show_this_context {=
          -- function x, along with the cached value of x before, between and
          -- after the evaluations.
          --/
-        start_table(table_props); [/ x in cache: /]
+        start_table(table_props); [| x in cache: |]
         next_column; x_in_cache;
 
-        next_row; [/ memoized x: /]
+        next_row; [| memoized x: |]
         next_column; x;
 
-        next_row; [/ x(:1:): /]
+        next_row; [| x(:1:): |]
         next_column; x(:1:);
 
-        next_row; [/ memoized x: /]
+        next_row; [| memoized x: |]
         next_column; x;
 
-        next_row; [/ x in cache: /]
+        next_row; [| x in cache: |]
         next_column; x_in_cache;
 
-        next_row; [/ x(:2:): /]
+        next_row; [| x(:2:): |]
         next_column; x(:2:);
 
-        next_row; [/ memoized x: /]
+        next_row; [| memoized x: |]
         next_column; x;
 
-        next_row; [/ x in cache: /]
+        next_row; [| x in cache: |]
         next_column; x_in_cache;
 
         end_table;
 
-        [/ <p/> /]
+        [| <p/> |]
 
         /-- The following code builds an HTML table showing initial and mutated
          -- values of y.  y is mutated using aliased caching.
          --/
 
-        start_table; [/ initial y: /]
+        start_table; [| initial y: |]
         next_column; y;
 
-        next_row; [/ set_y(1): /]
+        next_row; [| set_y(1): |]
         next_column; set_y(1);
 
-        next_row; [/ memoized y: /]
+        next_row; [| memoized y: |]
         next_column; y;
 
-        next_row; [/ set_y(2): /]
+        next_row; [| set_y(2): |]
         next_column; set_y(2);
 
-        next_row; [/ memoized y: /]
+        next_row; [| memoized y: |]
         next_column; y;
 
         end_table;
 
-        [/ <p/> /]
+        [| <p/> |]
 
         /-- The following code builds an HTML table showing initial and mutated
          -- values of z.  z is mutated using aliased caching, just like y above,
          -- but it uses implicit rather than explicit caching.
          --/
 
-        start_table; [/ initial z: /]
+        start_table; [| initial z: |]
         next_column; z;
 
-        next_row; [/ set_z(1): /]
+        next_row; [| set_z(1): |]
         next_column; set_z(1);
 
-        next_row; [/ memoized z: /]
+        next_row; [| memoized z: |]
         next_column; z;
 
-        next_row; [/ set_z(2): /]
+        next_row; [| set_z(2): |]
         next_column; set_z(2);
 
-        next_row; [/ memoized z: /]
+        next_row; [| memoized z: |]
         next_column; z;
 
         end_table;
@@ -5913,19 +5913,19 @@ memt {=
             int{} counter_cache = local_values
         }
         
-        [/ <h4>Local Counter</h4><b> /]
+        [| <h4>Local Counter</h4><b> |]
         for int i from 0 through 9 {
             local_counter; sp;
         }
-        [/ </b><h4>Session Counter</h4><b> /]
+        [| </b><h4>Session Counter</h4><b> |]
         for int i from 0 through 9 {
             session_counter; sp;
         }
-        [/ </b><h4>Global Counter</h4><b> /]
+        [| </b><h4>Global Counter</h4><b> |]
         for int i from 0 through 9 {
             global_counter; sp;
         }
-        [/ </b> /]
+        [| </b> |]
     }
 
 
@@ -5934,13 +5934,13 @@ memt {=
         char[] growing_array(char[] x) = x
         dynamic add_to_array(char c) = eval(growing_array(:growing_array + c:))
         
-        [/ <b> /]
+        [| <b> |]
         for char letter from 'A' through 'J' {
             add_to_array(letter);
             growing_array;
             br;
         }
-        [/ </b> /]
+        [| </b> |]
     }
 
 
@@ -5958,11 +5958,11 @@ memt {=
         keep in array_cache:
         char[] growing_array(int n) = _array + next_letter(n)
 
-        [/ <b> /]
+        [| <b> |]
         for int i from 0 through 9 {
             growing_array(:i:);  br;
         }
-        [/ </b> /]
+        [| </b> |]
     }
 
 
@@ -5975,13 +5975,13 @@ memt {=
         char[] array = [ letter ]
         keep as array: dynamic char[] incr_array = array + incr_letter
 
-        [/ <b> /]
+        [| <b> |]
         for int i from 0 through 9 {
             array;
             br;
             eval(incr_array);
         }
-        [/ </b> /]
+        [| </b> |]
     }
 
 
@@ -5993,12 +5993,12 @@ memt {=
             keep as chars: dynamic char[] add(char c) = chars + c
         }
 
-        [/ <b> /]
+        [| <b> |]
         for char letter from 'A' through 'J' {
             carray.add(letter);
             br;
         }
-        [/ </b> /]
+        [| </b> |]
     }
 
     session_id(session s) = s.id
@@ -6024,13 +6024,13 @@ memt {=
 
     dynamic growing_array_example_4(session s) {
         eval(session_id(: s :));
-        [/ <b> /]
+        [| <b> |]
         for char letter from 'A' through 'J' {
             add_to_session_char_array(letter, s);
             session_char_array;
             br;
         }
-        [/ </b> /]
+        [| </b> |]
     }
 
 page(r, s) gctest(request r, session s) {
@@ -6075,14 +6075,14 @@ page(r, s) gctest(request r, session s) {
         int id3 = auto_table3 ? auto_id("table3") : current_id("table3")
         int id_global = next_global_id
         
-        [/
+        [|
             <h3>Per table</h3>
             <p>{= (auto_table1 ? "Auto" : "Current"); =} id for table1: {= id1; =}</p>
             <p>{= (auto_table2 ? "Auto" : "Current"); =} id for table2: {= id2; =}</p>
             <p>{= (auto_table3 ? "Auto" : "Current"); =} id for table3: {= id3; =}</p>
             <h3>Global</h3>
             <p>Global auto id: {= id_global; =}</p>
-        /]
+        |]
     }
 
     gtid {
@@ -6411,12 +6411,12 @@ x67 {=
         modable_integer z = 0
         int y = z + 1
 
-        [/ <b> /]
+        [| <b> |]
         for int i from 0 to 5 {
             changing_letter;
         }
 
-        [/ <br> /]
+        [| <br> |]
 
         z; 
         z.set(1);
@@ -6427,7 +6427,7 @@ x67 {=
         z.add(2);
         z;
 
-        [/ </b> /]
+        [| </b> |]
         
     }
 
@@ -6461,38 +6461,38 @@ x67 {=
         
             val = "constructed"
 
-            [/ <h4>this_domain</h4> /]
-            [/ <ul><li><b>main_site: </b> /]          this_domain.main_site;
-            [/ </li><li><b>sites.count: </b> /]       this_domain.sites.count;
-            [/ </li><li><b>domains.count: </b> /]     this_domain.domains.count;
-            [/ </li></ul> /]
+            [| <h4>this_domain</h4> |]
+            [| <ul><li><b>main_site: </b> |]          this_domain.main_site;
+            [| </li><li><b>sites.count: </b> |]       this_domain.sites.count;
+            [| </li><li><b>domains.count: </b> |]     this_domain.domains.count;
+            [| </li></ul> |]
             
-            [/ <h4>this_processor</h4> /]
-            [/ <ul><li><b>name: </b> /]               this_processor.name;
-            [/ </li><li><b>version: </b> /]           this_processor.version;
-            [/ </li></ul> /]
+            [| <h4>this_processor</h4> |]
+            [| <ul><li><b>name: </b> |]               this_processor.name;
+            [| </li><li><b>version: </b> |]           this_processor.version;
+            [| </li></ul> |]
             
-            [/ <h4>this_server</h4> /]
-            [/ <ul><li><b>base_url: </b> /]           this_server.base_url;
-            [/ </li><li><b>file_base: </b> /]         this_server.file_base;
-            [/ </li><li><b>nominal_address: </b> /]   this_server.nominal_address;
-            [/ </li></ul> /]
+            [| <h4>this_server</h4> |]
+            [| <ul><li><b>base_url: </b> |]           this_server.base_url;
+            [| </li><li><b>file_base: </b> |]         this_server.file_base;
+            [| </li><li><b>nominal_address: </b> |]   this_server.nominal_address;
+            [| </li></ul> |]
             
-            [/ <h4>here</h4>  /]
-            [/ <ul><li><b>site_name: </b> /]          {= here.site_name;        =} catch {= "<b>Error</b>"; =}
-            [/ </li><li><b>get("val"): </b> /]        {= here.get("val");       =} catch {= "<b>Error</b>"; =} 
-            [/ </li><li><b>construct("val"): </b> /]  {= here.construct("val"); =} catch {= "<b>Error</b>"; =}
-            [/ </li><li><b>get("val"): </b> /]        {= here.get("val");       =} catch {= "<b>Error</b>"; =}
-            [/ </li><li><b>val: </b> /]               {= val;                   =} catch {= "<b>Error</b>"; =}
-            [/ </li><li><b>get("val"): </b> /]        {= here.get("val");       =} catch {= "<b>Error</b>"; =}
-            [/ </li></ul> /]
+            [| <h4>here</h4>  |]
+            [| <ul><li><b>site_name: </b> |]          {= here.site_name;        =} catch {= "<b>Error</b>"; =}
+            [| </li><li><b>get("val"): </b> |]        {= here.get("val");       =} catch {= "<b>Error</b>"; =} 
+            [| </li><li><b>construct("val"): </b> |]  {= here.construct("val"); =} catch {= "<b>Error</b>"; =}
+            [| </li><li><b>get("val"): </b> |]        {= here.get("val");       =} catch {= "<b>Error</b>"; =}
+            [| </li><li><b>val: </b> |]               {= val;                   =} catch {= "<b>Error</b>"; =}
+            [| </li><li><b>get("val"): </b> |]        {= here.get("val");       =} catch {= "<b>Error</b>"; =}
+            [| </li></ul> |]
 
-            [/ <h4>environment variables</h4> /]
-            [/ <ul><li><b>BENTO_HOME: </b> /]         $("BENTO_HOME");
-            [/ </li><li><b>HOME: </b> /]              $("HOME");
-            [/ </li><li><b>HOSTNAME: </b> /]          $("HOSTNAME");
-            [/ </li><li><b>PATH: </b> /]              $("PATH");
-            [/ </li></ul> /]
+            [| <h4>environment variables</h4> |]
+            [| <ul><li><b>BENTO_HOME: </b> |]         $("BENTO_HOME");
+            [| </li><li><b>HOME: </b> |]              $("HOME");
+            [| </li><li><b>HOSTNAME: </b> |]          $("HOSTNAME");
+            [| </li><li><b>PATH: </b> |]              $("PATH");
+            [| </li></ul> |]
             
         }
     }
@@ -6500,13 +6500,13 @@ x67 {=
     site_test {
         definition site_defs = site.defs
 
-        [/
+        [|
             <p>site.full_name: {= site.full_name; =}</p
             <p>site_defs.count: {= site_defs.count; =}</p>
             <ul>defs:
-        /]
+        |]
            
-        for definition d in site_defs [/
+        for definition d in site_defs [|
             <li>{=
                 if (d.type) {=
                     d.type;
@@ -6518,9 +6518,9 @@ x67 {=
                     "[/]";
                 =}
              =}</li>
-        /]
+        |]
 
-        [/ </ul> /]
+        [| </ul> |]
     }
 
 
@@ -6573,15 +6573,15 @@ x67 {=
             dynamic int sv2 = Session_object.val2;
             dynamic int sv3 = Session_object.val3;
             
-            [/
+            [|
                 <p><b>Local_value:</b> {= Local_value; =}<br/> 
                    <b>Session_value:</b> {= Session_value; =}</p> 
                 <p><b>Local_object:</b> Local_object({= lv1; =}, {= lv2; =}, {= lv3; =}) </p>
                    <b>Session_object:</b> Session_object({= sv1; =}, {= sv2; =}, {= sv3; =}) </p> 
-            /]
+            |]
 
 
-            if (r.params["value"]) [/
+            if (r.params["value"]) [|
 
                 <p></p> 
                 <b>r.params["value"]:</b> {= r.params["value"]; =}
@@ -6599,7 +6599,7 @@ x67 {=
                    <b>Session_value:</b> {= Session_value; =}</p>
 
 
-            /] else if (r.params["incvals"]) [/
+            |] else if (r.params["incvals"]) [|
 
                 <p></p> 
                 <b>r.params["incvals"]:</b> {= r.params["incvals"]; =}
@@ -6613,17 +6613,17 @@ x67 {=
                 <p><b>Local_object:</b> Local_object({= lv1; =}, {= lv2; =}, {= lv3; =}) </p>
                    <b>Session_object:</b> Session_object({= sv1; =}, {= sv2; =}, {= sv3; =}) </p> 
 
-            /]
+            |]
  
             value_buttons;
 
             eg_component(r);
 
-            [/
+            [|
                 <hr/>
                 <h4>Page views this session: {= num_page_views; =}</h4>
                 <h4>Total page views in all sessions: {= global_stats["global_page_views"]; =}</h4>
-            /]
+            |]
         } 
     }
     int selected_example(int n) = n
@@ -6635,8 +6635,8 @@ x67 {=
         if (example_arg) {
             eval(selected_example(example_arg));
         }
-        [/ <p>example_arg: {= example_arg; =}</p>
-           <p>selected_example: {= selected_example; =}</p> /]
+        [| <p>example_arg: {= example_arg; =}</p>
+           <p>selected_example: {= selected_example; =}</p> |]
     }
 
     public basepage(r, s) file_test_page(request r, session s) {
@@ -6648,15 +6648,15 @@ x67 {=
         file[] files = current_dir.files
         
         content(request r, session s) {
-            [/ <h4>Directory of {= current_dir.canonical_path; =}</h4> /]
+            [| <h4>Directory of {= current_dir.canonical_path; =}</h4> |]
 
-            [/ <ul> /]
+            [| <ul> |]
             for file f in files {
-                [/ <li> /]
+                [| <li> |]
                 f.canonical_path;
-                [/ </li> /]
+                [| </li> |]
             }
-            [/ </ul> /]
+            [| </ul> |]
         }
     }
 
@@ -6690,13 +6690,13 @@ ft {=
         public component top_bar(request r) {
             color bgcolor = "#8A8081"
             
-            [/ <h2> /]
+            [| <h2> |]
             with (r) {
                 r.params["title"];
             } else {
                 title;
             }
-            [/ </h2> /]
+            [| </h2> |]
         }
             
         component left_side_bar {
@@ -6715,33 +6715,33 @@ ft {=
             color bgcolor = "#EFCCCC"
             req_id = content_component.id
             
-            [/ <table width="96%" bgcolor="{= bgcolor; =}"><tr><td>Formlike Component</td></tr><tr><td> /]
+            [| <table width="96%" bgcolor="{= bgcolor; =}"><tr><td>Formlike Component</td></tr><tr><td> |]
             textarea("content", "", 23, 13);
-            [/ </td></tr><tr><td> /]
+            [| </td></tr><tr><td> |]
             submit_button("formlike_component_submit", "Submit", req_id, "content");
-            [/<br>content_component.type: {= content_component.type; =}
-              <br>content_component.id: {= content_component.id; =} /]
-            [/ </td></tr></table> /]
+            [|<br>content_component.type: {= content_component.type; =}
+              <br>content_component.id: {= content_component.id; =} |]
+            [| </td></tr></table> |]
         } 
             
         public component right_side_bar {
             color bgcolor = "#8AB0C1"
             
-            [/ <h3> /]
+            [| <h3> |]
             ajax_counter;
             nbsp; nbsp; nbsp;
             ajax_counter;
             nbsp; nbsp; nbsp;
             ajax_counter;
-            [/ </h3> /]
+            [| </h3> |]
         }
         
         public component content_component(request r) {
             with (r) {
                 r.params["content"];
-            } else [/
+            } else [|
                 <p>Interesting.</p>
-            /]
+            |]
         }
         
         public component bottom_bar {
@@ -6763,7 +6763,7 @@ ft {=
         component, selectable, draggable, resizable box [/]
                 
         box box_one {
-            style [/
+            style [|
                 #box_one {
                     position: absolute;
                     left: 50px; top: 10px;
@@ -6772,13 +6772,13 @@ ft {=
                     background-color: #CC4466;
                     padding: 4px;
                 }
-            /]
+            |]
             
-            [/ <p>Box One</p> /]
+            [| <p>Box One</p> |]
         }
 
         box box_two {
-            style [/
+            style [|
                 #box_two {
                     position: absolute;
                     left: 55px; top: 80px;
@@ -6787,13 +6787,13 @@ ft {=
                     background-color: #44CC66;
                     padding: 4px;
                 }
-            /]
+            |]
 
-            [/ <p>Box Two</p> /]
+            [| <p>Box Two</p> |]
         }
         
         box box_three {
-            style [/
+            style [|
                 #box_three {
                     position: absolute; left: 60px; top: 150px;
                     width: 50px; height: 52px; 
@@ -6801,9 +6801,9 @@ ft {=
                     background-color: #6644CC;
                     padding: 4px;
                 }
-            /]
+            |]
 
-            [/ <p>Box Three</p> /]
+            [| <p>Box Three</p> |]
         }
         
         content(request r, session s) {
@@ -6820,9 +6820,9 @@ ft {=
     
         
         content(request r, session s) {
-            [/ <h4>big array</h4> /]
+            [| <h4>big array</h4> |]
             big_mem_allocator;
-            [/ <p>ok.</p> /]
+            [| <p>ok.</p> |]
         }
     }
     
@@ -6839,12 +6839,12 @@ ft {=
         length = big_array_array.count * 1048576 * 256 * 4;
 
         content(request r, session s) {
-            [/
+            [|
                <h4>big array</h4>
                <p>length = {= length; =}
                <br>last item = {= big_array_array[255][1048575]; =}
                <br>ok.</p>
-            /]
+            |]
         }
     }
     
@@ -6865,11 +6865,11 @@ ft {=
         boolean ajax_enabled = true
 
         component input_panel(params{}) {
-            [/ <table><tr><td> /]
+            [| <table><tr><td> |]
             textedit("command_in", params["command_in"], 23);
-            [/ </td></tr><tr><td> /]
+            [| </td></tr><tr><td> |]
             submit_button("input_panel_submit", "Execute", "command_out", "command_in");
-            [/ </td></tr></table> /]
+            [| </td></tr></table> |]
         }    
         
         dynamic component command_out(params{}) {
@@ -6891,7 +6891,7 @@ ft {=
             
             } else if (params["command_in"]) {
                 log("running exec " + params["command_in"]);
-                [/ <tt>$&nbsp; /]
+                [| <tt>$&nbsp; |]
                 command_exec(: safe_command_in :);
                 eval(exec_is_running(: true :));
                 br;
@@ -6905,17 +6905,17 @@ ft {=
                 eval(exec_is_running(: false :));
                 show_out;
                 log("done with exec " + params["command_in"]);
-                [/ </tt> /]
-            } else [/
+                [| </tt> |]
+            } else [|
                 <p>(nothing to show)</p>
-            /]
+            |]
         }
 
         dynamic show_out {
             for line in lines(command_exec.err) {
-                [/ <span style="color:red"> /]
+                [| <span style="color:red"> |]
                 line;
-                [/ </span><br/> /]
+                [| </span><br/> |]
             }
             for line in lines(command_exec.out) {
                 line;
@@ -6967,17 +6967,17 @@ ft {=
                 launch_test_server;
             }
             
-            [/
+            [|
                 <p><b>test_server started:</b> {= server_started; =}</p> 
                 <p><b>test_server running:</b> {= server_is_running; =}</p> 
-            /]
+            |]
             
-            if (r.params["status"]) [/
+            if (r.params["status"]) [|
                 <table>
                 <tr><td><b>expected data from test_server:</b></td><td>ABCDE</td></tr> 
                 <tr><td><b>actual data from test_server:</b></td><td>{= get_a; bc[0]; bc[1]; de["d"]; de["e"]; =}</td></tr>
                 </table> 
-            /]
+            |]
             
             control_panel;
         }    
@@ -6993,34 +6993,34 @@ ft {=
         int fooyou(int x), (float y), (z) {
             with (x) {
                 x.type; ": ";
-                [/ int: /] sp;
+                [| int: |] sp;
                 x;
             } else with (y) {
                 y.type; ": ";
-                [/ float: /] sp;
+                [| float: |] sp;
                 y;
             } else with (z) {
                 z.type; ": ";
-                [/ untyped: /] sp;
+                [| untyped: |] sp;
                 z;
             }
         }
         
-        [/ <p>foo1("abc") = /]
+        [| <p>foo1("abc") = |]
         foo1("abc");
-        [/ <p>foo2("abc") = /]
+        [| <p>foo2("abc") = |]
         foo2("abc");
-        [/ <p>foo3("abc") = /]
+        [| <p>foo3("abc") = |]
         foo3("abc");
-        [/ <p>foo4("abc") = /]
+        [| <p>foo4("abc") = |]
         foo4("abc");
-        [/ <p>foo4("abc") + 5 = /]
+        [| <p>foo4("abc") + 5 = |]
         (foo4("abc") + 5);
-        [/ <p>5 + foo4("abc") = /]
+        [| <p>5 + foo4("abc") = |]
         (5 + foo4("abc"));
-        [/ <p>foo5("abc") = /]
+        [| <p>foo5("abc") = |]
         foo5("abc");
-        [/ <p>fooyou(1), fooyou(1.1), fooyou("abc") = /]
+        [| <p>fooyou(1), fooyou(1.1), fooyou("abc") = |]
         sp; fooyou(1); ", "; fooyou(1.1); ", "; fooyou("abc");
     }
 
@@ -7087,18 +7087,18 @@ ft {=
             /--- run all the tests in test_test_runner --/        
             test_test_runner.run;
         
-            [/ <h2>Test Results</h2><ol> /]
+            [| <h2>Test Results</h2><ol> |]
             for test_result rslt in test_test_runner.results {
-                [/ <li>Name: {= rslt.name; =}<br>
+                [| <li>Name: {= rslt.name; =}<br>
                       Passed: {= rslt.result; =}<br>
                       log:<ul>
-                /]
-                for msg in rslt.messages [/
+                |]
+                for msg in rslt.messages [|
                     <li>{= msg; =}</li>
-                /]
-                [/ </ul></li> /]                
+                |]
+                [| </ul></li> |]                
             }
-            [/ </ol> /]
+            [| </ol> |]
         }
     }
     
@@ -7177,7 +7177,7 @@ ft {=
                 throw_404_redirection;
             }
             
-            [/
+            [|
                 <h2>Errors</h2><ul>
                 <li><a href="error_test_page?error=nullpointer">null pointer exceptionr</a></li>
                 <li><a href="error_test_page?error=classnotfound">class not found exception</a></li>
@@ -7188,7 +7188,7 @@ ft {=
                 <li><a href="error_test_page?error=redirection">redirection</a></li>
                 <li><a href="error_test_page?error=404redirection">redirection to 404 error</a></li>
                 </ul>
-            /]                          
+            |]                          
         }
     }
 

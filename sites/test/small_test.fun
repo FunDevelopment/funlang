@@ -1,7 +1,7 @@
 /-- little test --/
 
 site small_test {
-    response index [/ <h6>small test</h6> /]
+    response index [| <h6>small test</h6> |]
 
     concurrent_test {
     

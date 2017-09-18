@@ -36,10 +36,17 @@ public class RedirectStatement extends FunStatement implements Construction {
     public Redirection getRedirection(Context context) {
         FunNode child = getChild(0);
         if (isDynamic()) {
-            DynamicFunBlock block = (DynamicFunBlock) child;
-            child = block.children[0];
-            if (child instanceof Instantiation) {
-                return new Redirection((Instantiation) child, context);
+            if (child instanceof Construction) {
+                try {
+                    Object obj = ((Construction) child).getData(context, null);
+                    if (obj instanceof Instantiation) {
+                        return new Redirection((Instantiation) obj, context);
+                    } else {
+                        return new Redirection(obj.toString());
+                    }
+                } catch (Redirection r) {
+                    return r;
+                }
             } else {
                 throw new IllegalArgumentException("Dynamic redirection requires an instantiation");
             }

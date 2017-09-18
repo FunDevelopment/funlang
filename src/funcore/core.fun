@@ -598,33 +598,33 @@ core {
     doctype [/]
 
 
-    doctype html4strict [/ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    doctype html4strict [| <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
            "http://www.w3.org/TR/html4/strict.dtd">
-    /]
+    |]
 
-    doctype html4loose [/ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    doctype html4loose [| <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
            "http://www.w3.org/TR/html4/loose.dtd">
-    /]
+    |]
 
-    doctype html4frames [/ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+    doctype html4frames [| <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
            "http://www.w3.org/TR/html4/frameset.dtd">
-    /]
+    |]
 
-    doctype xhtmlstrict [/ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    doctype xhtmlstrict [| <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-    /]
+    |]
 
-    doctype xhtmltrans [/ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    doctype xhtmltrans [| <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    /]
+    |]
 
-    doctype xhtmlframes [/ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+    doctype xhtmlframes [| <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-    /]
+    |]
 
-    doctype xhtml11 [/ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    doctype xhtml11 [| <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
         "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-    /]
+    |]
 
 
     imagepath [/]
@@ -651,7 +651,7 @@ core {
     colon = ":"
     comma = ","
     dash = "-"
-    dblquote [/ " /]
+    dblquote [| " |]
     dot = "."
     eq = "="
     quote = "'"
@@ -683,33 +683,33 @@ core {
      --     table_example {
      --
      --         start_table;
-     --         [/ Top left /]
+     --         [| Top left |]
      --         next_column;
-     --         [/ Top middle /]
+     --         [| Top middle |]
      --         next_column;
-     --         [/ Top right /]
+     --         [| Top right |]
      --         next_row;
-     --         [/ Bottom left /]
+     --         [| Bottom left |]
      --         next_column;
-     --         [/ Bottom middle /]
+     --         [| Bottom middle |]
      --         next_column;
-     --         [/ Bottom right /]
+     --         [| Bottom right |]
      --         end_table;
      --     }
      --/
 
-    start_table(table_attribs, row_attribs, cell_attribs) [/
+    start_table(table_attribs, row_attribs, cell_attribs) [|
         <table {= table_attribs; =}><tr {= row_attribs; =}><td {= cell_attribs; =}>
-    /]
-    next_row(row_attribs, cell_attribs) [/
+    |]
+    next_row(row_attribs, cell_attribs) [|
         </td></tr><tr {= row_attribs; =}><td {= cell_attribs; =}>
-    /]
-    next_column(cell_attribs) [/
+    |]
+    next_column(cell_attribs) [|
         </td><td {= cell_attribs; =}>
-    /]
-    end_table [/
+    |]
+    end_table [|
         </td></tr></table>
-    /]
+    |]
 
     /----------- session cache -------------/
 
@@ -750,25 +750,25 @@ core {
         label [/]
 
         /** The author of the page. */
-        author [/ me /]
+        author [| me |]
 
         /** A short description of the page. */
         description [/]
         
         /** Optional value for expires meta tag **/
-        expiration [/ -1 /]
+        expiration [| -1 |]
         
-        viewport [/ width=device-width, initial-scale=1 /]
+        viewport [| width=device-width, initial-scale=1 |]
 
         /** Indexing instructions for web crawlers **/
         robots = "all"
 
-        meta[] = [ [/ http-equiv="content-type" content="text/html; charset=iso-8859-1" /],
-                   if (expiration)  {= [/ http-equiv="expires" content="{= expiration; =}" /] =},
-                   if (author)      {= [/ name="author" content="{= author; =}"            /] =},
-                   if (description) {= [/ name="description" content="{= description; =}"  /] =},
-                   if (viewport)    {= [/ name="viewport" content="{= viewport; =}"        /] =},
-                   if (robots)      {= [/ name="robots" content="{= robots; =}"            /] =} ]
+        meta[] = [ [| http-equiv="content-type" content="text/html; charset=iso-8859-1" |],
+                   if (expiration)  {= [| http-equiv="expires" content="{= expiration; =}" |] =},
+                   if (author)      {= [| name="author" content="{= author; =}"            |] =},
+                   if (description) {= [| name="description" content="{= description; =}"  |] =},
+                   if (viewport)    {= [| name="viewport" content="{= viewport; =}"        |] =},
+                   if (robots)      {= [| name="robots" content="{= robots; =}"            |] =} ]
 
         links[] = []
 
@@ -821,9 +821,9 @@ core {
         dynamic core_script { 
             core_scripts(options, find_element_function, page_name);
             if (onload_script) {
-                [/ window.onload = function() { /]
+                [| window.onload = function() { |]
                 onload_script;
-                [/ } /]
+                [| } |]
             }
         }
         
@@ -845,11 +845,11 @@ core {
          *  document.getElementById, allowing pages to customize this behavior,
          *  for example to allow finding an element in another frame.
          **/
-        find_element_function [/
+        find_element_function [|
             function findElement(id) {    
                 return document.getElementById(id);
             }
-        /]
+        |]
         
 
       /---------------------------------------------/
@@ -858,70 +858,70 @@ core {
 
         doctype doctype_header = xhtmltrans
 
-        html_header [/
+        html_header [|
             <head>
             <title>{= title; =}</title>
             {=
-                for m in meta [/
+                for m in meta [|
                     <meta {= m; =} >
-                /]
+                |]
                 
-                for l in links [/
+                for l in links [|
                     <link {= l; =} >
-                /]
+                |]
 
-                if (style) [/
+                if (style) [|
                     <style type="text/css" media="all">
                     {= style; =}
                     </style>
-                /]
+                |]
             =}
             </head>
-        /]
+        |]
 
         body_attribs = background;
 
         background {
             if (bgimage) {
-                [/ background="{= bgimage; =}" /]
+                [| background="{= bgimage; =}" |]
                 sp;
             }
             if (bgcolor) {
-                [/ bgcolor="{= bgcolor; =}" /]
+                [| bgcolor="{= bgcolor; =}" |]
                 sp;
             }
             if (linkcolor) {
-                [/ link="{= linkcolor; =}" /]
+                [| link="{= linkcolor; =}" |]
                 sp;
             }
             if (vlinkcolor) {
-                [/ vlink="{= vlinkcolor; =}" /]
+                [| vlink="{= vlinkcolor; =}" |]
                 sp;
             }
             if (alinkcolor) {
-                [/ alink="{= alinkcolor; =}" /]
+                [| alink="{= alinkcolor; =}" |]
                 sp;
             }
         }
 
-        page_begin [/
+        page_begin [|
             {= doctype_header; =}
             <html>
             {= html_header; =}
             <body {= body_attribs; =}>
-        /]
+        |]
 
-        page_end [/
+        page_end [|
             {=
-                if (script) [/
+                if (script) [|
                     <script>
                     {= script; =}
                     </script>
-                /]
+                |]
             =}
             </body>
             </html>
-        /]
+        |]
 
       /---------------------------------------------/
       /------------- page construction -------------/
@@ -1045,7 +1045,7 @@ core {
      */
 
     page error_page(request r),(error err) {
-        title = [/ Error /]
+        title = [| Error |]
         color bgcolor = "#EEDDAA"
 
         int status = err ?? err.status : 500
@@ -1062,14 +1062,14 @@ core {
             else [/]     
        }
 
-        [/ <h2>Error constructing page:</h2><h3> /]
+        [| <h2>Error constructing page:</h2><h3> |]
 
         if (error_message) {
             error_message;
-        } else [/
+        } else [|
             No additional information available.
-        /]
+        |]
 
-        [/ </h3><p><i>Fun version {= version; =}</i></p> /]
+        [| </h3><p><i>Fun version {= version; =}</i></p> |]
     }
 }
