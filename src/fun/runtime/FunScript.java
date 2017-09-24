@@ -66,7 +66,7 @@ public class FunScript {
      *
      */
     public static void main(String[] args) {
-    	SiteBuilder.echoSystemOut = false;
+        SiteBuilder.echoSystemOut = false;
         Map<String, String> initParams = new HashMap<String, String>();
         String[] scriptArgs = processArgs(args, initParams);        
         String problems = initParams.get("problems");
@@ -78,19 +78,19 @@ public class FunScript {
             }
             List<Exception> exceptions = runner.getExceptions();
             if (exceptions != null && exceptions.size() > 0) {
-            	if (exceptions.size() == 1) {
-            		Exception e = exceptions.get(0);
+                if (exceptions.size() == 1) {
+                    Exception e = exceptions.get(0);
                     System.err.println("Problem running FunScript: " + e);
                     e.printStackTrace(System.err);
-            	} else {
+                } else {
                     System.err.println("Mutliple problems running FunScript.");
                     int i = 1;
                     for (Exception e: exceptions) {
-                    	System.err.println("-------------------------------------");
-                    	System.err.println("Problem " + i++ + ": " + e);
+                        System.err.println("-------------------------------------");
+                        System.err.println("Problem " + i++ + ": " + e);
                         e.printStackTrace(System.err);
                     }
-            	}
+                }
             }
 
         } else {
@@ -138,7 +138,7 @@ public class FunScript {
     }
 
     private static String[] processArgs(String[] args, Map<String, String> initParams) {
-    	String scriptArgs[] = null;
+        String scriptArgs[] = null;
         int numProblems = 0;
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
@@ -219,9 +219,9 @@ public class FunScript {
                 initParams.put("problem" + numProblems, msg);
 
             } else {
-            	scriptArgs = new String[args.length - i];
+                scriptArgs = new String[args.length - i];
                 int j = 0;
-            	while (i < args.length) {
+                while (i < args.length) {
                     scriptArgs[j++] = args[i++];
                 }
                 break;
@@ -279,13 +279,13 @@ public class FunScript {
     }
     
     private List<Exception> getExceptions() {
-    	List<Exception> list = new ArrayList<Exception>();
-    	for (Exception e: exceptions) {
-    		if (e != null) {
-    			list.add(e);
-    		}
-    	}
-    	return list;
+        List<Exception> list = new ArrayList<Exception>();
+        for (Exception e: exceptions) {
+            if (e != null) {
+                list.add(e);
+            }
+        }
+        return list;
     }
 
    
@@ -294,18 +294,18 @@ public class FunScript {
     //
     
     private void runScript(Writer out, String[] args) {
-    	if (args == null || args.length == 0) {
+        if (args == null || args.length == 0) {
             System.err.println("No script specified.");
             return;
-    	}
+        }
         sharedCore = new Core(true);
         try {
-    	    load(funPath, recursive);
+            load(funPath, recursive);
         } catch (Exception e) {
             System.err.println("Exception parsing funpath: " + e);
         }
-    	
-    	String path = args[0];
+        
+        String path = args[0];
         Node script = loadScript(path);
         if (script == null) {
             System.err.println("Unable to parse script");
@@ -315,9 +315,9 @@ public class FunScript {
         if (script instanceof Site) {
             mainScript = (Site) script;
         } else {
-        	Node child = script.jjtGetChild(0);
-        	if (child instanceof Site) {
-        		mainScript = (Site) child;
+            Node child = script.jjtGetChild(0);
+            if (child instanceof Site) {
+                mainScript = (Site) child;
             } else {
                 System.err.println("Illegal script format.");
                 return;
@@ -333,16 +333,16 @@ public class FunScript {
         }
         
         String expr = "main";
-    	expr = expr + "([";
-    	for (int i = 0; i < args.length; i++) {
-    		expr = expr + '"' + args[i] + '"';
-    		if (i < args.length - 1) {
-    			expr = expr + ',';
-    		}
-    	}
-    	expr = expr + "])";
+        expr = expr + "([";
+        for (int i = 0; i < args.length; i++) {
+            expr = expr + '"' + args[i] + '"';
+            if (i < args.length - 1) {
+                expr = expr + ',';
+            }
+        }
+        expr = expr + "])";
         
-    	int exitCode = 0;
+        int exitCode = 0;
         try {
             FunParser parser = new FunParser(new StringReader(expr));
             Instantiation instance = parser.parseInstance();
@@ -353,16 +353,16 @@ public class FunScript {
             System.err.println("Exception running script: " + e);
         
         } catch (ScriptExit se) {
-        	exitCode = se.getStatus();
+            exitCode = se.getStatus();
             if (exitCode == 0) {
-            	System.out.print(se.getTextOut());
+                System.out.print(se.getTextOut());
             } else {
-            	if (se.getPreserveOutput()) {
-                	System.out.print(se.getTextOut());
-            	}
-            	System.err.println(se.getMessage());
+                if (se.getPreserveOutput()) {
+                    System.out.print(se.getTextOut());
+                }
+                System.err.println(se.getMessage());
             }
-        	
+            
         } catch (Redirection r) {
             System.err.println("Redirection running script: " + r);
         }
@@ -429,28 +429,28 @@ public class FunScript {
 
     public Node loadScript(String path) {
         slog("loading script " + path);
-    	
-    	Node parseResult = null;
-    	Exception exception = null;
+        
+        Node parseResult = null;
+        Exception exception = null;
         SiteBuilder siteBuilder = new SiteBuilder(sharedCore);
         try {
             InputStream is = new BufferedInputStream(new FileInputStream(path));
-        	FunParser parser = new FunParser(is);;
+            FunParser parser = new FunParser(is);;
             parseResult = parser.parse(path);
             siteBuilder.build(parseResult);
             exception = siteBuilder.getException();
             if (exception != null) {
-            	throw exception;
+                throw exception;
             }
             slog("--- LINK PASS ---");
             parseResult.jjtAccept(new SiteLoader.Linker(), null);
 
         } catch (ParseException pe) {
-        	System.err.println("...syntax error in " + path + ": " + pe.getMessage());
+            System.err.println("...syntax error in " + path + ": " + pe.getMessage());
             exception = pe;
 
         } catch (DuplicateDefinitionException dde) {
-        	System.err.println("...duplicate definition in " + path + ": " + dde.getMessage());
+            System.err.println("...duplicate definition in " + path + ": " + dde.getMessage());
             exception = dde;
 
         } catch (Exception e) {

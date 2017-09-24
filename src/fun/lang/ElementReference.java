@@ -279,7 +279,8 @@ public class ElementReference extends AnonymousDefinition {
      */
     public Definition getUltimateDefinition(Context context) {
         try {
-            return getElementDefinition(context).getUltimateDefinition(context);
+            Definition elementDef = getElementDefinition(context);
+            return elementDef != null ? elementDef.getUltimateDefinition(context) : null;
         } catch (Redirection r) {
             log("getUltimateDefinition call failed on " + getFullName() +"; couldn't get element definition");
             return null;

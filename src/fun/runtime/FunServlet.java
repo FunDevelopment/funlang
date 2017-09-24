@@ -33,7 +33,7 @@ public class FunServlet extends FunServer {
     public FunServlet() {}
     
     public void init(ServletConfig config) throws ServletException {
-    	super.init(config);
+        super.init(config);
 
         if (fileHandlerName != null) {
             fileHandler = servletContext.getNamedDispatcher(fileHandlerName);
@@ -46,24 +46,23 @@ public class FunServlet extends FunServer {
         for (int i = 0; i < num; i++) {
             filters[i] = new ExtensionFilter(STANDARD_FILTERS[i]);
         }
-    	
-    	HashMap<String, String> initParams = new HashMap<String, String>();
+        
+        HashMap<String, String> initParams = new HashMap<String, String>();
 
         try {
             Enumeration<String> params = config.getInitParameterNames();
             while (params.hasMoreElements()) {
-            	String name = (String) params.nextElement();
-            	String param = config.getInitParameter(name);
-            	initParams.put(name, param);
+                String name = (String) params.nextElement();
+                String param = config.getInitParameter(name);
+                initParams.put(name, param);
             }
 
             initGlobalSettings(initParams);
             loadSite();
             
         } catch (Exception e) {
-        	throw new ServletException("Exception initializing FunServer", e);
+            throw new ServletException("Exception initializing FunServer", e);
         }
-    	
     }
 
 
@@ -83,10 +82,10 @@ public class FunServlet extends FunServer {
         }
 
         if (ru == null || ru.length() == 0) {
-            response.sendRedirect(response.encodeRedirectURL("index.html"));
-            return;
+            //response.sendRedirect(response.encodeRedirectURL("index.html"));
+            //return;
 
-            //ru = "/index.html";
+            ru = "/index.html";
 
         } else if (ru.endsWith("/")) {
             ru = ru + "index.html";
