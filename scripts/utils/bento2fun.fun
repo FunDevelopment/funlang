@@ -62,21 +62,15 @@ script bento2fun {
         static OPEN_DATA_2 = "[|"
         static CLOSE_DATA_2 = "|]"
         static NULL_BLOCK = "[/]"
-        
-        static open_data_temp = "[#"
-        static close_data_temp = "#]"
-        static null_block_temp = "[@]"
 
-        step_0(str) = replace(str, NULL_BLOCK, null_block_temp)
         step_1A(str) = replace(str, OPEN_CODE_0, OPEN_CODE_1)
         step_1B(str) = replace(str, OPEN_CODE_0, OPEN_CODE_2)
         step_2A(str) = replace(str, CLOSE_CODE_0, CLOSE_CODE_1)
         step_2B(str) = replace(str, CLOSE_CODE_0, CLOSE_CODE_2)
-        step_3(str) = replace(str, null_block_temp, NULL_BLOCK)
-        step_4(str) = replace(str, "bento", "fun")
+        step_3(str) = replace(str, "bento", "fun")
 
-        funcs_A[11] = [ step_0, step_1A, step_2A, step_3, step_4 ]          
-        funcs_B[11] = [ step_0, step_1B, step_2B, step_3, step_4 ]          
+        funcs_A[3] = [ step_1A, step_2A, step_3 ]          
+        funcs_B[3] = [ step_1B, step_2B, step_3 ]          
         
         dynamic apply_funcs(funcs[], x), (funcs[], int n, x) {
             int last_func_ix = funcs.count - 1
