@@ -4,8 +4,6 @@
 
 
 {
-
-
     /** The primary site. **/
     site_config main_site = test_config
 
@@ -57,24 +55,6 @@
     sitepath = main_site.sitepath
     
     file_separator = "/"
-
-    /** A generic website configuration. **/
-    site_config {
-        name [?]
-
-        funpath [?]
-        boolean recursive = false;
-
-        filepath = "."
-        boolean files_first = false;
-        
-        /** If non-empty, respond only to the listed addresses.  The addresses are
-         *  allowed, but are not automatically enabled; addresses must also appear in 
-         *  the listen_to array.  If empty, respond to any address.
-         **/
-        respond_only_to[] = []  
-    }
-
 
     /--- config objects for available sites ---/
 

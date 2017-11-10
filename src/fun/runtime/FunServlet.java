@@ -73,6 +73,9 @@ public class FunServlet extends FunServer {
         String fileBase = file_base();
         boolean filesFirst = files_first();
 
+System.out.println("---> FunServlet responding to " + ru);
+System.out.println("  --> fileBase is " + fileBase);
+
         if (contextPath != null && ru != null && ru.startsWith(contextPath)) {
             ru = ru.substring(contextPath.length());
         }
@@ -221,6 +224,7 @@ public class FunServlet extends FunServer {
             out.println("<p>Site " + siteName + " has received this request:</p><ul>");
         }
         out.println("<li>funpath: " + getFunPath() + "</li>");
+        out.println("<li>filepath: " + filePath);
         out.println("<li>ServletPath: " + request.getServletPath() + "</li>");
         out.println("<li>ContextPath: " + request.getContextPath() + "</li>");
         out.println("<li>PathInfo: " + request.getPathInfo() + "</li>");

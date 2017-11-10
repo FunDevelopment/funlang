@@ -392,13 +392,13 @@ core {
     }
 
     /** Returns the maximum of two values. **/
-    max(a, b) = (a >= b ? a : b)
+    dynamic max(a, b) = (a >= b ? a : b)
 
     /** Returns the minimum of two values. **/
-    min(a, b) = (a <= b ? a : b)
+    dynamic min(a, b) = (a <= b ? a : b)
 
     /** If the first argument is non-null, return it, else return the second argument. **/
-    either(a, b) = (a ? a : b)
+    dynamic either(a, b) = (a ? a : b)
 
     /** standard basic geometric types **/
     
@@ -460,12 +460,12 @@ core {
 
 
     /** Concatenates two strings, adding a file separator if necessary **/
-	meld_paths(path1, path2) {
-		path1;
-		if (char_at(path1, strlen(path1) - 1) != file_sep && char_at(path2, 0) != file_sep) {
-			file_sep;
+    dynamic meld_paths(path1, path2) {
+        path1;
+        if (char_at(path1, strlen(path1) - 1) != file_sep && char_at(path2, 0) != file_sep) {
+            file_sep;
         }
-		trim_leading(path2, (string) file_sep);
+        trim_leading(path2, (string) file_sep);
     }
 
 

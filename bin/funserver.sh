@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -x
 #
 # Startup script for Fun running on jetty
 # Adapted from jetty.sh in the jetty 9.3 distribution
