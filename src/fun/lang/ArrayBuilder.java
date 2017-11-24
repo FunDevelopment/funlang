@@ -371,6 +371,11 @@ class ArrayInstance implements FunArray, DynamicObject {
                     throw new UninitializedObjectException("Unable to initialize array: " + r.getMessage());
                 }
             }
+
+            // see if one of the above data fetches returned null
+            if (obj == null) {
+                throw new UninitializedObjectException("Unable to initialize array, array object has no data");
+            }
         
             if (obj instanceof FunArray) {
                 array = (FunArray) obj;

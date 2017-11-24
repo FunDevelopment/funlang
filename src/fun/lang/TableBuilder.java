@@ -33,7 +33,7 @@ public class TableBuilder extends CollectionBuilder {
         return new ResolvedTable(tableDef, context, args, indexes, collectionData);
     }
 
-    public static String getTextForMap(CollectionDefinition collectionDef, Map map, Context context) throws Redirection {
+    public static String getTextForMap(CollectionDefinition collectionDef, Map<?,?> map, Context context) throws Redirection {
         StringBuffer sb = new StringBuffer();
         
         sb.append("{ ");
@@ -117,9 +117,9 @@ class TableInstance implements Map<String, Object> {
                 obj = ((DynamicObject) obj).initForContext(context, args, indexes);
             }
             
-            if (indexes != null) {
+            /*** if (indexes != null) {
                 obj = context.dereference(obj, indexes);
-            }
+            } ***/
             
             if (obj instanceof Map<?,?>) {
                 map = (Map<String, Object>) obj;

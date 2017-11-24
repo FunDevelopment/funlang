@@ -152,7 +152,7 @@ public class FunServer extends HttpServlet implements FunProcessor {
                 noProblems = false;
             }
             if (server.exception != null) {
-            	noProblems = false;
+                noProblems = false;
             }
             
         } else {
@@ -482,14 +482,14 @@ public class FunServer extends HttpServlet implements FunProcessor {
 
     public void recordState(String state) {
         if (stateFileName != null) {
-        	try {
+            try {
                 PrintStream ps = new PrintStream(new FileOutputStream(stateFileName, false));
                 Date now = new Date();
                 ps.println(state + " " + now.toString());
                 ps.close();
-        	} catch (Exception e) {
-        		e.printStackTrace();
-        	}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     
@@ -1302,8 +1302,8 @@ public class FunServer extends HttpServlet implements FunProcessor {
     /** Class to provide Java access to Fun site_config object. **/
     public static class site_config_wrapper implements site_config {
         FunObjectWrapper site_config;
-    	
-    	public site_config_wrapper(FunObjectWrapper site_config) {
+        
+        public site_config_wrapper(FunObjectWrapper site_config) {
             this.site_config = site_config;
         }
 
