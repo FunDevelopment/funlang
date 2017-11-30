@@ -341,7 +341,6 @@ public class FunSite extends FunDomain {
 
             } else if (pageName.equalsIgnoreCase("$source")) {
                 recordRequest("$source", pageTracker);
-                //response.setContentType("text/plain");
                 printSource(out);
 
             } else if (hasGeneralResponse || handleAsObj || pageName.indexOf(".$") > -1) {
@@ -791,10 +790,10 @@ public class FunSite extends FunDomain {
         public void handleSite(Site site) {
 
             if (site instanceof Core) {
-                out.println("[---------------- Core ----------------]\n");
+                out.println("/---------------- Core ----------------/\n");
                 out.print("core ");
             } else {
-                out.println("[----------- Site " + site.getName() + " --------------]\n");
+                out.println("/----------- Site " + site.getName() + " --------------/\n");
                 out.print("site ");
             }
 
@@ -838,9 +837,9 @@ public class FunSite extends FunDomain {
             }
 
             if (site instanceof Core) {
-                out.println("[------------- end of core ------------]");
+                out.println("/------------- end of core ------------/");
             } else {
-                out.println("[----------- end of " + site.getName() + " --------------]");
+                out.println("/----------- end of " + site.getName() + " --------------/");
             }
             out.println();
         }

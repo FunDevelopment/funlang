@@ -1044,7 +1044,7 @@ core {
      *  Standard error page.
      */
 
-    page error_page(request r),(error err) {
+    public page error_page(request r),(error err) {
         title = [| Error |]
         color bgcolor = "#EEDDAA"
 
@@ -1053,7 +1053,7 @@ core {
         error_div(r);        
     }    
     
-    component error_div(request r),(error err) {
+    public component error_div(request r),(error err) {
         
         error_message {
             with (err) { err.message; }
