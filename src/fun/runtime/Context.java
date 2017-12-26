@@ -2650,7 +2650,7 @@ public class Context {
                 }
             }
     
-            if (!def.isExternal() && (!def.isCollection() || parentObj == null)) {
+            if (!def.isExternal() && (!def.isCollection() || parentObj == null) && !childName.isSpecial()) {
                 ParameterList params = def.getParamsForArgs(args, this);
                 if (!def.isIdentity() && !topEntry.def.equals(def)) {
                     boolean newFrame = !topEntry.def.equalsOrExtends(def);
