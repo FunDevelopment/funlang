@@ -2536,30 +2536,29 @@ public class Context {
         }
 
         try {
-
-            while (argDef.isAliasInContext(this)) {
-                ParameterList params = argDef.getParamsForArgs(argArgs, this);
-                push(argDef, params, argArgs, false);
-                numPushes++;
-                Instantiation aliasInstance = argDef.getAliasInstanceInContext(this);  //.getUltimateInstance(this);
-                if (aliasInstance == null) {
-                    pop();
-                    numPushes--;
-                    break;
+            if (!childName.isSpecial()) {
+                while (argDef.isAliasInContext(this)) {
+                    ParameterList params = argDef.getParamsForArgs(argArgs, this);
+                    push(argDef, params, argArgs, false);
+                    numPushes++;
+                    Instantiation aliasInstance = argDef.getAliasInstanceInContext(this);  //.getUltimateInstance(this);
+                    if (aliasInstance == null) {
+                        pop();
+                        numPushes--;
+                        break;
+                    }
+                    Definition newDef = (Definition) aliasInstance.getDefinition(this);  // lookup(this, false);
+                    if (newDef == null) {
+                        pop();
+                        numPushes--;
+                        break;
+                    } else {
+                        argDef = newDef;
+                    }
+                    argArgs = aliasInstance.getArguments();
                 }
-                Definition newDef = (Definition) aliasInstance.getDefinition(this);  // lookup(this, false);
-                if (newDef == null) {
-                    pop();
-                    numPushes--;
-                    break;
-                } else {
-                    argDef = newDef;
-                }
-                argArgs = aliasInstance.getArguments();
             }
-
             if (argDef != null) {
-        
                 if (argDef instanceof ElementReference) {
                     unpush();
                     numUnpushes++;
@@ -2585,7 +2584,7 @@ public class Context {
         
                 data = argDef.getChildData(childName, paramType, this, argArgs);
             }
-
+             
         } finally {
             while (numPushes-- > 0) {
                 pop();
@@ -2595,7 +2594,6 @@ public class Context {
             }
             //validateSize();
         }
-
         return data;
     }
 

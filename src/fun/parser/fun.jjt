@@ -1322,7 +1322,7 @@ void ArrayElementExpression() #void:
 {}
 {
     (
-      LOOKAHEAD("[=" ArrayElementExpression() ("," | "]"))
+      LOOKAHEAD("{=" ArrayElementExpression() ("," | "]"))
       ArrayInitBlock()
     |
       LOOKAHEAD(ArrayDynamicInitExpression())

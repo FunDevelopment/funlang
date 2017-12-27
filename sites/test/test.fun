@@ -1699,20 +1699,12 @@ site test {
                             }
                           ]
 
-        growable_array[] = [ "G" ]
+        item_h = "H"
 
-        child {
-            item_h = "H"
-            item_j = "J"
+        growable_array[] = [ "G", item_h ]
 
-            growable_array[0] = item_h
-            growable_array[1] = "I"
-            growable_array[2] = item_j
-
-            for z in growable_array {
-                z;
-            }
-        }
+        base_array[] = [ "I" ]
+        base_array extended_array = [ ..., "J" ]
         
         index_calc_array[3] = [ "K", "L", "M" ]
 
@@ -1728,7 +1720,9 @@ site test {
         for y in growable_array {
             y;
         }
-        child;
+        for z in extended_array {
+            z;
+        }
 
         int n = 1
         index_calc_array[n - 1];
