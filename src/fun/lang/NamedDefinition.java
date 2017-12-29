@@ -1082,6 +1082,32 @@ public class NamedDefinition extends AnonymousDefinition {
             
         } else if (node.getName() == Name.TYPE) {
             Definition ultimateDef = getUltimateDefinition(context);
+            
+            Definition superDef = getSuperDefinition(context);
+            while (ultimateDef.isAliasInContext(context)) {
+                Instantiation aliasInstance = ultimateDef.getAliasInstanceInContext(context);
+                if (ultimateDef.isParamAlias() && aliasInstance != null) {
+                    aliasInstance = aliasInstance.getUltimateInstance(context);
+                }
+                if (aliasInstance == null) {
+                    break;
+                }
+                Definition aliasDef = aliasInstance.getDefinition(context, this);  // def or nextDef?
+                if (aliasDef == null) {
+                    break;
+                }
+        
+                // we are only interested in aliases in the same hierarchy
+                if (superDef != null && !aliasDef.equalsOrExtends(superDef)) {
+                    break;
+                }
+                superDef = aliasDef;  // ratchet towards subclasses
+                ultimateDef = aliasDef;
+            }
+            // make sure we don't end up with the superclass
+            if (equalsOrExtends(ultimateDef)) {
+                ultimateDef = this;
+            }
             if (generate) {
                 return new PrimitiveValue(ultimateDef.getType());
             } else {
