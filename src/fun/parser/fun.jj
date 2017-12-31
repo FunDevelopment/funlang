@@ -2139,6 +2139,9 @@ void TableInitExpression()               :
       (
         "{}"       // empty table
       |
+        LOOKAHEAD(2)
+        "{" ( Ellipsis() [","] TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
+      |
         "{" ( TableElementExpression() ( LOOKAHEAD(2) "," TableElementExpression() )* [ "," ] "}" )
       )
    )/*@bgen(jjtree)*/

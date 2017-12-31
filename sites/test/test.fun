@@ -2449,7 +2449,7 @@ te {=
         name = "Table Test"
         key = "table"
 
-        expected = "ABCDEFGHIJKLMNO"
+        expected = "ABCDEFGHIJKLMNOPQ"
 
         item_b = "B"
         key_c = "item_c"
@@ -2483,6 +2483,7 @@ te {=
         
         table_super{} = {}
         table_super table_sub = { "o": "O" }
+        table_sub table_sub_sub = { ..., "p": "P", "o": "Q" } 
         
         fixed_table["item_a"];
         fixed_table["item_b"];
@@ -2513,6 +2514,8 @@ te {=
         tbl2["m"];
         table_with_arg("N")["n"];
         table_sub["o"];
+        table_sub_sub["p"];
+        table_sub_sub["o"];
     }
 
 tt {=

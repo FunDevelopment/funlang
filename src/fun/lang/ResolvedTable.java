@@ -166,6 +166,16 @@ class ResolvedTable extends ResolvedCollection {
                 } else if (item instanceof ConstructionGenerator) {
                     List<Construction> constructions = ((ConstructionGenerator) item).generateConstructions(context);
                     addElements(context, constructions, table);
+                } else if (item instanceof SuperStatement) {
+                    Definition superDef = collectionDef.getSuperDefinition(context);
+                    if (superDef != null) {
+                        CollectionDefinition superCollection = superDef.getCollectionDefinition(context, ((SuperStatement) item).getArguments());
+                        if (superCollection != null) {
+                            Map<String, Object> superElements = superCollection.instantiate_table(context);
+                            table.putAll(superElements);
+                        }
+                    }
+
                 } else {
                     throw new Redirection(Redirection.STANDARD_ERROR, collectionDef.getFullName() + " contains invalid element type: " + item.getClass().getName());
                 }
