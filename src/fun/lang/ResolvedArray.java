@@ -111,7 +111,7 @@ class ResolvedArray extends ResolvedCollection {
                 if (elements != null) {
                     if (fixed) {
                         for (int i = 0; i < elements.size(); i++) {
-                            Construction element = elements.get(i); 
+                            Construction element = elements.get(i);
                             element = resolveElement(collectionDef, element, context);
                             array.set(i, element);
                         }
@@ -120,8 +120,20 @@ class ResolvedArray extends ResolvedCollection {
                         Iterator<Construction> it = elements.iterator();
                         while (it.hasNext()) {
                             Construction element = it.next();
-                            element = resolveElement(collectionDef, element, context);
-                            array.add(element);
+                            if (element instanceof SuperStatement) {
+                                Definition superDef = def.getSuperDefinition(context);
+                                if (superDef != null) {
+                                    CollectionDefinition superCollection = superDef.getCollectionDefinition(context, ((SuperStatement) element).getArguments());
+                                    if (superCollection != null) {
+                                        List<Object> superElements = superCollection.instantiate_array(context);
+                                        array.addAll(superElements);
+                                    }
+                                }
+
+                            } else {
+                                element = resolveElement(collectionDef, element, context);
+                                array.add(element);
+                            }
                         }
                     }
                 }

@@ -76,6 +76,25 @@ public class Utils {
         }
     }
     
+    public static List<Object> append(List<Object> list, Object addition) {
+        List<Object> returnList = new ArrayList<Object>(list);
+        if (addition instanceof Collection<?>) {
+            returnList.addAll((Collection<? extends Object>) addition);
+        } else if (addition instanceof Object[]) {
+            returnList.addAll(Arrays.asList(addition));
+        } else {
+            returnList.add(addition);
+        }
+        
+        return returnList;
+    }
+
+    public static Map<String, Object> update(Map<String, Object> map, Map<String, Object> addition) {
+        HashMap<String, Object> returnMap = new HashMap<String, Object>(map);
+        returnMap.putAll(addition);
+        return returnMap;
+    }
+    
     public static int strlen(String str) {
         if (str != null) {
             return str.length();

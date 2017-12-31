@@ -2692,10 +2692,19 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         jj_consume_token(ARRAYTYPE);
         break;
       default:
-        jj_la1[84] = jj_gen;
+        jj_la1[85] = jj_gen;
         if (jj_2_57(2)) {
           jj_consume_token(LBRACKET);
           Ellipsis();
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COMMA:
+            jj_consume_token(COMMA);
+            break;
+          default:
+            jj_la1[82] = jj_gen;
+            ;
+          }
+          ArrayElementExpression();
           label_16:
           while (true) {
             if (jj_2_53(2)) {
@@ -2711,7 +2720,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[82] = jj_gen;
+            jj_la1[83] = jj_gen;
             ;
           }
           jj_consume_token(RBRACKET);
@@ -2751,13 +2760,13 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
               jj_consume_token(COMMA);
               break;
             default:
-              jj_la1[83] = jj_gen;
+              jj_la1[84] = jj_gen;
               ;
             }
             jj_consume_token(RBRACKET);
             break;
           default:
-            jj_la1[85] = jj_gen;
+            jj_la1[86] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -2836,13 +2845,13 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_consume_token(COMMA);
           break;
         default:
-          jj_la1[86] = jj_gen;
+          jj_la1[87] = jj_gen;
           ;
         }
         jj_consume_token(RBRACKET);
         break;
       default:
-        jj_la1[87] = jj_gen;
+        jj_la1[88] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -2899,13 +2908,13 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_consume_token(COMMA);
           break;
         default:
-          jj_la1[88] = jj_gen;
+          jj_la1[89] = jj_gen;
           ;
         }
         jj_consume_token(RCODE);
         break;
       default:
-        jj_la1[89] = jj_gen;
+        jj_la1[90] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -2961,13 +2970,13 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_consume_token(COMMA);
           break;
         default:
-          jj_la1[90] = jj_gen;
+          jj_la1[91] = jj_gen;
           ;
         }
         jj_consume_token(RCODE);
         break;
       default:
-        jj_la1[91] = jj_gen;
+        jj_la1[92] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3011,7 +3020,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           DefTypeName();
           break;
         default:
-          jj_la1[92] = jj_gen;
+          jj_la1[93] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3023,7 +3032,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         jj_consume_token(SEMICOLON);
         break;
       default:
-        jj_la1[93] = jj_gen;
+        jj_la1[94] = jj_gen;
         ;
       }
       jjtree.closeNodeScope(jjtn000, true);
@@ -3066,7 +3075,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           DefTypeName();
           break;
         default:
-          jj_la1[94] = jj_gen;
+          jj_la1[95] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3148,7 +3157,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         ElementExpression();
         break;
       default:
-        jj_la1[95] = jj_gen;
+        jj_la1[96] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3211,7 +3220,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       AnonymousArray();
       break;
     default:
-      jj_la1[96] = jj_gen;
+      jj_la1[97] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3274,7 +3283,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       node = AnonymousArray();
       break;
     default:
-      jj_la1[97] = jj_gen;
+      jj_la1[98] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3299,7 +3308,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       TableElement();
       break;
     default:
-      jj_la1[98] = jj_gen;
+      jj_la1[99] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3344,7 +3353,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         TableDynamicElement();
         break;
       default:
-        jj_la1[99] = jj_gen;
+        jj_la1[100] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3376,7 +3385,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         jj_consume_token(RPAREN);
         break;
       default:
-        jj_la1[100] = jj_gen;
+        jj_la1[101] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3445,7 +3454,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                  modifier = Definition.PUBLIC_ACCESS;
       break;
     default:
-      jj_la1[101] = jj_gen;
+      jj_la1[102] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3469,7 +3478,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                   modifier = Definition.DYNAMIC;
       break;
     default:
-      jj_la1[102] = jj_gen;
+      jj_la1[103] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3497,7 +3506,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       Type();
       break;
     default:
-      jj_la1[103] = jj_gen;
+      jj_la1[104] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3526,7 +3535,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       CorrespondingSuperType();
       break;
     default:
-      jj_la1[104] = jj_gen;
+      jj_la1[105] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3557,7 +3566,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         PrimitiveType();
         break;
       default:
-        jj_la1[105] = jj_gen;
+        jj_la1[106] = jj_gen;
         if (jj_2_66(2147483647)) {
           TypeWithArguments();
         } else {
@@ -3566,7 +3575,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             Type();
             break;
           default:
-            jj_la1[106] = jj_gen;
+            jj_la1[107] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -3579,7 +3588,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[107] = jj_gen;
+          jj_la1[108] = jj_gen;
           break label_22;
         }
         jj_consume_token(COMMA);
@@ -3602,7 +3611,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           PrimitiveType();
           break;
         default:
-          jj_la1[108] = jj_gen;
+          jj_la1[109] = jj_gen;
           if (jj_2_67(2147483647)) {
             TypeWithArguments();
           } else {
@@ -3611,7 +3620,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
               Type();
               break;
             default:
-              jj_la1[109] = jj_gen;
+              jj_la1[110] = jj_gen;
               jj_consume_token(-1);
               throw new ParseException();
             }
@@ -3702,7 +3711,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Arguments();
           break;
         default:
-          jj_la1[110] = jj_gen;
+          jj_la1[111] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3778,7 +3787,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         PrimitiveType();
         break;
       default:
-        jj_la1[111] = jj_gen;
+        jj_la1[112] = jj_gen;
         if (jj_2_69(2147483647)) {
           TypeWithArguments();
         } else {
@@ -3787,7 +3796,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             TypeName();
             break;
           default:
-            jj_la1[112] = jj_gen;
+            jj_la1[113] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -3805,7 +3814,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[113] = jj_gen;
+          jj_la1[114] = jj_gen;
           break label_23;
         }
       }
@@ -3852,7 +3861,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         PrimitiveType();
         break;
       default:
-        jj_la1[114] = jj_gen;
+        jj_la1[115] = jj_gen;
         if (jj_2_70(2147483647)) {
           TypeWithArguments();
         } else {
@@ -3861,7 +3870,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             TypeName();
             break;
           default:
-            jj_la1[115] = jj_gen;
+            jj_la1[116] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -3876,7 +3885,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[116] = jj_gen;
+          jj_la1[117] = jj_gen;
           break label_24;
         }
       }
@@ -3913,7 +3922,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       TableDim();
       break;
     default:
-      jj_la1[117] = jj_gen;
+      jj_la1[118] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3953,7 +3962,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                    jjtn000.setDimType(Dim.TYPE.DEFINITE);
         break;
       default:
-        jj_la1[118] = jj_gen;
+        jj_la1[119] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -4027,7 +4036,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
              jjtn000.setTable(true);
         break;
       default:
-        jj_la1[119] = jj_gen;
+        jj_la1[120] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -4089,7 +4098,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             ;
             break;
           default:
-            jj_la1[120] = jj_gen;
+            jj_la1[121] = jj_gen;
             break label_26;
           }
           jj_consume_token(COMMA);
@@ -4097,7 +4106,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         }
         break;
       default:
-        jj_la1[121] = jj_gen;
+        jj_la1[122] = jj_gen;
         ;
       }
       label_27:
@@ -4112,7 +4121,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[122] = jj_gen;
+          jj_la1[123] = jj_gen;
           break label_27;
         }
       }
@@ -4154,7 +4163,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[123] = jj_gen;
+          jj_la1[124] = jj_gen;
           break label_28;
         }
       }
@@ -4197,7 +4206,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             ;
             break;
           default:
-            jj_la1[124] = jj_gen;
+            jj_la1[125] = jj_gen;
             break label_29;
           }
           jj_consume_token(COMMA);
@@ -4205,7 +4214,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         }
         break;
       default:
-        jj_la1[125] = jj_gen;
+        jj_la1[126] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -4297,7 +4306,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             ;
             break;
           default:
-            jj_la1[126] = jj_gen;
+            jj_la1[127] = jj_gen;
             break label_31;
           }
           jj_consume_token(COMMA);
@@ -4308,12 +4317,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Ellipsis();
           break;
         default:
-          jj_la1[127] = jj_gen;
+          jj_la1[128] = jj_gen;
           ;
         }
         break;
       default:
-        jj_la1[128] = jj_gen;
+        jj_la1[129] = jj_gen;
         ;
       }
       jj_consume_token(RPAREN);
@@ -4355,7 +4364,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ParameterList();
           break;
         default:
-          jj_la1[129] = jj_gen;
+          jj_la1[130] = jj_gen;
           ;
         }
       } else if (jj_2_75(2147483647)) {
@@ -4366,7 +4375,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ParameterList();
           break;
         default:
-          jj_la1[130] = jj_gen;
+          jj_la1[131] = jj_gen;
           ;
         }
       } else if (jj_2_76(2147483647)) {
@@ -4380,7 +4389,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             ParameterList();
             break;
           default:
-            jj_la1[131] = jj_gen;
+            jj_la1[132] = jj_gen;
             ;
           }
           break;
@@ -4388,7 +4397,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_consume_token(TIMES);
           break;
         default:
-          jj_la1[132] = jj_gen;
+          jj_la1[133] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -4434,7 +4443,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       ContinueStatement();
       break;
     default:
-      jj_la1[133] = jj_gen;
+      jj_la1[134] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -4459,7 +4468,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         RegExp();
         break;
       default:
-        jj_la1[134] = jj_gen;
+        jj_la1[135] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -4470,7 +4479,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       AnyAny();
       break;
     default:
-      jj_la1[135] = jj_gen;
+      jj_la1[136] = jj_gen;
       ;
     }
   }
@@ -4587,7 +4596,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                 jjtn000.makeVoid();
         break;
       default:
-        jj_la1[136] = jj_gen;
+        jj_la1[137] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -4616,7 +4625,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         WithExpression();
         break;
       default:
-        jj_la1[137] = jj_gen;
+        jj_la1[138] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -4634,7 +4643,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         ElseExpression();
         break;
       default:
-        jj_la1[138] = jj_gen;
+        jj_la1[139] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -4675,7 +4684,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       WithoutPredicateExpression();
       break;
     default:
-      jj_la1[139] = jj_gen;
+      jj_la1[140] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -4693,7 +4702,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       WithPredicate();
       break;
     default:
-      jj_la1[140] = jj_gen;
+      jj_la1[141] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -4716,7 +4725,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Name();
           break;
         default:
-          jj_la1[141] = jj_gen;
+          jj_la1[142] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -4753,7 +4762,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       WithoutPredicate();
       break;
     default:
-      jj_la1[142] = jj_gen;
+      jj_la1[143] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -4776,7 +4785,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Name();
           break;
         default:
-          jj_la1[143] = jj_gen;
+          jj_la1[144] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -4814,7 +4823,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       WithPredicateExpression();
       break;
     default:
-      jj_la1[144] = jj_gen;
+      jj_la1[145] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -4842,7 +4851,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[145] = jj_gen;
+          jj_la1[146] = jj_gen;
           break label_34;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -4855,7 +4864,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Iterator(true);
           break;
         default:
-          jj_la1[146] = jj_gen;
+          jj_la1[147] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -4917,7 +4926,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COLON);
             break;
           default:
-            jj_la1[147] = jj_gen;
+            jj_la1[148] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -4930,7 +4939,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                            jjtn000.setBy(true);
             break;
           default:
-            jj_la1[148] = jj_gen;
+            jj_la1[149] = jj_gen;
             ;
           }
           break;
@@ -4944,7 +4953,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(ASSIGN);
             break;
           default:
-            jj_la1[149] = jj_gen;
+            jj_la1[150] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -4963,14 +4972,14 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                                             jjtn000.setThrough(true);
               break;
             default:
-              jj_la1[150] = jj_gen;
+              jj_la1[151] = jj_gen;
               jj_consume_token(-1);
               throw new ParseException();
             }
             ValueExpression();
             break;
           default:
-            jj_la1[151] = jj_gen;
+            jj_la1[152] = jj_gen;
             ;
           }
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -4980,12 +4989,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                        jjtn000.setBy(true);
             break;
           default:
-            jj_la1[152] = jj_gen;
+            jj_la1[153] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[153] = jj_gen;
+          jj_la1[154] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -4996,7 +5005,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                     jjtn000.setWhere(true);
           break;
         default:
-          jj_la1[154] = jj_gen;
+          jj_la1[155] = jj_gen;
           ;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -5006,7 +5015,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                     jjtn000.setUntil(true);
           break;
         default:
-          jj_la1[155] = jj_gen;
+          jj_la1[156] = jj_gen;
           ;
         }
         break;
@@ -5016,7 +5025,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         ValueExpression();
         break;
       default:
-        jj_la1[156] = jj_gen;
+        jj_la1[157] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -5055,7 +5064,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       ArrayInitBlock();
       break;
     default:
-      jj_la1[157] = jj_gen;
+      jj_la1[158] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -5075,7 +5084,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         ArrayInitWithExpression();
         break;
       default:
-        jj_la1[158] = jj_gen;
+        jj_la1[159] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -5093,7 +5102,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         ArrayInitElseExpression();
         break;
       default:
-        jj_la1[159] = jj_gen;
+        jj_la1[160] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -5141,7 +5150,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       WithPredicateExpression();
       break;
     default:
-      jj_la1[160] = jj_gen;
+      jj_la1[161] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -5169,7 +5178,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[161] = jj_gen;
+          jj_la1[162] = jj_gen;
           break label_36;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -5182,7 +5191,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Iterator(true);
           break;
         default:
-          jj_la1[162] = jj_gen;
+          jj_la1[163] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -5276,12 +5285,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[163] = jj_gen;
+            jj_la1[164] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[164] = jj_gen;
+          jj_la1[165] = jj_gen;
           ;
         }
         jj_consume_token(REMBEDCODE);
@@ -5346,18 +5355,18 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[165] = jj_gen;
+            jj_la1[166] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[166] = jj_gen;
+          jj_la1[167] = jj_gen;
           ;
         }
         jj_consume_token(RCODE);
         break;
       default:
-        jj_la1[167] = jj_gen;
+        jj_la1[168] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -5367,7 +5376,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                            jjtn000.setCatch(catchBlock);
         break;
       default:
-        jj_la1[168] = jj_gen;
+        jj_la1[169] = jj_gen;
         ;
       }
       jjtree.closeNodeScope(jjtn000, true);
@@ -5417,7 +5426,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       TableInitBlock();
       break;
     default:
-      jj_la1[169] = jj_gen;
+      jj_la1[170] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -5437,7 +5446,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         TableInitWithExpression();
         break;
       default:
-        jj_la1[170] = jj_gen;
+        jj_la1[171] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -5455,7 +5464,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         TableInitElseExpression();
         break;
       default:
-        jj_la1[171] = jj_gen;
+        jj_la1[172] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -5503,7 +5512,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       WithPredicateExpression();
       break;
     default:
-      jj_la1[172] = jj_gen;
+      jj_la1[173] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -5531,7 +5540,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[173] = jj_gen;
+          jj_la1[174] = jj_gen;
           break label_40;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -5544,7 +5553,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Iterator(true);
           break;
         default:
-          jj_la1[174] = jj_gen;
+          jj_la1[175] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -5630,12 +5639,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[175] = jj_gen;
+            jj_la1[176] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[176] = jj_gen;
+          jj_la1[177] = jj_gen;
           ;
         }
         jj_consume_token(REMBEDCODE);
@@ -5692,18 +5701,18 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[177] = jj_gen;
+            jj_la1[178] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[178] = jj_gen;
+          jj_la1[179] = jj_gen;
           ;
         }
         jj_consume_token(RCODE);
         break;
       default:
-        jj_la1[179] = jj_gen;
+        jj_la1[180] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -5713,7 +5722,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                            jjtn000.setCatch(catchBlock);
         break;
       default:
-        jj_la1[180] = jj_gen;
+        jj_la1[181] = jj_gen;
         ;
       }
       jjtree.closeNodeScope(jjtn000, true);
@@ -5773,7 +5782,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       DefParameter();
       break;
     default:
-      jj_la1[181] = jj_gen;
+      jj_la1[182] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -5804,7 +5813,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       Instance();
       break;
     default:
-      jj_la1[182] = jj_gen;
+      jj_la1[183] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -5872,7 +5881,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           AdditiveInstanceExpression();
           break;
         default:
-          jj_la1[183] = jj_gen;
+          jj_la1[184] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -5912,7 +5921,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[184] = jj_gen;
+          jj_la1[185] = jj_gen;
           break label_43;
         }
         AddOperator();
@@ -5953,7 +5962,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[185] = jj_gen;
+          jj_la1[186] = jj_gen;
           break label_44;
         }
         OrOperator();
@@ -5994,7 +6003,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[186] = jj_gen;
+          jj_la1[187] = jj_gen;
           break label_45;
         }
         XorOperator();
@@ -6035,7 +6044,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[187] = jj_gen;
+          jj_la1[188] = jj_gen;
           break label_46;
         }
         AndOperator();
@@ -6086,7 +6095,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       InstanceExpression();
       break;
     default:
-      jj_la1[188] = jj_gen;
+      jj_la1[189] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -6193,7 +6202,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         jj_consume_token(SEMICOLON);
         break;
       default:
-        jj_la1[189] = jj_gen;
+        jj_la1[190] = jj_gen;
         ;
       }
     } finally {
@@ -6260,12 +6269,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         jj_consume_token(RPAREN);
         jj_consume_token(SEMICOLON);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 166:
-          jj_consume_token(166);
+        case 165:
+          jj_consume_token(165);
                                              jjtn000.setConcurrent();
           break;
         default:
-          jj_la1[190] = jj_gen;
+          jj_la1[191] = jj_gen;
           ;
         }
       } else {
@@ -6284,17 +6293,17 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           case SEMICOLON:
             jj_consume_token(SEMICOLON);
             switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-            case 166:
-              jj_consume_token(166);
+            case 165:
+              jj_consume_token(165);
                                            jjtn000.setConcurrent();
               break;
             default:
-              jj_la1[191] = jj_gen;
+              jj_la1[192] = jj_gen;
               ;
             }
             break;
           default:
-            jj_la1[192] = jj_gen;
+            jj_la1[193] = jj_gen;
             ;
           }
           break;
@@ -6310,7 +6319,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_consume_token(SEMICOLON);
           break;
         default:
-          jj_la1[193] = jj_gen;
+          jj_la1[194] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -6348,12 +6357,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       ComplexName();
       jj_consume_token(SEMICOLON);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 166:
-        jj_consume_token(166);
+      case 165:
+        jj_consume_token(165);
                                jjtn000.setConcurrent();
         break;
       default:
-        jj_la1[194] = jj_gen;
+        jj_la1[195] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -6440,7 +6449,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           jj_consume_token(KEEP);
           break;
         default:
-          jj_la1[195] = jj_gen;
+          jj_la1[196] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -6450,7 +6459,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Name();
           break;
         default:
-          jj_la1[196] = jj_gen;
+          jj_la1[197] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -6537,7 +6546,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       SpecialName();
       break;
     default:
-      jj_la1[197] = jj_gen;
+      jj_la1[198] = jj_gen;
       if (jj_2_93(2147483647)) {
         NameWithIndexes();
       } else if (jj_2_94(2147483647)) {
@@ -6550,7 +6559,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Name();
           break;
         default:
-          jj_la1[198] = jj_gen;
+          jj_la1[199] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -6655,7 +6664,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                               jjtn000.setName(Name.TYPE);
         break;
       default:
-        jj_la1[199] = jj_gen;
+        jj_la1[200] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -6724,7 +6733,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         Arguments();
         break;
       default:
-        jj_la1[200] = jj_gen;
+        jj_la1[201] = jj_gen;
         ;
       }
       label_50:
@@ -6863,7 +6872,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
               ;
               break;
             default:
-              jj_la1[201] = jj_gen;
+              jj_la1[202] = jj_gen;
               break label_51;
             }
             jj_consume_token(COMMA);
@@ -6871,7 +6880,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           }
           break;
         default:
-          jj_la1[202] = jj_gen;
+          jj_la1[203] = jj_gen;
           ;
         }
         jj_consume_token(RDYNAMICPAREN);
@@ -6931,7 +6940,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
               ;
               break;
             default:
-              jj_la1[203] = jj_gen;
+              jj_la1[204] = jj_gen;
               break label_52;
             }
             jj_consume_token(COMMA);
@@ -6939,13 +6948,13 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           }
           break;
         default:
-          jj_la1[204] = jj_gen;
+          jj_la1[205] = jj_gen;
           ;
         }
         jj_consume_token(RPAREN);
         break;
       default:
-        jj_la1[205] = jj_gen;
+        jj_la1[206] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -7091,12 +7100,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             ValueExpression();
             break;
           default:
-            jj_la1[206] = jj_gen;
+            jj_la1[207] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[207] = jj_gen;
+          jj_la1[208] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -7136,7 +7145,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[208] = jj_gen;
+          jj_la1[209] = jj_gen;
           break label_53;
         }
         LogicalOrOperator();
@@ -7191,7 +7200,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[209] = jj_gen;
+          jj_la1[210] = jj_gen;
           break label_54;
         }
         LogicalAndOperator();
@@ -7249,7 +7258,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[210] = jj_gen;
+          jj_la1[211] = jj_gen;
           break label_55;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -7266,7 +7275,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           NotEqualsIgnoreCaseOperator();
           break;
         default:
-          jj_la1[211] = jj_gen;
+          jj_la1[212] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -7376,7 +7385,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[212] = jj_gen;
+          jj_la1[213] = jj_gen;
           break label_56;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -7405,7 +7414,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           GEIgnoreCaseOperator();
           break;
         default:
-          jj_la1[213] = jj_gen;
+          jj_la1[214] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -7570,7 +7579,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[214] = jj_gen;
+          jj_la1[215] = jj_gen;
           break label_57;
         }
         InOperator();
@@ -7627,7 +7636,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[215] = jj_gen;
+          jj_la1[216] = jj_gen;
           break label_58;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -7641,7 +7650,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           RightUnsignedShiftOperator();
           break;
         default:
-          jj_la1[216] = jj_gen;
+          jj_la1[217] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -7725,7 +7734,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[217] = jj_gen;
+          jj_la1[218] = jj_gen;
           break label_59;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -7736,7 +7745,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           SubtractOperator();
           break;
         default:
-          jj_la1[218] = jj_gen;
+          jj_la1[219] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -7807,7 +7816,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[219] = jj_gen;
+          jj_la1[220] = jj_gen;
           break label_60;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -7821,7 +7830,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ModOperator();
           break;
         default:
-          jj_la1[220] = jj_gen;
+          jj_la1[221] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -7904,7 +7913,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[221] = jj_gen;
+          jj_la1[222] = jj_gen;
           break label_61;
         }
         OrOperator();
@@ -7959,7 +7968,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[222] = jj_gen;
+          jj_la1[223] = jj_gen;
           break label_62;
         }
         XorOperator();
@@ -8014,7 +8023,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[223] = jj_gen;
+          jj_la1[224] = jj_gen;
           break label_63;
         }
         AndOperator();
@@ -8070,7 +8079,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       LogicalNotExpression();
       break;
     default:
-      jj_la1[224] = jj_gen;
+      jj_la1[225] = jj_gen;
       if (jj_2_99(2147483647)) {
         CastExpression();
       } else {
@@ -8107,7 +8116,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ExpressionComprehension();
           break;
         default:
-          jj_la1[225] = jj_gen;
+          jj_la1[226] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -8125,7 +8134,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       ComprehensionConditionalExpression();
       break;
     default:
-      jj_la1[226] = jj_gen;
+      jj_la1[227] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -8145,7 +8154,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         ComprehensionWithExpression();
         break;
       default:
-        jj_la1[227] = jj_gen;
+        jj_la1[228] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -8163,7 +8172,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         ComprehensionElseExpression();
         break;
       default:
-        jj_la1[228] = jj_gen;
+        jj_la1[229] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -8211,7 +8220,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       WithPredicateExpression();
       break;
     default:
-      jj_la1[229] = jj_gen;
+      jj_la1[230] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -8239,7 +8248,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           ;
           break;
         default:
-          jj_la1[230] = jj_gen;
+          jj_la1[231] = jj_gen;
           break label_65;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -8252,7 +8261,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Iterator(true);
           break;
         default:
-          jj_la1[231] = jj_gen;
+          jj_la1[232] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -8346,12 +8355,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[232] = jj_gen;
+            jj_la1[233] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[233] = jj_gen;
+          jj_la1[234] = jj_gen;
           ;
         }
         jj_consume_token(REMBEDCODE);
@@ -8416,18 +8425,18 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
             jj_consume_token(COMMA);
             break;
           default:
-            jj_la1[234] = jj_gen;
+            jj_la1[235] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[235] = jj_gen;
+          jj_la1[236] = jj_gen;
           ;
         }
         jj_consume_token(RCODE);
         break;
       default:
-        jj_la1[236] = jj_gen;
+        jj_la1[237] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -8437,7 +8446,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                                                jjtn000.setCatch(catchBlock);
         break;
       default:
-        jj_la1[237] = jj_gen;
+        jj_la1[238] = jj_gen;
         ;
       }
       jjtree.closeNodeScope(jjtn000, true);
@@ -8664,13 +8673,13 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
           Literal();
           break;
         default:
-          jj_la1[238] = jj_gen;
+          jj_la1[239] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
       default:
-        jj_la1[239] = jj_gen;
+        jj_la1[240] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -8745,11 +8754,11 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       PrimaryExpression();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case ISA:
-      case 167:
+      case 166:
         IsaOperator();
         break;
       default:
-        jj_la1[240] = jj_gen;
+        jj_la1[241] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -8778,11 +8787,11 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     case ISA:
       jj_consume_token(ISA);
       break;
-    case 167:
-      jj_consume_token(167);
+    case 166:
+      jj_consume_token(166);
       break;
     default:
-      jj_la1[241] = jj_gen;
+      jj_la1[242] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -8824,7 +8833,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       ValueInstance();
       break;
     default:
-      jj_la1[242] = jj_gen;
+      jj_la1[243] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -8883,7 +8892,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       NullLiteral();
       break;
     default:
-      jj_la1[243] = jj_gen;
+      jj_la1[244] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -9000,7 +9009,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                 jjtn000.setValue(false);
         break;
       default:
-        jj_la1[244] = jj_gen;
+        jj_la1[245] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -9044,7 +9053,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
                jjtn000.setAbstract();
         break;
       default:
-        jj_la1[245] = jj_gen;
+        jj_la1[246] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -10220,7 +10229,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
   }
 
   private boolean jj_3_63() {
-    if (jj_scan_token(165)) return true;
+    if (jj_scan_token(LEMBEDCODE)) return true;
     if (jj_3R_108()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -10359,6 +10368,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     return false;
   }
 
+  private boolean jj_3_53() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_108()) return true;
+    return false;
+  }
+
   private boolean jj_3R_321() {
     if (jj_scan_token(LCODE)) return true;
     if (jj_3R_110()) return true;
@@ -10463,12 +10478,6 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     return false;
   }
 
-  private boolean jj_3_53() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_108()) return true;
-    return false;
-  }
-
   private boolean jj_3R_109() {
     if (jj_scan_token(ELLIPSIS)) return true;
     return false;
@@ -10504,6 +10513,9 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_3R_109()) return true;
     Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(116)) jj_scanpos = xsp;
+    if (jj_3R_108()) return true;
     while (true) {
       xsp = jj_scanpos;
       if (jj_3_53()) { jj_scanpos = xsp; break; }
@@ -10993,7 +11005,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     xsp = jj_scanpos;
     if (jj_scan_token(63)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(167)) return true;
+    if (jj_scan_token(166)) return true;
     }
     if (jj_3R_115()) return true;
     return false;
@@ -13579,17 +13591,17 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
   }
 
   private boolean jj_3R_622() {
-    if (jj_scan_token(166)) return true;
+    if (jj_scan_token(165)) return true;
     return false;
   }
 
   private boolean jj_3R_603() {
-    if (jj_scan_token(166)) return true;
+    if (jj_scan_token(165)) return true;
     return false;
   }
 
   private boolean jj_3R_623() {
-    if (jj_scan_token(166)) return true;
+    if (jj_scan_token(165)) return true;
     return false;
   }
 
@@ -15348,7 +15360,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[246];
+  final private int[] jj_la1 = new int[247];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -15364,22 +15376,22 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
       jj_la1_init_5();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x50000000,0x0,0x50000000,0x0,0x0,0x0,0x0,0x80000000,0x8000000,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x5fde0000,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x5fde0000,0x0,0x5fde0000,0x0,0x80000000,0x48000000,0x80000000,0x48000000,0x0,0x0,0x8000000,0x0,0x8000000,0x0,0x0,0x5fde0000,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x5fde0000,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x8000000,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x0,0x5fde0000,0x5fde0000,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0xc000000,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x50000000,0x0,0x50000000,0x0,0x0,0x0,0x0,0x80000000,0x8000000,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x5fde0000,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x5fde0000,0x0,0x5fde0000,0x0,0x80000000,0x48000000,0x80000000,0x48000000,0x0,0x0,0x8000000,0x0,0x8000000,0x0,0x0,0x5fde0000,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x5fde0000,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x8000000,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x0,0x5fde0000,0x5fde0000,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x5fde0000,0x0,0x5fde0000,0x0,0x0,0xc000000,0x0,0x0,0x0,0x5fde0000,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200,0x0,0xa,0xa,0x10000,0x0,0x4004000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x0,0x0,0x0,0x10,0x10,0x0,0x64e6e8a0,0x64e6e8a0,0x0,0x10,0x64e6e8a0,0x10,0x64e6e8a0,0x4004000,0x0,0x64e6e8a0,0x10,0x200,0xa62080,0x200,0xa62080,0x0,0xa42080,0x0,0xa42080,0x0,0x60408820,0xa42080,0x4004000,0x4004000,0x0,0x0,0x802080,0x240000,0xa42080,0x0,0x802080,0x240000,0xa42080,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2400c800,0x2400c800,0x2400c800,0x20008800,0x2400c800,0x0,0x240000,0x802080,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x60408820,0x0,0x0,0x0,0x60008000,0x100,0x60000000,0x0,0x0,0x0,0x0,0x20008000,0x100001,0x100001,0x10000,0x8,0x1000,0x3000000,0x3000000,0x8,0x11000,0x10000000,0x8000000,0x8000000,0x20008800,0x20008000,0x100,0x20008000,0x100001,0x100001,0x0,0x2400c800,0x0,0x2400c800,0x0,0x10,0x20008800,0x20008000,0x100,0x20008000,0x100001,0x100001,0x0,0x2400c800,0x0,0x2400c800,0x0,0x10,0x0,0x4004000,0x4004000,0x0,0x0,0x0,0x0,0x4004000,0x0,0x0,0x0,0x0,0x0,0x0,0x20000,0x0,0x4004000,0x0,0x4004000,0x0,0x0,0x2400c800,0x0,0x2400c800,0x0,0x0,0x2400c800,0x0,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2400c800,0x20008800,0x20008000,0x100,0x20008000,0x100001,0x100001,0x0,0x2400c800,0x0,0x2400c800,0x0,0x10,0x0,0x0,0x80000000,0x80000000,0x4004000,0x0,0x0,0x0,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200,0x0,0xa,0xa,0x10000,0x0,0x4004000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x0,0x0,0x0,0x10,0x10,0x0,0x64e6e8a0,0x64e6e8a0,0x0,0x10,0x64e6e8a0,0x10,0x64e6e8a0,0x4004000,0x0,0x64e6e8a0,0x10,0x200,0xa62080,0x200,0xa62080,0x0,0xa42080,0x0,0xa42080,0x0,0x60408820,0xa42080,0x4004000,0x4004000,0x0,0x0,0x802080,0x240000,0xa42080,0x0,0x802080,0x240000,0xa42080,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2400c800,0x2400c800,0x2400c800,0x20008800,0x2400c800,0x0,0x240000,0x802080,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x60408820,0x0,0x0,0x0,0x60008000,0x100,0x60000000,0x0,0x0,0x0,0x0,0x20008000,0x100001,0x100001,0x10000,0x8,0x1000,0x3000000,0x3000000,0x8,0x11000,0x10000000,0x8000000,0x8000000,0x20008800,0x20008000,0x100,0x20008000,0x100001,0x100001,0x0,0x2400c800,0x0,0x2400c800,0x0,0x10,0x20008800,0x20008000,0x100,0x20008000,0x100001,0x100001,0x0,0x2400c800,0x0,0x2400c800,0x0,0x10,0x0,0x4004000,0x4004000,0x0,0x0,0x0,0x0,0x4004000,0x0,0x0,0x0,0x0,0x0,0x0,0x20000,0x0,0x4004000,0x0,0x4004000,0x0,0x0,0x2400c800,0x0,0x2400c800,0x0,0x0,0x2400c800,0x0,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2400c800,0x20008800,0x20008000,0x100,0x20008000,0x100001,0x100001,0x0,0x2400c800,0x0,0x2400c800,0x0,0x10,0x0,0x0,0x80000000,0x80000000,0x4004000,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0xa8000000,0x0,0x28000000,0x50000000,0xa8000000,0xa8000000,0x50000000,0x0,0xa8000000,0xa8000000,0x50000000,0x0,0x0,0xa8000000,0xa8f47fff,0xa8f47fff,0x0,0x0,0xa8f47fff,0x0,0xa8f47fff,0x800000,0xa8000000,0xa8f47fff,0x0,0x0,0x8007ff,0x0,0x8007ff,0x0,0x0,0x8007ff,0x0,0x8007ff,0x0,0xa8747800,0x8007ff,0x800000,0xa8000000,0x800000,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0x8007ff,0x0,0x0,0x0,0x800000,0x8007ff,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x800000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x0,0x800000,0xa8f47800,0xa8f47800,0xa8f47800,0xf00000,0xf47800,0xf00000,0x0,0x0,0x8007ff,0x8007ff,0x7ff,0x800000,0x0,0x7ff,0x800000,0x0,0x7ff,0x800000,0x0,0x7ff,0x800000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8007ff,0x0,0x0,0x0,0x800000,0x0,0x800000,0x0,0x7ff,0x0,0x0,0x0,0x800000,0x800000,0x800000,0x800000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8007ff,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xa8f47800,0x0,0xa8f47800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xf47800,0x0,0xf47800,0x0,0x0,0x8007ff,0x800000,0x800000,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0xa8747800,0x0,0x800000,0x800000,0x0,0x800000,0x0,0x0,0x0,0xa8f47800,0x0,0xa8f47800,0x0,0x0,0xf47800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xf47800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xa8f47800,0x0,0xa8f47800,0x0,0x0,0xf47800,0x0,0x0,0x0,0xf47800,0x747800,0x2800,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0xa8000000,0x0,0x28000000,0x50000000,0xa8000000,0xa8000000,0x50000000,0x0,0xa8000000,0xa8000000,0x50000000,0x0,0x0,0xa8000000,0xa8f47fff,0xa8f47fff,0x0,0x0,0xa8f47fff,0x0,0xa8f47fff,0x800000,0xa8000000,0xa8f47fff,0x0,0x0,0x8007ff,0x0,0x8007ff,0x0,0x0,0x8007ff,0x0,0x8007ff,0x0,0xa8747800,0x8007ff,0x800000,0xa8000000,0x800000,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0x8007ff,0x0,0x0,0x0,0x800000,0x8007ff,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x800000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x0,0x800000,0xa8f47800,0xa8f47800,0xa8f47800,0xf00000,0xf47800,0xf00000,0x0,0x0,0x8007ff,0x8007ff,0x7ff,0x800000,0x0,0x7ff,0x800000,0x0,0x7ff,0x800000,0x0,0x7ff,0x800000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8007ff,0x0,0x0,0x0,0x800000,0x0,0x800000,0x0,0x7ff,0x0,0x0,0x0,0x800000,0x800000,0x800000,0x800000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8007ff,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xa8f47800,0x0,0xa8f47800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xf47800,0x0,0xf47800,0x0,0x0,0x8007ff,0x800000,0x800000,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0x0,0xa8747800,0x0,0x800000,0x800000,0x0,0x800000,0x0,0x0,0x0,0xa8f47800,0x0,0xa8f47800,0x0,0x0,0xf47800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xf47800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xa8f47800,0x0,0xa8f47800,0x0,0x0,0xf47800,0x0,0x0,0x0,0xf47800,0x747800,0x2800,0x0,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x0,0xa,0xa,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x80000,0x80000,0x2a,0x2a,0x0,0x0,0x2a,0x2a,0x0,0x0,0x2a,0x2a,0x0,0x0,0x0,0x0,0x82a,0x82a,0xa,0x0,0x82a,0x0,0x82a,0x0,0xa,0x82a,0x0,0x0,0x0,0x0,0x0,0xa,0x0,0x0,0x0,0x0,0x0,0x82a,0x0,0x0,0x82a,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x0,0x800000,0x100000,0x800,0x0,0x0,0x80000,0x80000,0x80000,0x80000,0x480,0x80000,0x0,0x0,0x80000,0x80000,0x480,0x80000,0x100000,0x100000,0x80,0x20000,0x100000,0x20080,0x100000,0x402,0x100000,0x402,0x0,0x80000,0x0,0xc020c8a,0xc020c8a,0xc020c8a,0x80a,0xc000800,0x800,0x0,0x0,0x0,0x0,0x0,0x0,0x100000,0x0,0x0,0x2800,0x0,0x0,0x20780,0x0,0x0,0x480,0x20780,0x20380,0x480,0x100000,0x800,0x20780,0x480,0x100000,0x800,0x100000,0x0,0x0,0x800,0x800,0x800,0x0,0x0,0x0,0x200000,0x0,0x0,0x0,0x0,0x800,0x0,0x800,0x0,0x0,0x0,0x0,0x40000000,0x0,0x800000,0x0,0x0,0x0,0x40800000,0x0,0x0,0x800,0xa,0x0,0x0,0x0,0x0,0x0,0x100000,0xc020c8a,0x100000,0xc020c8a,0xa,0x0,0xa,0x0,0x0,0x0,0x0,0x0,0x100000,0xc00080a,0x100000,0xc00080a,0xa,0x0,0x800,0x800,0x8000800,0x0,0x0,0x0,0x0,0x8000800,0x80000,0x0,0x0,0x80000,0x82a,0x0,0x0,0x0,0x0,0x0,0x0,0x2800,0x100000,0xc020c8a,0x100000,0xc020c8a,0x2800,0x10000000,0xc000800,0x0,0x0,0x80000000,0x80000000,0x3000000,0x3000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc000000,0x800,0x0,0x0,0x0,0x0,0x0,0x0,0x100000,0xc020c8a,0x100000,0xc020c8a,0xa,0x0,0xc000800,0x800,0x0,0x0,0x800,0x0,0x0,0x0,};
+      jj_la1_3 = new int[] {0x0,0xa,0xa,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x80000,0x80000,0x2a,0x2a,0x0,0x0,0x2a,0x2a,0x0,0x0,0x2a,0x2a,0x0,0x0,0x0,0x0,0x82a,0x82a,0xa,0x0,0x82a,0x0,0x82a,0x0,0xa,0x82a,0x0,0x0,0x0,0x0,0x0,0xa,0x0,0x0,0x0,0x0,0x0,0x82a,0x0,0x0,0x82a,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x0,0x800000,0x100000,0x800,0x0,0x0,0x80000,0x80000,0x80000,0x80000,0x480,0x80000,0x0,0x0,0x80000,0x80000,0x480,0x80000,0x100000,0x100000,0x100000,0x80,0x20000,0x100000,0x20080,0x100000,0x402,0x100000,0x402,0x0,0x80000,0x0,0xc020c8a,0xc020c8a,0xc020c8a,0x80a,0xc000800,0x800,0x0,0x0,0x0,0x0,0x0,0x0,0x100000,0x0,0x0,0x2800,0x0,0x0,0x20780,0x0,0x0,0x480,0x20780,0x20380,0x480,0x100000,0x800,0x20780,0x480,0x100000,0x800,0x100000,0x0,0x0,0x800,0x800,0x800,0x0,0x0,0x0,0x200000,0x0,0x0,0x0,0x0,0x800,0x0,0x800,0x0,0x0,0x0,0x0,0x40000000,0x0,0x800000,0x0,0x0,0x0,0x40800000,0x0,0x0,0x800,0xa,0x0,0x0,0x0,0x0,0x0,0x100000,0xc020c8a,0x100000,0xc020c8a,0xa,0x0,0xa,0x0,0x0,0x0,0x0,0x0,0x100000,0xc00080a,0x100000,0xc00080a,0xa,0x0,0x800,0x800,0x8000800,0x0,0x0,0x0,0x0,0x8000800,0x80000,0x0,0x0,0x80000,0x82a,0x0,0x0,0x0,0x0,0x0,0x0,0x2800,0x100000,0xc020c8a,0x100000,0xc020c8a,0x2800,0x10000000,0xc000800,0x0,0x0,0x80000000,0x80000000,0x3000000,0x3000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc000000,0x800,0x0,0x0,0x0,0x0,0x0,0x0,0x100000,0xc020c8a,0x100000,0xc020c8a,0xa,0x0,0xc000800,0x800,0x0,0x0,0x800,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_4() {
-      jj_la1_4 = new int[] {0x0,0x0,0x0,0xc0000000,0xe0000000,0xc0000000,0xe0000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc00000,0x0,0x0,0x0,0xe0c00000,0xe0c00000,0x0,0x0,0xe0c00000,0xe0c00000,0x0,0x0,0x0,0x0,0x8c00000,0x8c00000,0x0,0x0,0x8c00000,0x0,0x8c00000,0x0,0xc00000,0x8c00000,0x0,0x0,0x8000000,0x0,0x8000000,0x0,0x0,0x8000000,0x0,0x8000000,0x0,0xc00000,0x8000000,0x0,0xc00000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0xc01800,0xc01800,0x0,0x1800,0x0,0x0,0x0,0x8000000,0x8000000,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2000000,0x8002000,0x0,0x0,0x0,0x2000,0x0,0x2000,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8002000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0x0,0xc01800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1800,0x0,0x1800,0x0,0x0,0x8002000,0x0,0x0,0x800,0x10000,0x20000,0x8000,0x0,0x0,0x0,0x0,0x0,0xc00000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0x0,0xc01800,0x0,0x0,0x1800,0x400,0x200,0x10c,0x10c,0xf3,0xf3,0x0,0x380000,0x380000,0x1800,0x1800,0x46000,0x46000,0x10000,0x20000,0x8000,0x1800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0x0,0xc01800,0x0,0x0,0x1800,0x0,0x0,0x0,0x0,0x0,0x0,0xc00000,};
+      jj_la1_4 = new int[] {0x0,0x0,0x0,0xc0000000,0xe0000000,0xc0000000,0xe0000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc00000,0x0,0x0,0x0,0xe0c00000,0xe0c00000,0x0,0x0,0xe0c00000,0xe0c00000,0x0,0x0,0x0,0x0,0x8c00000,0x8c00000,0x0,0x0,0x8c00000,0x0,0x8c00000,0x0,0xc00000,0x8c00000,0x0,0x0,0x8000000,0x0,0x8000000,0x0,0x0,0x8000000,0x0,0x8000000,0x0,0xc00000,0x8000000,0x0,0xc00000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0xc01800,0xc01800,0x0,0x1800,0x0,0x0,0x0,0x8000000,0x8000000,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2000000,0x8002000,0x0,0x0,0x0,0x2000,0x0,0x2000,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8002000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0x0,0xc01800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1800,0x0,0x1800,0x0,0x0,0x8002000,0x0,0x0,0x800,0x10000,0x20000,0x8000,0x0,0x0,0x0,0x0,0x0,0xc00000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0x0,0xc01800,0x0,0x0,0x1800,0x400,0x200,0x10c,0x10c,0xf3,0xf3,0x0,0x380000,0x380000,0x1800,0x1800,0x46000,0x46000,0x10000,0x20000,0x8000,0x1800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc01800,0x0,0xc01800,0x0,0x0,0x1800,0x0,0x0,0x0,0x0,0x0,0x0,0xc00000,};
    }
    private static void jj_la1_init_5() {
-      jj_la1_5 = new int[] {0x0,0x0,0x0,0x3,0x7,0x3,0x7,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x7,0x7,0x0,0x0,0x7,0x7,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40,0x40,0x0,0x0,0x40,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80,0x80,0x0,0x0,0x0,0x0,};
+      jj_la1_5 = new int[] {0x0,0x0,0x0,0x3,0x7,0x3,0x7,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x7,0x7,0x0,0x0,0x7,0x7,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x20,0x0,0x0,0x20,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40,0x40,0x0,0x0,0x0,0x0,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[105];
   private boolean jj_rescan = false;
@@ -15396,7 +15408,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 246; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 247; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -15412,7 +15424,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 246; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 247; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -15423,7 +15435,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 246; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 247; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -15435,7 +15447,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 246; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 247; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -15445,7 +15457,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 246; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 247; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -15456,7 +15468,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 246; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 247; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -15568,12 +15580,12 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[168];
+    boolean[] la1tokens = new boolean[167];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 246; i++) {
+    for (int i = 0; i < 247; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -15597,7 +15609,7 @@ public class FunParser/*@bgen(jjtree)*/implements FunParserTreeConstants, FunPar
         }
       }
     }
-    for (int i = 0; i < 168; i++) {
+    for (int i = 0; i < 167; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

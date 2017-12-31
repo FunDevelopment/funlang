@@ -179,6 +179,10 @@ class FixedArray implements FunArray {
         return false;
     }
 
+    public boolean addAll(List<Object> list) {
+        return false;
+    }
+
     public Object set(int n, Object element) {
         if (array == null) {
             array = new Object[size];
@@ -267,6 +271,14 @@ class GrowableArray implements FunArray {
             init();
         }
         array.add(element);
+        return true;
+    }
+
+    public boolean addAll(List<Object> list) {
+        if (array == null) {
+            init();
+        }
+        array.addAll(list);
         return true;
     }
 
@@ -431,6 +443,15 @@ class ArrayInstance implements FunArray, DynamicObject {
 
         return true;
     }
+    
+    public boolean addAll(List<Object> list) {
+        if (array == null) {
+            init_array();
+        }
+        array.addAll(list);
+
+        return true;
+    }
 
     public Object set(int n, Object element) {
         if (array == null) {
@@ -574,6 +595,14 @@ class DynamicArray implements FunArray, DynamicObject {
             throw new RuntimeException("Dynamic array not initialized in a context");
         }
         statements.add(element);
+        return true;
+    }
+
+    public boolean addAll(List<Object> list) {
+        if (generatedArray == null) {
+            throw new RuntimeException("Dynamic array not initialized in a context");
+        }
+        statements.addAll(list);
         return true;
     }
 

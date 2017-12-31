@@ -8,6 +8,7 @@
 package fun.parser;
 
 import fun.lang.*;
+import fun.lang.Dim.TYPE;
 
 import java.util.*;
 
@@ -68,7 +69,15 @@ public class ParsedCollectionDefinition extends CollectionDefinition implements 
                     if (children[elementIx] instanceof ArgumentList) {
                         ArgumentList argList = (ArgumentList) children[elementIx];
                         if (argList.isArray() || argList.isTable()) {
-                            Dim newDim = new Dim(Dim.TYPE.DEFINITE, argList.size());
+                            Dim.TYPE dimType = Dim.TYPE.DEFINITE;
+                            for (Object element: argList) {
+                                if (element instanceof SuperStatement || element instanceof SubStatement || element instanceof NextStatement) {
+                                    dimType = Dim.TYPE.INDEFINITE;
+                                    break;
+                                }
+                            }
+
+                            Dim newDim = new Dim(dimType, argList.size());
                             if (argList.isTable()) {
                                 newDim.setTable(true);
                             }

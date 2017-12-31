@@ -84,6 +84,10 @@ System.out.println("-}} instantiated " + instantiatedResultSet.size() + " rows")
         return false;
     }
 
+    public boolean addAll(List<Object> list) {
+        return false;
+    }
+
     public Object set(int n, Object element) {
         throw new UnsupportedOperationException("ResultArrays are immutable");
     }

@@ -8,6 +8,7 @@
 package fun.lang;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -44,7 +45,15 @@ public class Dim extends AbstractNode {
                 TYPE type = ((FunArray) obj).isGrowable() ? TYPE.INDEFINITE : TYPE.DEFINITE;
                 dim = new Dim(type, ((FunArray) obj).getSize());
             } else if (obj.getClass().isArray()) {
-                dim = new Dim(TYPE.DEFINITE, Array.getLength(obj));
+                TYPE type = TYPE.DEFINITE;
+                Object[] array = (Object[]) obj;
+                for (Object element: array) {
+                    if (element instanceof SuperStatement || element instanceof SubStatement || element instanceof NextStatement) {
+                        type = TYPE.INDEFINITE;
+                        break;
+                    }
+                }
+                dim = new Dim(type, Array.getLength(obj));
             }
         }
         return dim;

@@ -10,6 +10,7 @@ package fun.lang;
 import fun.runtime.Context;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Interface for fun arrays.
@@ -49,8 +50,9 @@ public interface FunArray {
     /** For a growable array, adds an element to the end of the array.  Throws
      *  an UnsupportedOperationException on a fixed array.
      */
-
     public boolean add(Object element);
+
+    public boolean addAll(List<Object> list);
 
     public Object set(int n, Object element);
 

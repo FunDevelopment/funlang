@@ -69,6 +69,12 @@ abstract class FunArrayAdapter implements FunArray {
         return true;
     }
 
+    public boolean addAll(List<Object> list) {
+        ensureArray();
+        array.addAll(list);
+        return true;
+    }
+
     public Object set(int n, Object element) {
         ensureArray();
         Object oldElement = array.get(n);
@@ -201,6 +207,10 @@ class ExternalFixedArray implements FunArray {
         return false;
     }
 
+    public boolean addAll(List<Object> list) {
+        return false;
+    }
+
     public Object set(int n, Object element) {
         if (array == null) {
             return null;
@@ -262,6 +272,14 @@ class ExternalGrowableArray implements FunArray {
             throw new IllegalStateException("this ExternalGrowableArray points to a null array");
         }
         list.add(element);
+        return true;
+    }
+
+    public boolean addAll(List<Object> list) {
+        if (list == null) {
+            throw new IllegalStateException("this ExternalGrowableArray points to a null array");
+        }
+        list.addAll(list);
         return true;
     }
 

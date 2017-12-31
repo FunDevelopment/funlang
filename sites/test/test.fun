@@ -1688,7 +1688,7 @@ site test {
         name = "Array Test"
         key = "array"
 
-        expected = "ABCDEFGHIJKLMN"
+        expected = "ABCDEFGHIJKLMNO"
 
         fixed_array[3] = [ "A", "B", "C" ]
 
@@ -1708,8 +1708,8 @@ site test {
         
         index_calc_array[3] = [ "K", "L", "M" ]
 
-        super_array[] = []
-        super_array sub_array = [ "N" ]
+        super_array[] = [ "O" ]
+        super_array sub_array = [ "N", ... ]
                 
         for w in fixed_array {
             w;
@@ -1729,6 +1729,7 @@ site test {
         index_calc_array[n];
         index_calc_array[index_calc_array.count - n];
         sub_array[0];
+        sub_array[1];
     }
 
 

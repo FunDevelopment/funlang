@@ -834,7 +834,11 @@ public class Context {
             // get the arguments and parameters, if any, to push on the
             // context stack with the definition
             params = definition.getParamsForArgs(args, this);
-    
+
+if (definition.getName().equals("show")) {
+ System.out.println(definition.getName() + " at ctx 839");    
+}
+            
             // if there are args but this definition has no params, check to see if it's an
             // alias and if so look for params there
             if (params == null && args != null && definition.isAliasInContext(this)) {

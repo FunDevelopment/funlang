@@ -14,7 +14,7 @@ package fun.lang;
  * @version $Revision: 1.3 $
  */
 
-public class Ellipsis extends SubStatement {
+public class Ellipsis extends SuperStatement {
 
     public Ellipsis() {
         super();

@@ -1222,7 +1222,7 @@ void ArrayInitExpression() #Arguments(>0):
         "[]"       // empty array
       |
         LOOKAHEAD(2)
-        "[" ( Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
+        "[" ( Ellipsis() [","] ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ "," ] "]" )
       |
         "[" ( ArrayElementExpression() ( LOOKAHEAD(2) "," ArrayElementExpression() )* [ LOOKAHEAD(2) "," Ellipsis() ( LOOKAHEAD(2) "," ArrayElementExpression() )* ] [ "," ] "]" )
       )

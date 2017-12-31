@@ -54,13 +54,17 @@ core {
 	dynamic site_name = this_context.site_name
 
 
-    /------ Collection access ------/
+    /------ Collections ------/
 
     array = fun.runtime.Array;
     table = fun.runtime.Table;
     
     dynamic string[] sorted_array(string[] ary) = fun.runtime.Utils.sortedArray(ary)
     dynamic string{} sorted_table(string{} tbl) = fun.runtime.Utils.sortedTable(tbl) 
+
+    dynamic string[] append(base[], addition[]) = fun.runtime.Utils.append(base, addition)
+    dynamic string[] update(base{}, addition{}) = fun.runtime.Utils.update(base, addition)
+
 
     /------ Database objects ------/
 

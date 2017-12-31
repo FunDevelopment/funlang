@@ -483,7 +483,6 @@ public interface FunParserConstants {
     "\"/]\"",
     "<token of kind 163>",
     "\"``]\"",
-    "\"[=\"",
     "\"++\"",
     "\"|>\"",
   };
