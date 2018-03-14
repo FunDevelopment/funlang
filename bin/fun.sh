@@ -20,11 +20,11 @@ if [ -z $FUN_HOME ]
 then
     if [ -f "$FUN_JAR_PATH" ]
     then
-        FUN_HOME="."
+        FUN_HOME=$(pwd)
 
     elif [ -f "../$FUN_JAR_PATH" ]
     then
-        FUN_HOME=".."
+        FUN_HOME=$(pwd)/..
 
     elif [ -n $SERVICE_NAME ] && [ -f "/opt/$SERVICE_NAME/$FUN_JAR_PATH" ]
     then
@@ -34,13 +34,13 @@ then
     then
         FUN_HOME="/opt/fun"
 
-    elif [ -f "/usr/share/$FUN_JAR_PATH" ]
+    elif [ -f "/usr/share/fun/$FUN_JAR_PATH" ]
     then
         FUN_HOME="/usr/share/fun"
 
-    elif [ -f "~/fun/$FUN_JAR_PATH" ]
+    elif [ -f "$HOME/fun/$FUN_JAR_PATH" ]
     then
-        FUN_HOME="~/fun"
+        FUN_HOME="$HOME/fun"
 
     else
       echo "ERROR: FUN_HOME not set and Fun not installed in a standard location"
