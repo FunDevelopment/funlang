@@ -219,7 +219,7 @@ core {
 	 */ 
     dynamic replace(str, oldstr, newstr) = fun.runtime.Utils.replaceOccurrences(str, oldstr, newstr)
 
-    dynamic replace_all(str, strmap{}) = fun.runtime.Utils.replaceAllOccurrences(str, strmap)
+    dynamic replace_all(str, strmap{}), (str, regex, replacement) = (strmap ?? fun.runtime.Utils.replaceAllOccurrences(str, strmap) : fun.runtime.Utiles.replaceAll(str, regex, replacement)) 
 
     dynamic concat(str1, str2),(strs[]) = (strs ? fun.runtime.Utils.concat(strs) : fun.runtime.Utils.concat(str1, str2)) 
 

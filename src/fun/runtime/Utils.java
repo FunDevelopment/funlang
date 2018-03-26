@@ -502,7 +502,9 @@ public class Utils {
         return str;
     }
     
-
+    public static String replaceAll(String str, String regex, String replacement) {
+    	return str.replaceAll(regex, replacement);
+    }
     
     public static String replaceOccurrences(String str, String oldField, String newField) {
         if (str == null) {
